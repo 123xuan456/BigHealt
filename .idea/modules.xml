@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BigHealt.iml" filepath="$PROJECT_DIR$/BigHealt.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/telephonymanager/telephonymanager.iml" filepath="$PROJECT_DIR$/telephonymanager/telephonymanager.iml" />
     </modules>
   </component>
 </project>
