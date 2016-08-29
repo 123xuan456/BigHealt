@@ -1,0 +1,3564 @@
+Index: app/src/main/java/dbighealth/bighealth/sadas.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/sadas.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/sadas.java	(revision )
+@@ -0,0 +1,9 @@
++package dbighealth.bighealth;
++
++/**
++ * Created by de on 2016/8/25.
++ */
++public class sadas {
++
++
++}
+Index: app/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/.gitignore	(revision )
++++ app/.gitignore	(revision )
+@@ -0,0 +1,1 @@
++/build
+Index: app/src/main/res/layout/fragment_news_channel.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_news_channel.xml	(revision )
++++ app/src/main/res/layout/fragment_news_channel.xml	(revision )
+@@ -0,0 +1,10 @@
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context="dbighealth.bighealth.fragment.home.NewsChannelFragment">
++
++    <!-- TODO: Update blank fragment layout -->
++    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
++        android:text="@string/hello_blank_fragment" />
++
++</FrameLayout>
+Index: app/src/main/res/layout/fragment_blank_fragment1.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_blank_fragment1.xml	(revision )
++++ app/src/main/res/layout/fragment_blank_fragment1.xml	(revision )
+@@ -0,0 +1,10 @@
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context="dbighealth.bighealth.fragment.home.BlankFragment1">
++
++    <!-- TODO: Update blank fragment layout -->
++    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
++        android:text="颈椎" />
++
++</FrameLayout>
+Index: app/src/main/java/dbighealth/bighealth/fragment/ProductFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/ProductFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/ProductFragment.java	(revision )
+@@ -0,0 +1,156 @@
++package dbighealth.bighealth.fragment;
++
++
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.support.v4.app.FragmentManager;
++import android.support.v4.app.FragmentPagerAdapter;
++import android.support.v4.view.ViewPager;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.LinearLayout;
++import android.widget.ScrollView;
++import android.widget.TextView;
++
++import dbighealth.bighealth.ben.Model;
++import dbighealth.bighealth.R;
++
++/**
++ * A simple {@link Fragment} subclass.
++ * 产品
++ */
++public class ProductFragment extends Fragment {
++
++    private String[] list;
++    private TextView[] tvList;
++    private View[] views;
++    private LayoutInflater inflater;
++    private ScrollView scrollView;
++    private ViewPager mPager;
++    private int currentItem = 0;
++    View ra;
++
++    @Override
++    public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        inflater = LayoutInflater.from(getActivity());
++    }
++
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        ra = inflater.inflate(R.layout.fragment_product, container, false);
++        TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
++        tvTab.setText("产品");
++        mPager = (ViewPager) ra.findViewById(R.id.goods_pager);
++        scrollView = (ScrollView) ra.findViewById(R.id.tools_scrlllview);
++        list = Model.toolsList;
++        setView();
++        showToolsView();
++        return ra;
++    }
++
++
++    private void showToolsView() {
++
++        LinearLayout toolsLayout = (LinearLayout) ra.findViewById(R.id.tools);
++        int s = list.length;
++        System.out.println("ssadadaas="+s);
++        tvList = new TextView[s];
++        views = new View[s];
++        for (int i = 0; i < s; i++) {
++            View view = inflater.inflate(R.layout.item_list_layout, null);
++            view.setId(i);
++            view.setOnClickListener(toolsItemListener);
++            TextView textView = (TextView) view.findViewById(R.id.text);
++            textView.setText(list[i]);
++            toolsLayout.addView(view);
++            tvList[i] = textView;
++            views[i] = view;
++        }
++        changeTextColor(0);
++    }
++
++    private void changeTextColor(int id) {
++        for (int i = 0; i < tvList.length; i++) {
++            if (i != id) {
++                tvList[i].setBackgroundColor(0x00000000);
++                tvList[i].setTextColor(0xFF000000);
++            }
++        }
++        tvList[id].setBackgroundColor(0xFFFFFFFF);
++        tvList[id].setTextColor(0xFFFF5D5E);
++
++    }
++
++    private View.OnClickListener toolsItemListener = new View.OnClickListener() {
++        @Override
++        public void onClick(View v) {
++            mPager.setCurrentItem(v.getId());
++        }
++    };
++    private void setView() {
++        mPager.setAdapter(new ShopAdapter(getChildFragmentManager()));
++        mPager.setOnPageChangeListener(onPageChangeListener);
++        mPager.setCurrentItem(0);
++
++
++
++
++    }
++
++    /**
++     * OnPageChangeListener<br/>
++     * 监听ViewPager选项卡变化事的事件
++     */
++    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
++        @Override
++        public void onPageSelected(int arg0) {
++            if (mPager.getCurrentItem() != arg0)
++                mPager.setCurrentItem(arg0);
++            if (currentItem != arg0) {
++                changeTextColor(arg0);
++                changeTextLocation(arg0);
++            }
++            currentItem = arg0;
++        }
++
++        @Override
++        public void onPageScrollStateChanged(int arg0) {
++        }
++
++        @Override
++        public void onPageScrolled(int arg0, float arg1, int arg2) {
++        }
++    };
++
++    private void changeTextLocation(int clickPosition) {
++        int x = (views[clickPosition].getTop());
++        scrollView.smoothScrollTo(0, x);
++
++    }
++
++
++    private class ShopAdapter extends FragmentPagerAdapter {
++        public ShopAdapter(FragmentManager fm) {
++            super(fm);
++        }
++
++        @Override
++        public Fragment getItem(int index) {
++            Fragment fragment = new KakaFragment();
++            Bundle bundle = new Bundle();
++            bundle.putInt("index", index);
++            fragment.setArguments(bundle);
++            return fragment;
++        }
++
++        @Override
++        public int getCount() {
++            return list.length;
++        }
++
++
++
++    }
++}
+Index: app/src/main/res/layout/item_list_layout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/item_list_layout.xml	(revision )
++++ app/src/main/res/layout/item_list_layout.xml	(revision )
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="fill_parent"
++    android:layout_height="fill_parent"
++    android:orientation="vertical" >
++
++    <TextView
++        android:id="@+id/text"
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:gravity="center"
++        android:paddingBottom="15dp"
++        android:paddingTop="15dp"
++        android:textColor="#000"
++        android:textSize="14sp" />
++
++    <ImageView
++        android:id="@+id/line"
++        android:layout_width="fill_parent"
++        android:layout_height="1dp"
++        android:background="#cccccc"
++        android:contentDescription="@null"
++        android:visibility="visible" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/dbighealth/bighealth/adapter/NewsFragmentPagerAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/adapter/NewsFragmentPagerAdapter.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/adapter/NewsFragmentPagerAdapter.java	(revision )
+@@ -0,0 +1,38 @@
++package dbighealth.bighealth.adapter;
++
++import android.support.v4.app.Fragment;
++import android.support.v4.app.FragmentManager;
++import android.support.v4.app.FragmentPagerAdapter;
++import android.support.v4.app.FragmentTransaction;
++import android.view.ViewGroup;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by de on 2016/8/15.
++ */
++public class NewsFragmentPagerAdapter extends FragmentPagerAdapter {
++    private List<Fragment> fragmentList;
++    private FragmentManager fm;
++    public NewsFragmentPagerAdapter(FragmentManager fm,List<Fragment> fragmentList) {
++        super(fm);
++        this.fragmentList=fragmentList;
++        this.fm=fm;
++        System.out.println("dkalsd="+fragmentList);
++    }
++    @Override
++    public Fragment getItem(int idx) {
++        return fragmentList.get(idx%fragmentList.size());
++    }
++    @Override
++    public int getCount() {
++        // TODO Auto-generated method stub
++        return fragmentList.size();
++    }
++    @Override
++    public int getItemPosition(Object object) {
++        return POSITION_NONE;  //没有找到child要求重新加载
++    }
++
++}
+\ No newline at end of file
+Index: app/src/main/res/drawable/biankuang.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/biankuang.xml	(revision )
++++ app/src/main/res/drawable/biankuang.xml	(revision )
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="#ffffff"></solid>
++    <stroke
++        android:width="1dp"
++        android:color="#b3b3b3" />
++    <corners android:radius="5dp"  ></corners>
++</shape>
+\ No newline at end of file
+Index: app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment.java	(revision )
+@@ -0,0 +1,31 @@
++package dbighealth.bighealth.fragment.home;
++
++
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++
++import dbighealth.bighealth.R;
++
++/**
++ * 糖尿病
++ */
++public class BlankFragment extends Fragment {
++
++
++    public BlankFragment() {
++        // Required empty public constructor
++    }
++
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        // Inflate the layout for this fragment
++        return inflater.inflate(R.layout.fragment_blank, container, false);
++    }
++
++
++}
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision )
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -0,0 +1,32 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="dbighealth.bighealth" >
++
++    <!-- To auto-complete the email text field in the login form with the user's emails -->
++    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
++    <uses-permission android:name="android.permission.READ_PROFILE" />
++    <uses-permission android:name="android.permission.READ_CONTACTS" />
++
++    <application
++        android:allowBackup="true"
++        android:icon="@mipmap/ic_launcher"
++        android:label="@string/app_name"
++        android:supportsRtl="true"
++        android:theme="@style/AppTheme" >
++        <activity
++            android:name=".MainActivity"
++            android:label="@string/app_name"
++            android:theme="@android:style/Theme.Light.NoTitleBar" >
++            <intent-filter>
++                <action android:name="android.intent.action.MAIN" />
++
++                <category android:name="android.intent.category.LAUNCHER" />
++            </intent-filter>
++        </activity>
++        <activity
++            android:name=".activity.LoginActivity"
++             >
++        </activity>
++    </application>
++
++</manifest>
+Index: app/src/main/res/layout/fragment_product.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_product.xml	(revision )
++++ app/src/main/res/layout/fragment_product.xml	(revision )
+@@ -0,0 +1,42 @@
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#efeff4"
++    tools:context="dbighealth.bighealth.fragment.ProductFragment">
++
++    <include
++        layout="@layout/footer_tabs"
++        android:id="@+id/include"></include>
++
++    <LinearLayout
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:layout_alignParentEnd="true"
++        android:orientation="horizontal"
++        android:layout_below="@+id/include">
++
++        <ScrollView
++            android:id="@+id/tools_scrlllview"
++            android:layout_width="fill_parent"
++            android:layout_height="fill_parent"
++            android:layout_weight="3"
++            android:fadingEdge="none"
++            android:scrollbars="none" >
++
++            <LinearLayout
++                android:id="@+id/tools"
++                android:layout_width="fill_parent"
++                android:layout_height="wrap_content"
++                android:gravity="center_horizontal"
++                android:orientation="vertical" />
++        </ScrollView>
++
++        <android.support.v4.view.ViewPager
++            android:id="@+id/goods_pager"
++            android:layout_width="fill_parent"
++            android:layout_height="fill_parent"
++            android:layout_weight="1" />
++    </LinearLayout>
++
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/drawable/login_selector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/login_selector.xml	(revision )
++++ app/src/main/res/drawable/login_selector.xml	(revision )
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:state_focused="true"
++        android:drawable="@drawable/yuanjiao"/>
++    <item android:state_pressed="true"
++        android:drawable="@drawable/yuanjiao"/>
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/layout/tab_rb.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/tab_rb.xml	(revision )
++++ app/src/main/res/layout/tab_rb.xml	(revision )
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="wrap_content"
++    android:layout_height="30dp"
++    android:textColor="@drawable/tab_text_selector"
++    android:text="今日"
++    android:background="@drawable/tab_selector"
++    android:paddingLeft="15dp"
++    android:paddingRight="15dp"
++    android:paddingTop="10dp"
++    android:paddingBottom="10dp"
++    android:button="@null"
++    />
++
++
++
+Index: app/src/main/res/values-w820dp/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-w820dp/dimens.xml	(revision )
++++ app/src/main/res/values-w820dp/dimens.xml	(revision )
+@@ -0,0 +1,6 @@
++<resources>
++    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
++         (such as screen margins) for screens with more than 820dp of available width. This
++         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
++    <dimen name="activity_horizontal_margin">64dp</dimen>
++</resources>
+Index: app/src/main/java/dbighealth/bighealth/view/ColumnHorizontalScrollView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/view/ColumnHorizontalScrollView.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/view/ColumnHorizontalScrollView.java	(revision )
+@@ -0,0 +1,114 @@
++package dbighealth.bighealth.view;
++
++import android.app.Activity;
++import android.content.Context;
++import android.support.v4.view.ViewPager;
++import android.util.AttributeSet;
++import android.view.MotionEvent;
++import android.view.View;
++import android.widget.HorizontalScrollView;
++import android.widget.ImageView;
++
++/**
++ * Created by de on 2016/8/15.
++ */
++public class ColumnHorizontalScrollView extends HorizontalScrollView {
++    /** 传入整体布局  */
++    private View ll_content;
++    /** 传入更多栏目选择布局 */
++    private View ll_more;
++    /** 传入拖动栏布局 */
++    private View rl_column;
++    /** 左阴影图片 */
++    private ImageView leftImage;
++    /** 右阴影图片 */
++    private ImageView rightImage;
++    /** 屏幕宽度 */
++    private int mScreenWitdh = 0;
++    /** 父类的活动activity */
++    private Activity activity;
++
++    public ColumnHorizontalScrollView(Context context) {
++        super(context);
++    }
++
++    public ColumnHorizontalScrollView(Context context, AttributeSet attrs) {
++        super(context, attrs);
++    }
++
++    public ColumnHorizontalScrollView(Context context, AttributeSet attrs,
++                                      int defStyle) {
++        super(context, attrs, defStyle);
++    }
++    /**
++     * 在拖动的时候执行
++     * */
++    @Override
++    protected void onScrollChanged(int paramInt1, int paramInt2, int paramInt3, int paramInt4) {
++        // TODO Auto-generated method stub
++        super.onScrollChanged(paramInt1, paramInt2, paramInt3, paramInt4);
++        shade_ShowOrHide();
++        if(!activity.isFinishing() && ll_content !=null && leftImage!=null && rightImage!=null && ll_more!=null && rl_column !=null){
++            if(ll_content.getWidth() <= mScreenWitdh){
++                leftImage.setVisibility(View.GONE);
++                rightImage.setVisibility(View.GONE);
++            }
++        }else{
++            return;
++        }
++        if(paramInt1 ==0){
++            leftImage.setVisibility(View.GONE);
++            rightImage.setVisibility(View.VISIBLE);
++            return;
++        }
++        if(ll_content.getWidth() - paramInt1 + ll_more.getWidth() + rl_column.getLeft() == mScreenWitdh){
++            leftImage.setVisibility(View.VISIBLE);
++            rightImage.setVisibility(View.GONE);
++            return;
++        }
++        leftImage.setVisibility(View.VISIBLE);
++        rightImage.setVisibility(View.VISIBLE);
++    }
++    /**
++     * 传入父类布局中的资源文件
++     * */
++    public void setParam(Activity activity, int mScreenWitdh,View paramView1,ImageView paramView2, ImageView paramView3 ,View paramView4,View paramView5){
++        this.activity = activity;
++        this.mScreenWitdh = mScreenWitdh;
++        ll_content = paramView1;
++        leftImage = paramView2;
++        rightImage = paramView3;
++        ll_more = paramView4;
++        rl_column = paramView5;
++    }
++    /**
++     * 判断左右阴影的显示隐藏效果
++     * */
++    public void shade_ShowOrHide() {
++        if (!activity.isFinishing() && ll_content != null) {
++            measure(0, 0);
++            //如果整体宽度小于屏幕宽度的话，那左右阴影都隐藏
++            if (mScreenWitdh >= getMeasuredWidth()) {
++                leftImage.setVisibility(View.GONE);
++                rightImage.setVisibility(View.GONE);
++            }
++        } else {
++            return;
++        }
++        //如果滑动在最左边时候，左边阴影隐藏，右边显示
++        if (getLeft() == 0) {
++            leftImage.setVisibility(View.GONE);
++            rightImage.setVisibility(View.VISIBLE);
++            return;
++        }
++        //如果滑动在最右边时候，左边阴影显示，右边隐藏
++        if (getRight() == getMeasuredWidth() - mScreenWitdh) {
++            leftImage.setVisibility(View.VISIBLE);
++            rightImage.setVisibility(View.GONE);
++            return;
++        }
++        //否则，说明在中间位置，左、右阴影都显示
++        leftImage.setVisibility(View.VISIBLE);
++        rightImage.setVisibility(View.VISIBLE);
++    }
++}
+Index: app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java	(revision )
+@@ -0,0 +1,350 @@
++package dbighealth.bighealth.activity;
++
++import android.animation.Animator;
++import android.animation.AnimatorListenerAdapter;
++import android.annotation.TargetApi;
++import android.content.pm.PackageManager;
++import android.support.annotation.NonNull;
++import android.support.design.widget.Snackbar;
++import android.support.v7.app.AppCompatActivity;
++import android.app.LoaderManager.LoaderCallbacks;
++
++import android.content.CursorLoader;
++import android.content.Loader;
++import android.database.Cursor;
++import android.net.Uri;
++import android.os.AsyncTask;
++
++import android.os.Build;
++import android.os.Bundle;
++import android.provider.ContactsContract;
++import android.text.TextUtils;
++import android.view.KeyEvent;
++import android.view.View;
++import android.view.View.OnClickListener;
++import android.view.inputmethod.EditorInfo;
++import android.widget.ArrayAdapter;
++import android.widget.AutoCompleteTextView;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.TextView;
++
++import java.util.ArrayList;
++import java.util.List;
++
++import dbighealth.bighealth.R;
++
++import static android.Manifest.permission.READ_CONTACTS;
++
++/**
++ * A login screen that offers login via email/password.
++ */
++public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
++
++    /**
++     * Id to identity READ_CONTACTS permission request.
++     */
++    private static final int REQUEST_READ_CONTACTS = 0;
++
++    /**
++     * A dummy authentication store containing known user names and passwords.
++     * TODO: remove after connecting to a real authentication system.
++     */
++    private static final String[] DUMMY_CREDENTIALS = new String[]{
++            "foo@example.com:hello", "bar@example.com:world"
++    };
++    /**
++     * Keep track of the login task to ensure we can cancel it if requested.
++     */
++    private UserLoginTask mAuthTask = null;
++
++    // UI references.
++    private AutoCompleteTextView mEmailView;
++    private EditText mPasswordView;
++    private View mProgressView;
++    private View mLoginFormView;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_login);
++        // Set up the login form.
++        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
++        populateAutoComplete();
++
++        mPasswordView = (EditText) findViewById(R.id.password);
++        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
++            @Override
++            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
++                if (id == R.id.login || id == EditorInfo.IME_NULL) {
++                    attemptLogin();
++                    return true;
++                }
++                return false;
++            }
++        });
++
++        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
++        mEmailSignInButton.setOnClickListener(new OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                attemptLogin();
++            }
++        });
++
++        mLoginFormView = findViewById(R.id.login_form);
++        mProgressView = findViewById(R.id.login_progress);
++    }
++
++    private void populateAutoComplete() {
++        if (!mayRequestContacts()) {
++            return;
++        }
++
++        getLoaderManager().initLoader(0, null, this);
++    }
++
++    private boolean mayRequestContacts() {
++        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
++            return true;
++        }
++        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
++            return true;
++        }
++        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
++            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
++                    .setAction(android.R.string.ok, new View.OnClickListener() {
++                        @Override
++                        @TargetApi(Build.VERSION_CODES.M)
++                        public void onClick(View v) {
++                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
++                        }
++                    });
++        } else {
++            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
++        }
++        return false;
++    }
++
++    /**
++     * Callback received when a permissions request has been completed.
++     */
++    @Override
++    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
++                                           @NonNull int[] grantResults) {
++        if (requestCode == REQUEST_READ_CONTACTS) {
++            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
++                populateAutoComplete();
++            }
++        }
++    }
++
++
++    /**
++     * Attempts to sign in or register the account specified by the login form.
++     * If there are form errors (invalid email, missing fields, etc.), the
++     * errors are presented and no actual login attempt is made.
++     */
++    private void attemptLogin() {
++        if (mAuthTask != null) {
++            return;
++        }
++
++        mEmailView.setError(null);
++        mPasswordView.setError(null);
++
++        // Store values at the time of the login attempt.
++        String email = mEmailView.getText().toString();
++        String password = mPasswordView.getText().toString();
++
++        boolean cancel = false;
++        View focusView = null;
++
++        // Check for a valid password, if the user entered one.
++        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
++            mPasswordView.setError(getString(R.string.error_invalid_password));
++            focusView = mPasswordView;
++            cancel = true;
++        }
++
++        // Check for a valid email address.
++        if (TextUtils.isEmpty(email)) {
++            mEmailView.setError(getString(R.string.error_field_required));
++            focusView = mEmailView;
++            cancel = true;
++        } else if (!isEmailValid(email)) {
++            mEmailView.setError(getString(R.string.error_invalid_email));
++            focusView = mEmailView;
++            cancel = true;
++        }
++
++        if (cancel) {
++            // There was an error; don't attempt login and focus the first
++            // form field with an error.
++            focusView.requestFocus();
++        } else {
++            // Show a progress spinner, and kick off a background task to
++            // perform the user login attempt.
++            showProgress(true);
++            mAuthTask = new UserLoginTask(email, password);
++            mAuthTask.execute((Void) null);
++        }
++    }
++
++    private boolean isEmailValid(String email) {
++        //TODO: Replace this with your own logic
++        return email.contains("@");
++    }
++
++    private boolean isPasswordValid(String password) {
++        //TODO: Replace this with your own logic
++        return password.length() > 4;
++    }
++    /**
++     * Shows the progress UI and hides the login form.
++     */
++    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
++    private void showProgress(final boolean show) {
++        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
++        // for very easy animations. If available, use these APIs to fade-in
++        // the progress spinner.
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
++            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
++
++            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
++            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
++                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
++                @Override
++                public void onAnimationEnd(Animator animation) {
++                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
++                }
++            });
++
++            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
++            mProgressView.animate().setDuration(shortAnimTime).alpha(
++                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
++                @Override
++                public void onAnimationEnd(Animator animation) {
++                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
++                }
++            });
++        } else {
++            // The ViewPropertyAnimator APIs are not available, so simply show
++            // and hide the relevant UI components.
++            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
++            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
++        }
++    }
++
++    @Override
++    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
++        return new CursorLoader(this,
++                // Retrieve data rows for the device user's 'profile' contact.
++                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
++                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
++
++                // Select only email addresses.
++                ContactsContract.Contacts.Data.MIMETYPE +
++                        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
++                .CONTENT_ITEM_TYPE},
++
++                // Show primary email addresses first. Note that there won't be
++                // a primary email address if the user hasn't specified one.
++                ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
++    }
++
++    @Override
++    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
++        List<String> emails = new ArrayList<>();
++        cursor.moveToFirst();
++        while (!cursor.isAfterLast()) {
++            emails.add(cursor.getString(ProfileQuery.ADDRESS));
++            cursor.moveToNext();
++        }
++
++        addEmailsToAutoComplete(emails);
++    }
++
++    @Override
++    public void onLoaderReset(Loader<Cursor> cursorLoader) {
++
++    }
++
++    private interface ProfileQuery {
++        String[] PROJECTION = {
++                ContactsContract.CommonDataKinds.Email.ADDRESS,
++                ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
++        };
++
++        int ADDRESS = 0;
++        int IS_PRIMARY = 1;
++    }
++
++
++    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
++        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
++        ArrayAdapter<String> adapter =
++                new ArrayAdapter<>(LoginActivity.this,
++                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
++
++        mEmailView.setAdapter(adapter);
++    }
++
++    /**
++     * Represents an asynchronous login/registration task used to authenticate
++     * the user.
++     */
++    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
++
++        private final String mEmail;
++        private final String mPassword;
++
++        UserLoginTask(String email, String password) {
++            mEmail = email;
++            mPassword = password;
++        }
++
++        @Override
++        protected Boolean doInBackground(Void... params) {
++            // TODO: attempt authentication against a network service.
++
++            try {
++                // Simulate network access.
++                Thread.sleep(2000);
++            } catch (InterruptedException e) {
++                return false;
++            }
++
++            for (String credential : DUMMY_CREDENTIALS) {
++                String[] pieces = credential.split(":");
++                if (pieces[0].equals(mEmail)) {
++                    // Account exists, return true if the password matches.
++                    return pieces[1].equals(mPassword);
++                }
++            }
++
++            // TODO: register the new account here.
++            return true;
++        }
++
++        @Override
++        protected void onPostExecute(final Boolean success) {
++            mAuthTask = null;
++            showProgress(false);
++
++            if (success) {
++                finish();
++            } else {
++                mPasswordView.setError(getString(R.string.error_incorrect_password));
++                mPasswordView.requestFocus();
++            }
++        }
++
++        @Override
++        protected void onCancelled() {
++            mAuthTask = null;
++            showProgress(false);
++        }
++    }
++}
++
+Index: app/src/main/res/menu/menu_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/menu/menu_main.xml	(revision )
++++ app/src/main/res/menu/menu_main.xml	(revision )
+@@ -0,0 +1,6 @@
++<menu xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
++    <item android:id="@+id/action_settings" android:title="@string/action_settings"
++        android:orderInCategory="100" app:showAsAction="never" />
++</menu>
+Index: app/src/main/java/dbighealth/bighealth/fragment/HomeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/HomeFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/HomeFragment.java	(revision )
+@@ -0,0 +1,135 @@
++package dbighealth.bighealth.fragment;
++
++import android.app.Activity;
++import android.graphics.Color;
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.support.v4.view.ViewPager;
++import android.util.DisplayMetrics;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.HorizontalScrollView;
++import android.widget.RadioButton;
++import android.widget.RadioGroup;
++
++import java.util.ArrayList;
++import java.util.List;
++
++import dbighealth.bighealth.R;
++import dbighealth.bighealth.adapter.NewsFragmentPagerAdapter;
++import dbighealth.bighealth.ben.Channel;
++import dbighealth.bighealth.ben.ChannelDb;
++import dbighealth.bighealth.fragment.home.BlankFragment;
++import dbighealth.bighealth.fragment.home.BlankFragment1;
++import dbighealth.bighealth.fragment.home.BlankFragment2;
++import dbighealth.bighealth.fragment.home.NewsChannelFragment;
++
++/**首页*/
++public class HomeFragment extends Fragment implements ViewPager.OnPageChangeListener{
++    private View view=null;
++    private RadioGroup rgChannel=null;
++    private ViewPager viewPager;
++    private HorizontalScrollView hvChannel=null;
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        if(view==null){
++            view=inflater.inflate(R.layout.fragment_home, null);
++
++            rgChannel=(RadioGroup)view.findViewById(R.id.rgChannel);
++            viewPager=(ViewPager)view.findViewById(R.id.vpNewsList);
++            hvChannel=(HorizontalScrollView)view.findViewById(R.id.hvChannel);
++            rgChannel.setOnCheckedChangeListener(
++                    new RadioGroup.OnCheckedChangeListener() {
++                        @Override
++                        public void onCheckedChanged(RadioGroup group,
++                                                     int checkedId) {
++                            viewPager.setCurrentItem(checkedId);
++                        }
++                    });
++            initTab(inflater);
++            initViewPager();
++        }
++        ViewGroup parent=(ViewGroup)view.getParent();
++        if(parent!=null){
++            parent.removeView(view);
++        }
++        return view;
++    }
++    private List<Fragment> newsChannelList=new ArrayList<Fragment>();
++    private NewsFragmentPagerAdapter adapter;
++    private void initViewPager(){
++        List<Channel> channelList= ChannelDb.getSelectedChannel();//获取到上标题///暂时用不着
++                NewsChannelFragment fragment=new NewsChannelFragment();
++                BlankFragment fragment1=new BlankFragment();
++                BlankFragment1 fragment11=new BlankFragment1();
++                BlankFragment2 fragment12=new BlankFragment2();
++                newsChannelList.add(fragment);
++                newsChannelList.add(fragment1);
++                newsChannelList.add(fragment11);
++                newsChannelList.add(fragment12);
++
++
++        System.out.println("dkalsd"+newsChannelList);
++        adapter=new NewsFragmentPagerAdapter(super.getActivity().getSupportFragmentManager(), newsChannelList);
++        viewPager.setAdapter(adapter);
++        viewPager.setOffscreenPageLimit(2);
++        viewPager.setCurrentItem(0);
++        viewPager.setOnPageChangeListener(this);
++    }
++    private void initTab(LayoutInflater inflater){
++        List<Channel> channelList=ChannelDb.getSelectedChannel();
++        for(int i=0;i<channelList.size();i++){
++            RadioButton rb=(RadioButton)inflater.
++                    inflate(R.layout.tab_rb, null);
++            rb.setId(i);
++            rb.setText(channelList.get(i).getName());
++            RadioGroup.LayoutParams params=new
++                    RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT,
++                    RadioGroup.LayoutParams.WRAP_CONTENT);
++
++            rgChannel.addView(rb,params);
++        }
++        rgChannel.check(0);
++    }
++
++
++    @Override
++    public void onAttach(Activity activity) {
++        // TODO Auto-generated method stub
++        super.onAttach(activity);
++    }
++
++    @Override
++    public void setArguments(Bundle args) {
++        // TODO Auto-generated method stub
++        super.setArguments(args);
++    }
++    @Override
++    public void onPageScrollStateChanged(int arg0) {
++        // TODO Auto-generated method stub
++
++    }
++    @Override
++    public void onPageScrolled(int arg0, float arg1, int arg2) {
++        // TODO Auto-generated method stub
++
++    }
++    @Override
++    public void onPageSelected(int idx) {
++        setTab(idx);
++    }
++    private void setTab(int idx){
++        RadioButton rb=(RadioButton)rgChannel.getChildAt(idx);
++        rb.setChecked(true);
++        int left=rb.getLeft();
++        int width=rb.getMeasuredWidth();
++        DisplayMetrics metrics=new DisplayMetrics();
++        super.getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
++        int screenWidth=metrics.widthPixels;
++        int len=left+width/2-screenWidth/2;
++        hvChannel.smoothScrollTo(len, 0);
++    }
++
++}
+Index: app/src/main/res/drawable/radio_buttong_bg.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/radio_buttong_bg.xml	(revision )
++++ app/src/main/res/drawable/radio_buttong_bg.xml	(revision )
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++
++    <item android:state_pressed="true"><shape>
++        <gradient android:angle="270.0" android:endColor="#ffcc3131" android:startColor="#ffcc3131" />
++
++        <corners android:radius="2.0dip" />
++    </shape></item>
++    <item android:state_selected="true"><shape>
++        <gradient android:angle="270.0" android:endColor="#ffcc3131" android:startColor="#ffcc3131" />
++
++        <corners android:radius="2.0dip" />
++    </shape></item>
++    <item android:state_checkable="true"><shape>
++        <gradient android:angle="270.0" android:endColor="#ffcc3131" android:startColor="#ffcc3131" />
++
++        <corners android:radius="2.0dip" />
++    </shape></item>
++    <item><shape>
++        <gradient android:angle="270.0" android:endColor="#00000000" android:startColor="#00000000" />
++
++        <corners android:radius="2.0dip" />
++    </shape></item>
++
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/drawable/channel_glide_day_bg.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/channel_glide_day_bg.xml	(revision )
++++ app/src/main/res/drawable/channel_glide_day_bg.xml	(revision )
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector
++  xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:state_pressed="true" android:drawable="@mipmap/channel_glide_press" />
++    <item android:drawable="@mipmap/channel_glide" />
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_system.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_system.xml	(revision )
++++ app/src/main/res/layout/fragment_system.xml	(revision )
+@@ -0,0 +1,580 @@
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#efeff4"
++    android:orientation="vertical"
++    tools:context="dbighealth.bighealth.fragment.SystemFragment">
++
++<include
++    layout="@layout/footer_tabs"
++    ></include>
++
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="30dp"
++        android:layout_marginLeft="30dp"
++        android:layout_marginRight="30dp"
++        android:background="@drawable/biankuang_yuan"
++        android:id="@+id/rl">
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="富贵病康复体系"
++            android:layout_margin="10dp"
++            android:layout_centerVertical="true"
++            android:layout_centerHorizontal="true"
++            android:id="@+id/textView2" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView4"
++            android:background="@drawable/up"
++            android:layout_centerVertical="true"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="33dp" />
++    </RelativeLayout>
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="50dp"
++        android:layout_marginRight="50dp"
++        android:visibility="gone"
++        android:id="@+id/l1"
++        android:background="@drawable/biankuang_yuan_1"
++        android:orientation="vertical"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:padding="10dp"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv1"
++            android:text="半身不遂失语康复理疗方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:id="@+id/tv2"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="预防中风复发康复养生方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:id="@+id/tv3"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="冠心病、脑血栓自然养生疗愈方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv4"
++            android:padding="10dp"
++            android:text="高血压养生康复方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv5"
++            android:padding="10dp"
++            android:text="高血脂症清调补康复方案"
++            android:layout_gravity="center"
++            />
++
++    </LinearLayout>
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="30dp"
++        android:layout_marginLeft="30dp"
++        android:id="@+id/r2"
++        android:layout_marginRight="30dp"
++        android:background="@drawable/biankuang_yuan"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="老年病康复与养生技术体系"
++            android:layout_margin="10dp"
++            android:layout_centerVertical="true"
++            android:layout_centerHorizontal="true"
++            android:id="@+id/textView3" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView5"
++            android:background="@drawable/up"
++            android:layout_centerVertical="true"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="33dp" />
++    </RelativeLayout>
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="50dp"
++        android:layout_marginRight="50dp"
++        android:visibility="gone"
++        android:id="@+id/l2"
++        android:background="@drawable/biankuang_yuan_1"
++        android:orientation="vertical"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:padding="10dp"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv11"
++            android:text="半身不遂失语康复理疗方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:id="@+id/tv12"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="预防中风复发康复养生方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:id="@+id/tv13"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="冠心病、脑血栓自然养生疗愈方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv14"
++            android:padding="10dp"
++            android:text="高血压养生康复方案"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv15"
++            android:padding="10dp"
++            android:text="高血脂症清调补康复方案"
++            android:layout_gravity="center"
++            />
++
++    </LinearLayout>
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="30dp"
++        android:id="@+id/r3"
++        android:layout_marginLeft="30dp"
++        android:layout_marginRight="30dp"
++        android:background="@drawable/biankuang_yuan"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="关节骨病奇效力量康复技术体系"
++            android:layout_margin="10dp"
++            android:layout_centerVertical="true"
++            android:layout_centerHorizontal="true"
++            android:id="@+id/textView" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView6"
++            android:background="@drawable/up"
++            android:layout_centerVertical="true"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="33dp" />
++    </RelativeLayout>
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="50dp"
++        android:layout_marginRight="50dp"
++        android:visibility="gone"
++        android:id="@+id/l3"
++        android:background="@drawable/biankuang_yuan_1"
++        android:orientation="vertical"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:padding="10dp"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv21"
++            android:text="颈椎病理疗技术"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:id="@+id/tv22"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="脊椎病理疗技术"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:id="@+id/tv23"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="腰椎病理疗技术"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv24"
++            android:padding="10dp"
++            android:text="肩周炎快速理疗技术"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv25"
++            android:padding="10dp"
++            android:text="其他关节骨病理疗技术"
++            android:layout_gravity="center"
++            />
++
++    </LinearLayout>
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="30dp"
++        android:id="@+id/r4"
++        android:layout_marginLeft="30dp"
++        android:layout_marginRight="30dp"
++        android:background="@drawable/biankuang_yuan"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="皮肤病与保健美容技术体系"
++            android:layout_margin="10dp"
++            android:layout_centerVertical="true"
++            android:layout_centerHorizontal="true"
++            android:id="@+id/textView6" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView7"
++            android:background="@drawable/up"
++            android:layout_centerVertical="true"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="33dp" />
++    </RelativeLayout>
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="50dp"
++        android:layout_marginRight="50dp"
++        android:visibility="gone"
++        android:id="@+id/l4"
++        android:background="@drawable/biankuang_yuan_1"
++        android:orientation="vertical"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:padding="10dp"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv31"
++            android:text="扁平疣"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:id="@+id/tv32"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="牛皮癣"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:id="@+id/tv33"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="花斑癣"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv34"
++            android:padding="10dp"
++            android:text="体癣"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:id="@+id/tv35"
++            android:padding="10dp"
++            android:text="股癣"
++            android:layout_gravity="center"
++            />
++
++    </LinearLayout>
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="30dp"
++        android:layout_marginLeft="30dp"
++        android:id="@+id/r5"
++        android:layout_marginRight="30dp"
++        android:background="@drawable/biankuang_yuan"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="康复产品技术体系"
++            android:layout_margin="10dp"
++            android:layout_centerVertical="true"
++            android:layout_centerHorizontal="true"
++            android:id="@+id/textView7" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView8"
++            android:background="@drawable/up"
++            android:layout_centerVertical="true"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="33dp" />
++    </RelativeLayout>
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="50dp"
++        android:layout_marginRight="50dp"
++        android:visibility="gone"
++        android:id="@+id/l5"
++        android:background="@drawable/biankuang_yuan_1"
++        android:orientation="vertical"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:padding="10dp"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:text="功能饮品系列"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="功能型食品系列"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="保健花草茶系列"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="传统理疗产品系列"
++            android:layout_gravity="center"
++            />
++        <RelativeLayout
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#ffff"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="0dp"
++            android:layout_weight="1"
++            android:textColor="#ffff"
++            android:textSize="15sp"
++            android:padding="10dp"
++            android:text="高科技理疗产品系列"
++            android:layout_gravity="center"
++            />
++
++    </LinearLayout>
++
++
++
++
++</LinearLayout>
+Index: app/src/main/java/dbighealth/bighealth/ben/Model.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/ben/Model.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/ben/Model.java	(revision )
+@@ -0,0 +1,17 @@
++package dbighealth.bighealth.ben;
++
++import dbighealth.bighealth.R;
++
++public class Model {
++
++
++	public static final String[] toolsList = { "特价", "茶叶", "龙井", "绿茶",
++			"红茶", "大红袍"};
++
++	public static final int[] iconList = { R.drawable.cha,
++			R.drawable.cha1,R.drawable.chaye,
++			R.drawable.cha3,R.drawable.cha4,
++			R.drawable.chaye1
++	};
++
++}
+Index: app/src/main/res/layout/fragment_blank.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_blank.xml	(revision )
++++ app/src/main/res/layout/fragment_blank.xml	(revision )
+@@ -0,0 +1,10 @@
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context="dbighealth.bighealth.fragment.home.BlankFragment">
++
++    <!-- TODO: Update blank fragment layout -->
++    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
++        android:text="糖尿病" />
++
++</FrameLayout>
+Index: app/app.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/app.iml	(revision )
++++ app/app.iml	(revision )
+@@ -0,0 +1,105 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="BigHealth" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
++  <component name="FacetManager">
++    <facet type="android-gradle" name="Android-Gradle">
++      <configuration>
++        <option name="GRADLE_PROJECT_PATH" value=":app" />
++      </configuration>
++    </facet>
++    <facet type="android" name="Android">
++      <configuration>
++        <option name="SELECTED_BUILD_VARIANT" value="debug" />
++        <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
++        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
++        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
++        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugAndroidTest" />
++        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileDebugAndroidTestSources" />
++        <afterSyncTasks>
++          <task>generateDebugAndroidTestSources</task>
++          <task>generateDebugSources</task>
++        </afterSyncTasks>
++        <option name="ALLOW_USER_CONFIGURATION" value="false" />
++        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
++        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
++        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res" />
++        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
++      </configuration>
++    </facet>
++  </component>
++  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
++    <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
++    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/debug" />
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/debug" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/debug" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/aidl" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/aidl" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
++      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/bundles" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/coverage-instrumented-classes" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/design/23.2.1/jars" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.1/jars" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/libs" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/ndk" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/proguard" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
++      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
++      <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
++      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
++    </content>
++    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
++    <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" exported="" name="animated-vector-drawable-23.2.1" level="project" />
++    <orderEntry type="library" exported="" name="support-v4-23.2.1" level="project" />
++    <orderEntry type="library" exported="" name="recyclerview-v7-23.2.1" level="project" />
++    <orderEntry type="library" exported="" name="support-annotations-23.2.1" level="project" />
++    <orderEntry type="library" exported="" name="support-vector-drawable-23.2.1" level="project" />
++    <orderEntry type="library" exported="" name="design-23.2.1" level="project" />
++    <orderEntry type="library" exported="" name="appcompat-v7-23.2.1" level="project" />
++  </component>
++</module>
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision )
++++ app/src/main/res/values/strings.xml	(revision )
+@@ -0,0 +1,25 @@
++<resources>
++    <string name="app_name">BigHealth</string>
++    <string name="action_settings">Settings</string>
++
++<!-- TODO: Remove or change this placeholder text -->
++    <string name="hello_blank_fragment">Hello blank fragment1</string>
++
++    <!-- Strings related to login -->
++    <string name="prompt_email">手机号/邮箱</string>
++    <string name="prompt_password">密码</string>
++    <string name="forget_password">忘记密码？</string>
++
++    <string name="action_sign_in">登  录</string>
++    <string name="action_sign_in_color">#ffffff</string>
++
++    <string name="action_register">注  册</string>
++    <string name="action_sign_in_short">Sign in</string>
++    <string name="error_invalid_email">This email address is invalid</string>
++    <string name="error_invalid_password">This password is too short</string>
++    <string name="error_incorrect_password">This password is incorrect</string>
++    <string name="error_field_required">请输入账号</string>
++    <string name="permission_rationale">"Contacts permissions are needed for providing email
++        completions."
++    </string>
++</resources>
+Index: app/src/main/java/dbighealth/bighealth/adapter/GridViewAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/adapter/GridViewAdapter.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/adapter/GridViewAdapter.java	(revision )
+@@ -0,0 +1,74 @@
++package dbighealth.bighealth.adapter;
++
++import java.util.ArrayList;
++import android.annotation.SuppressLint;
++import android.content.Context;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.BaseAdapter;
++import android.widget.ImageView;
++import android.widget.TextView;
++
++import dbighealth.bighealth.R;
++import dbighealth.bighealth.ben.Type;
++
++public class GridViewAdapter extends BaseAdapter {
++
++	private ArrayList<Type> list;
++	private Type type;
++	private Context context;
++	Holder view;
++
++	public GridViewAdapter(Context context, ArrayList<Type> list) {
++		this.list = list;
++		this.context = context;
++	}
++
++	@Override
++	public int getCount() {
++		if (list != null && list.size() > 0)
++			return list.size();
++		else
++			return 0;
++	}
++
++	@Override
++	public Object getItem(int position) {
++		return list.get(position);
++	}
++
++	@Override
++	public long getItemId(int position) {
++		return 0;
++	}
++
++	@SuppressLint("NewApi") @Override
++	public View getView(final int position, View convertView, ViewGroup parent) {
++		if (convertView == null) {
++			convertView = View.inflate(context, R.layout.item_gridview, null);
++			view = new Holder(convertView);
++			convertView.setTag(view);
++		} else {
++			view = (Holder) convertView.getTag();
++		}
++		if (list != null && list.size() > 0) {
++			type = list.get(position);
++			view.icon.setBackground(context.getResources().getDrawable(
++					type.getIcon()));
++			view.name.setText(type.getTypename());
++		}
++
++		return convertView;
++	}
++
++	private class Holder {
++		private ImageView icon;
++		private TextView name;
++
++		public Holder(View view) {
++			icon = (ImageView) view.findViewById(R.id.typeicon);
++			name = (TextView) view.findViewById(R.id.typename);
++		}
++	}
++
++}
+Index: app/src/main/res/values/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/styles.xml	(revision )
++++ app/src/main/res/values/styles.xml	(revision )
+@@ -0,0 +1,25 @@
++<resources>
++
++    <!-- Base application theme. -->
++    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
++        <!-- Customize your theme here. -->
++    </style>
++    <style name="AppTheme.NoActionBar">
++        <item name="windowActionBar">false</item>
++        <item name="windowNoTitle">true</item>
++    </style>
++    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
++    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
++
++    <style name="top_category_scroll_view_item_text">
++        <item name="android:textSize">16.0sp</item>
++        <item name="android:textStyle">bold</item>
++        <item name="android:gravity">center</item>
++    </style>
++    <style name="tabstyle">
++        <item name="android:button">@null</item>
++        <item name="android:textSize">18sp</item>
++        <item name="android:gravity">center</item>
++    </style>
++
++</resources>
+Index: app/src/main/java/dbighealth/bighealth/ben/ChannelDb.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/ben/ChannelDb.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/ben/ChannelDb.java	(revision )
+@@ -0,0 +1,33 @@
++package dbighealth.bighealth.ben;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by de on 2016/8/16.
++ */
++public class ChannelDb {
++
++    private static List<Channel> selectedChannel=new ArrayList<Channel>();
++
++    static{
++        selectedChannel.add(new Channel("T1348647909107","推荐",0,
++                "http://c.3g.163.com/nc/article/headline/T1348647909107/0-20.html",""));
++        selectedChannel.add(new Channel("T1348648517839","糖尿病",0,
++                "http://c.3g.163.com/nc/article/list/T1348648517839/0-20.html",""));
++        selectedChannel.add(new Channel("T1348649079062","颈椎病",0,
++                "http://c.3g.163.com/nc/article/list/T1348649079062/0-20.html",""));
++        selectedChannel.add(new Channel("T1348648756099","肩周炎",0,"http://c.3g.163.com/nc/article/list/T1348648756099/0-20.html",""));
++
++        selectedChannel.add(new Channel("","心脑血管",0,
++               "http://c.3g.163.com/recommend/getSubDocPic?passport=&devId=000000000000000&size=20",""));
++        selectedChannel.add(new Channel("","妇科病",0,"",""));
++       selectedChannel.add(new Channel("","前列腺",0,"",""));
++       selectedChannel.add(new Channel("","皮肤病",0,"",""));
++        selectedChannel.add(new Channel("","脚气",0,"",""));
++    }
++    public static  List<Channel> getSelectedChannel(){
++        return selectedChannel;
++    }
++
++}
+Index: app/src/main/java/dbighealth/bighealth/fragment/KakaFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/KakaFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/KakaFragment.java	(revision )
+@@ -0,0 +1,64 @@
++package dbighealth.bighealth.fragment;
++
++
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.AdapterView;
++import android.widget.GridView;
++import android.widget.TextView;
++
++import java.util.ArrayList;
++
++import dbighealth.bighealth.ben.Model;
++import dbighealth.bighealth.R;
++import dbighealth.bighealth.adapter.GridViewAdapter;
++import dbighealth.bighealth.ben.Type;
++
++/**
++ * A simple {@link Fragment} subclass.
++ */
++public class KakaFragment extends Fragment {
++
++    private ArrayList<Type> list;
++    private GridView gridView;
++    private GridViewAdapter adapter;
++    private Type type;
++    private String typename;
++    private int icon;
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        View view = inflater.inflate(R.layout.fragment_kaka, null);
++        gridView = (GridView) view.findViewById(R.id.listView);
++        int index = getArguments().getInt("index");
++
++        typename = Model.toolsList[index];
++        icon = Model.iconList[index];
++
++        ((TextView) view.findViewById(R.id.toptype)).setText(typename);
++        GetTypeList();
++        adapter = new GridViewAdapter(getActivity(), list);
++        gridView.setAdapter(adapter);
++        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
++            @Override
++            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
++                                    long arg3) {
++            }
++        });
++
++        return view;
++    }
++
++    private void GetTypeList() {
++        list = new ArrayList<Type>();
++        for (int i = 1; i < 23; i++) {
++            type = new Type(i, typename + i, icon);
++            list.add(type);
++        }
++    }
++
++}
+Index: app/src/main/res/layout/activity_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_login.xml	(revision )
++++ app/src/main/res/layout/activity_login.xml	(revision )
+@@ -0,0 +1,67 @@
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent" android:gravity="center_horizontal"
++    android:orientation="vertical" android:paddingBottom="@dimen/activity_vertical_margin"
++    android:paddingLeft="@dimen/activity_horizontal_margin"
++    android:paddingRight="@dimen/activity_horizontal_margin"
++    android:paddingTop="@dimen/activity_vertical_margin"
++    tools:context="dbighealth.bighealth.activity.LoginActivity">
++
++    <!-- Login progress -->
++    <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
++        android:layout_width="wrap_content" android:layout_height="wrap_content"
++        android:layout_marginBottom="8dp" android:visibility="gone" />
++
++    <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
++        android:layout_height="match_parent">
++
++        <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
++            android:layout_height="wrap_content" android:orientation="vertical">
++
++            <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
++                android:layout_height="wrap_content">
++
++                <AutoCompleteTextView android:id="@+id/email" android:layout_width="match_parent"
++                    android:layout_height="wrap_content" android:hint="@string/prompt_email"
++                    android:inputType="textEmailAddress" android:maxLines="1"
++                    android:singleLine="true" />
++
++            </android.support.design.widget.TextInputLayout>
++
++            <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
++                android:layout_height="wrap_content">
++
++                <EditText android:id="@+id/password" android:layout_width="match_parent"
++                    android:layout_height="wrap_content" android:hint="@string/prompt_password"
++                    android:imeActionId="@+id/login"
++                    android:imeActionLabel="@string/action_sign_in_short"
++                    android:imeOptions="actionUnspecified" android:inputType="textPassword"
++                    android:maxLines="1" android:singleLine="true" />
++
++            </android.support.design.widget.TextInputLayout>
++
++
++            <Button
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="@string/forget_password"
++                android:layout_marginRight="20dp"
++                android:id="@+id/button"
++                android:background="@null"
++                android:layout_gravity="right" />
++
++            <Button android:id="@+id/email_sign_in_button" style="?android:textAppearanceSmall"
++                android:layout_width="match_parent" android:layout_height="wrap_content"
++                android:layout_marginTop="16dp" android:text="@string/action_sign_in"
++                android:background="@drawable/yuanjiao"
++                android:textColor="@string/action_sign_in_color"
++                android:textStyle="bold" />
++            <Button android:id="@+id/email_register_button" style="?android:textAppearanceSmall"
++                android:layout_width="match_parent" android:layout_height="wrap_content"
++                android:layout_marginTop="16dp" android:text="@string/action_register"
++                android:background="@drawable/login_selector"
++                android:textStyle="bold" />
++
++        </LinearLayout>
++    </ScrollView>
++</LinearLayout>
+Index: app/src/main/java/dbighealth/bighealth/ben/Type.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/ben/Type.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/ben/Type.java	(revision )
+@@ -0,0 +1,38 @@
++package dbighealth.bighealth.ben;
++
++public class Type {
++	private int id;
++	private String typename;
++	private int icon;
++
++	public Type(int id, String typename, int icon) {
++		super();
++		this.id = id;
++		this.typename = typename;
++		this.icon = icon;
++	}
++
++	public int getId() {
++		return id;
++	}
++
++	public void setId(int id) {
++		this.id = id;
++	}
++
++	public String getTypename() {
++		return typename;
++	}
++
++	public void setTypename(String typename) {
++		this.typename = typename;
++	}
++
++	public int getIcon() {
++		return icon;
++	}
++
++	public void setIcon(int icon) {
++		this.icon = icon;
++	}
++}
+Index: app/src/main/res/layout/fragment_mine.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_mine.xml	(revision )
++++ app/src/main/res/layout/fragment_mine.xml	(revision )
+@@ -0,0 +1,177 @@
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#efeff4"
++    tools:context="dbighealth.bighealth.fragment.MineFragment"
++    android:orientation="vertical"
++    android:weightSum="1">
++    <include
++        layout="@layout/footer_tabs"
++        ></include>
++
++    <ImageView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="50dp"
++        android:layout_marginBottom="20dp"
++        android:background="@drawable/user"
++        android:layout_gravity="center"
++        />
++<LinearLayout
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:paddingBottom="20dp"
++    android:orientation="horizontal"
++   >
++    <Button
++        android:layout_width="1dp"
++        android:layout_weight="1"
++        android:layout_height="50dp"
++        android:text="登录"
++        android:textSize="18sp"
++        android:id="@+id/login"
++        android:textColor="#b3b3b3"
++        android:background="@drawable/biankuang"
++        android:layout_marginStart="40dp" />
++    <Button
++        android:layout_width="1dp"
++        android:layout_weight="1"
++        android:layout_height="wrap_content"
++        android:background="@null"
++        android:layout_marginStart="40dp" />
++
++    <Button
++        android:layout_width="1dp"
++        android:layout_weight="1"
++        android:layout_height="50dp"
++        android:text="注册"
++        android:textSize="18sp"
++        android:textColor="#b3b3b3"
++        android:background="@drawable/biankuang"
++        android:layout_marginEnd="40dp" />
++</LinearLayout>
++
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_weight="0.10">
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:background="@drawable/alarm"
++            android:id="@+id/imageView"
++            android:layout_marginStart="20dp"
++            android:layout_centerVertical="true"
++            android:layout_alignParentStart="true" />
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="服药提醒"
++            android:layout_marginStart="25dp"
++            android:layout_alignBottom="@+id/imageView"
++            android:layout_toEndOf="@+id/imageView" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView2"
++            android:layout_centerVertical="true"
++            android:background="@drawable/arrow"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="27dp" />
++        <View
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="#b3b3b3"
++            ></View>
++
++    </RelativeLayout>
++    <View
++        android:layout_width="match_parent"
++        android:layout_height="1dp"
++        android:layout_marginLeft="20dp"
++        android:layout_marginRight="20dp"
++        android:background="#b3b3b3"
++        ></View>
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_weight="0.10">
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:background="@drawable/xingzhuang"
++            android:id="@+id/imageView1"
++            android:layout_marginStart="20dp"
++            android:layout_centerVertical="true"
++            android:layout_alignParentStart="true" />
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="我的收藏"
++            android:layout_marginStart="25dp"
++            android:layout_alignBottom="@+id/imageView1"
++            android:layout_toEndOf="@+id/imageView1" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView3"
++            android:layout_centerVertical="true"
++            android:background="@drawable/arrow"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="27dp" />
++
++    </RelativeLayout>
++    <View
++        android:layout_width="match_parent"
++        android:layout_height="1dp"
++        android:layout_marginLeft="20dp"
++        android:layout_marginRight="20dp"
++        android:background="#b3b3b3"
++        ></View>
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_weight="0.10">
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:background="@drawable/shop"
++            android:id="@+id/imageView5"
++            android:layout_marginStart="20dp"
++            android:layout_centerVertical="true"
++            android:layout_alignParentStart="true" />
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="我的购物车"
++            android:layout_marginStart="25dp"
++            android:layout_alignBottom="@+id/imageView5"
++            android:layout_toEndOf="@+id/imageView5" />
++
++        <ImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/imageView26"
++            android:layout_centerVertical="true"
++            android:background="@drawable/arrow"
++            android:layout_alignParentEnd="true"
++            android:layout_marginEnd="27dp" />
++
++    </RelativeLayout>
++    <View
++        android:layout_width="match_parent"
++        android:layout_height="1dp"
++        android:layout_marginLeft="20dp"
++        android:layout_marginRight="20dp"
++        android:background="#b3b3b3"
++        ></View>
++
++</LinearLayout>
+Index: app/src/test/java/dbighealth/bighealth/ExampleUnitTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/test/java/dbighealth/bighealth/ExampleUnitTest.java	(revision )
++++ app/src/test/java/dbighealth/bighealth/ExampleUnitTest.java	(revision )
+@@ -0,0 +1,15 @@
++package dbighealth.bighealth;
++
++import org.junit.Test;
++
++import static org.junit.Assert.*;
++
++/**
++ * To work on unit tests, switch the Test Artifact in the Build Variants view.
++ */
++public class ExampleUnitTest {
++    @Test
++    public void addition_isCorrect() throws Exception {
++        assertEquals(4, 2 + 2);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/dbighealth/bighealth/fragment/home/NewsChannelFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/home/NewsChannelFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/home/NewsChannelFragment.java	(revision )
+@@ -0,0 +1,63 @@
++package dbighealth.bighealth.fragment.home;
++
++
++import android.app.Activity;
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.Gravity;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.webkit.WebView;
++import android.widget.RadioGroup;
++import android.widget.TextView;
++
++import dbighealth.bighealth.R;
++
++/**
++ * A simple {@link Fragment} subclass.
++ * 首页——推荐页面
++ */
++public class NewsChannelFragment extends Fragment {
++
++    private String channelName;
++    private String url;
++
++    @Override
++    public void setArguments(Bundle args) {
++        channelName=args.getString("cname");
++        url=args.getString("url");
++    }
++
++    @Override
++    public void onAttach(Activity activity) {
++        // TODO Auto-generated method stub
++        super.onAttach(activity);
++    }
++
++    private TextView view;
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++
++        if(view==null){
++            view=new TextView(super.getActivity());
++            view.setLayoutParams(new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.MATCH_PARENT));
++            view.setText("推荐");
++
++        }
++        ViewGroup parent=(ViewGroup)view.getParent();
++        if(parent!=null){
++            parent.removeView(view);
++        }
++        return view;
++    }
++
++    @Override
++    public void onDestroy() {
++        // TODO Auto-generated method stub
++        super.onDestroy();
++    }
++
++
++}
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/dimens.xml	(revision )
++++ app/src/main/res/values/dimens.xml	(revision )
+@@ -0,0 +1,6 @@
++<resources>
++    <!-- Default screen margins, per the Android Design guidelines. -->
++    <dimen name="activity_horizontal_margin">16dp</dimen>
++    <dimen name="activity_vertical_margin">16dp</dimen>
++    <dimen name="fab_margin">16dp</dimen>
++</resources>
+Index: app/src/main/res/layout/fragment_treatment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_treatment.xml	(revision )
++++ app/src/main/res/layout/fragment_treatment.xml	(revision )
+@@ -0,0 +1,10 @@
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#efeff4"
++    tools:context="dbighealth.bighealth.fragment.SystemFragment">
++
++    <include
++        layout="@layout/footer_tabs"
++        ></include>
++</RelativeLayout>
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision )
++++ app/src/main/res/layout/activity_main.xml	(revision )
+@@ -0,0 +1,27 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    tools:context=".MainActivity" >
++    <FrameLayout  android:id="@+id/contentLayout"
++        android:layout_width="match_parent"
++        android:layout_height="60dp"
++        android:layout_weight="1">
++
++    </FrameLayout>
++    <android.support.v4.app.FragmentTabHost
++        android:id="@android:id/tabhost"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:background="#F6F6F6"
++        >
++        <FrameLayout android:id="@android:id/tabcontent"
++            android:layout_height="0dp" android:layout_width="0dp"
++            />
++    </android.support.v4.app.FragmentTabHost>
++
++
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/dbighealth/bighealth/fragment/SystemFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/SystemFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/SystemFragment.java	(revision )
+@@ -0,0 +1,172 @@
++package dbighealth.bighealth.fragment;
++
++
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ImageView;
++import android.widget.LinearLayout;
++import android.widget.RelativeLayout;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import dbighealth.bighealth.R;
++
++/**
++ * A simple {@link Fragment} subclass.
++ * 体系页面
++ */
++public class SystemFragment extends Fragment implements View.OnClickListener{
++
++    View ra;
++    private RelativeLayout r1,r2,r3,r4,r5;
++    private LinearLayout l1,l2,l3,l4,l5;
++    private ImageView image4,image5,image6,image7,image8;
++    private TextView tv1,tv2,tv3,tv4,tv5;
++    private View l11;
++
++    public SystemFragment() {
++    }
++    private static int TOUCH;
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++
++
++        ra = inflater.inflate(R.layout.fragment_system, container, false);
++        TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
++        tvTab.setText("体系");
++        setView();
++        return ra;
++    }
++
++    private void setView() {
++        l1= (LinearLayout) ra.findViewById(R.id.l1);
++        l2= (LinearLayout) ra.findViewById(R.id.l2);
++        l3= (LinearLayout) ra.findViewById(R.id.l3);
++        l4= (LinearLayout) ra.findViewById(R.id.l4);
++        l5= (LinearLayout) ra.findViewById(R.id.l5);
++        r1=(RelativeLayout)ra.findViewById(R.id.rl);
++        r1.setOnClickListener(this);
++        r2=(RelativeLayout)ra.findViewById(R.id.r2);
++        r2.setOnClickListener(this);
++        r3=(RelativeLayout)ra.findViewById(R.id.r3);
++        r3.setOnClickListener(this);
++        r4=(RelativeLayout)ra.findViewById(R.id.r4);
++        r4.setOnClickListener(this);
++        r5=(RelativeLayout)ra.findViewById(R.id.r5);
++        r5.setOnClickListener(this);
++        image4=(ImageView)ra.findViewById(R.id.imageView4);
++        image5=(ImageView)ra.findViewById(R.id.imageView5);
++        image6=(ImageView)ra.findViewById(R.id.imageView6);
++        image7=(ImageView)ra.findViewById(R.id.imageView7);
++        image8=(ImageView)ra.findViewById(R.id.imageView8);
++
++        tv1=(TextView)ra.findViewById(R.id.tv1);
++        tv2=(TextView)ra.findViewById(R.id.tv2);
++        tv3=(TextView)ra.findViewById(R.id.tv3);
++        tv4=(TextView)ra.findViewById(R.id.tv4);
++        tv5=(TextView)ra.findViewById(R.id.tv5);
++    }
++
++
++    @Override
++    public void onClick(View v) {
++        switch (v.getId()){
++            case R.id.rl:
++                if (TOUCH==0){
++                    image4.setBackgroundResource(R.drawable.down);
++                    is(image5, l2);
++                    is(image6, l3);
++                    is(image7, l4);
++                    is(image8, l5);
++
++                    l1.setVisibility(View.VISIBLE);
++                    tv1.setText("二型糖尿病康复技术体系");
++                    tv2.setText("重度肥胖病诊断技术与绿色不反弹减肥法");
++                    tv3.setText("重度脂肪肝精准治愈康复方案");
++                    tv4.setText("高尿酸患者体质分析技术与快速复原方案");
++                    tv5.setText("痛风精准自然医学方案");
++                    TOUCH=1;
++                }else if (TOUCH==1){
++
++                    is(image4, l1);
++                    TOUCH=0;
++                }
++
++                break;
++            case R.id.r2:
++                if (TOUCH==0){
++                    image5.setBackgroundResource(R.drawable.down);
++                    is(image4,l1);
++                    is(image6, l3);
++                    is(image7,l4);
++                    is(image8, l5);
++                    l2.setVisibility(View.VISIBLE);
++                    TOUCH=1;
++
++                }else if (TOUCH==1){
++                    is(image5,l2);
++                    TOUCH=0;
++                }
++                break;
++
++            case R.id.r3:
++
++                if (TOUCH==0){
++                    image6.setBackgroundResource(R.drawable.down);
++
++                    is(image4,l1);
++                    is(image5, l2);
++                    is(image7, l4);
++                    is(image8, l5);
++                    l3.setVisibility(View.VISIBLE);
++                    TOUCH=1;
++                }else if (TOUCH==1){
++                    is(image6, l3);
++                    TOUCH=0;
++                }
++                break;
++            case R.id.r4:
++
++                if (TOUCH==0){
++                    image7.setBackgroundResource(R.drawable.down);
++                    is(image4,l1);
++                    is(image5, l2);
++                    is(image6,l3);
++                    is(image8, l5);
++                    l4.setVisibility(View.VISIBLE);
++                    TOUCH=1;
++                }else if (TOUCH==1){
++                    is(image7, l4);
++                    TOUCH=0;
++                }
++                break;
++            case R.id.r5:
++
++                if (TOUCH==0){
++                    image8.setBackgroundResource(R.drawable.down);
++
++                    is(image4,l1);
++                    is(image5,l2);
++                    is(image6,l3);
++                    is(image7,l4);
++                    l5.setVisibility(View.VISIBLE);
++                    TOUCH=1;
++                }else if (TOUCH==1){
++                    is(image8,l5);
++                    TOUCH=0;
++                }
++                break;
++        }
++    }
++
++    private void is(ImageView image, LinearLayout l) {
++        image.setBackgroundResource(R.drawable.up);
++        l.setVisibility(View.GONE);
++
++    }
++}
+Index: app/src/main/res/drawable/tab_selector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/tab_selector.xml	(revision )
++++ app/src/main/res/drawable/tab_selector.xml	(revision )
+@@ -0,0 +1,45 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android" >
++    <item android:state_checked="true" >
++        <layer-list >
++            <item >
++                <shape android:shape="rectangle">
++                    <stroke android:width="5dp"  android:color="#4BC9B4"/>
++                </shape>
++
++            </item>
++            <item  android:bottom="5dp" >
++                <shape android:shape="rectangle" >
++                    <solid android:color="#fff"/>
++                </shape>
++            </item>
++
++        </layer-list>
++
++
++    </item>
++    <item android:state_selected="true" >
++        <layer-list >
++            <item >
++                <shape android:shape="rectangle">
++                    <stroke android:width="5dp"  android:color="#4BC9B4"/>
++                </shape>
++
++            </item>
++            <item  android:bottom="5dp" >
++                <shape android:shape="rectangle" >
++                    <solid android:color="#fff"/>
++                </shape>
++            </item>
++
++        </layer-list>
++
++
++    </item>
++    <item >
++        <shape >
++            <solid  android:color="#FAFAFA"/>
++        </shape>
++    </item>
++
++</selector>
+Index: app/src/main/res/drawable/tab_text_selector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/tab_text_selector.xml	(revision )
++++ app/src/main/res/drawable/tab_text_selector.xml	(revision )
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android" >
++    <item android:state_checked="true"
++        android:color="#4BC9B4"/>
++
++    <item android:state_selected="true" android:color="#4BC9B4"/>
++    <item android:color="#000000"/>
++</selector>
+Index: app/src/main/res/layout/fragment_kaka.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_kaka.xml	(revision )
++++ app/src/main/res/layout/fragment_kaka.xml	(revision )
+@@ -0,0 +1,24 @@
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="fill_parent"
++    android:layout_height="fill_parent"
++    android:background="#ffffff"
++    android:orientation="vertical" >
++
++    <TextView
++        android:id="@+id/toptype"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_margin="15dp"
++        android:textSize="12sp" />
++
++    <GridView
++        android:id="@+id/listView"
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:layout_centerInParent="true"
++        android:horizontalSpacing="10dp"
++        android:numColumns="3"
++        android:scrollbars="none"
++        android:verticalSpacing="10dp" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java	(revision )
+@@ -0,0 +1,54 @@
++package dbighealth.bighealth.fragment;
++
++
++import android.content.Intent;
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.Button;
++import android.widget.TextView;
++
++import dbighealth.bighealth.R;
++import dbighealth.bighealth.activity.LoginActivity;
++
++/**
++ * A simple {@link Fragment} subclass.
++ * 我的页面
++ */
++public class MineFragment extends Fragment implements View.OnClickListener{
++    View ra;
++    private Button login;//点击登录按钮
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++
++        ra = inflater.inflate(R.layout.fragment_mine, container, false);
++        TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
++        tvTab.setText("我的");
++
++        setView();
++
++        return ra;
++    }
++
++    private void setView() {
++        login=(Button)ra.findViewById(R.id.login);
++       login.setOnClickListener(this);
++    }
++
++
++    @Override
++    public void onClick(View v) {
++        switch (v.getId()){
++            case R.id.login:
++                Intent i=new Intent(getContext(),LoginActivity.class);
++                startActivity(i);
++                break;
++
++
++        }
++    }
++}
+Index: app/src/main/java/dbighealth/bighealth/ben/Channel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/ben/Channel.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/ben/Channel.java	(revision )
+@@ -0,0 +1,58 @@
++package dbighealth.bighealth.ben;
++
++/**
++ * Created by de on 2016/8/16.
++ * 首页页面的上标题内容
++ */
++public class Channel {
++    private String id;
++    private String name;
++    private int order;
++    private String weburl;
++    private String hweburl;
++
++
++
++    public Channel(){
++
++    }
++    public Channel(String id,String name, int order, String weburl, String hweburl) {
++        super();
++        this.id=id;
++        this.name = name;
++        this.order = order;
++        this.weburl = weburl;
++        this.hweburl = hweburl;
++    }
++    public String getName() {
++        return name;
++    }
++    public void setName(String name) {
++        this.name = name;
++    }
++    public int getOrder() {
++        return order;
++    }
++    public void setOrder(int order) {
++        this.order = order;
++    }
++    public String getWeburl() {
++        return weburl;
++    }
++    public void setWeburl(String weburl) {
++        this.weburl = weburl;
++    }
++    public String getHweburl() {
++        return hweburl;
++    }
++    public void setHweburl(String hweburl) {
++        this.hweburl = hweburl;
++    }
++    public String getId() {
++        return id;
++    }
++    public void setId(String id) {
++        this.id = id;
++    }
++
++}
+Index: app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment1.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment1.java	(revision )
+@@ -0,0 +1,31 @@
++package dbighealth.bighealth.fragment.home;
++
++
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++
++import dbighealth.bighealth.R;
++
++/**
++ * 颈椎
++ */
++public class BlankFragment1 extends Fragment {
++
++
++    public BlankFragment1() {
++        // Required empty public constructor
++    }
++
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        // Inflate the layout for this fragment
++        return inflater.inflate(R.layout.fragment_blank_fragment1, container, false);
++    }
++
++
++}
+Index: app/proguard-rules.pro
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/proguard-rules.pro	(revision )
++++ app/proguard-rules.pro	(revision )
+@@ -0,0 +1,17 @@
++# Add project specific ProGuard rules here.
++# By default, the flags in this file are appended to flags specified
++# in D:\SDK/tools/proguard/proguard-android.txt
++# You can edit the include path and order by changing the proguardFiles
++# directive in build.gradle.
++#
++# For more details, see
++#   http://developer.android.com/guide/developing/tools/proguard.html
++
++# Add any project specific keep options here:
++
++# If your project uses WebView with JS, uncomment the following
++# and specify the fully qualified class name to the JavaScript interface
++# class:
++#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
++#   public *;
++#}
+Index: app/src/main/java/dbighealth/bighealth/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/MainActivity.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/MainActivity.java	(revision )
+@@ -0,0 +1,78 @@
++package dbighealth.bighealth;
++
++import android.graphics.Color;
++import android.os.Bundle;
++import android.support.v4.app.FragmentActivity;
++import android.support.v4.app.FragmentTabHost;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.widget.ImageView;
++import android.widget.TabHost;
++import android.widget.TabWidget;
++import android.widget.TextView;
++
++import dbighealth.bighealth.fragment.HomeFragment;
++import dbighealth.bighealth.fragment.MineFragment;
++import dbighealth.bighealth.fragment.ProductFragment;
++import dbighealth.bighealth.fragment.SystemFragment;
++import dbighealth.bighealth.fragment.TreatmentFragment;
++
++public class MainActivity extends FragmentActivity implements TabHost.OnTabChangeListener{
++    private FragmentTabHost tabHost;
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_main);
++        initView();
++    }
++
++    private void initView() {
++        tabHost=(FragmentTabHost)super.findViewById(android.R.id.tabhost);
++        tabHost.setup(this,super.getSupportFragmentManager()
++                ,R.id.contentLayout);
++        tabHost.getTabWidget().setDividerDrawable(null);
++        tabHost.setOnTabChangedListener(this);
++        initTab();
++    }
++    String[] tabs={"首页","体系","治疗","产品"," 我的"};
++    Class[] clz={HomeFragment.class,SystemFragment.class,
++            TreatmentFragment.class,ProductFragment.class,
++            MineFragment.class};
++
++    private void initTab() {
++        for(int i=0;i<tabs.length;i++){
++            TabHost.TabSpec tabSpec=tabHost.newTabSpec(tabs[i]).setIndicator(getTabView(i));
++            tabHost.addTab(tabSpec,clz[i],null);
++            tabHost.setTag(i);
++        }
++
++    }
++
++    private View getTabView(int idx) {
++        View view= LayoutInflater.from(this).inflate(R.layout.footer_tabs,null);
++        ((TextView)view.findViewById(R.id.tvTab)).setText(tabs[idx]);
++        if(idx==0){
++            ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.RED);
++        }else{
++        }
++        return view;
++    }
++    @Override
++    public void onTabChanged(String tabId) {
++        updateTab();
++    }
++
++    private void updateTab() {
++        TabWidget tabw=tabHost.getTabWidget();
++        for(int i=0;i<tabw.getChildCount();i++){
++            View view=tabw.getChildAt(i);
++            if(i==tabHost.getCurrentTab()){
++                ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.YELLOW);
++            }else{
++                ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.WHITE);
++            }
++
++        }
++
++    }
++}
+Index: app/src/main/res/layout/fragment_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_home.xml	(revision )
++++ app/src/main/res/layout/fragment_home.xml	(revision )
+@@ -0,0 +1,58 @@
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#efeff4"
++    android:orientation="vertical" >
++    <RelativeLayout
++        android:id="@+id/rl"
++        android:layout_width="match_parent"
++        android:layout_height="60dp"
++        android:background="#4BC9B4"
++        >
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="大健康"
++            android:textColor="#FFFFFF"
++            android:textSize="20sp"
++            android:id="@+id/textView"
++            android:layout_centerVertical="true"
++            android:layout_alignParentStart="true"
++            android:layout_marginStart="30dp" />
++    </RelativeLayout>
++
++    <RelativeLayout android:layout_width="match_parent"
++        android:layout_height="wrap_content">
++        <HorizontalScrollView
++            android:id="@+id/hvChannel"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_toLeftOf="@+id/ivShowChannel"
++            android:scrollbars="none"
++            >
++            <RadioGroup
++                android:id="@+id/rgChannel"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content" android:orientation="horizontal">
++
++            </RadioGroup>
++
++        </HorizontalScrollView>
++        <ImageView android:layout_width="40dp"
++            android:layout_height="40dp"
++            android:id="@+id/ivShowChannel"
++            android:layout_alignParentRight="true"
++            android:src="@drawable/channel_glide_day_bg"
++            android:scaleType="fitXY"
++            />
++    </RelativeLayout>
++
++    <android.support.v4.view.ViewPager
++        android:id="@+id/vpNewsList"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        >
++    </android.support.v4.view.ViewPager>
++
++</LinearLayout>
++
+Index: app/src/main/res/layout/fragment_blank_fragment2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_blank_fragment2.xml	(revision )
++++ app/src/main/res/layout/fragment_blank_fragment2.xml	(revision )
+@@ -0,0 +1,10 @@
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context="dbighealth.bighealth.fragment.home.BlankFragment2">
++
++    <!-- TODO: Update blank fragment layout -->
++    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
++        android:text="肩周炎" />
++
++</FrameLayout>
+Index: app/src/androidTest/java/dbighealth/bighealth/ApplicationTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/androidTest/java/dbighealth/bighealth/ApplicationTest.java	(revision )
++++ app/src/androidTest/java/dbighealth/bighealth/ApplicationTest.java	(revision )
+@@ -0,0 +1,13 @@
++package dbighealth.bighealth;
++
++import android.app.Application;
++import android.test.ApplicationTestCase;
++
++/**
++ * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
++ */
++public class ApplicationTest extends ApplicationTestCase<Application> {
++    public ApplicationTest() {
++        super(Application.class);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/dbighealth/bighealth/fragment/TreatmentFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/TreatmentFragment.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/TreatmentFragment.java	(revision )
+@@ -0,0 +1,36 @@
++package dbighealth.bighealth.fragment;
++
++
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.RelativeLayout;
++import android.widget.TextView;
++
++import dbighealth.bighealth.R;
++
++/**
++ * A simple {@link Fragment} subclass.
++ * https://git.oschina.net/qishaoxuan/new.git
++ * 治疗页面
++ */
++public class TreatmentFragment extends Fragment {
++    public TreatmentFragment() {
++
++    }
++
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        RelativeLayout r= (RelativeLayout) inflater.inflate(R.layout.fragment_treatment,null);
++        TextView tvTab= (TextView) r.findViewById(R.id.tvTab);
++        tvTab.setText("治疗");
++
++        return r;
++    }
++
++
++}
+Index: app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment2.java	(revision )
++++ app/src/main/java/dbighealth/bighealth/fragment/home/BlankFragment2.java	(revision )
+@@ -0,0 +1,32 @@
++package dbighealth.bighealth.fragment.home;
++
++import android.app.Activity;
++import android.net.Uri;
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++
++import dbighealth.bighealth.R;
++
++/**
++ * 肩周炎
++ */
++public class BlankFragment2 extends Fragment {
++
++    public BlankFragment2() {
++        // Required empty public constructor
++    }
++
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        // Inflate the layout for this fragment
++        return inflater.inflate(R.layout.fragment_blank_fragment2, container, false);
++    }
++
++    // TODO: Rename method, update argument and hook method into UI event
++
++}
+Index: app/src/main/res/layout/footer_tabs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/footer_tabs.xml	(revision )
++++ app/src/main/res/layout/footer_tabs.xml	(revision )
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="fill_parent"
++    android:layout_height="60dp"
++
++    android:gravity="center"
++    android:padding="8dp"
++    android:background="#4BC9B4"
++    >
++
++    <TextView
++        android:id="@+id/tvTab"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_alignParentLeft="true"
++        android:padding="5dp"
++        android:textColor="#ffff"
++        android:textSize="20sp"
++        android:text="新闻" android:layout_marginTop="2dp"/>
++
++</RelativeLayout>
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision )
++++ app/build.gradle	(revision )
+@@ -0,0 +1,27 @@
++apply plugin: 'com.android.application'
++
++android {
++    compileSdkVersion 23
++    buildToolsVersion "23.0.3"
++
++    defaultConfig {
++        applicationId "dbighealth.bighealth"
++        minSdkVersion 18
++        targetSdkVersion 23
++        versionCode 1
++        versionName "1.0"
++    }
++    buildTypes {
++        release {
++            minifyEnabled false
++            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
++        }
++    }
++}
++
++dependencies {
++    compile fileTree(dir: 'libs', include: ['*.jar'])
++    testCompile 'junit:junit:4.12'
++    compile 'com.android.support:appcompat-v7:23.2.1'
++    compile 'com.android.support:design:23.2.1'
++}
+Index: app/src/main/res/layout/item_gridview.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/item_gridview.xml	(revision )
++++ app/src/main/res/layout/item_gridview.xml	(revision )
+@@ -0,0 +1,22 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="fill_parent"
++    android:layout_height="fill_parent"
++    android:gravity="center"
++    android:orientation="vertical" >
++
++    <ImageView
++        android:id="@+id/typeicon"
++        android:layout_width="80dp"
++        android:layout_height="80dp"
++        android:contentDescription="@null"
++        android:scaleType="center" />
++
++    <TextView
++        android:id="@+id/typename"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:gravity="center"
++        android:textSize="12sp" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/drawable/biankuang_yuan_1.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/biankuang_yuan_1.xml	(revision )
++++ app/src/main/res/drawable/biankuang_yuan_1.xml	(revision )
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="#F19B9B"></solid>
++    <stroke
++        android:width="1dp"
++        android:color="#b3b3b3" />
++    <corners android:radius="3dp"  ></corners>
++</shape>
+\ No newline at end of file
+Index: app/src/main/res/drawable/biankuang_yuan.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/biankuang_yuan.xml	(revision )
++++ app/src/main/res/drawable/biankuang_yuan.xml	(revision )
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="#ffffff"></solid>
++    <stroke
++        android:width="1dp"
++        android:color="#b3b3b3" />
++    <corners android:radius="25dp"  ></corners>
++</shape>
+\ No newline at end of file
+Index: app/src/main/res/values-v21/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-v21/styles.xml	(revision )
++++ app/src/main/res/values-v21/styles.xml	(revision )
+@@ -0,0 +1,8 @@
++<resources>>
++    <style name="AppTheme.NoActionBar">
++        <item name="windowActionBar">false</item>
++        <item name="windowNoTitle">true</item>
++        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
++        <item name="android:statusBarColor">@android:color/transparent</item>
++    </style>
++</resources>

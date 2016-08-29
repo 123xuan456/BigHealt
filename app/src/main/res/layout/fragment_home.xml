@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efeff4"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#4BC9B4"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大健康"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:id="@+id/textView"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp" />
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <HorizontalScrollView
+            android:id="@+id/hvChannel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/ivShowChannel"
+            android:scrollbars="none"
+            >
+            <RadioGroup
+                android:id="@+id/rgChannel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:orientation="horizontal">
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+        <ImageView android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ivShowChannel"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/channel_glide_day_bg"
+            android:scaleType="fitXY"
+            />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpNewsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
+
