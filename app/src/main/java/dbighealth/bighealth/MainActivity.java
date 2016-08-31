@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         tabHost.setOnTabChangedListener(this);
         initTab();
     }
-    String[] tabs={"首页","体系","治疗","产品"," 我的"};
+    String[] tabs={"首页","体系","医疗养生","产品"," 我的"};
     Class[] clz={HomeFragment.class,SystemFragment.class,
             TreatmentFragment.class,ProductFragment.class,
             MineFragment.class};

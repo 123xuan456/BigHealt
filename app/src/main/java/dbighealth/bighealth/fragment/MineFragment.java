@@ -7,48 +7,69 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.ConditionActivity;
 import dbighealth.bighealth.activity.LoginActivity;
+import dbighealth.bighealth.activity.Me_LogoutActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  * 我的页面
  */
 public class MineFragment extends Fragment implements View.OnClickListener{
-    View ra;
-    private Button login;//点击登录按钮
+    LinearLayout ra;
+    private RelativeLayout rl;//点击进入登录页面（没有登录时）
+    private RelativeLayout rl1;//（登录之后）
+     boolean isLogin= false;
+    private TextView textView12;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        ra = inflater.inflate(R.layout.fragment_mine, container, false);
+        ra = (LinearLayout) inflater.inflate(R.layout.fragment_mine, null);
         TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
         tvTab.setText("我的");
-
         setView();
-
         return ra;
     }
 
     private void setView() {
-        login=(Button)ra.findViewById(R.id.login);
-       login.setOnClickListener(this);
-    }
+        rl=(RelativeLayout)ra.findViewById(R.id.rl);
+        rl.setOnClickListener(this);
+        rl1=(RelativeLayout)ra.findViewById(R.id.rl1);
+        rl1.setOnClickListener(this);
+        if (isLogin=true){
+            rl1.setVisibility(View.VISIBLE);
+            rl.setVisibility(View.GONE);
+        }else if (isLogin=false){
+            rl1.setVisibility(View.GONE);
+            rl.setVisibility(View.VISIBLE);
+        }
+        textView12=(TextView)ra.findViewById(R.id.textView12);
+        textView12.setOnClickListener(this);
 
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.login:
-                Intent i=new Intent(getContext(),LoginActivity.class);
-                startActivity(i);
+                    case R.id.rl:
+                    Intent i=new Intent(getContext(), LoginActivity.class);//没有登录点击进入登录页面
+                    startActivity(i);
+                    break;
+
+            case R.id.rl1:
+                Intent i1=new Intent(getContext(), Me_LogoutActivity.class);//已经登录后，点击进入详情
+                startActivity(i1);
                 break;
-
-
+            case R.id.textView12:
+                Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
+                startActivity(i2);
+                break;
         }
     }
 }

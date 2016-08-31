@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:weightSum="1">
     <include
-        layout="@layout/footer_tabs"
+        layout="@layout/footer_tab_1"
         ></include>
 
     <ImageView
@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:layout_weight="0.10">
+        android:layout_weight="0.10"
+        android:id="@+id/remind">
 
         <ImageView
             android:layout_width="wrap_content"

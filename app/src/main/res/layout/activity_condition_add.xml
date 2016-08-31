@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efeff4"
+    tools:context="dbighealth.bighealth.activity.ConditionAddActivity">
+    <include
+        layout="@layout/footer_tab_2"
+        android:id="@+id/include3"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="#ffff"
+        android:layout_below="@+id/include3"
+        android:id="@+id/linearLayout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="早餐"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:id="@+id/textView25"
+            android:layout_gravity="center_horizontal" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/biankuang_top"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="餐量："
+                android:padding="15dp"
+                android:id="@+id/textView26"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText1"
+                android:layout_alignBottom="@+id/textView26"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:layout_toEndOf="@+id/textView26"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间："
+                android:padding="15dp"
+                android:id="@+id/textView27"
+                android:layout_below="@+id/textView26"
+                android:layout_alignParentStart="true"
+                />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:layout_marginRight="30dp"
+                android:layout_alignBottom="@+id/textView27"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/textView26" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="#ffff"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="午餐"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:id="@+id/textView28"
+            android:layout_gravity="center_horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/biankuang_top"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText2"
+                android:layout_alignBottom="@+id/textView29"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:layout_toEndOf="@+id/textView29" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="餐量："
+                android:padding="15dp"
+                android:id="@+id/textView29"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间："
+                android:padding="15dp"
+                android:id="@+id/textView30"
+                android:layout_below="@+id/textView29"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText3"
+                android:layout_marginRight="30dp"
+                android:layout_alignBottom="@+id/textView30"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/textView29" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="#ffff"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="晚餐"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:id="@+id/textView31"
+            android:layout_gravity="center_horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/biankuang_top"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText4"
+                android:layout_alignBottom="@+id/textView32"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:layout_toEndOf="@+id/textView32" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="餐量："
+                android:padding="15dp"
+                android:id="@+id/textView32"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间："
+                android:padding="15dp"
+                android:id="@+id/textView33"
+                android:layout_below="@+id/textView32"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText5"
+                android:layout_marginRight="30dp"
+                android:layout_alignBottom="@+id/textView33"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/textView32" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

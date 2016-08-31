@@ -7,7 +7,7 @@
     tools:context=".MainActivity" >
     <FrameLayout  android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_weight="1">
 
     </FrameLayout>
@@ -17,8 +17,10 @@
         android:layout_height="wrap_content"
         android:background="#F6F6F6"
         >
-        <FrameLayout android:id="@android:id/tabcontent"
-            android:layout_height="0dp" android:layout_width="0dp"
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
             />
     </android.support.v4.app.FragmentTabHost>
 
