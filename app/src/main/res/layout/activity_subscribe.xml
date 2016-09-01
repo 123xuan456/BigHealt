@@ -78,19 +78,19 @@
         android:id="@+id/textView38"
         android:textSize="20sp"
 
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp" />
+        android:layout_marginBottom="50dp"
+        android:layout_above="@+id/imageView22"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView22"
-        android:layout_below="@+id/textView38"
         style="@style/subtv"
         android:background="@drawable/biankuang_yuan_blue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginBottom="82dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

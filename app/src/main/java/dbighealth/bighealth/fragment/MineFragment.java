@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ConditionActivity;
+import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
 import dbighealth.bighealth.activity.SubscribeActivity;
@@ -91,7 +92,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i4);
                 break;
             case R.id.textView15:
-                Intent i5=new Intent(getContext(), ConditionActivity.class);//资讯
+                Intent i5=new Intent(getContext(), InformationActivity.class);//资讯
                 startActivity(i5);
                 break;
             case R.id.textView16:

@@ -3,9 +3,9 @@ package dbighealth.bighealth.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import dbighealth.bighealth.adapter.ConditionAdapter;
 /**每日情况*/
 public class ConditionActivity extends Activity implements View.OnClickListener{
 
-    private ListViewCompat listview;
+    private ListView listview;
 
     List<Map<String,String>> list=new ArrayList<>();
     private ImageView arrow_left;
@@ -30,7 +30,7 @@ public class ConditionActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_condition);
-        listview=(ListViewCompat)findViewById(R.id.listView);
+        listview=(ListView)findViewById(R.id.listView);
         setView();
         getDate();
 
