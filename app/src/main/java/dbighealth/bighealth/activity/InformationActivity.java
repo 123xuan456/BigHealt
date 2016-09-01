@@ -39,12 +39,6 @@ public class InformationActivity extends Activity implements View.OnClickListene
         right_tv.setOnClickListener(this);
 
 
-
-
-
-
-
-
         String []a={"提问于1","提问于2","提问于3","提问于4"};
         String []b={"2016-01-01","2016-01-02","2016-01-03","2016-01-04"};
         String []c={"晚上多梦1","晚上多梦2","晚上多梦3","晚上多梦4"};
