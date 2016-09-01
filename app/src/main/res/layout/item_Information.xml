@@ -2,17 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="30dp"
-    android:paddingBottom="30dp"
-    android:background="#ffff"
-    >
-
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="#F0EFF5"
+   >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="早晨"
+        android:text="提问于："
         android:id="@+id/textView21"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
          />
 
     <TextView
@@ -28,29 +27,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="餐量:"
+        android:text="eqwewqeqw"
         android:id="@+id/textView22"
-        android:layout_marginEnd="8dp"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/textView23" />
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textView21"
+        android:layout_alignStart="@+id/textView21" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="nasdad"
-        android:layout_marginRight="30dp"
-        android:id="@+id/textView23"
-        android:layout_marginEnd="44dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="问"
         android:id="@+id/textView24"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/textView23"
-        android:layout_toEndOf="@+id/textView22" />
+        android:layout_marginEnd="27dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/biankuang"
+        android:layout_below="@+id/textView22"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
