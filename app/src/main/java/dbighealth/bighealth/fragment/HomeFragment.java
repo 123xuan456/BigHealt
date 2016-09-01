@@ -23,6 +23,7 @@ import dbighealth.bighealth.ben.ChannelDb;
 import dbighealth.bighealth.fragment.home.BlankFragment;
 import dbighealth.bighealth.fragment.home.BlankFragment1;
 import dbighealth.bighealth.fragment.home.BlankFragment2;
+import dbighealth.bighealth.fragment.home.CommonFragment;
 import dbighealth.bighealth.fragment.home.NewsChannelFragment;
 
 /**首页*/
@@ -62,13 +63,21 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private void initViewPager(){
         List<Channel> channelList= ChannelDb.getSelectedChannel();//获取到上标题///暂时用不着
                 NewsChannelFragment fragment=new NewsChannelFragment();
+                CommonFragment recommandFragment=new CommonFragment();
+                CommonFragment TangNiaoBing=new CommonFragment();
+                CommonFragment JingZhuiBing=new CommonFragment();
+                CommonFragment PiFuBing=new CommonFragment();
+                CommonFragment XinNaoXueGuan=new CommonFragment();
+
+
                 BlankFragment fragment1=new BlankFragment();
                 BlankFragment1 fragment11=new BlankFragment1();
                 BlankFragment2 fragment12=new BlankFragment2();
-                newsChannelList.add(fragment);
-                newsChannelList.add(fragment1);
-                newsChannelList.add(fragment11);
-                newsChannelList.add(fragment12);
+                newsChannelList.add(recommandFragment);
+                newsChannelList.add(TangNiaoBing);
+                newsChannelList.add(JingZhuiBing);
+                newsChannelList.add(PiFuBing);
+                newsChannelList.add(XinNaoXueGuan);
 
 
         System.out.println("dkalsd"+newsChannelList);
