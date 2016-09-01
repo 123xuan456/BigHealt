@@ -1,6 +1,7 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -67,6 +68,7 @@ public class InformationActivity extends Activity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.right_tv:
+                Intent i=new Intent();
 
                 break;
             case R.id.arrow_left:
