@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efeff4"
+    tools:context=".activity.SubscribeActivity">
+    <include
+        layout="@layout/footer_tab_1"
+        android:id="@+id/include4"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include4"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#ffff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="76dp">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView21"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大健康产业联盟"
+            android:id="@+id/textView34"
+            android:layout_alignTop="@+id/imageView21"
+            android:layout_toEndOf="@+id/imageView21"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="公司简介："
+            android:id="@+id/textView35"
+            android:layout_below="@+id/textView34"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@+id/textView34" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正月里来是新年啊，"
+            android:id="@+id/textView36"
+            android:layout_alignTop="@+id/textView35"
+            android:layout_toEndOf="@+id/textView35" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
