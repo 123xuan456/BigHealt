@@ -77,7 +77,6 @@
             android:layout_alignParentRight="true"
             android:text="追问"
             android:background="#ffbd8b"
-            android:Click="ture"
             android:textSize="20sp"
             android:id="@+id/textView8" />
     </RelativeLayout>

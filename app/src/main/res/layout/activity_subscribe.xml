@@ -11,13 +11,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_below="@+id/include4"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:paddingRight="10dp"
         android:background="#ffff"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp">
+        android:layout_marginTop="50dp"
+        android:id="@+id/relativeLayout2">
 
 
         <ImageView
@@ -39,23 +41,56 @@
             android:layout_toEndOf="@+id/imageView21"
              />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="公司简介："
-            android:id="@+id/textView35"
-            android:layout_below="@+id/textView34"
-            android:layout_marginTop="10dp"
-            android:layout_alignStart="@+id/textView34" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="正月里来是新年啊，"
+            android:text="公司简介：正月里来是新年啊，大年三十头一天啊！也不管那男和女哟！哎哟哟哟哎哟哟！都把那个新衣穿啊！"
             android:id="@+id/textView36"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/textView34"
+            android:layout_toRightOf="@+id/imageView21" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工作时间："
+            android:id="@+id/textView35"
+            android:layout_below="@+id/textView36"
+            android:layout_alignLeft="@+id/textView36"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周一到周五9:00-17:00"
+            android:maxLines="1"
+            android:id="@+id/textView37"
             android:layout_alignTop="@+id/textView35"
-            android:layout_toEndOf="@+id/textView35" />
+            android:layout_toRightOf="@+id/textView35" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="资讯电话：13716276410"
+        android:id="@+id/textView38"
+        android:textSize="20sp"
+
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="67dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView22"
+        android:layout_below="@+id/textView38"
+        style="@style/subtv"
+        android:background="@drawable/biankuang_yuan_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
 
 
 </RelativeLayout>
