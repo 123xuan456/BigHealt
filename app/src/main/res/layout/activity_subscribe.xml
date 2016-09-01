@@ -47,6 +47,14 @@
             android:layout_below="@+id/textView34"
             android:layout_marginTop="10dp"
             android:layout_alignStart="@+id/textView34" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正月里来是新年啊，"
+            android:id="@+id/textView36"
+            android:layout_alignTop="@+id/textView35"
+            android:layout_toEndOf="@+id/textView35" />
     </RelativeLayout>
 
 
