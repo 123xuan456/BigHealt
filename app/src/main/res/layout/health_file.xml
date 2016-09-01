@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+<TextView
+    android:layout_width="174dp"
+    android:layout_height="41dp"
+    android:text="基本信息"
+    android:textSize="19sp"
+    android:gravity="center"
+    android:textColor="#ffffff"
+    android:background="@drawable/green_circle"
+    />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名："
+                android:textColor="#343434"
+                android:textSize="17sp"
+                android:id="@+id/textView" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="117dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="民族："
+                android:textColor="#343434"
+                android:textSize="17sp"
+                 />
+
+            <EditText
+                android:id="@+id/nation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别："
+            android:textSize="17sp"
+            android:textColor="#343434"
+            android:id="@+id/textView2" />
+        <RadioGroup
+            android:id="@+id/sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView2">
+
+            <RadioButton
+                android:id="@+id/man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/gender"
+                android:text=" 男"
+                android:textColor="#666666"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_below="@+id/radioGroup"
+                android:layout_toStartOf="@+id/radioButton"
+                android:layout_marginEnd="22dp" />
+
+            <RadioButton
+                android:id="@+id/woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/gender"
+                android:text=" 女"
+                android:textColor="#666666"
+                android:checked="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/radioGroup"
+                android:layout_centerHorizontal="true"
+                 />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            >
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="血型："
+                android:textColor="#343434"
+                android:textSize="17sp"
+                 />
+            <RadioGroup
+                android:id="@+id/blood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/textView4">
+
+                <RadioButton
+                    android:id="@+id/rb_blood_ab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/blood"
+                    android:text=" AB"
+                    android:textColor="#666666"
+                    android:checked="true"
+                    android:layout_gravity="right"
+                     />
+
+                <RadioButton
+                    android:id="@+id/rb_blood_a"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/blood"
+                    android:text=" A"
+                    android:checked="false"
+                    android:textColor="#666666"
+                    android:layout_below="@+id/radioGroup"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            <RadioButton
+                android:id="@+id/rb_blood_b"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/blood"
+                android:text=" B"
+                android:textColor="#666666"
+                android:checked="false"
+                android:layout_gravity="center_horizontal"
+                 />
+
+            <RadioButton
+                android:id="@+id/rb_blood_o"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/blood"
+                android:text=" O"
+                android:checked="false"
+                android:textColor="#666666"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="40dp" />
+            </RadioGroup>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="居住情况："
+                android:textColor="#343434"
+                android:textSize="17sp"
+                />
+            <RadioGroup
+                android:id="@+id/live"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/textView5">
+
+                <RadioButton
+                    android:id="@+id/solitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/live"
+                    android:text=" 独居"
+                    android:textColor="#666666"
+                    android:checked="true"
+                    android:layout_gravity="right"
+                    />
+
+                <RadioButton
+                    android:id="@+id/two_people"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/live"
+                    android:text=" 两人"
+                    android:textColor="#666666"
+                    android:checked="false"
+                    android:layout_below="@+id/radioGroup"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <RadioButton
+                    android:id="@+id/above"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/live"
+                    android:text=" 三人以上"
+                    android:textColor="#666666"
+                    android:checked="false"
+                    android:layout_gravity="center_horizontal"
+                     />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="336dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="身高："
+                android:textColor="#343434"
+                android:textSize="17sp"
+                />
+
+            <EditText
+                android:id="@+id/height"
+                android:layout_width="117dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="体重："
+                android:textColor="#343434"
+                android:textSize="17sp"
+                />
+
+            <EditText
+                android:id="@+id/weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="出生年月："
+                android:textColor="#343434"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:text="1992年2月"
+                android:textColor="#666666"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="25dp"
+            android:text="过敏史"
+            android:textSize="19sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:background="@drawable/green_circle"
+            />
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/allergy"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:text="药物过敏"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:checked="true"
+                android:background="@drawable/allergy"
+                android:textSize="17sp"
+                />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/rest"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/allergy"
+                android:button="@null"
+                android:text="其他"
+                android:textColor="#666666"
+                android:checked="false"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:padding="3dp"
+            android:text="家族遗传病史"
+            android:layout_marginTop="25dp"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:background="@drawable/green_circle"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            >
+            <RadioGroup
+                android:id="@+id/heredity"
+                android:padding="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/diabetes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/heredity"
+                    android:text=" 糖尿病"
+                    android:textColor="#666666"
+                    android:checked="true"
+                    android:layout_gravity="right"
+                    />
+
+                <RadioButton
+                    android:id="@+id/dermatosis"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/heredity"
+                    android:text=" 皮肤病"
+                    android:textColor="#666666"
+                    android:checked="false"
+                    android:layout_below="@+id/radioGroup"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <RadioButton
+                    android:id="@+id/heart"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/heredity"
+                    android:text=" 先天性心脏病"
+                    android:textColor="#666666"
+                    android:checked="false"
+                    android:layout_gravity="center_horizontal"
+                    />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:padding="3dp"
+            android:layout_marginTop="25dp"
+            android:text="过往病史"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:background="@drawable/green_circle"
+            />
+
+        <EditText
+            android:id="@+id/medical_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:layout_margin="10dp"
+            android:text="sdasdasdafafasfadasdasdasffgffgjfghfdhgdfhfghdfgdfg"
+            android:textColor="#666666"/>
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:padding="3dp"
+            android:layout_marginTop="25dp"
+            android:text="生活习惯"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:background="@drawable/green_circle"
+            />
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/diet"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:text="饮食"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:checked="true"
+                android:background="@drawable/habit"
+                android:textSize="17sp"
+                />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/sleep"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:text="睡眠"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="#666666"
+                android:background="@drawable/habit"
+                android:textSize="17sp"
+                android:checked="false" />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/play"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/habit"
+                android:button="@null"
+                android:text="运动"
+                android:textColor="#666666"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:checked="false"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/rectangle">
+
+        <EditText
+            android:id="@+id/habit_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="例如：吃甜食不吃早饭"
+            android:textColor="#666666"/>
+    </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

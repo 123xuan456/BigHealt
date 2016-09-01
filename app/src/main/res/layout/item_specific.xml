@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    >
+<ImageView
+    android:layout_width="150dp"
+    android:layout_height="100dp"
+    android:layout_marginLeft="10dp"
+    android:id="@+id/iv_spcific_list"
+    android:src="@mipmap/spcificpic"
+    />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:textSize="14sp"
+    android:id="@+id/tv_description"
+    android:layout_toRightOf="@+id/iv_spcific_list"
+    android:layout_marginLeft="10dp"
+    android:textColor="#2e2e2e"
+    android:text="健康知识小常识健康知识小常识健康知识小常识健康知识小常识"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="昨天"
+        android:id="@+id/tv_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
+        android:textSize="14sp"
+        android:textColor="#e7e7e7"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e5e5e5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+</RelativeLayout>
