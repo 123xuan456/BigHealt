@@ -5,4 +5,6 @@ package dbighealth.bighealth.activity;
  */
 public class Test2 {
     int haha= 1;
+
+    String yy = "qiqi";
 }
