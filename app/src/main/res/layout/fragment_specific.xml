@@ -10,11 +10,12 @@
         android:id="@+id/iv_spcific"
         android:scaleType="fitXY"
         android:src="@mipmap/home"
+
         />
-    <android.support.v7.widget.RecyclerView
+    <dbighealth.bighealth.view.PullRecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rv_spcific"
         >
-    </android.support.v7.widget.RecyclerView>
+    </dbighealth.bighealth.view.PullRecyclerView>
 </LinearLayout>
