@@ -17,7 +17,7 @@ import dbighealth.bighealth.ben.Model;
 import dbighealth.bighealth.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ *  simple {@link Fragment} subclass.
  * 产品
  */
 public class ProductFragment extends Fragment {

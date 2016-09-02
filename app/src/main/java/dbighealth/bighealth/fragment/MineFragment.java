@@ -18,7 +18,7 @@ import dbighealth.bighealth.activity.Me_LogoutActivity;
 import dbighealth.bighealth.activity.SubscribeActivity;
 
 /**
- * A simple {@link Fragment} subclass.
+ *  simple {@link Fragment} subclass.
  * 我的页面
  */
 public class MineFragment extends Fragment implements View.OnClickListener{

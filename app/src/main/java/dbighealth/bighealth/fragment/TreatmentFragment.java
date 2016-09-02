@@ -12,7 +12,7 @@ import android.widget.TextView;
 import dbighealth.bighealth.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ *  simple {@link Fragment} subclass.
  * https://git.oschina.net/qishaoxuan/new.git
  * 治疗页面
  */
@@ -20,8 +20,6 @@ public class TreatmentFragment extends Fragment {
     public TreatmentFragment() {
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

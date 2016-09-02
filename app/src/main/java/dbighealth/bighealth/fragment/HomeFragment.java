@@ -62,6 +62,8 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private List<Fragment> newsChannelList=new ArrayList<Fragment>();
     private NewsFragmentPagerAdapter adapter;
     private void initViewPager(){
+      
+
         List<Channel> channelList= ChannelDb.getSelectedChannel();//获取到上标题///暂时用不着
                 NewsChannelFragment fragment=new NewsChannelFragment();
                 CommonFragment recommandFragment=new CommonFragment();

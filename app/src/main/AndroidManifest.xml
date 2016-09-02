@@ -54,7 +54,8 @@
         <activity
             android:name=".activity.ConditionAddActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".activity.SubscribeActivity"></activity>
+        <activity android:name=".activity.SubscribeActivity" />
+        <activity android:name=".activity.CooparateActivity"></activity>
     </application>
 
 </manifest>

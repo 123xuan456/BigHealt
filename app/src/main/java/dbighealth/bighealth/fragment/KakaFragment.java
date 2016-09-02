@@ -18,7 +18,7 @@ import dbighealth.bighealth.adapter.GridViewAdapter;
 import dbighealth.bighealth.ben.Type;
 
 /**
- * A simple {@link Fragment} subclass.
+ * simple {@link Fragment} subclass.
  */
 public class KakaFragment extends Fragment {
 
