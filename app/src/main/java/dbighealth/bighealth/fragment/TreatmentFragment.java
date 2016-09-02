@@ -1,6 +1,7 @@
 package dbighealth.bighealth.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.CooparateActivity;
 import dbighealth.bighealth.adapter.TreatmentAdapter;
 
 /**
@@ -43,6 +45,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         tvTab.setText("医疗养生");
         right_tv = (TextView) r.findViewById(R.id.right_tv);
         right_tv.setText("加盟");
+        right_tv.setOnClickListener(this);
         setView();
         return r;
     }
@@ -130,5 +133,11 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.right_tv:
+                Intent i=new Intent(getContext(),CooparateActivity.class);
+                startActivity(i);
+                break;
+        }
     }
 }
