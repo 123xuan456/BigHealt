@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/footer_tab_2" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </WebView>
+
+        <ListView
+            android:id="@+id/mcomment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/ndewbfhwb"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#4bcab4"
+        android:gravity="center_vertical"
+        >
+
+        <RelativeLayout
+            android:id="@+id/txtbottomshare"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/write_comment"
+             >
+
+            <EditText
+                android:id="@+id/txtedit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:enabled="true"
+                android:hint=" 评论"
+                android:textSize="15dp"
+                android:drawableLeft="@drawable/write_bg"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/btnpinglun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="发送"
+            android:textSize="17sp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/txtbottomshare"
+            android:layout_marginStart="21dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/star"
+            android:layout_marginLeft="35dp"
+            android:enabled="true"
+            android:visibility="visible"
+            android:layout_alignTop="@+id/btnpinglun"
+            android:layout_toEndOf="@+id/btnpinglun" />
+    </RelativeLayout>
+</RelativeLayout>
