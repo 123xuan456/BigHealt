@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="E:\BigHealt\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="564ccc1f451f1510ec955e1319c7ecf1b6069b13">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_48f3e4f9df8c73c08801d59e12118e0001d467cb.jar" />
+    </item>
+
+</items>

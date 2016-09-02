@@ -15,7 +15,7 @@ import android.widget.TextView;
 import dbighealth.bighealth.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ *  simple {@link Fragment} subclass.
  * 首页——推荐页面
  */
 public class NewsChannelFragment extends Fragment {

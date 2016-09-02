@@ -79,8 +79,6 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
             info.setImgList(imageList);
             mDatas.add(info);
         }
-
-
     }
 
     @Override

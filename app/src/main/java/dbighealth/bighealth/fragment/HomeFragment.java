@@ -25,6 +25,7 @@ import dbighealth.bighealth.fragment.home.BlankFragment1;
 import dbighealth.bighealth.fragment.home.BlankFragment2;
 import dbighealth.bighealth.fragment.home.CommonFragment;
 import dbighealth.bighealth.fragment.home.NewsChannelFragment;
+import dbighealth.bighealth.fragment.home.SpecialFragment;
 
 /**首页*/
 public class HomeFragment extends Fragment implements ViewPager.OnPageChangeListener{
@@ -61,23 +62,31 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private List<Fragment> newsChannelList=new ArrayList<Fragment>();
     private NewsFragmentPagerAdapter adapter;
     private void initViewPager(){
+      
+
         List<Channel> channelList= ChannelDb.getSelectedChannel();//获取到上标题///暂时用不着
                 NewsChannelFragment fragment=new NewsChannelFragment();
                 CommonFragment recommandFragment=new CommonFragment();
                 CommonFragment TangNiaoBing=new CommonFragment();
                 CommonFragment JingZhuiBing=new CommonFragment();
-                CommonFragment PiFuBing=new CommonFragment();
+                CommonFragment JianZhouyan=new CommonFragment();
                 CommonFragment XinNaoXueGuan=new CommonFragment();
+                CommonFragment Fukebing=new CommonFragment();
+                CommonFragment Qianliexian=new CommonFragment();
+           //     CommonFragment PiFuBing=new CommonFragment();
+              SpecialFragment PiFuBing = new SpecialFragment();
+                CommonFragment Jiaoqi=new CommonFragment();
 
-
-                BlankFragment fragment1=new BlankFragment();
-                BlankFragment1 fragment11=new BlankFragment1();
-                BlankFragment2 fragment12=new BlankFragment2();
                 newsChannelList.add(recommandFragment);
                 newsChannelList.add(TangNiaoBing);
                 newsChannelList.add(JingZhuiBing);
-                newsChannelList.add(PiFuBing);
+                newsChannelList.add(JianZhouyan);
                 newsChannelList.add(XinNaoXueGuan);
+                newsChannelList.add(Fukebing);
+                newsChannelList.add(Qianliexian);
+                newsChannelList.add(PiFuBing);
+                newsChannelList.add(Jiaoqi);
+
 
 
         System.out.println("dkalsd"+newsChannelList);
