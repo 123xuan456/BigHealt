@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,6 +27,7 @@ import dbighealth.bighealth.fragment.home.BlankFragment2;
 import dbighealth.bighealth.fragment.home.CommonFragment;
 import dbighealth.bighealth.fragment.home.NewsChannelFragment;
 import dbighealth.bighealth.fragment.home.SpecialFragment;
+import utils.UrlUtils;
 
 /**首页*/
 public class HomeFragment extends Fragment implements ViewPager.OnPageChangeListener{
@@ -66,7 +68,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
         List<Channel> channelList= ChannelDb.getSelectedChannel();//获取到上标题///暂时用不着
                 NewsChannelFragment fragment=new NewsChannelFragment();
-                CommonFragment recommandFragment=new CommonFragment();
+                CommonFragment recommandFragment=new CommonFragment(UrlUtils.CommonHome,"2");
                 CommonFragment TangNiaoBing=new CommonFragment();
                 CommonFragment JingZhuiBing=new CommonFragment();
                 CommonFragment JianZhouyan=new CommonFragment();
