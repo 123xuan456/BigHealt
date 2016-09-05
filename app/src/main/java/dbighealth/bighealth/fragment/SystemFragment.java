@@ -15,7 +15,7 @@ import android.widget.Toast;
 import dbighealth.bighealth.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ *  simple {@link Fragment} subclass.
  * 体系页面
  */
 public class SystemFragment extends Fragment implements View.OnClickListener{

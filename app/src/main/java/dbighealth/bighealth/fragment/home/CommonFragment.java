@@ -2,23 +2,32 @@ package dbighealth.bighealth.fragment.home;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.adapter.InfoAdapter;
-import dbighealth.bighealth.bean.InfoBean;
+import dbighealth.bighealth.adapter.InfoAdapter1;
+import dbighealth.bighealth.bean.CommonHomeBean;
 import dbighealth.bighealth.view.BaseAdapter;
 import dbighealth.bighealth.view.PullBaseView;
 import dbighealth.bighealth.view.PullRecyclerView;
+import okhttp3.Call;
+import utils.UrlUtils;
 
 /**
  * 首页公共fragment
@@ -27,30 +36,34 @@ import dbighealth.bighealth.view.PullRecyclerView;
 public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickListener, BaseAdapter.OnItemLongClickListener,
         BaseAdapter.OnViewClickListener, PullBaseView.OnRefreshListener {
 
+    int HOME_COMMON=101;
+    private Context context;
     PullRecyclerView recyclerView;
     List<Object> mDatas;
-    InfoAdapter infoAdapter;
+    InfoAdapter1 infoAdapter;
     private String url;
+    private String params;
     public CommonFragment() {
         // Required empty public constructor
+        context = getActivity();
     }
+
     @SuppressLint("ValidFragment")
-    public CommonFragment(String url){
-        this.url = url;
+    public CommonFragment(String url,String params){
+        Log.e("mhysa", UrlUtils.CommonHome);
+        this.url = UrlUtils.CommonHome;
+        this.params = "2";
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        initData();
+       // initData();
         View  view= inflater.inflate(R.layout.fragment_common,container,false);
         recyclerView = (PullRecyclerView) view.findViewById(R.id.recyclerView);
+        initInternet();
         recyclerView.setOnRefreshListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        infoAdapter = new InfoAdapter(getActivity(), mDatas,this);
-        infoAdapter.setOnItemClickListener(this);
-        infoAdapter.setOnItemLongClickListener(this);
-        recyclerView.setAdapter(infoAdapter);
+
         return view;
     }
 
@@ -59,12 +72,67 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
      */
     public void initInternet(){
 
-
+        OkHttpUtils
+                .get()
+                .url("http://192.168.0.38:8080/JianKangChanYe/homepictures/sickness")
+                .id(HOME_COMMON)
+                .addParams("id", "2")
+                .build()
+                .execute(MyStringCallBack);
     }
-    public void initData(){
-        /**
+    public StringCallback MyStringCallBack=new StringCallback(){
+
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+
+            Message msg = new Message();
+            msg.what = 1;
+            Bundle bundle = new Bundle();
+            bundle.putString("result",response);
+            msg.setData(bundle);
+            handler.sendMessage(msg);
+
+            Log.e("mhysa",response);
+
+
+        }
+    };
+    public Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    Bundle data = msg.getData();
+                    String result = data.getString("result");
+                    Log.e("mhysa","请求到的接口"+result);
+                    Gson gson = new Gson();
+                    CommonHomeBean commonHomeBean = gson.fromJson(result, CommonHomeBean.class);
+                    int code = commonHomeBean.getCode();
+                    if(code ==200){
+                        List<CommonHomeBean.ResultBean> result1 = commonHomeBean.getResult();
+                        List<Object> feng = new ArrayList<Object>();
+                        feng.add(result1);
+                        infoAdapter = new InfoAdapter1(getActivity(),result1);
+                      //  Log.e("mhysa",infoAdapter.toString());
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        recyclerView.setAdapter(infoAdapter);
+                    }
+
+                    break;
+            }
+
+        }
+    };
+    /*public void initData(){
+        *//**
          * 暂时用假图片
-         */
+         *//*
         mDatas = new ArrayList<>();
         List<Object> imageList = new ArrayList<>();
         imageList.add("http://avatar.csdn.net/3/B/9/1_baiyuliang2013.jpg");
@@ -79,13 +147,12 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
             info.setImgList(imageList);
             mDatas.add(info);
         }
-    }
+    }*/
 
     @Override
     public void onItemClick(int position) {
 
     }
-
     @Override
     public void onItemLongClick(int position) {
 
@@ -101,9 +168,6 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                InfoBean info = new InfoBean();
-                info.setText("新增新增新增新增新增新增新增新增新增新增新增新增新增新增新增新增新增新增");
-                mDatas.add(0, info);
                 infoAdapter.notifyDataSetChanged();
                 recyclerView.onHeaderRefreshComplete();
             }
@@ -120,14 +184,10 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                InfoBean info = new InfoBean();
-                info.setText("更多更多更多更多更多更多更多更多更多更多更多更多更多更多更多更多更多");
-                mDatas.add(info);
                 infoAdapter.notifyDataSetChanged();
                 recyclerView.onFooterRefreshComplete();
             }
         }, 1500);
-
     }
 
     @Override

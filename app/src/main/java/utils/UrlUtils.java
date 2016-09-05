@@ -7,6 +7,7 @@ import android.os.Environment;
  */
 public class UrlUtils {
     public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
-    public  static String   BASEURL="http://showtest.dancw.com";
+    public  static String   BASEURL="http://192.168.0.30:8080/JianKangChanYe";
     //-------------------------------API接口----------------------------------
+    public static String CommonHome=BASEURL+"/homepictures/sickness";
 }
