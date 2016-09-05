@@ -82,7 +82,6 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
             tv_PicTxt = (TextView) view.findViewById(R.id.tv_PicTxt);
         }
     }
-
     int dip2px(float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);

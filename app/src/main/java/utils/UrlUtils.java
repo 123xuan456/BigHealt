@@ -10,4 +10,5 @@ public class UrlUtils {
     public  static String   BASEURL="http://192.168.0.30:8080/JianKangChanYe";
     //-------------------------------API接口----------------------------------
     public static String CommonHome=BASEURL+"/homepictures/sickness";
+    public static String SpecialHome = BASEURL+"homepictures/showhealthknowledge";
 }
