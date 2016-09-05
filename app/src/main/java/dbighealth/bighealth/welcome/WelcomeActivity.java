@@ -130,6 +130,7 @@ public class WelcomeActivity extends AppCompatActivity {
                                     System.exit(0);// 这里是没有网络的时候，又不需要手动设置，则显示出来的一个静态页面，根据个人需要。
                                 }
                             }).show();
+
         }
     }
 

@@ -54,8 +54,8 @@
       <file leaf-file-name="WelcomeActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/welcome/WelcomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6709559">
-              <caret line="131" column="38" selection-start-line="131" selection-start-column="38" selection-end-line="131" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.7058824">
+              <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
               <folding>
                 <element signature="e#2993#4411#0" expanded="true" />
                 <element signature="e#3057#3089#0" expanded="true" />
@@ -2255,7 +2255,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473053032814</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="渐变and引导and判断网络22">
+      <created>1473053249144</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1473053249144</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2307,7 +2313,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="渐变and引导and判断网络" />
-    <option name="LAST_COMMIT_MESSAGE" value="渐变and引导and判断网络" />
+    <MESSAGE value="渐变and引导and判断网络22" />
+    <option name="LAST_COMMIT_MESSAGE" value="渐变and引导and判断网络22" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2783,8 +2790,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/welcome/WelcomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6709559">
-          <caret line="131" column="38" selection-start-line="131" selection-start-column="38" selection-end-line="131" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.7058824">
+          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
           <folding>
             <element signature="e#2993#4411#0" expanded="true" />
             <element signature="e#3057#3089#0" expanded="true" />
