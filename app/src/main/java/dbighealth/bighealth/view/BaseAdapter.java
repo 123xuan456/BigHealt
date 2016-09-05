@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import dbighealth.bighealth.bean.CommonHomeBean;
+
 /**
  * BaseAdapter
  * Created by baiyuliang on 2016-5-27.

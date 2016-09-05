@@ -13,21 +13,25 @@ import android.widget.TextView;
 
 import net.tsz.afinal.FinalBitmap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.view.BaseAdapter;
+import dbighealth.bighealth.bean.CommonHomeBean;
+import dbighealth.bighealth.view.BaseAdapter1;
 
 /**
  * Created by baiyuliang on 2016-5-27.
  */
-public class ImageAdapter extends BaseAdapter<ImageAdapter.MyViewHolder> {
+public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
 
     FinalBitmap fb = null;
     DisplayMetrics dm;
 
-    public ImageAdapter(Context context, List<Object> listDatas) {
+    public ImageAdapter(Context context, List<CommonHomeBean.ResultBean.ResultsBean> listDatas) {
         super(context, listDatas);
+       // List<CommonHomeBean.ResultBean.ResultsBean> list = ( List<CommonHomeBean.ResultBean.ResultsBean>)listDatas;
+
         fb = FinalBitmap.create(context);
         dm = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -46,12 +50,17 @@ public class ImageAdapter extends BaseAdapter<ImageAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
-        String url = (String) listDatas.get(position);//转换
+        String url = (String) listDatas.get(position).getImages();//转换
         fb.display(holder.iv, url);
+        holder.tv_PicTxt.setText(listDatas.get(position).getTitle());
+        /**
+         * 跳转到二级界面
+         */
         holder.iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("mhysa", "" + position);
+               // Intent intent = new
             }
         });
 

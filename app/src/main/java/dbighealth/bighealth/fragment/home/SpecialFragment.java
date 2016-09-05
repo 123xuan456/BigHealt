@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.adapter.InfoAdapter;
 import dbighealth.bighealth.adapter.ItemAdapter;
 import dbighealth.bighealth.view.BaseAdapter;
 import dbighealth.bighealth.view.PullBaseView;
