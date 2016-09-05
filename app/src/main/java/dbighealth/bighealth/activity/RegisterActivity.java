@@ -165,7 +165,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 if (code==200){
                     String res = codebean.getHint();
                     verification = codebean.getVerification();
-
                     Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
                 }else {
                     return;
