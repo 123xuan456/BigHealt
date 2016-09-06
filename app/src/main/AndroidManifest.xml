@@ -54,17 +54,17 @@
         <activity
             android:name=".activity.ConditionAddActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-<<<<<<<<< Temporary merge branch 1
+
         <activity android:name=".activity.SubscribeActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             />
         <activity android:name=".activity.InformationActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             ></activity>
-=========
-        <activity android:name=".activity.SubscribeActivity" />
+
+       
         <activity android:name=".activity.CooparateActivity"></activity>
->>>>>>>>> Temporary merge branch 2
+
     </application>
 
 </manifest>
