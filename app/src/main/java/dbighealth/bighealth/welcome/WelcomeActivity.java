@@ -21,6 +21,7 @@ import dbighealth.bighealth.fragment.HomeFragment;
 
 public class WelcomeActivity extends AppCompatActivity {
 
+
     private ImageView img;
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
