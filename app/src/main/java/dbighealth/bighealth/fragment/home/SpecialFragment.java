@@ -55,7 +55,6 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
         rv_spcific.setOnRefreshListener(this);
 
         rv_spcific.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         initInternet();
         /*itemAdapter = new ItemAdapter(getActivity(),mDatas,this);
         itemAdapter.setOnItemClickListener(this);

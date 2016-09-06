@@ -12,5 +12,5 @@ public class UrlUtils {
     public static String CommonHome=BASEURL+"/homepictures/sickness";
     public static String SpecialHome = BASEURL+"homepictures/showhealthknowledge";
 
-    
+
 }

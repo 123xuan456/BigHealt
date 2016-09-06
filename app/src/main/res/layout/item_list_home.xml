@@ -7,7 +7,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
         android:background="#e5e5e5"
         />
     <TextView
@@ -23,7 +22,9 @@
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"></android.support.v7.widget.RecyclerView>
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        ></android.support.v7.widget.RecyclerView>
 
 
 
