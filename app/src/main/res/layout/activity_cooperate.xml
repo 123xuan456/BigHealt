@@ -28,6 +28,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/radiobutton_selector"
             android:id="@+id/rb_medical"
+            android:button="@null"
+            android:gravity="center"
+            android:checked="false"
             android:text="医疗"
             />
         <RadioButton
@@ -35,6 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:id="@+id/nourishing"
+            android:button="@null"
+            android:gravity="center"
+            android:checked="true"
             android:background="@drawable/radiobutton_selector"
             />
         </RelativeLayout>

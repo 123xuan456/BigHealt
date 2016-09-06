@@ -21,7 +21,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".activity.Me_LogoutActivity"
             android:screenOrientation="portrait"
@@ -48,23 +50,21 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".activity.ConditionActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".activity.ConditionAddActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name=".activity.SubscribeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name=".activity.CooparateActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".activity.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+<<<<<<<<< Temporary merge branch 1
+        <activity android:name=".activity.SubscribeActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+        <activity android:name=".activity.InformationActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            ></activity>
+=========
+        <activity android:name=".activity.SubscribeActivity" />
+        <activity android:name=".activity.CooparateActivity"></activity>
+>>>>>>>>> Temporary merge branch 2
     </application>
 
 </manifest>

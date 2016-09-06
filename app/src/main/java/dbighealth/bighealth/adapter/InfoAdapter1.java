@@ -1,6 +1,9 @@
 package dbighealth.bighealth.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.sax.StartElementListener;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.bean.CommonHomeBean;
 import dbighealth.bighealth.view.BaseAdapter2;
 
@@ -84,11 +88,14 @@ public class InfoAdapter1 extends BaseAdapter2<InfoAdapter1.MyViewHolder> {
             this.onViewClickListener = onViewClickListener;
             this.position = position;
             this.viewtype = viewtype;
+
         }
 
         @Override
         public void onClick(View v) {
+
             onViewClickListener.onViewClick(position, viewtype);
+
         }
     }
 
