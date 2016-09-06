@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="D:\wanglaotaitai\BigHealt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="D:\wanglaotaitai\BigHealt\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.1.0_a644c7e84ebcac131a22636a94bc5142059f81b4.jar" />
+    </item>
+    <item
+        jar="D:\wanglaotaitai\BigHealt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="D:\wanglaotaitai\BigHealt\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.1.0_fbd34786028843e64866acb590c38c389fb8b89c.jar" />
+    </item>
+
+</items>
