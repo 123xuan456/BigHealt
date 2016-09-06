@@ -36,7 +36,7 @@ public class ItemAdapter extends ItemBaseAdapter<ItemAdapter.MyViewHolder> {
         super(context,listDatas);
         this.context = context;
         this.listDatas = listDatas;
-       // Log.i("mhysa","list数据"+listDatas);
+        Log.i("mhysa","list数据"+listDatas);
 
     }
 

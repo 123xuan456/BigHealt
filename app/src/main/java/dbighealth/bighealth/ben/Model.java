@@ -5,8 +5,8 @@ import dbighealth.bighealth.R;
 public class Model {
 
 
-	public static final String[] toolsList = { "特价", "茶叶", "龙井", "绿茶",
-			"红茶", "大红袍"};
+	public static final String[] toolsList = { "代茶饮", "护肤品", "保健品", "康复仪器",
+			};
 
 	public static final int[] iconList = { R.drawable.cha,
 			R.drawable.cha1,R.drawable.chaye,

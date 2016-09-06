@@ -86,6 +86,7 @@ public class ProductFragment extends Fragment {
     private View.OnClickListener toolsItemListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             mPager.setCurrentItem(v.getId());
         }
     };

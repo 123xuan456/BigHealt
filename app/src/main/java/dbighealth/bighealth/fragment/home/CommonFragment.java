@@ -105,9 +105,6 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
             msg.setData(bundle);
             handler.sendMessage(msg);
 
-            Log.e("mhysa-->",response.getBytes().toString());
-
-
         }
     };
     public Handler handler = new Handler(){
