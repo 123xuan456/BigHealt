@@ -2,6 +2,7 @@ package dbighealth.bighealth.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     public CodeBean codebean;
     String verification;
     private RegisterBean registerbean;
+    private TimeCount time;//验证码倒计时
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +124,26 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         getcode.setOnClickListener(this);
         register=(Button)findViewById(R.id.button3);
         register.setOnClickListener(this);
-    }
 
+        time = new TimeCount(60000, 1000);
+    }
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onFinish() {// 计时完毕
+            getcode.setText("重新获取验证码");
+            getcode.setClickable(true);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {// 计时过程
+            getcode.setClickable(false);//防止重复点击
+            getcode.setText(millisUntilFinished / 1000 + "s");
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -131,7 +151,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case  R.id.button2:
-
+                time.start();// 开始计时
                 sendServer();//向服务器发送验证码
                 break;
             case  R.id.button3:
