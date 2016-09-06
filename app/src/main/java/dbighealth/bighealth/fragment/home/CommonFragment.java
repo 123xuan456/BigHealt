@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -27,6 +28,7 @@ import dbighealth.bighealth.view.BaseAdapter;
 import dbighealth.bighealth.view.PullBaseView;
 import dbighealth.bighealth.view.PullRecyclerView;
 import okhttp3.Call;
+import utils.UrlUtils;
 
 /**
  * 首页公共fragment
@@ -50,8 +52,8 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
     @SuppressLint("ValidFragment")
     public CommonFragment(String url,String params){
 //        Log.e("mhysa", UrlUtils.CommonHome);
-//        this.url = UrlUtils.CommonHome;
-        this.params = "2";
+        this.url = UrlUtils.CommonHome;
+        this.params = params;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,9 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
        // initData();
         View  view= inflater.inflate(R.layout.fragment_common,container,false);
         recyclerView = (PullRecyclerView) view.findViewById(R.id.recyclerView);
+        LinearLayoutManager  linearLayoutManager=new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayout.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
         initInternet();
         recyclerView.setOnRefreshListener(this);
 
@@ -71,11 +76,12 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
      */
     public void initInternet(){
 
+        Log.e("mhysa","url:-->"+UrlUtils.CommonHome+"id"+params);
         OkHttpUtils
                 .get()
-                .url("http://192.168.0.38:8080/JianKangChanYe/homepictures/sickness")
+                .url(UrlUtils.CommonHome)
                 .id(HOME_COMMON)
-                .addParams("id", "2")
+                .addParams("id", params)
                 .build()
                 .execute(MyStringCallBack);
     }
@@ -84,6 +90,7 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         @Override
         public void onError(Call call, Exception e, int id) {
 
+            Log.e("mhysa-->","加载失败");
         }
 
         @Override
@@ -96,7 +103,7 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
             msg.setData(bundle);
             handler.sendMessage(msg);
 
-            Log.e("mhysa",response);
+            Log.e("mhysa-->",response.getBytes().toString());
 
 
         }
@@ -119,7 +126,7 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
                         feng.add(result1);
                         infoAdapter = new InfoAdapter1(getActivity(),result1);
                       //  Log.e("mhysa",infoAdapter.toString());
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         recyclerView.setAdapter(infoAdapter);
                     }
 

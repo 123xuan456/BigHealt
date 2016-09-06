@@ -1,6 +1,7 @@
 package dbighealth.bighealth.fragment;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,9 +21,13 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.NewsFragmentPagerAdapter;
 import dbighealth.bighealth.ben.Channel;
 import dbighealth.bighealth.ben.ChannelDb;
+import dbighealth.bighealth.fragment.home.BlankFragment;
+import dbighealth.bighealth.fragment.home.BlankFragment1;
+import dbighealth.bighealth.fragment.home.BlankFragment2;
 import dbighealth.bighealth.fragment.home.CommonFragment;
 import dbighealth.bighealth.fragment.home.NewsChannelFragment;
 import dbighealth.bighealth.fragment.home.SpecialFragment;
+import utils.UrlUtils;
 
 /**首页*/
 public class HomeFragment extends Fragment implements ViewPager.OnPageChangeListener{
@@ -62,18 +68,18 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
         List<Channel> channelList= ChannelDb.getSelectedChannel();//获取到上标题///暂时用不着
                 NewsChannelFragment fragment=new NewsChannelFragment();
-            //    CommonFragment recommandFragment=new CommonFragment(UrlUtils.CommonHome,"2");
-                CommonFragment TangNiaoBing=new CommonFragment();
-                CommonFragment JingZhuiBing=new CommonFragment();
-                CommonFragment JianZhouyan=new CommonFragment();
-                CommonFragment XinNaoXueGuan=new CommonFragment();
-                CommonFragment Fukebing=new CommonFragment();
-                CommonFragment Qianliexian=new CommonFragment();
+                CommonFragment recommandFragment=new CommonFragment(UrlUtils.CommonHome,"1");
+                CommonFragment TangNiaoBing=new CommonFragment(UrlUtils.CommonHome,"2");
+                CommonFragment JingZhuiBing=new CommonFragment(UrlUtils.CommonHome,"3");
+                CommonFragment JianZhouyan=new CommonFragment(UrlUtils.CommonHome,"4");
+                CommonFragment XinNaoXueGuan=new CommonFragment(UrlUtils.CommonHome,"5");
+                CommonFragment Fukebing=new CommonFragment(UrlUtils.CommonHome,"6");
+                CommonFragment Qianliexian=new CommonFragment(UrlUtils.CommonHome,"7");
            //     CommonFragment PiFuBing=new CommonFragment();
               SpecialFragment PiFuBing = new SpecialFragment();
-                CommonFragment Jiaoqi=new CommonFragment();
+                CommonFragment Jiaoqi=new CommonFragment(UrlUtils.CommonHome,"8");
 
-         //       newsChannelList.add(recommandFragment);
+                newsChannelList.add(recommandFragment);
                 newsChannelList.add(TangNiaoBing);
                 newsChannelList.add(JingZhuiBing);
                 newsChannelList.add(JianZhouyan);
