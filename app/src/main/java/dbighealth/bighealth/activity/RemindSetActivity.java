@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 import dbighealth.bighealth.R;
-
+/**服药提醒设置页面*/
 public class RemindSetActivity extends Activity {
 
     @Override

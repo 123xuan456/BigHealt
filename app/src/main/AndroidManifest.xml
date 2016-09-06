@@ -28,10 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name=".activity.LoginActivity" />
         <activity
             android:name=".activity.Me_LogoutActivity"
             android:screenOrientation="portrait"
@@ -54,8 +51,13 @@
         <activity
             android:name=".activity.ConditionAddActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".activity.SubscribeActivity" />
-        <activity android:name=".activity.CooparateActivity"></activity>
+        <activity
+            android:name=".activity.SubscribeActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".activity.CooparateActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name=".activity.RegisterActivity"></activity>
     </application>
 
 </manifest>

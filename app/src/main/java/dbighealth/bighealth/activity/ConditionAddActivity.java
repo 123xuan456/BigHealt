@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import dbighealth.bighealth.R;
-
+/**每日二级页面*/
 public class ConditionAddActivity extends Activity implements View.OnClickListener{
 
     private ImageView arrow_left;

@@ -16,7 +16,7 @@
         android:layout_weight="1.5"
         android:background="@drawable/biankuang_1"
         android:layout_margin="15dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:padding="8dp">
 
 
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.2"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@drawable/biankuang_1"
         android:layout_margin="15dp"
         android:padding="8dp">

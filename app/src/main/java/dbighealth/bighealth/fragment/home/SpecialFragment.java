@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +16,15 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.ItemAdapter;
 import dbighealth.bighealth.bean.CommonHealth;
 import dbighealth.bighealth.view.BaseAdapter;
-import dbighealth.bighealth.view.ItemBaseAdapter;
 import dbighealth.bighealth.view.PullBaseView;
 import dbighealth.bighealth.view.PullRecyclerView;
 import okhttp3.Call;
-import utils.UrlUtils;
 
 /**
  * 首页特殊布局
@@ -70,7 +66,7 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
      *
      */
    public void  initInternet(){
-       Log.e("wanglao","特殊页的地址"+UrlUtils.SpecialHome);
+    //   Log.e("mhysa","特殊页的地址"+UrlUtils.SpecialHome);
 
        OkHttpUtils.get()
                   .url("http://192.168.0.38:8080/JianKangChanYe/homepictures/showhealthknowledge")

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import dbighealth.bighealth.R;
-
+/**忘记密码*/
 public class LostPasswordActivity extends AppCompatActivity {
 
     @Override

@@ -10,7 +10,7 @@
         layout="@layout/footer_tab_1"
         android:id="@+id/include3"></include>
 
-<android.support.v7.widget.ListViewCompat
+<ListView
     android:layout_width="match_parent"
     android:id="@+id/listView"
     android:layout_marginTop="10dp"
@@ -19,5 +19,5 @@
     android:layout_height="match_parent"
     android:layout_below="@+id/include3">
 
-</android.support.v7.widget.ListViewCompat>
+</ListView>
 </RelativeLayout>

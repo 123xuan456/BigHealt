@@ -1,21 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:gravity="center_horizontal"
-    android:orientation="vertical" android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="dbighealth.bighealth.activity.LoginActivity">
+    <include layout="@layout/footer_tab_1"></include>
 
-    <!-- Login progress -->
-    <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp" android:visibility="gone" />
+    <ScrollView android:id="@+id/login_form"
+        android:layout_width="match_parent"
 
-    <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
+        <LinearLayout android:id="@+id/email_login_form"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
@@ -39,27 +36,58 @@
                     android:maxLines="1" android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
 
+            <Button android:id="@+id/email_register_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/action_register"
+                android:background="@null"
+                android:gravity="left"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:textColor="#BEBEBE"
+                android:textStyle="bold" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/forget_password"
+                android:textSize="15sp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/button"
                 android:background="@null"
-                android:layout_gravity="right" />
+                android:textColor="#BEBEBE"
+                android:gravity="right"
+                android:paddingLeft="10dp" />
 
-            <Button android:id="@+id/email_sign_in_button" style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" android:text="@string/action_sign_in"
-                android:background="@drawable/yuanjiao"
+
+        </LinearLayout>
+
+
+
+            <Button android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:padding="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/action_sign_in"
+                android:textSize="20sp"
+                android:textColor="#ffff"
+                android:layout_gravity="center"
+                android:background="@drawable/biankuang_yuan_red_1"
                 android:textStyle="bold" />
-            <Button android:id="@+id/email_register_button" style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" android:text="@string/action_register"
-                android:background="@drawable/yuanjiao"
-                android:textStyle="bold" />
+
 
         </LinearLayout>
     </ScrollView>
