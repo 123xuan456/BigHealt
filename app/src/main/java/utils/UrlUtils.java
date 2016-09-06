@@ -11,4 +11,6 @@ public class UrlUtils {
     //-------------------------------API接口----------------------------------
     public static String CommonHome=BASEURL+"/homepictures/sickness";
     public static String SpecialHome = BASEURL+"homepictures/showhealthknowledge";
+
+    
 }

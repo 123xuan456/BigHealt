@@ -41,7 +41,6 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
     private ImageView iv_spcific;
     private PullRecyclerView rv_spcific;
     private ItemAdapter itemAdapter;
-
     public SpecialFragment() {
         // Required empty public constructor
     }
@@ -70,13 +69,13 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
      *
      */
    public void  initInternet(){
-       Log.e("wanglao","特殊页的地址"+UrlUtils.SpecialHome);
+       Log.e("mhysa","特殊页的地址"+UrlUtils.SpecialHome);
 
        OkHttpUtils.get()
                   .url("http://192.168.0.38:8080/JianKangChanYe/homepictures/showhealthknowledge")
                   .id(SPECIAL_HOME)
-               .build()
-               .execute(MyStringCallBack);
+                  .build()
+                  .execute(MyStringCallBack);
 
    }
     public StringCallback MyStringCallBack = new StringCallback() {
