@@ -3,6 +3,7 @@ package dbighealth.bighealth.fragment.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.adapter.InfoAdapter1;
 import dbighealth.bighealth.bean.CommonHomeBean;
 import dbighealth.bighealth.view.BaseAdapter;
@@ -102,9 +104,6 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
             bundle.putString("result",response);
             msg.setData(bundle);
             handler.sendMessage(msg);
-
-            Log.e("mhysa-->",response.getBytes().toString());
-
 
         }
     };
@@ -198,6 +197,7 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
 
     @Override
     public void onViewClick(int position, int viewtype) {
+
 
     }
 }

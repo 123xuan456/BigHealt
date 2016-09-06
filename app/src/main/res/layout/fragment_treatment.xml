@@ -6,5 +6,54 @@
 
     <include
         layout="@layout/footer_tabs"
-        ></include>
+        android:id="@+id/include6"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/include6"
+        android:id="@+id/linearLayout3">
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:background="@drawable/yuanjiao_spinner1"
+            android:spinnerMode="dropdown"
+            android:layout_below="@+id/include6"
+            android:layout_alignParentStart="true" />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner1"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/yuanjiao_spinner2"
+            android:spinnerMode="dropdown"
+            android:layout_below="@+id/include6"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView2"
+        android:divider="@null"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>

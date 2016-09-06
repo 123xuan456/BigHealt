@@ -1,11 +1,11 @@
 package dbighealth.bighealth.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
 import dbighealth.bighealth.R;
-
-public class CooparateActivity extends AppCompatActivity {
+/**医疗养生加盟*/
+public class CooparateActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

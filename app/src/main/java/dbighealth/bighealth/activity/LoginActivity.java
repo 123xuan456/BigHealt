@@ -1,7 +1,5 @@
 package dbighealth.bighealth.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -21,13 +19,17 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import dbighealth.bighealth.R;
+import okhttp3.Call;
+import utils.UrlUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -63,14 +67,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
     private View mLoginFormView;
-    private Button button;
+    private Button button,email_sign_in_button,email_register_button;
+    private static int LOGINID;
+    private ImageView arrow_left,right_add;
+    private TextView tvTab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -87,19 +93,20 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 return false;
             }
         });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
+        arrow_left=(ImageView)findViewById(R.id.arrow_left);
+        arrow_left.setOnClickListener(this);
+        tvTab=(TextView)findViewById(R.id.tvTab);
+        tvTab.setText("登录");
+        right_add=(ImageView)findViewById(R.id.right_add);
+        right_add.setVisibility(View.GONE);
 
         mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
         button= (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
+        email_sign_in_button= (Button) findViewById(R.id.email_sign_in_button);//登录
+        email_sign_in_button.setOnClickListener(this);
+        email_register_button= (Button) findViewById(R.id.email_register_button);
+        email_register_button.setOnClickListener(this);
     }
 
     private void populateAutoComplete() {
@@ -147,9 +154,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * 判断用户输入的是否是有用的登录名和密码.
      */
     private void attemptLogin() {
         if (mAuthTask != null) {
@@ -178,7 +183,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             cancel = true;
         }
 
-        // Check for a valid email address.
+        // 一个有效的手机号码
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -190,19 +195,40 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            // 　　有一个错误,不要尝试登录和第一个焦点　　
+            //表单字段和一个错误。
             focusView.requestFocus();
         } else {
-            // 显示一个进度转轮,启动一个后台任务　　
-            // / /执行用户的登录尝试。
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            //用户输入的规范正确，向服务器发送判断是否是正确用户
+            String url= UrlUtils.LOGIN;
+            OkHttpUtils.get().url(url).id(LOGINID)
+                    .addParams("regphone",email)
+                    .addParams("password",password)
+                    .build().execute(MyStringLogin);
+
+            //模拟登录，现在已经没用
+//            mAuthTask = new UserLoginTask(email, password);
+//            mAuthTask.execute((Void) null);
 
         }
-    }
 
+
+    }
+    StringCallback MyStringLogin =new StringCallback() {
+        //失败
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            System.out.println("传递失败原因="+e);
+        }
+            //成功
+        @Override
+        public void onResponse(String response, int id) {
+            System.out.println("传递成功="+response);
+            Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_LONG).show();
+
+
+        }
+    };
     private boolean isEmailValid(String email) {
             Pattern p = Pattern
                     .compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
@@ -213,42 +239,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 6;
-    }
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        return password.length() >= 6;
     }
 
     @Override
@@ -285,15 +276,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.button:
-                Intent i=new Intent(this,LostPasswordActivity.class);
-                startActivity(i);
-                break;
-        }
-    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -335,15 +318,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
             try {
                 // 模拟网络访问.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+              Thread.sleep(2000);
+            } catch (Exception e) {
                 return false;
             }
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
+                    // 账户存在,返回true,如果密码匹配.
                     return pieces[1].equals(mPassword);
                 }
             }
@@ -355,7 +338,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
 
             if (success) {
                 finish();
@@ -368,7 +350,30 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button:
+                Intent i=new Intent(this,LostPasswordActivity.class);
+                startActivity(i);
+                break;
+            case  R.id.arrow_left:
+                finish();
+                break;
+            case  R.id.email_register_button://注册
+                Intent i1=new Intent(this,RegisterActivity.class);
+                startActivity(i1);
+                finish();
+                break;
+            case  R.id.email_sign_in_button:
+                attemptLogin();
+
+                break;
+
         }
     }
 }

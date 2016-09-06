@@ -15,7 +15,7 @@
 
     <string name="action_log_out">退  出</string>
 
-    <string name="action_register">注  册</string>
+    <string name="action_register">新用户注册</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">请输入正确的手机号</string>
     <string name="error_invalid_password">密码太短</string>
@@ -38,4 +38,6 @@
     <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
     <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
     <string name="title_activity_activity_test">ActivityTest</string>
+
+    <string name="guide_viewpager_btn_go_text">立即进入</string>
 </resources>
