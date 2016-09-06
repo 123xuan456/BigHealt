@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ConditionActivity;
+import dbighealth.bighealth.activity.Home_Page_Details;
 import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
@@ -32,6 +33,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView textView14;//方案
     private TextView textView15;//资讯
     private TextView textView16;//预约
+    private TextView textView19;//体检报告
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +67,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         textView15.setOnClickListener(this);
         textView16=(TextView)ra.findViewById(R.id.textView16);
         textView16.setOnClickListener(this);
-
+        textView19 = (TextView)ra.findViewById(R.id.textView19);
+        textView19.setOnClickListener(this);
     }
 
     @Override
@@ -98,6 +101,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             case R.id.textView16:
                 Intent i6=new Intent(getContext(), SubscribeActivity.class);//预约
                 startActivity(i6);
+                break;
+            case R.id.textView19:
+                Intent i9=new Intent(getContext(), Home_Page_Details.class);//体检报告
+                startActivity(i9);
                 break;
         }
     }
