@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 /**退出登录*/
 public class Me_LogoutActivity extends Activity implements View.OnClickListener{
@@ -51,7 +52,9 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.email_sign_in_button:
+                BaseApplication.userid="";
                 Toast.makeText(this,"退出成功",Toast.LENGTH_LONG).show();
+                finish();
                 break;
             case R.id.remind:
                 Intent i=new Intent(this,RemindActivity.class);

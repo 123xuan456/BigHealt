@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -36,7 +37,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.bean.LoginokBean;
 import okhttp3.Call;
 import utils.UrlUtils;
 
@@ -214,6 +217,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
 
     }
+
+    private LoginokBean log;
     StringCallback MyStringLogin =new StringCallback() {
         //失败
         @Override
@@ -224,7 +229,17 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         @Override
         public void onResponse(String response, int id) {
             System.out.println("传递成功="+response);
-            Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_LONG).show();
+            Gson gson=new Gson();
+            log=gson.fromJson(response, LoginokBean.class);
+            if(log.getCode()==200){
+                String hint=log.getHint();
+                String id1=String.valueOf(log.getId());
+                BaseApplication.userid=id1;//吧id传到
+                Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
+                finish();
+            }else {
+                Toast.makeText(getApplicationContext(),"登录失败",Toast.LENGTH_LONG).show();
+            }
 
 
         }
@@ -357,7 +372,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button:
+            case R.id.button://忘记密码
                 Intent i=new Intent(this,LostPasswordActivity.class);
                 startActivity(i);
                 break;
@@ -369,7 +384,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 startActivity(i1);
                 finish();
                 break;
-            case  R.id.email_sign_in_button:
+            case  R.id.email_sign_in_button://登录
                 attemptLogin();
 
                 break;
