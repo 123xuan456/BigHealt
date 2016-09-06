@@ -3,11 +3,13 @@
 
     <item
         android:state_selected="true"
+        android:state_checked="true"
         android:drawable="@drawable/red_circle"
         >
     </item>
     <item
         android:state_selected="false"
+        android:state_checked="false"
         android:drawable="@drawable/white_circle"
         />
 </selector>

@@ -20,24 +20,26 @@
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
             >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radiobutton_selector"
                     android:id="@+id/rb_medical"
                     android:text="医疗"
+                    android:gravity="center"
+                    android:checked="true"
+                    android:button="@null"
                     />
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:text="养生"
+                    android:gravity="center"
                     android:id="@+id/nourishing"
                     android:background="@drawable/radiobutton_selector"
+                    android:button="@null"
                     />
-            </RelativeLayout>
         </RadioGroup>
         <TextView
             android:layout_width="wrap_content"
@@ -73,27 +75,33 @@
                 android:id="@+id/tv_Tel"
                 android:textSize="15sp"
                 />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/write_comment"
+                android:layout_toRightOf="@+id/tv_Tel"
+                >
             <EditText
                 android:layout_width="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_tel"
-                android:layout_toRightOf="@+id/tv_Tel"
-                android:background="@drawable/write_comment"
-                android:layout_marginLeft="5dp"
+                android:background="#ffffff"
+                android:layout_marginLeft="10dp"
                 />
+            </RelativeLayout>
 
         </RelativeLayout>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/btn_cooperate"
             android:text="确认加盟"
             android:textColor="#ffffff"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/biankuang_yuan_blue"
+            android:background="@drawable/button_selector"
             />
     </LinearLayout>
 </LinearLayout>
