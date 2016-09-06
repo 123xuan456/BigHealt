@@ -15,6 +15,9 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.CodeBean;
 import dbighealth.bighealth.bean.RegisterBean;
@@ -31,7 +34,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private EditText phone;
     private EditText code;
     private EditText password1,password2;
-    private Button getcode;//获取验证码
+    private TextView getcode;//获取验证码
     private Button register;
     public CodeBean codebean;
     String verification;
@@ -62,7 +65,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
             Toast.makeText(this, "昵称不能为空", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(phone1)) {
             Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(code1)) {
+        }else
+        if (!isEmailValid(phone1)) {//设置手机格式
+            Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+        }
+
+        else if (TextUtils.isEmpty(code1)) {
             Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
@@ -72,7 +80,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         }else
          if (!password.equals(passwor)){
             Toast.makeText(this,"两次密码不相同",Toast.LENGTH_SHORT).show();
-       }
+       }else
+        if (!isPasswordValid(password)) {//设置密码必须不少于6个
+            Toast.makeText(this, "密码不能低于六位", Toast.LENGTH_SHORT).show();
+        }
+
+
         else {
             Toast.makeText(this, "完事了", Toast.LENGTH_SHORT).show();
             String url = UrlUtils.REGISTER;
@@ -106,6 +119,18 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
     }
 
+    private boolean isEmailValid(String email) {
+        Pattern p = Pattern
+                .compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher m = p.matcher(email);
+        System.out.println(m.matches() + "---");
+        return m.matches();
+    }
+
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() >= 6;
+    }
 
     private void setView() {
         arrow_left=(ImageView)findViewById(R.id.arrow_left);
@@ -120,7 +145,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         code = (EditText) findViewById(R.id.editText8);
         password1 = (EditText) findViewById(R.id.editText9);
         password2 = (EditText) findViewById(R.id.editText10);
-        getcode=(Button)findViewById(R.id.button2);
+        getcode=(TextView)findViewById(R.id.button2);
         getcode.setOnClickListener(this);
         register=(Button)findViewById(R.id.button3);
         register.setOnClickListener(this);
@@ -151,8 +176,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case  R.id.button2:
-                time.start();// 开始计时
-                sendServer();//向服务器发送验证码
+                String phone1 = phone.getText().toString();
+                if (!isEmailValid(phone1)) {//设置手机格式
+                    Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                }else {
+                    time.start();// 开始计时
+                    sendServer();//向服务器发送验证码
+                }
                 break;
             case  R.id.button3:
                 attemptLogin();//拿到用户输入的数据

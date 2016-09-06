@@ -48,7 +48,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     }
 
     private View getTabView(int idx) {
-        View view= LayoutInflater.from(this).inflate(R.layout.footer_tabs,null);
+        View view= LayoutInflater.from(this).inflate(R.layout.footer_tab,null);
         ((TextView)view.findViewById(R.id.tvTab)).setText(tabs[idx]);
         if(idx==0){
             ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.RED);

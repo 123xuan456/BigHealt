@@ -5,7 +5,7 @@
         jar="D:\BigHealt\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="5b290667bfabfd11b178fc3d3d158d36f4a89fc7">
+        sha1="9bcf7255971a7d3f760069dcb1dc4cec7d3acdf7">
         <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\instant-run_e42251d84ff65fcfab0d49a2cffb28772dc36a65.jar" />
     </item>
     <item
@@ -37,11 +37,11 @@
         <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.2.1_bce6d48228c042ab845286e23c028122b4953151.jar" />
     </item>
     <item
-        jar="D:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\design\23.2.1\jars\classes.jar"
+        jar="D:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\jars\classes.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
-        <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.2.1_b82e8d84a453f0aebd73841a44f5519e7621ed6a.jar" />
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.2.1_440b6b4d7ee3b92e8d5a2b133ebdba04a2756a49.jar" />
     </item>
     <item
         jar="C:\Users\de\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
@@ -51,18 +51,11 @@
         <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\glide-3.7.0_97df2dae71af82ca4378af1a227ac2404ea2ad70.jar" />
     </item>
     <item
-        jar="D:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\jars\classes.jar"
+        jar="D:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\design\23.2.1\jars\classes.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
-        <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.2.1_440b6b4d7ee3b92e8d5a2b133ebdba04a2756a49.jar" />
-    </item>
-    <item
-        jar="D:\BigHealt\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="e3bf8e4aca75854405b7613b69d2909efaf980f4">
-        <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_114d3e6de05a5a7ef85385f226c7ae82e722c5ac.jar" />
+        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
+        <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.2.1_b82e8d84a453f0aebd73841a44f5519e7621ed6a.jar" />
     </item>
     <item
         jar="D:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\percent\23.0.0\jars\classes.jar"
@@ -70,6 +63,13 @@
         revision="23.0.3"
         sha1="fef469dcc3073ecc4706ba216479f2111e05834f">
         <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-percent-23.0.0_7a6ed21a059d95cb36b898f25021e43152e3b87f.jar" />
+    </item>
+    <item
+        jar="D:\BigHealt\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ade43fbf5ac85345ab1081d9439292f57f0c0b9f">
+        <dex dex="D:\BigHealt\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_114d3e6de05a5a7ef85385f226c7ae82e722c5ac.jar" />
     </item>
     <item
         jar="D:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\libs\internal_impl-23.2.1.jar"

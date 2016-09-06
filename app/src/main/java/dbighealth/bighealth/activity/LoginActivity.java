@@ -184,15 +184,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         }
 
         // 一个有效的手机号码
-//        if (TextUtils.isEmpty(email)) {
-//            mEmailView.setError(getString(R.string.error_field_required));
-//            focusView = mEmailView;
-//            cancel = true;
-//        } else if (!isEmailValid(email)) {
-//            focusView = mEmailView;
-//            mEmailView.setError(getString(R.string.error_invalid_email));
-//            cancel = true;
-//        }
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            focusView = mEmailView;
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            cancel = true;
+        }
 
         if (cancel) {
             // 　　有一个错误,不要尝试登录和第一个焦点　　
