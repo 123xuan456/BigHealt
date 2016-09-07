@@ -6,7 +6,7 @@
     android:orientation="vertical"
     >
     <include
-        layout="@layout/footer_tab_1"
+        layout="@layout/footer_tab_2"
         />
 <ScrollView
     android:layout_width="match_parent"
@@ -27,10 +27,10 @@
         >
 
 <TextView
-    android:layout_width="174dp"
-    android:layout_height="41dp"
+   android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:text="基本信息"
-    android:textSize="19sp"
+    android:textSize="16sp"
     android:gravity="center"
     android:textColor="#ffffff"
     android:background="@drawable/green_circle"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="姓名："
                 android:textColor="#343434"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:id="@+id/textView" />
 
             <EditText
@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@null"
+                android:textSize="16sp"
                 android:layout_alignParentEnd="true" />
 
             <TextView
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="民族："
                 android:textColor="#343434"
-                android:textSize="17sp"
+                android:textSize="16sp"
                  />
 
             <EditText
@@ -73,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@null"
+                android:textSize="16sp"
                 android:layout_alignParentEnd="true" />
         </LinearLayout>
 
@@ -85,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="性别："
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:textColor="#343434"
             android:id="@+id/textView2" />
         <RadioGroup
@@ -138,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:text="血型："
                 android:textColor="#343434"
-                android:textSize="17sp"
+                android:textSize="16sp"
                  />
             <RadioGroup
                 android:id="@+id/blood"
@@ -214,7 +216,7 @@
                 android:layout_height="wrap_content"
                 android:text="居住情况："
                 android:textColor="#343434"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 />
             <RadioGroup
                 android:id="@+id/live"
@@ -275,7 +277,7 @@
                 android:layout_height="wrap_content"
                 android:text="身高："
                 android:textColor="#343434"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 />
 
             <EditText
@@ -284,14 +286,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@null"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:textSize="16sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="体重："
                 android:textColor="#343434"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 />
 
             <EditText
@@ -300,7 +304,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@null"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:textSize="16sp"
+                />
         </LinearLayout>
 
 
@@ -315,7 +321,7 @@
                 android:layout_height="wrap_content"
                 android:text="出生年月："
                 android:textColor="#343434"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 />
             <TextView
                 android:id="@+id/date"
@@ -323,18 +329,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@null"
-                android:text="1992年2月"
+                android:hint="1992年2月"
                 android:textColor="#666666"
                 android:layout_alignParentEnd="true" />
         </LinearLayout>
 
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="过敏史"
-            android:textSize="19sp"
+            android:textSize="16sp"
             android:gravity="center"
             android:textColor="#ffffff"
             android:background="@drawable/green_circle"
@@ -344,11 +350,44 @@
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
-            <CheckBox
+            <RadioGroup
+                android:id="@+id/rg_guomin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:id="@+id/btn_medicine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/allergy"
+                    android:text="药物过敏"
+                    android:textSize="16sp"
+                    android:textColor="@drawable/textcolor_selector"
+                    android:checked="true"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/btn_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:text="其他"
+                    android:textColor="@drawable/textcolor_selector"
+                    android:background="@drawable/allergy"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    />
+            </RadioGroup>
+          <!--  <CheckBox
                 android:id="@+id/allergy"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -379,16 +418,16 @@
                 android:checked="false"
                 android:gravity="center"
                 android:textSize="17sp"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true" />-->
         </LinearLayout>
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="3dp"
             android:text="家族遗传病史"
-            android:layout_marginTop="25dp"
-            android:textSize="17sp"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
             android:gravity="center"
             android:textColor="#ffffff"
             android:background="@drawable/green_circle"
@@ -407,7 +446,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
-
                 <RadioButton
                     android:id="@+id/diabetes"
                     android:layout_width="wrap_content"
@@ -448,12 +486,12 @@
         </RelativeLayout>
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="3dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:text="过往病史"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:gravity="center"
             android:textColor="#ffffff"
             android:background="@drawable/green_circle"
@@ -465,17 +503,19 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:layout_margin="10dp"
-            android:text="sdasdasdafafasfadasdasdasffgffgjfghfdhgdfhfghdfgdfg"
-            android:textColor="#666666"/>
+            android:hint="例如糖尿病"
+            android:textColor="#666666"
+            android:textSize="16sp"
+            />
 
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="3dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:text="生活习惯"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:gravity="center"
             android:textColor="#ffffff"
             android:background="@drawable/green_circle"
@@ -497,7 +537,7 @@
                 android:text="饮食"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="#ffffff"
+                android:textColor="@drawable/textcolor_selector"
                 android:checked="true"
                 android:background="@drawable/habit"
                 android:textSize="17sp"
@@ -516,7 +556,7 @@
                 android:text="睡眠"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="#666666"
+                android:textColor="@drawable/textcolor_selector"
                 android:background="@drawable/habit"
                 android:textSize="17sp"
                 android:checked="false" />
@@ -534,7 +574,7 @@
                 android:background="@drawable/habit"
                 android:button="@null"
                 android:text="运动"
-                android:textColor="#666666"
+                android:textColor="@drawable/textcolor_selector"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:checked="false"
@@ -544,17 +584,19 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:background="@drawable/rectangle">
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        >
 
         <EditText
             android:id="@+id/habit_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="例如：吃甜食不吃早饭"
-            android:textColor="#666666"/>
+            android:hint="例如：吃甜食不吃早饭"
+            android:textColor="#666666"
+            android:textSize="16sp"
+            />
     </RelativeLayout>
 
     </LinearLayout>
