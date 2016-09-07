@@ -2,10 +2,13 @@ package dbighealth.bighealth.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
 import dbighealth.bighealth.ben.Model;
 import dbighealth.bighealth.R;
+import okhttp3.Call;
 
 /**
  *  simple {@link Fragment} subclass.
@@ -29,6 +36,7 @@ public class ProductFragment extends Fragment {
     private ScrollView scrollView;
     private ViewPager mPager;
     private int currentItem = 0;
+    private int PRODUCT = 1;
     View ra;
 
     public static Fragment newInstance() {
@@ -101,8 +109,6 @@ public class ProductFragment extends Fragment {
         mPager.setCurrentItem(0);
 
 
-
-
     }
 
     /**
@@ -147,9 +153,11 @@ public class ProductFragment extends Fragment {
             Fragment fragment = new KakaFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("index", index);
+            //传图片进去文字进去即可
             fragment.setArguments(bundle);
             return fragment;
         }
+
 
         @Override
         public int getCount() {
@@ -159,4 +167,7 @@ public class ProductFragment extends Fragment {
 
 
     }
+
+
+
 }
