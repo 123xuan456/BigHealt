@@ -17,6 +17,7 @@ import dbighealth.bighealth.activity.ConditionActivity;
 import dbighealth.bighealth.activity.Home_Page_Details;
 import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
+import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.SubscribeActivity;
 
 /**
@@ -92,7 +93,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i2);
                 break;
             case R.id.textView13:
-                Intent i3=new Intent(getContext(), ConditionActivity.class);//体质
+                Intent i3=new Intent(getContext(), PhysiqueActivity.class);//体质
                 startActivity(i3);
                 break;
             case R.id.textView14:

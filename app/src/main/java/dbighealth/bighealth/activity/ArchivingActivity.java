@@ -219,7 +219,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
              * 提交档案的代码
              */
             case R.id.right_tv:
-                if(name.equals("")||nation.equals("")||height1.equals("")||weight1.equals("")){
+                if(name==null||nation==null||height1==null||weight1==null){
                     Toast.makeText(getApplicationContext(),"信息填写不全",Toast.LENGTH_SHORT).show();
                 }else{
                     Log.i("mhysa-->",getUserInfo());
