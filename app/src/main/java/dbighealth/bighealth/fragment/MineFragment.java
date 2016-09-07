@@ -11,11 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.ArchivingActivity;
 import dbighealth.bighealth.activity.ConditionActivity;
 import dbighealth.bighealth.activity.Home_Page_Details;
 import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
+import dbighealth.bighealth.activity.Me_LogoutActivity;
 import dbighealth.bighealth.activity.SubscribeActivity;
 
 /**
@@ -26,13 +29,20 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     LinearLayout ra;
     private RelativeLayout rl;//点击进入登录页面（没有登录时）
     private RelativeLayout rl1;//（登录之后）
-     boolean isLogin= true;
+    boolean isLogin;
     private TextView textView12;//今日
     private TextView textView13;//体质
     private TextView textView14;//方案
     private TextView textView15;//资讯
     private TextView textView16;//预约
     private TextView textView19;//体检报告
+    String id;
+    TextView archiving;
+
+    public static Fragment newInstance() {
+        MineFragment f = new MineFragment();
+        return f;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,21 +51,49 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
         tvTab.setText("我的");
         setView();
+
+        id = BaseApplication.userid;
+        System.out.println("拿到id="+id);
+        if(!id.equals("")){//如果有id
+            rl1.setVisibility(View.VISIBLE);
+            rl.setVisibility(View.GONE);
+        }else
+        if (id.equals("")){//没有用户id
+            rl1.setVisibility(View.GONE);
+            rl.setVisibility(View.VISIBLE);
+        }
         return ra;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(!id.equals("")){//如果有id
+            rl1.setVisibility(View.VISIBLE);
+            rl.setVisibility(View.GONE);
+        }else
+        if (id.equals("")){//没有用户id
+            rl1.setVisibility(View.GONE);
+            rl.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void setView() {
+
+//档案
+        archiving = (TextView) ra.findViewById(R.id.textView18);
         rl=(RelativeLayout)ra.findViewById(R.id.rl);
         rl.setOnClickListener(this);
         rl1=(RelativeLayout)ra.findViewById(R.id.rl1);
         rl1.setOnClickListener(this);
-//        if (isLogin=true){
-//            rl1.setVisibility(View.VISIBLE);
-//            rl.setVisibility(View.GONE);
-//        }else if (isLogin=false){
-//            rl1.setVisibility(View.GONE);
-//            rl.setVisibility(View.VISIBLE);
-//        }
         textView12=(TextView)ra.findViewById(R.id.textView12);
         textView12.setOnClickListener(this);
         textView13=(TextView)ra.findViewById(R.id.textView13);
@@ -68,6 +106,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         textView16.setOnClickListener(this);
         textView19 = (TextView)ra.findViewById(R.id.textView19);
         textView19.setOnClickListener(this);
+        archiving.setOnClickListener(this);
+
     }
 
     @Override
@@ -78,8 +118,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
             case R.id.rl1:
-                //Intent i1=new Intent(getContext(), Me_LogoutActivity.class);//已经登录后，点击进入详情
-                //startActivity(i1);
+                Intent i1=new Intent(getContext(), Me_LogoutActivity.class);//已经登录后，点击进入详情
+                startActivity(i1);
                 break;
             case R.id.textView12:
                 Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
@@ -104,6 +144,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             case R.id.textView19:
                 Intent i9=new Intent(getContext(), Home_Page_Details.class);//体检报告
                 startActivity(i9);
+                break;
+            case R.id.textView18:
+                Intent intent = new Intent(getContext(), ArchivingActivity.class);//健康档案
+                startActivity(intent);
                 break;
         }
     }

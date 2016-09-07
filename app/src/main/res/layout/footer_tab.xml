@@ -7,13 +7,13 @@
 
     <TextView
         android:id="@+id/tvTab"
-        android:layout_width="wrap_content"
+        android:layout_width="80sp"
         android:layout_height="wrap_content"
         android:textColor="#ffff"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:textSize="20sp"
-        android:text="新闻"
+        android:text="新闻中心"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

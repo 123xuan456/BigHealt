@@ -30,6 +30,13 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private RadioGroup rgChannel=null;
     private ViewPager viewPager;
     private HorizontalScrollView hvChannel=null;
+
+    public static Fragment newInstance() {
+        HomeFragment f = new HomeFragment();
+        return f;
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -146,5 +153,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         int len=left+width/2-screenWidth/2;
         hvChannel.smoothScrollTo(len, 0);
     }
+
+
 
 }

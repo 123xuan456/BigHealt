@@ -104,6 +104,7 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_verification://点击获取验证码
+                phone = phoneEdit.getText().toString();
                 if (TextUtils.isEmpty(phone)) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else if (!isEmailValid(phone)) {//设置手机格式
