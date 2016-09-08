@@ -13,6 +13,7 @@ public class UrlUtils {
     public  static String   REGISTER="http://192.168.0.38:8080/JianKangChanYe/user/regiontoamaster?";
     //-------------------------------API接口----------------------------------
     public static String CommonHome=BASEURL+"/homepictures/sickness";
-    public static String SpecialHome = BASEURL+"homepictures/showhealthknowledge";
+    public static String SpecialHome = BASEURL+"/homepictures/showhealthknowledge";
+    public static  String LEAGUE = BASEURL+"/hathappenedat/savehealthcare";
 
 }

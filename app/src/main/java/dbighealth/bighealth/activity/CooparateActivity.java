@@ -2,6 +2,7 @@ package dbighealth.bighealth.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +11,18 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.R;
+import okhttp3.Call;
+import utils.UrlUtils;
 
 /**
  * 医疗养生加盟
@@ -44,6 +53,12 @@ public class CooparateActivity extends Activity implements View.OnClickListener 
     @Bind(R.id.rg_yiliaoyangsheng)
     RadioGroup rgYiliaoyangsheng;
 
+    //选择医疗or养生
+    String yiliaoyangsheng;
+    String company;//名称内容
+    String details;//详情
+    String tels;//电话
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +86,54 @@ public class CooparateActivity extends Activity implements View.OnClickListener 
                 }else if(nourishing.isChecked()){
                     Log.i("mhysa","点击了养生");
                 }
+                yiliaoyangsheng =rbMedical.isChecked() ? "医疗" : "养生";
+                company = etCompany.getText().toString().trim();
+                details = tvDetail.getText().toString().trim();
+                tels = etTel.getText().toString().trim();
+                if (TextUtils.isEmpty(company)){
+                    Toast.makeText(this, "公司名称不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(details)){
+                    Toast.makeText(this, "详情不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(tels)){
+                    Toast.makeText(this, "联系方式不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    OkHttpUtils.get().url(UrlUtils.LEAGUE)
+                            .addParams("type", yiliaoyangsheng)
+                            .addParams("title", company)
+                            .addParams("content", details)
+                            .addParams("information", tels)
+                            .build()
+                            .execute(MyStringCallBack);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
+
+    private StringCallback MyStringCallBack = new StringCallback(){
+
+
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
+            Toast.makeText(getApplicationContext(), "加盟失败", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            Toast.makeText(getApplicationContext(),"加盟成功！！",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    };
 
 }
