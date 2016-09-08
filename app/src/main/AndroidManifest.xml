@@ -75,6 +75,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             />
+
     </application>
 
 </manifest>

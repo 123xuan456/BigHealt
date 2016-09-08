@@ -1,9 +1,16 @@
 package dbighealth.bighealth.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +45,59 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView textView19;//体检报告
     String id;
     TextView archiving;
+    private Thread mThread;
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage (Message msg) {//此方法在ui线程运行
+            switch(msg.what) {
+                case 1:
+                    id = BaseApplication.userid;
+                    System.out.println("拿到id="+id);
+                    if(!id.equals("")){//如果有id
+                        rl1.setVisibility(View.VISIBLE);
+                        rl.setVisibility(View.GONE);
+                    }else
+                    if (id.equals("")){//没有用户id
+                        rl1.setVisibility(View.GONE);
+                        rl.setVisibility(View.VISIBLE);
+                    }
+                    break;
+            }
+
+        }
+    };
 
     public static Fragment newInstance() {
         MineFragment f = new MineFragment();
         return f;
     }
+
+    /**接收登录成功的广播*/
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.CART_BROADCAST");//
+        BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent){
+                System.out.println("接收到了");
+                    mThread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Message msg=new Message();
+                            msg.what=1;
+                           mHandler.sendMessage(msg);
+                        }
+                    });
+                    mThread.start();//线程启动
+            }
+        };
+        broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,17 +106,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
         tvTab.setText("我的");
         setView();
-
-        id = BaseApplication.userid;
-        System.out.println("拿到id="+id);
-        if(!id.equals("")){//如果有id
-            rl1.setVisibility(View.VISIBLE);
-            rl.setVisibility(View.GONE);
-        }else
-        if (id.equals("")){//没有用户id
-            rl1.setVisibility(View.GONE);
-            rl.setVisibility(View.VISIBLE);
-        }
         return ra;
     }
 
@@ -73,22 +117,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(!id.equals("")){//如果有id
-            rl1.setVisibility(View.VISIBLE);
-            rl.setVisibility(View.GONE);
-        }else
-        if (id.equals("")){//没有用户id
-            rl1.setVisibility(View.GONE);
-            rl.setVisibility(View.VISIBLE);
-        }
-    }
 
     private void setView() {
 
-//档案
+        //档案
         archiving = (TextView) ra.findViewById(R.id.textView18);
         rl=(RelativeLayout)ra.findViewById(R.id.rl);
         rl.setOnClickListener(this);
@@ -108,7 +140,19 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         textView19.setOnClickListener(this);
         archiving.setOnClickListener(this);
 
+        id = BaseApplication.userid;
+        System.out.println("拿到id="+id);
+        if(!id.equals("")){//如果有id
+            rl1.setVisibility(View.VISIBLE);
+            rl.setVisibility(View.GONE);
+        }else
+        if (id.equals("")){//没有用户id
+            rl1.setVisibility(View.GONE);
+            rl.setVisibility(View.VISIBLE);
+        }
     }
+
+
 
     @Override
     public void onClick(View v) {

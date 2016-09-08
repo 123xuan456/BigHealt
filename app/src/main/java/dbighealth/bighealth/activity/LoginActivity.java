@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -209,6 +210,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                     .addParams("password",password)
                     .build().execute(MyStringLogin);
 
+
+
             //模拟登录，现在已经没用
 //            mAuthTask = new UserLoginTask(email, password);
 //            mAuthTask.execute((Void) null);
@@ -236,6 +239,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String id1=String.valueOf(log.getId());
                 BaseApplication.userid=id1;//吧id传到
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
+                //登录成功之后发送一个广播
+                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+
                 finish();
             }else {
                 Toast.makeText(getApplicationContext(),"登录失败",Toast.LENGTH_LONG).show();
