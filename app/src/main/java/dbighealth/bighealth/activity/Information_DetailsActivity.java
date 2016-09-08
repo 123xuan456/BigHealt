@@ -1,11 +1,11 @@
 package dbighealth.bighealth.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import dbighealth.bighealth.R;
 /**资讯详情*/
-public class Information_DetailsActivity extends AppCompatActivity {
+public class Information_DetailsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
