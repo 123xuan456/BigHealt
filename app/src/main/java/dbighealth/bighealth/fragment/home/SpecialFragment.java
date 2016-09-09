@@ -3,6 +3,7 @@ package dbighealth.bighealth.fragment.home;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -11,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.UrlLoader;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -52,14 +55,12 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
         View view =inflater.inflate(R.layout.fragment_specific,container,false);
         iv_spcific = (ImageView) view.findViewById(R.id.iv_spcific);
         rv_spcific = (PullRecyclerView)view.findViewById(R.id.rv_spcific);
-        rv_spcific.setOnRefreshListener(this);
 
-        rv_spcific.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager  linearLayoutManager=new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayout.VERTICAL);
+        rv_spcific.setLayoutManager(linearLayoutManager);
         initInternet();
-        /*itemAdapter = new ItemAdapter(getActivity(),mDatas,this);
-        itemAdapter.setOnItemClickListener(this);
-        itemAdapter.setOnItemLongClickListener(this);
-        rv_spcific.setAdapter(itemAdapter);*/
+        rv_spcific.setOnRefreshListener(this);
         return view;
     }
 
@@ -71,7 +72,7 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
        Log.e("mhysa","特殊页的地址"+UrlUtils.SpecialHome);
 
        OkHttpUtils.get()
-                  .url("http://192.168.0.38:8080/JianKangChanYe/homepictures/showhealthknowledge")
+                  .url(UrlUtils.SpecialHome)
                   .id(SPECIAL_HOME)
                   .build()
                   .execute(MyStringCallBack);
@@ -81,39 +82,55 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
         @Override
         public void onError(Call call, Exception e, int id) {
 
-            Log.e("mhysa","请求失败");
+            Log.e("mhysa","特殊页请求失败");
         }
 
         @Override
         public void onResponse(String response, int id) {
+           if(id==SPECIAL_HOME){
 
-            Log.e("mhysa","首页特殊页展示"+response);
-            Gson gson = new Gson();
-            CommonHealth commonHealth = gson.fromJson(response, CommonHealth.class);
-            String code = commonHealth.getCode();
-            if(id==SPECIAL_HOME){
-                if(code.equals("200")){
-                    String imgUrl = commonHealth.getImgUrl();
-                    Glide.with(getActivity())
-                            .load(imgUrl)
-                            .centerCrop()
-                            .placeholder(R.mipmap.home)
-                            .error(R.mipmap.home)
-                            .crossFade()
-                            .into(iv_spcific);
+           }
+        }
+    };
 
-                    List<CommonHealth.ItemListBean> itemList = commonHealth.getItemList();
-                    itemAdapter = new ItemAdapter(getActivity(),itemList);
-                 //   itemAdapter.setOnItemClickListener((ItemBaseAdapter.OnItemClickListener) getActivity().getApplicationContext());
+    public Handler handler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+
+                    Bundle data = msg.getData();
+                    String result = data.getString("result");
+                    Log.e("mhysa","首页特殊页展示"+result);
+                    Gson gson = new Gson();
+                    CommonHealth commonHealth = gson.fromJson(result, CommonHealth.class);
+                    String code = commonHealth.getCode();
+
+                        if(code.equals("200")){
+                            String imgUrl = commonHealth.getImgUrl();
+                            Log.i("mhysa-->","首页图片地址是"+imgUrl);
+                            Glide.with(getActivity())
+                                    .load(imgUrl)
+                                    .centerCrop()
+                                    .placeholder(R.mipmap.home)
+                                    .error(R.mipmap.home)
+                                    .crossFade()
+                                    .into(iv_spcific);
+
+                            List<CommonHealth.ItemListBean> itemList = commonHealth.getItemList();
+                            itemAdapter = new ItemAdapter(getActivity(),itemList);
+                            //   itemAdapter.setOnItemClickListener((ItemBaseAdapter.OnItemClickListener) getActivity().getApplicationContext());
                   /*  LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                     llm.setOrientation(OrientationHelper.VERTICAL);
                   //  rv_spcific.setHasFixedSize(true);
                     rv_spcific.setLayoutManager(llm);*/
-                    rv_spcific.setAdapter(itemAdapter);
+                            rv_spcific.setAdapter(itemAdapter);
+                        }
 
-                }
+                    break;
             }
-
         }
     };
 

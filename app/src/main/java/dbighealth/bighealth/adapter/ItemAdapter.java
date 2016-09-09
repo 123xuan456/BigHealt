@@ -36,7 +36,6 @@ public class ItemAdapter extends ItemBaseAdapter<ItemAdapter.MyViewHolder> {
         super(context,listDatas);
         this.context = context;
         this.listDatas = listDatas;
-        Log.i("mhysa","list数据"+listDatas);
 
     }
 
@@ -50,6 +49,7 @@ public class ItemAdapter extends ItemBaseAdapter<ItemAdapter.MyViewHolder> {
         super.onBindViewHolder(holder, position);
         String itemUrl = listDatas.get(position).getItemUrl();
         int id = listDatas.get(position).getId();
+        Log.i("mhysa--->",itemUrl+"itemurl");
         String desciption = listDatas.get(position).getDesciption();
         String time = listDatas.get(position).getTime();
         Glide.with(context)

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/problem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1、您喜欢安静的呆着吗？"
+        android:textSize="18sp"
+        android:textColor="#666666"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/rg_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:id="@+id/btn_no"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="  没有"
+                android:textColor="#666666"
+                android:button="@drawable/body_measuring"
+                android:checked="false"
+                android:textSize="17sp"
+                />
+            <RadioButton
+                android:id="@+id/btn_rarely"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="  很少"
+                android:textColor="#666666"
+                android:checked="false"
+                android:textSize="17sp"
+                android:button="@drawable/body_measuring"
+                 />
+            <RadioButton
+                android:id="@+id/btn_sometimes"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textColor="#666666"
+                android:layout_height="wrap_content"
+                android:button="@drawable/body_measuring"
+                android:checked="false"
+                android:textSize="17sp"
+                android:text="  有时"
+                />
+
+         <RadioButton
+             android:id="@+id/often"
+             android:layout_weight="1"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:checked="false"
+             android:textSize="17sp"
+             android:button="@drawable/body_measuring"
+             android:textColor="#666666"
+             android:text="  经常"/>
+        </RadioGroup>
+
+    </LinearLayout>
+</LinearLayout>
