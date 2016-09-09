@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ArchivingActivity;
@@ -97,8 +98,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i3);
                 break;
             case R.id.textView14:
-                Intent i4=new Intent(getContext(), ConditionActivity.class);//方案
-                startActivity(i4);
+                /*Intent i4=new Intent(getContext(), ConditionActivity.class);//方案
+                startActivity(i4);*/
+                Toast.makeText(getActivity(),"暂未开通，敬请期待",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.textView15:
                 Intent i5=new Intent(getContext(), InformationActivity.class);//资讯
@@ -109,8 +111,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i6);
                 break;
             case R.id.textView19:
-                Intent i9=new Intent(getContext(), Home_Page_Details.class);//体检报告
-                startActivity(i9);
+                /*Intent i9=new Intent(getContext(), Home_Page_Details.class);//体检报告
+                startActivity(i9);*/
+                Toast.makeText(getActivity(),"暂未开通，敬请期待",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.textView18:
                 Intent intent = new Intent(getContext(), ArchivingActivity.class);

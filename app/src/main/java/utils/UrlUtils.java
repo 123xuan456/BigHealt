@@ -22,5 +22,7 @@ public class UrlUtils {
     public static  String SUBSCRIBE =BASEURL +"/hathappenedat/onlinebookingselect";
     //详细预约particular
     public static  String SUBSCRIBE_PARTICULAR =BASEURL +"/hathappenedat/savemakeapp";
+    //保存用户体质测试
+    public static String SAVESYMPTON = BASEURL2+"/Symptom/save";
 
 }

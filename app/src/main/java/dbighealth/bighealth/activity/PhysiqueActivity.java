@@ -8,12 +8,17 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -60,6 +65,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
     TextView rightTv;
     private int SYMPTOM = 1;
     private PhysicalAdapter physicalAdapter;
+    private int SAVE_SYMPTON =2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +74,8 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
         setContentView(R.layout.mine_constitution);
         ButterKnife.bind(this);
         tit.setText("我的体质");
-        rightTv.setText("保存");
+       // rightTv.setText("保存");
+        rightTv.setVisibility(View.INVISIBLE);
         //创建我们的自定义头部视图
         CustomUltraRefreshHeader header = new CustomUltraRefreshHeader(this);
 
@@ -88,6 +95,9 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
 //        //设置数据刷新回调接口
         ultraLv.setUltraRefreshListener(this);
 
+        arrowLeft.setOnClickListener(this);
+        rightTv.setOnClickListener(this);
+        btnConsititutionCommit.setOnClickListener(this);
         InitInternet();
     }
 
@@ -108,7 +118,13 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
 
         @Override
         public void onError(Call call, Exception e, int id) {
-            Log.e("mhysa--->", "体质请求失败");
+           // Log.e("mhysa--->", "体质请求失败");
+            if(id==SYMPTOM){
+                Toast.makeText(getApplicationContext(),"体质请求失败",Toast.LENGTH_SHORT).show();
+            }
+            if(id==SAVE_SYMPTON){
+                Toast.makeText(getApplicationContext(),"保存体质测试",Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -123,6 +139,8 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 physicalAdapter = new PhysicalAdapter(getApplicationContext(), result);
                 // listview.setAdapter(physicalAdapter);
                 ultraLv.setAdapter(physicalAdapter);
+            }if(id== SAVE_SYMPTON){
+                Toast.makeText(getApplicationContext(),"保存成功",Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -134,10 +152,68 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
             case R.id.arrow_left:
                 finish();
                 break;
+            //提交所有
+            case R.id.btn_consititution_commit:
+                int childCount = ultraLv.getChildCount();
+                JSONObject jsonObject = new JSONObject();
+                int FLAG =0;
+                try {
+                    jsonObject.put("userId",16);
+                    for(int i=1;i<childCount+1;i++){
+                        int id = getItemId(i-1);
+                        if(id!=0){
+                            FLAG =1;
+                            jsonObject.put("symptomId_foreign"+i,i);
+                            jsonObject.put("score"+i,id);
+                        }
+
+                    }
+
+                    /**
+                     * 提交接口
+                     */
+                if(FLAG==1){
+
+                    OkHttpUtils.postString()
+                               .url(UrlUtils.SAVESYMPTON)
+                               .content(jsonObject.toString())
+                               .id(SAVE_SYMPTON)
+                               .build()
+                               .execute(MyStringCallBack);
+                }else{
+                    Toast.makeText(getApplicationContext(),"请填写信息后再提交！！！",Toast.LENGTH_SHORT).show();
+                }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
+
+
 
     }
 
+
+    /**
+     * 获取点击的itemId
+     */
+    public int getItemId(int itemIndex){
+
+            RadioGroup rg_selector = (RadioGroup) ultraLv.getChildAt(itemIndex).findViewById(R.id.rg_selector);
+            RadioButton btn_sometimes = (RadioButton) ultraLv.getChildAt(itemIndex).findViewById(R.id.btn_sometimes);
+            RadioButton btn_rarely = (RadioButton) ultraLv.getChildAt(itemIndex).findViewById(R.id.btn_rarely);
+            RadioButton often = (RadioButton) ultraLv.getChildAt(itemIndex).findViewById(R.id.often);
+            RadioButton btn_no = (RadioButton) ultraLv.getChildAt(itemIndex).findViewById(R.id.btn_no);
+           /* rg_selector.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                }
+            });
+*/
+        return btn_no.isChecked()?1:(btn_rarely.isChecked()?2:(btn_sometimes.isChecked()?3:(often.isChecked()?4:0)));
+    }
     @Override
     public void onRefresh() {
         ultraPtr.postDelayed(new Runnable() {
@@ -171,6 +247,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 ultraLv.refreshComplete();
                 physicalAdapter.notifyDataSetChanged();
             }
-        }, 1000);
+        }, 200);
     }
+
 }
