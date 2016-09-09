@@ -33,15 +33,11 @@ import utils.UrlUtils;
  * created by mhysa
  * 我的体质
  */
-public class PhysiqueActivity extends Activity implements View.OnClickListener,UltraRefreshListener {
+public class PhysiqueActivity extends Activity implements View.OnClickListener, UltraRefreshListener {
 
 
     @Bind(R.id.arrow_left)
     ImageView arrowLeft;
-    @Bind(R.id.tvTab)
-    TextView tvTab;
-    @Bind(R.id.right_add)
-    ImageView rightAdd;
     @Bind(R.id.textView6)
     TextView textView6;
     @Bind(R.id.textView1)
@@ -58,6 +54,10 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener,U
     UltraRefreshListView ultraLv;
     @Bind(R.id.btn_consititution_commit)
     Button btnConsititutionCommit;
+    @Bind(R.id.tit)
+    TextView tit;
+    @Bind(R.id.right_tv)
+    TextView rightTv;
     private int SYMPTOM = 1;
     private PhysicalAdapter physicalAdapter;
 
@@ -67,9 +67,8 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener,U
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.mine_constitution);
         ButterKnife.bind(this);
-        tvTab.setText("我的体质");
-        rightAdd.setVisibility(View.INVISIBLE);
-
+        tit.setText("我的体质");
+        rightTv.setText("保存");
         //创建我们的自定义头部视图
         CustomUltraRefreshHeader header = new CustomUltraRefreshHeader(this);
 
@@ -107,7 +106,6 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener,U
     private StringCallback MyStringCallBack = new StringCallback() {
 
 
-
         @Override
         public void onError(Call call, Exception e, int id) {
             Log.e("mhysa--->", "体质请求失败");
@@ -132,6 +130,12 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener,U
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()) {
+            case R.id.arrow_left:
+                finish();
+                break;
+        }
+
     }
 
     @Override
@@ -145,11 +149,11 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener,U
 //                }
                 //刷新完成
 
-                Toast.makeText(getApplicationContext(),"刷新完成",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "刷新完成", Toast.LENGTH_SHORT).show();
                 ultraLv.refreshComplete();
                 physicalAdapter.notifyDataSetChanged();
             }
-        },1000);
+        }, 1000);
     }
 
     @Override
@@ -163,10 +167,10 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener,U
 //                }
                 //刷新完成
 
-                Toast.makeText(getApplicationContext(),"刷新完成",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "刷新完成", Toast.LENGTH_SHORT).show();
                 ultraLv.refreshComplete();
                 physicalAdapter.notifyDataSetChanged();
             }
-        },1000);
+        }, 1000);
     }
 }
