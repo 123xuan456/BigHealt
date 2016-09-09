@@ -18,6 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.List;
+
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ArchivingActivity;
@@ -27,6 +33,8 @@ import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
 import dbighealth.bighealth.activity.SubscribeActivity;
+import dbighealth.bighealth.bean.EveryDayBean;
+import okhttp3.Call;
 
 /**
  *  simple {@link Fragment} subclass.
@@ -43,6 +51,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView textView15;//资讯
     private TextView textView16;//预约
     private TextView textView19;//体检报告
+    private TextView textView9;//温馨提示
+    private TextView textView11;//每日一读
     String id;
     TextView archiving;
     private Thread mThread;
@@ -109,6 +119,45 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         return ra;
     }
 
+    private void everyday() {
+        String url = "http://192.168.0.120:8081/JianKangChanYe/HomePage/list";
+        OkHttpUtils.get().url(url).id(1)
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                System.out.println("每日一读失败"+e);
+            }
+            @Override
+            public void onResponse(String response, int id) {
+               System.out.println("每日一读"+response);
+                Gson g=new Gson();
+                EveryDayBean everyday = g.fromJson(response, EveryDayBean.class);
+                if (everyday.getCode()==200){
+                    EveryDayBean.MessageBean mes = everyday.getMessage();
+                    List<EveryDayBean.MessageBean.DailyBean> day = mes.getDaily();
+                    for (int i=0;i<day.size();i++){
+                        EveryDayBean.MessageBean.DailyBean d = day.get(i);
+                        int dailyId = d.getDailyId();
+                        String dailyRead = d.getDailyRead();
+                        textView11.setText(dailyRead);
+                        String dailyDate = d.getDailyDate();
+
+                    }
+                    List<EveryDayBean.MessageBean.ReminderBean> r = mes.getReminder();
+                    for (int j=0;j<r.size();j++){
+                        EveryDayBean.MessageBean.ReminderBean remind = r.get(j);
+                        int  reminderId=remind.getReminderId();
+                        String  reminder=remind.getReminder();
+                        textView9.setText(reminder);
+                        String  reminderDate=remind.getReminderDate();
+                    }
+                }
+            }
+        });
+
+
+    }
+
 
     @Override
     public void onResume() {
@@ -140,6 +189,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         textView19.setOnClickListener(this);
         archiving.setOnClickListener(this);
 
+        textView9 = (TextView)ra.findViewById(R.id.textView9);
+        textView11 = (TextView)ra.findViewById(R.id.textView11);
+
         id = BaseApplication.userid;
         System.out.println("拿到id="+id);
         if(!id.equals("")){//如果有id
@@ -150,6 +202,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             rl1.setVisibility(View.GONE);
             rl.setVisibility(View.VISIBLE);
         }
+        everyday();//每日一读
     }
 
 
