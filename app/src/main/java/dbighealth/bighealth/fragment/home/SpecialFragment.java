@@ -69,7 +69,7 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
      *
      */
    public void  initInternet(){
-       Log.e("mhysa","特殊页的地址"+UrlUtils.SpecialHome);
+       Log.e("mhysa12345","特殊页的地址"+UrlUtils.SpecialHome);
 
        OkHttpUtils.get()
                   .url(UrlUtils.SpecialHome)
