@@ -71,16 +71,32 @@
             android:layout_toRightOf="@+id/textView35" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView22"
+
+        android:layout_centerHorizontal="true">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="资讯电话：13716276410"
+        android:text="资讯电话："
         android:id="@+id/textView38"
         android:textSize="20sp"
+        android:layout_marginBottom="48dp"
+        />
 
-        android:layout_marginBottom="50dp"
-        android:layout_above="@+id/imageView22"
-        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1234567890"
+        android:id="@+id/tel"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView38" />
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"

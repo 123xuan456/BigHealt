@@ -18,5 +18,9 @@ public class UrlUtils {
     public static  String LEAGUE = BASEURL+"/hathappenedat/savehealthcare";
     public static  String  Symptom = BASEURL2+"/Symptom/list";
     public static  String  FileSave = BASEURL2+"/filesave/save";
+    //预约一级
+    public static  String SUBSCRIBE =BASEURL +"/hathappenedat/onlinebookingselect";
+    //详细预约particular
+    public static  String SUBSCRIBE_PARTICULAR =BASEURL +"/hathappenedat/savemakeapp";
 
 }

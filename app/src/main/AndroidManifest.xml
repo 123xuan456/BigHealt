@@ -85,6 +85,7 @@
        <!-- <activity android:name=".activity.PhysiqueActivity"
             android:screenOrientation="portrait"
             ></activity>-->
+        <activity android:name=".activity.Particular_subscribeActivity"></activity>
     </application>
 
 </manifest>
