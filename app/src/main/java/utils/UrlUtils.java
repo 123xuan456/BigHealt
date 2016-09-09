@@ -24,5 +24,7 @@ public class UrlUtils {
     public static  String SUBSCRIBE_PARTICULAR =BASEURL +"/hathappenedat/savemakeapp";
     //保存用户体质测试
     public static String SAVESYMPTON = BASEURL2+"/Symptom/save";
+    //产品
+    public static String PRODUCT = BASEURL+"/mountinformation/product";
 
 }

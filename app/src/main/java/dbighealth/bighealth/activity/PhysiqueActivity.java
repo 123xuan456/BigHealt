@@ -1,6 +1,7 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.percent.PercentRelativeLayout;
 import android.util.Log;
@@ -66,6 +67,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
     private int SYMPTOM = 1;
     private PhysicalAdapter physicalAdapter;
     private int SAVE_SYMPTON =2;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +125,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 Toast.makeText(getApplicationContext(),"体质请求失败",Toast.LENGTH_SHORT).show();
             }
             if(id==SAVE_SYMPTON){
-                Toast.makeText(getApplicationContext(),"保存体质测试",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"保存体质测试失败",Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -168,7 +170,6 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                         }
 
                     }
-
                     /**
                      * 提交接口
                      */
@@ -180,6 +181,13 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                                .id(SAVE_SYMPTON)
                                .build()
                                .execute(MyStringCallBack);
+
+                    sp = getSharedPreferences("commit",
+                            Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = sp.edit();
+                    edit.putBoolean("First",true);
+                    edit.commit();
+
                 }else{
                     Toast.makeText(getApplicationContext(),"请填写信息后再提交！！！",Toast.LENGTH_SHORT).show();
                 }
@@ -190,11 +198,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 break;
         }
 
-
-
     }
-
-
     /**
      * 获取点击的itemId
      */
@@ -210,8 +214,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 }
-            });
-*/
+            });*/
         return btn_no.isChecked()?1:(btn_rarely.isChecked()?2:(btn_sometimes.isChecked()?3:(often.isChecked()?4:0)));
     }
     @Override
@@ -243,7 +246,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
 //                }
                 //刷新完成
 
-                Toast.makeText(getApplicationContext(), "刷新完成", Toast.LENGTH_SHORT).show();
+              /*  Toast.makeText(getApplicationContext(), "刷新完成", Toast.LENGTH_SHORT).show();*/
                 ultraLv.refreshComplete();
                 physicalAdapter.notifyDataSetChanged();
             }

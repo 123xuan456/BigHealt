@@ -1,9 +1,12 @@
 package dbighealth.bighealth.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import dbighealth.bighealth.activity.Home_Page_Details;
 import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
+import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
 
 /**
@@ -37,6 +41,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView textView16;//预约
     private TextView textView19;//体检报告
     TextView archiving;
+    private SharedPreferences sp;
+    private boolean first;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +53,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         archiving = (TextView) ra.findViewById(R.id.textView18);
         tvTab.setText("我的");
         setView();
+        sp = getActivity().getSharedPreferences("commit",
+                Activity.MODE_PRIVATE);
+        first = sp.getBoolean("First", false);
+        Log.i("mhysa-->","是否保存了"+first);
         return ra;
     }
 
@@ -90,12 +100,24 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 //startActivity(i1);
                 break;
             case R.id.textView12:
-                Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
-                startActivity(i2);
+                /**
+                 * 判断是否提交过
+                 */
+
+                    Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
+                    startActivity(i2);
+
                 break;
             case R.id.textView13:
-                Intent i3=new Intent(getContext(), PhysiqueActivity.class);//体质
-                startActivity(i3);
+                    if(first){
+
+                        Intent intent = new Intent(getContext(),RewritePhysical.class);
+                        startActivity(intent);
+                    }else{
+                        Intent i3=new Intent(getContext(), PhysiqueActivity.class);//体质
+                        startActivity(i3);
+                    }
+
                 break;
             case R.id.textView14:
                 /*Intent i4=new Intent(getContext(), ConditionActivity.class);//方案
