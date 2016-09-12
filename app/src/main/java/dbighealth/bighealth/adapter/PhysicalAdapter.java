@@ -19,7 +19,7 @@ import dbighealth.bighealth.bean.PhysicalBean;
 /**
  * Created by mhysa on 2016/8/31.
  */
-public class PhysicalAdapter extends BaseAdapter{
+public class PhysicalAdapter extends BaseAdapter implements RadioGroup.OnCheckedChangeListener{
 
     private LayoutInflater mInflater = null;
     private Context context;
@@ -32,7 +32,7 @@ public class PhysicalAdapter extends BaseAdapter{
     private RadioButton often;
     private TextView problem;
 
-    public PhysicalAdapter(Context context,List<PhysicalBean.ContentBean.ResultBean> list){
+    public PhysicalAdapter(Context context,List<PhysicalBean.ContentBean.ResultBean> list) {
             this.context = context;
             this.list = list;
             this.mInflater = LayoutInflater.from(context);
@@ -54,7 +54,7 @@ public class PhysicalAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
         //如果缓存convertView为空，则需要创建View
@@ -75,15 +75,29 @@ public class PhysicalAdapter extends BaseAdapter{
         {
             holder = (ViewHolder)convertView.getTag();
         }
-
         holder.problemDescribe.setText(list.get(position).getSymptom());
       /*  holder.img.setBackgroundResource((Integer)data.get(position).get("img"));
         holder.title.setText((String)data.get(position).get("title"));
         holder.info.setText((String)data.get(position).get("info"));*/
 
+        holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                //病症号
+                int symptomId = list.get(position).getSymptomId();
+
+            }
+        });
+
         return convertView;
     }
 
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+
+    }
     public class ViewHolder{
         TextView problemDescribe;
         RadioGroup radioGroup;
@@ -91,6 +105,5 @@ public class PhysicalAdapter extends BaseAdapter{
         RadioButton rbSometimes;
         RadioButton rbRarely;
         RadioButton rbOffen;
-
     }
 }

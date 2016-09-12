@@ -56,6 +56,7 @@ public class CustomUltraRefreshHeader extends RelativeLayout implements PtrUIHan
 
         int circlewidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getResources().getDisplayMetrics());
 
+
         mCircleView = new CircleView(getContext());
 
         LinearLayout.LayoutParams circleParams = new LinearLayout.LayoutParams(circlewidth,circlewidth);
