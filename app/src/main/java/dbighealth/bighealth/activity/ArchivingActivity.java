@@ -1,8 +1,8 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,7 +13,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -219,7 +218,8 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
              * 提交档案的代码
              */
             case R.id.right_tv:
-                if(name==null||nation==null||height1==null||weight1==null){
+                getUserInfo();
+                if(TextUtils.isEmpty(userName)||TextUtils.isEmpty(nation1)||TextUtils.isEmpty(height1)||TextUtils.isEmpty(weight1)){
                     Toast.makeText(getApplicationContext(),"信息填写不全",Toast.LENGTH_SHORT).show();
                 }else{
                     Log.i("mhysa-->",getUserInfo());

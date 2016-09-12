@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -32,6 +33,7 @@ import dbighealth.bighealth.activity.Home_Page_Details;
 import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
+import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.SubscribeActivity;
 import dbighealth.bighealth.bean.EveryDayBean;
 import okhttp3.Call;
@@ -53,7 +55,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView textView19;//体检报告
     private TextView textView9;//温馨提示
     private TextView textView11;//每日一读
-    String id;
+    String id;//用户id
     TextView archiving;
     private Thread mThread;
 
@@ -219,11 +221,16 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i1);
                 break;
             case R.id.textView12:
-                Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
-                startActivity(i2);
+                if (id.equals("")){
+                    Toast.makeText(getContext(),"请先登录",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
+                    startActivity(i2);
+                }
+
                 break;
             case R.id.textView13:
-                Intent i3=new Intent(getContext(), ConditionActivity.class);//体质
+                Intent i3=new Intent(getContext(), PhysiqueActivity.class);//体质
                 startActivity(i3);
                 break;
             case R.id.textView14:

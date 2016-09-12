@@ -7,19 +7,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Map;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.bean.ConditionBean;
 
 /**
  * Created by de on 2016/8/31.
  */
 public class ConditionAdapter extends BaseAdapter{
     Context context;
-    List<Map<String, String>> list;
-    private Map<String, String> type;
+    List<ConditionBean.MessageBean> list;
+    private ConditionBean.MessageBean condition;
 
-    public ConditionAdapter(Context context, List<Map<String, String>> list1) {
+    public ConditionAdapter(Context context, List<ConditionBean.MessageBean> list1) {
         this.context=context;
         list=list1;
         System.out.println("list="+list);
@@ -49,26 +49,39 @@ public class ConditionAdapter extends BaseAdapter{
             holder=new ViewHolder();
             holder.time= (TextView) convertView.findViewById(R.id.time);
             holder.con= (TextView) convertView.findViewById(R.id.textView23);
-            holder.year= (TextView) convertView.findViewById(R.id.textView24);
-            holder.morn= (TextView) convertView.findViewById(R.id.textView21);
+            holder.year= (TextView) convertView.findViewById(R.id.textView53);
+
+            holder.tv45= (TextView) convertView.findViewById(R.id.textView45);
+            holder.tv47= (TextView) convertView.findViewById(R.id.textView47);
+            holder.tv49= (TextView) convertView.findViewById(R.id.textView49);
+            holder.tv52= (TextView) convertView.findViewById(R.id.textView52);
             convertView.setTag(holder);
         }else{
            holder= (ViewHolder) convertView.getTag();
         }
         if (list != null && list.size() > 0) {
-            type = list.get(position);
-            holder.con.setText(type.get("c"));
-            holder.year.setText(type.get("d"));
-            holder.morn.setText(type.get("a"));
+            condition = list.get(position);
+            holder.con.setText(condition.getLunchsize());
+            holder.time.setText(condition.getLunchtime());
+            holder.year.setText(condition.getSavedate());
+            holder.tv45.setText(condition.getBreakfasttime());
+            holder.tv47.setText(condition.getBreakfastsize());
+            holder.tv49.setText(condition.getDinnertime());
+            holder.tv52.setText(condition.getDinnersize());
         }
         return convertView;
     }
 
     class ViewHolder{
      TextView time;//时间
-     TextView con;//内容
+     TextView con;//餐量
+
+     TextView tv45;//早晨
+     TextView tv47;
+     TextView tv49;//晚餐
+     TextView tv52;
      TextView year;//年月
-     TextView morn;//早晨
+
     }
 
 
