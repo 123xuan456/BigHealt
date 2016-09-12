@@ -1,9 +1,12 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,9 +24,15 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.wheel.JudgeDate;
+import dbighealth.bighealth.wheel.ScreenInfo;
+import dbighealth.bighealth.wheel.WheelMain;
 import okhttp3.Call;
 import utils.UrlUtils;
 
@@ -127,6 +136,8 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
     private String habitDesciption;
     private String habit1;
     private static int CommitHealth=1;
+    private WheelMain wheelMain;
+    private SimpleDateFormat dateFormat;
 
 
     @Override
@@ -136,6 +147,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
         ButterKnife.bind(this);
         tit.setText("健康档案");
         rightTv.setText("提交");
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         initListener();
 
     }
@@ -209,6 +221,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
     public void initListener() {
         arrowLeft.setOnClickListener(this);
         rightTv.setOnClickListener(this);
+        date.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -216,6 +229,49 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
             case R.id.arrow_left:
                 finish();
                 break;
+            /**
+             * 日期选择
+             */
+        case R.id.date:
+            LayoutInflater inflater = LayoutInflater.from(ArchivingActivity.this);
+            final View timepickerview = inflater.inflate(R.layout.timepicker,null);
+            ScreenInfo screenInfo = new ScreenInfo(ArchivingActivity.this);
+            wheelMain = new WheelMain(timepickerview);
+            wheelMain.screenheight = screenInfo.getHeight();
+           // String time1 = btn_day.getText().toString();
+            String date1 =  date.getText().toString();
+            Calendar calendar = Calendar.getInstance();
+            if (JudgeDate.isDate(date, "yyyy-MM-dd")) {
+                try {
+                    calendar.setTime(dateFormat.parse(date1));
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            wheelMain.initDateTimePicker(year, month, day);
+            new AlertDialog.Builder(ArchivingActivity.this)
+                    .setTitle("请选择时间")
+                    .setView(timepickerview)
+                    .setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    date.setText(wheelMain.getTime());
+                                }
+                            })
+                    .setNegativeButton("取消",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                }
+                            }).show();
+            break;
             /**
              * 提交档案的代码
              */
@@ -232,6 +288,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
                                .execute(MyStringCallBack);
                 }
                 break;
+
         }
     }
 

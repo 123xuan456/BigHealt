@@ -125,7 +125,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 Toast.makeText(getApplicationContext(),"体质请求失败",Toast.LENGTH_SHORT).show();
             }
             if(id==SAVE_SYMPTON){
-                Toast.makeText(getApplicationContext(),"保存体质测试失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"体质测试提交失败",Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -191,7 +191,6 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 }else{
                     Toast.makeText(getApplicationContext(),"请填写信息后再提交！！！",Toast.LENGTH_SHORT).show();
                 }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -230,7 +229,10 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
 
                 Toast.makeText(getApplicationContext(), "刷新完成", Toast.LENGTH_SHORT).show();
                 ultraLv.refreshComplete();
-                physicalAdapter.notifyDataSetChanged();
+                if(physicalAdapter!=null){
+                    physicalAdapter.notifyDataSetChanged();
+                }
+
             }
         }, 1000);
     }
