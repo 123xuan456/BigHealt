@@ -20,6 +20,10 @@ public class UrlUtils {
     public static  String SUBSCRIBE =BASEURL +"/hathappenedat/onlinebookingselect";
     //详细预约particular
     public static  String SUBSCRIBE_PARTICULAR =BASEURL +"/hathappenedat/savemakeapp";
+    //保存用户体质测试
+    public static String SAVESYMPTON = BASEURL2+"/Symptom/save";
+    //产品
+    public static String PRODUCT = BASEURL+"/mountinformation/product";
 
     //登录
     public  static String   LOGIN=BASEURL+"/user/login.do?";

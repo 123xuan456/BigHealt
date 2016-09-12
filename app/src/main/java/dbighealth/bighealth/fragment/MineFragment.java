@@ -131,7 +131,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             }
             @Override
             public void onResponse(String response, int id) {
-               System.out.println("每日一读"+response);
+                System.out.println("每日一读"+response);
                 Gson g=new Gson();
                 EveryDayBean everyday = g.fromJson(response, EveryDayBean.class);
                 if (everyday.getCode()==200){

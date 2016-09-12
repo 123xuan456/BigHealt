@@ -22,6 +22,7 @@ import dbighealth.bighealth.ben.ChannelDb;
 import dbighealth.bighealth.fragment.home.CommonFragment;
 import dbighealth.bighealth.fragment.home.NewsChannelFragment;
 import dbighealth.bighealth.fragment.home.SpecialFragment;
+import dbighealth.bighealth.fragment.home.SpecialFragment1;
 import utils.UrlUtils;
 
 /**首页*/
@@ -78,7 +79,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
                 CommonFragment Fukebing=new CommonFragment(UrlUtils.CommonHome,"6");
                 CommonFragment Qianliexian=new CommonFragment(UrlUtils.CommonHome,"7");
       //         CommonFragment PiFuBing=new CommonFragment();
-              SpecialFragment PiFuBing = new SpecialFragment();
+              SpecialFragment1 PiFuBing = new SpecialFragment1();
                 CommonFragment Jiaoqi=new CommonFragment(UrlUtils.CommonHome,"8");
 
                 newsChannelList.add(recommandFragment);

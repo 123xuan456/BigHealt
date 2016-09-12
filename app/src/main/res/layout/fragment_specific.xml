@@ -12,10 +12,15 @@
         android:src="@mipmap/home"
 
         />
-    <dbighealth.bighealth.view.PullRecyclerView
+ <dbighealth.bighealth.view.PullRecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rv_spcific"
         >
     </dbighealth.bighealth.view.PullRecyclerView>
+   <!-- <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_spcific"
+        ></ListView>-->
 </LinearLayout>

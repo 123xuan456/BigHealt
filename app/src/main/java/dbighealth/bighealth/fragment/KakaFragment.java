@@ -18,13 +18,13 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GridViewAdapter1;
 import dbighealth.bighealth.bean.ProductBean;
 import dbighealth.bighealth.ben.Model;
-import dbighealth.bighealth.R;
-import dbighealth.bighealth.adapter.GridViewAdapter;
 import dbighealth.bighealth.ben.Type;
 import okhttp3.Call;
+import utils.UrlUtils;
 
 /**
  * simple {@link Fragment} subclass.
@@ -51,7 +51,7 @@ public class KakaFragment extends Fragment {
          * 网络请求
          */
         OkHttpUtils.get()
-                .url("http://192.168.0.38:8080/JianKangChanYe/mountinformation/product")
+                .url(UrlUtils.PRODUCT)
                 .id(PRODUCT)
                 .addParams("id",params)
                 .build()

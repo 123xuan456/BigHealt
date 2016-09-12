@@ -8,7 +8,7 @@
     android:orientation="vertical"
     >
     <include
-        layout="@layout/footer_tab_1"
+        layout="@layout/footer_tab_2"
         />
     <TextView
         android:layout_width="match_parent"
