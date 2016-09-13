@@ -246,6 +246,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
             }
         }
     };
+
     public List<String> getData() {
         List<String> list = new ArrayList<>();
         list.add("医疗");
