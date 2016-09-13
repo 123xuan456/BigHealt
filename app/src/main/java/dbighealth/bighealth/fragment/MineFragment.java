@@ -53,9 +53,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         archiving = (TextView) ra.findViewById(R.id.textView18);
         tvTab.setText("我的");
         setView();
-        sp = getActivity().getSharedPreferences("commit",
-                Activity.MODE_PRIVATE);
-        first = sp.getBoolean("First", false);
+
         Log.i("mhysa-->","是否保存了"+first);
         return ra;
     }
@@ -109,6 +107,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
                 break;
             case R.id.textView13:
+                sp = getActivity().getSharedPreferences("commit",
+                        Activity.MODE_PRIVATE);
+                first = sp.getBoolean("First", false);
                     if(first){
 
                         Intent intent = new Intent(getContext(),RewritePhysical.class);

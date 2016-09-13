@@ -1,6 +1,5 @@
 package dbighealth.bighealth.fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,12 +14,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.CooparateActivity;
 import dbighealth.bighealth.adapter.TreatmentAdapter;
+import dbighealth.bighealth.bean.HealthCare;
+import dbighealth.bighealth.bean.TreatmentBean;
+import okhttp3.Call;
+import utils.UrlUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,8 +42,11 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
     Spinner sp, sp1;
     private ListView listview;
     private String[] images;
-
-
+    private int HOME_TREATMENT = 1;
+    private int REGION =2 ;
+    private Map map;
+    private List<String> province_list;
+    private Map<Integer, Storage> map1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,9 +58,48 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         right_tv = (TextView) r.findViewById(R.id.right_tv);
         right_tv.setText("加盟");
         right_tv.setOnClickListener(this);
+        sp1 = (Spinner) r.findViewById(R.id.spinner1);
+        map = new HashMap<Integer,String>();
+        map1 = new HashMap<Integer,Storage>();
+        province_list = new ArrayList<String>();
+        province_list.add("地区");
+        map.put(0,"地区");
+        map1.put(0,new Storage(0,"地区"));
         setView();
+
         return r;
     }
+
+    /**
+     * 存储地区和编号
+     */
+    public class Storage{
+        private int AddressId;
+        private String AddressName;
+        public Storage(int AddressId,String AddressName){
+            this.AddressId =AddressId;
+            this.AddressName = AddressName;
+        }
+
+        public String getAddressName() {
+            return AddressName;
+        }
+
+        public void setAddressName(String addressName) {
+            AddressName = addressName;
+        }
+
+
+
+        public int getAddressId() {
+            return AddressId;
+        }
+
+        public void setAddressId(int addressId) {
+            AddressId = addressId;
+        }
+    }
+
 
     private void setView() {
         sp = (Spinner) r.findViewById(R.id.spinner);
@@ -58,20 +109,36 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                 android.R.layout.simple_spinner_item, getData());
         adapter.setDropDownViewResource(R.layout.item_spinner);
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
+     /*   ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, getData1());
-        adapter1.setDropDownViewResource(R.layout.item_spinner);
-
-
+        adapter1.setDropDownViewResource(R.layout.item_spinner);*/
         sp.setAdapter(adapter);
-        sp1.setAdapter(adapter1);
+     //   sp1.setAdapter(adapter1);
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 在选中之后触发
                 Toast.makeText(getContext(),
-                        parent.getItemAtPosition(position).toString(),
+                       position+"",
                         Toast.LENGTH_SHORT).show();
+                if(sp1.getSelectedItemPosition()==0){
+                    getInternet();
+                }else{
+
+
+                    int selectedItemPosition = sp1.getSelectedItemPosition();
+                    Storage storage = (Storage) map.get(selectedItemPosition);
+                    int addressId = storage.getAddressId();
+                    int postionType = position+1;
+                    OkHttpUtils.get()
+                            .url(UrlUtils.TREATMENT)
+                            .id(REGION)
+                            .addParams("med",postionType+"")
+                            .addParams("region",addressId+"")
+                            .build()
+                            .execute(MyStringCallBack);
+
+                }
             }
 
             @Override
@@ -83,23 +150,73 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
 
         listview = (ListView) r.findViewById(R.id.listView2);
 
-        getImageUrls();
+       /* getImageUrls();
         TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), images);
-        listview.setAdapter(adapter2);
+        listview.setAdapter(adapter2);*/
 
     }
+    /**
+     * 请求网络
+     * @return
+     */
+    public void getInternet(){
+        OkHttpUtils.get()
+                   .url(UrlUtils.TREATMENT)
+                   .id(HOME_TREATMENT)
+                   .build()
+                   .execute(MyStringCallBack);
+    }
 
+    public StringCallback MyStringCallBack = new StringCallback(){
 
+        private List<TreatmentBean.ResultBean.ResultsBean> results;
+
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            
+            if(id==HOME_TREATMENT){
+                Gson gson = new Gson();
+                TreatmentBean treatmentBean = gson.fromJson(response, TreatmentBean.class);
+                List<TreatmentBean.ResultBean> result = treatmentBean.getResult();
+
+                for(int i= 0 ; i<result.size();i++){
+                    List<TreatmentBean.ResultBean.RegionBean> region = result.get(i).getRegion();
+                    for(int j =0;j<region.size();j++){
+                        int id1 = region.get(j).getId();
+                        String province = region.get(j).getProvince();
+                        map.put(j,new Storage(id1,province));
+                     //   map.put(id1,province);
+                        province_list.add(province);
+                    }
+                    results = result.get(i).getResults();
+
+                    TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), results);
+                    listview.setAdapter(adapter2);
+                }
+
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
+                        android.R.layout.simple_spinner_item, province_list);
+                adapter1.setDropDownViewResource(R.layout.item_spinner);
+                sp1.setAdapter(adapter1);
+            }
+            if(id == REGION){
+                Gson gson1 = new Gson();
+                HealthCare healthCare = gson1.fromJson(response, HealthCare.class);
+                List<HealthCare.MedicalListBean> medicalList = healthCare.getMedicalList();
+                TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), results);
+                listview.setAdapter(adapter2);
+            }
+        }
+    };
     public List<String> getData() {
         List<String> list = new ArrayList<>();
         list.add("医疗");
-        list.add("地区");
-        list.add("北京");
-        list.add("上海");
-        list.add("广州");
-        list.add("深圳");
-        list.add("山东");
-        list.add("青岛");
+        list.add("养生");
         return list;
     }
     public List<String> getData1() {
