@@ -3,6 +3,7 @@ package dbighealth.bighealth.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -25,6 +25,7 @@ import java.util.Map;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.CooparateActivity;
+import dbighealth.bighealth.adapter.HealthCareAdpter;
 import dbighealth.bighealth.adapter.TreatmentAdapter;
 import dbighealth.bighealth.bean.HealthCare;
 import dbighealth.bighealth.bean.TreatmentBean;
@@ -65,11 +66,10 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         province_list.add("地区");
         map.put(0,"地区");
         map1.put(0,new Storage(0,"地区"));
+       // getInternet();
         setView();
-
         return r;
     }
-
     /**
      * 存储地区和编号
      */
@@ -100,7 +100,6 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-
     private void setView() {
         sp = (Spinner) r.findViewById(R.id.spinner);
         sp1 = (Spinner) r.findViewById(R.id.spinner1);
@@ -118,27 +117,29 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 在选中之后触发
-                Toast.makeText(getContext(),
-                       position+"",
-                        Toast.LENGTH_SHORT).show();
-                if(sp1.getSelectedItemPosition()==0){
+                System.out.println("此时的坐标是："+position+"地区选中的坐标是"+sp1.getSelectedItemPosition());
+                if(sp1.getSelectedItemPosition()!=-1){
+
+                    if(sp1.getSelectedItemPosition()!=0){
+                        int selectedItemPosition = sp1.getSelectedItemPosition();
+                        Storage storage = (Storage) map1.get(selectedItemPosition);
+                        int addressId = storage.getAddressId();
+                        int postionType = position+1;
+                        OkHttpUtils.get()
+                                .url(UrlUtils.SELECTED_TREATMENT)
+                                .id(REGION)
+                                .addParams("med",postionType+"")
+                                .addParams("region",addressId+"")
+                                .build()
+                                .execute(MyStringCallBack);
+                    }
+
+                    }else{
+                    map1.clear();
+                    map1.put(0,new Storage(0,"地区"));
                     getInternet();
-                }else{
-
-
-                    int selectedItemPosition = sp1.getSelectedItemPosition();
-                    Storage storage = (Storage) map.get(selectedItemPosition);
-                    int addressId = storage.getAddressId();
-                    int postionType = position+1;
-                    OkHttpUtils.get()
-                            .url(UrlUtils.TREATMENT)
-                            .id(REGION)
-                            .addParams("med",postionType+"")
-                            .addParams("region",addressId+"")
-                            .build()
-                            .execute(MyStringCallBack);
-
                 }
+
             }
 
             @Override
@@ -147,6 +148,36 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                 //在官方的文档上说明，为back的时候触发，但是无效，可能需要特定的场景
             }
         });
+
+       sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+               // 在选中之后触发
+             //  System.out.println("此时的坐标是："+position+"医疗养生选中的坐标是"+sp.getSelectedItemPosition());
+
+               if(position!=0){
+                    //  int selectedItemPosition1 = sp.getSelectedItemPosition();
+                    Storage storage = (Storage) map1.get(position);
+                    int addressId = storage.getAddressId();
+                    int postionType = sp.getSelectedItemPosition()+1;
+                   Log.e("mhysa-->","url-->"+UrlUtils.SELECTED_TREATMENT+"?med="+postionType+"&region="+addressId);
+                    OkHttpUtils.get()
+                            .url(UrlUtils.SELECTED_TREATMENT)
+                            .id(REGION)
+                            .addParams("med",postionType+"")
+                            .addParams("region",addressId+"")
+                            .build()
+                            .execute(MyStringCallBack);
+                }
+
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> parent) {
+
+           }
+       });
 
         listview = (ListView) r.findViewById(R.id.listView2);
 
@@ -189,7 +220,8 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                     for(int j =0;j<region.size();j++){
                         int id1 = region.get(j).getId();
                         String province = region.get(j).getProvince();
-                        map.put(j,new Storage(id1,province));
+
+                        map1.put(j+1,new Storage(id1,province));
                      //   map.put(id1,province);
                         province_list.add(province);
                     }
@@ -208,8 +240,9 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                 Gson gson1 = new Gson();
                 HealthCare healthCare = gson1.fromJson(response, HealthCare.class);
                 List<HealthCare.MedicalListBean> medicalList = healthCare.getMedicalList();
-                TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), results);
-                listview.setAdapter(adapter2);
+                Log.e("mhysa-->",medicalList.size()+"");
+                HealthCareAdpter healthcare = new HealthCareAdpter(getContext(), medicalList);
+                listview.setAdapter(healthcare);
             }
         }
     };
@@ -231,8 +264,8 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         list.add("青岛");
         return list;
     }
-
-    public void getImageUrls() {
+/*
+   public void getImageUrls() {
         images = new String[]{
                 "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
                 "http://img.my.csdn.net/uploads/201407/26/1406383291_6518.jpg",
@@ -246,7 +279,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                 "http://img.my.csdn.net/uploads/201407/26/1406383264_8243.jpg",
                 "http://img.my.csdn.net/uploads/201407/26/1406383248_3693.jpg",
         };
-    }
+    }*/
 
     @Override
     public void onClick(View v) {

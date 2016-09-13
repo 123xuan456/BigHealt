@@ -50,15 +50,20 @@ public class HealthCareAdpter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
+        ViewHolder holder = null;
         if(convertView==null){
+            holder = new ViewHolder();
             convertView=  mInflat.inflate(R.layout.item_list_treatment,null,false);
-            ImageView iv= (ImageView) convertView.findViewById(R.id.line);
+            holder.line= (ImageView) convertView.findViewById(R.id.line);
             Glide.with(context)
                     .load(list.get(position).getImageUrl())
                     .centerCrop()
                     .placeholder(R.mipmap.ic_launcher)
                     .crossFade()
-                    .into(iv);
+                    .into(holder.line);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
         }
 
         return convertView;
