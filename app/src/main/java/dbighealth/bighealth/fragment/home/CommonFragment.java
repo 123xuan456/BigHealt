@@ -115,7 +115,7 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
                 case 1:
                     Bundle data = msg.getData();
                     String result = data.getString("result");
-                    Log.e("mhysa","请求到的接口"+result);
+                  //  Log.e("mhysa","请求到的接口"+result);
                     Gson gson = new Gson();
                     CommonHomeBean commonHomeBean = gson.fromJson(result, CommonHomeBean.class);
                     int code = commonHomeBean.getCode();

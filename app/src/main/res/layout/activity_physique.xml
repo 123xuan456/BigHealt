@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.PhysiqueActivity">
+    tools:context=".activity.PhysiqueActivity"
+    android:background="#f0eff5"
+    >
     <include
         layout="@layout/footer_tab_2"
         />

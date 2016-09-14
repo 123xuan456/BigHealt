@@ -42,7 +42,7 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
         View view = mInflater.inflate(R.layout.item_grid_home, parent, false);
         //动态设置ImageView的宽高，根据自己每行item数量计算
         //dm.widthPixels-dip2px(20)即屏幕宽度-左右10dp+10dp=20dp再转换为px的宽度，最后/3得到每个item的宽高
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams((dm.widthPixels - dip2px(20)) / 3, (dm.widthPixels - dip2px(20)) / 3);
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams((dm.widthPixels - dip2px(20)) / 3, (dm.widthPixels - dip2px(20)) / 3-dip2px(40));
         view.setLayoutParams(lp);
         return new MyViewHolder(view);
     }

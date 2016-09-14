@@ -44,6 +44,7 @@ public class RewritePhysical extends Activity implements View.OnClickListener{
             case R.id.right_tv:
                 Intent intent=new Intent(RewritePhysical.this, PhysiqueActivity.class);//体质
                 startActivity(intent);
+                finish();
                 break;
         }
     }

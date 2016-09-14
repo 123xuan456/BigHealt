@@ -24,6 +24,10 @@ public class UrlUtils {
     public static String SAVESYMPTON = BASEURL2+"/Symptom/save";
     //产品
     public static String PRODUCT = BASEURL+"/mountinformation/product";
+    //医疗养生
+    public static String TREATMENT = BASEURL+"/hathappenedat/selecthealth";
+    //医疗养生选择
+    public static String SELECTED_TREATMENT = BASEURL+"/hathappenedat/condition";
 
     //登录
     public  static String   LOGIN=BASEURL+"/user/login.do?";

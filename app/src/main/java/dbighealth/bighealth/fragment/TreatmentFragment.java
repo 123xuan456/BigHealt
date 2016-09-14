@@ -33,10 +33,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
     Spinner sp, sp1;
     private ListView listview;
     private String[] images;
-    public static Fragment newInstance() {
-        TreatmentFragment f = new TreatmentFragment();
-        return f;
-    }
+
 
 
     @Override

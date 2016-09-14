@@ -1,5 +1,6 @@
 package dbighealth.bighealth.adapter;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,23 +13,22 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.bean.TreatmentBean;
+import dbighealth.bighealth.bean.HealthCare;
 
 /**
- * Created by de on 2016/9/2.
+ * Created by mhysa on 2016/9/12.
+ * 医疗养生
  */
-public class TreatmentAdapter extends BaseAdapter{
-  //  private String images[];
-    private List<TreatmentBean.ResultBean.ResultsBean> list;
+public class HealthCareAdpter extends BaseAdapter {
+
+    private List<HealthCare.MedicalListBean> list;
     private Context context;
     private LayoutInflater mInflat;
 
-
-    public TreatmentAdapter(Context context, List<TreatmentBean.ResultBean.ResultsBean> list) {
-        this.list = list;
-        this.context=context;
+    public HealthCareAdpter(Context context,List<HealthCare.MedicalListBean> list){
+        this.context = context;
+        this.list = list ;
         mInflat= LayoutInflater.from(context);
-
     }
 
     @Override
@@ -48,18 +48,28 @@ public class TreatmentAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
+        ViewHolder holder = null;
         if(convertView==null){
+            holder = new ViewHolder();
             convertView=  mInflat.inflate(R.layout.item_list_treatment,null,false);
-            ImageView iv= (ImageView) convertView.findViewById(R.id.line);
+            holder.line= (ImageView) convertView.findViewById(R.id.line);
             Glide.with(context)
                     .load(list.get(position).getImageUrl())
                     .centerCrop()
                     .placeholder(R.mipmap.ic_launcher)
                     .crossFade()
-                    .into(iv);
+                    .into(holder.line);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
         }
 
         return convertView;
 
+    }
+    public class ViewHolder{
+            ImageView line;
     }
 }
