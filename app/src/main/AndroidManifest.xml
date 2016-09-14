@@ -71,27 +71,32 @@
             android:name=".activity.CooparateActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".activity.RegisterActivity"
+        <activity
+            android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
-        <activity android:name=".activity.Home_Page_Details"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".activity.Home_Page_Details"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
-        <activity android:name=".activity.ArchivingActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".activity.ArchivingActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            />
-        <activity android:name=".activity.PhysiqueActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".activity.PhysiqueActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            />
-        <activity android:name=".activity.RewritePhysical"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".activity.RewritePhysical"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            />
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".activity.SelectPicActivity"></activity>
     </application>
 
 </manifest>
