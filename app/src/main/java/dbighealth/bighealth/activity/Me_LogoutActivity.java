@@ -57,6 +57,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener{
                 Toast.makeText(this,"退出成功",Toast.LENGTH_LONG).show();
                 //退出成功之后发送一个广播
                 Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+                intent.putExtra("username","");
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
 
                 finish();

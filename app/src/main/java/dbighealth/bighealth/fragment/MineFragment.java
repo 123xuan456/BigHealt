@@ -55,10 +55,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView textView19;//体检报告
     private TextView textView9;//温馨提示
     private TextView textView11;//每日一读
+    private TextView textView50;//昵称
     String id;//用户id
     TextView archiving;
     private Thread mThread;
-
+    String username;
     private Handler mHandler = new Handler() {
         public void handleMessage (Message msg) {//此方法在ui线程运行
             switch(msg.what) {
@@ -95,7 +96,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent){
-                System.out.println("接收到了");
+
+                username = intent.getStringExtra("username");
+                System.out.println("接收到了"+username);
+                textView50.setText(username);
                 mThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -188,6 +192,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         textView16=(TextView)ra.findViewById(R.id.textView16);
         textView16.setOnClickListener(this);
         textView19 = (TextView)ra.findViewById(R.id.textView19);
+        textView50 = (TextView)ra.findViewById(R.id.textView50);
         textView19.setOnClickListener(this);
         archiving.setOnClickListener(this);
 

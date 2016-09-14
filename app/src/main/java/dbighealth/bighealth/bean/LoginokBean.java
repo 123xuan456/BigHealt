@@ -14,6 +14,7 @@ public class LoginokBean {
     private int code;
     private int id;
     private String hint;
+    private String username;
 
     public int getCode() {
         return code;
@@ -37,5 +38,12 @@ public class LoginokBean {
 
     public void setHint(String hint) {
         this.hint = hint;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
