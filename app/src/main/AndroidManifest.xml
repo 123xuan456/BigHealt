@@ -35,9 +35,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
 
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+        <activity android:name=".welcome.GuideActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
         <activity
             android:name=".activity.Me_LogoutActivity"
             android:screenOrientation="portrait"
@@ -92,6 +98,7 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".activity.PhysiqueActivity"
+
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity

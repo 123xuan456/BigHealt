@@ -2,15 +2,14 @@ package dbighealth.bighealth.welcome;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnClickListener;
-import android.content.SharedPreferences;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,9 +20,8 @@ import java.util.List;
 import dbighealth.bighealth.MainActivity;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GuideViewPagerAdapter;
-import dbighealth.bighealth.fragment.HomeFragment;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends Activity {
 
     private ViewPager viewpager;
     private List<View> list;

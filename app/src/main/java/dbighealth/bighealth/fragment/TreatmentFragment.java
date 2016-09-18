@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -48,6 +48,10 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
     private Map map;
     private List<String> province_list;
     private Map<Integer, Storage> map1;
+    public static Fragment newInstance() {
+        TreatmentFragment f = new TreatmentFragment();
+        return f;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

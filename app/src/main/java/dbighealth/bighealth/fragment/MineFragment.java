@@ -13,6 +13,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         }
     };
 
-    public static Fragment newInstance() {
+       public static Fragment newInstance() {
         MineFragment f = new MineFragment();
         return f;
     }
@@ -238,13 +239,17 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 /**
                  * 判断是否提交过
                  */
+                if (!TextUtils.isEmpty(id)){
                     Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
                     startActivity(i2);
+                }else {
+                    Toast.makeText(getActivity(),"请先登录",Toast.LENGTH_SHORT).show();
+                }
+
 
                 break;
             case R.id.textView13:
                     if(first){
-
                         Intent intent = new Intent(getContext(),RewritePhysical.class);
                         startActivity(intent);
                     }else{
