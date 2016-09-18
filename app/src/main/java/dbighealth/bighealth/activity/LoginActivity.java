@@ -232,6 +232,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String id1=String.valueOf(log.getId());
 
                 BaseApplication.userid=id1;//吧id传到
+                BaseApplication.username=username;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 //登录成功之后发送一个广播
                 Intent intent = new Intent("android.intent.action.CART_BROADCAST");

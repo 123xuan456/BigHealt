@@ -105,6 +105,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             public void onReceive(Context context, Intent intent){
 
                 username = intent.getStringExtra("username");
+
                 System.out.println("接收到了"+username);
                 textView50.setText(username);
                 mThread = new Thread(new Runnable() {
@@ -129,6 +130,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
         tvTab.setText("我的");
         setView();
+        username=BaseApplication.username;
+        textView50.setText(username);
         sp = getActivity().getSharedPreferences("commit",
                 Activity.MODE_PRIVATE);
         first = sp.getBoolean("First", false);
