@@ -63,26 +63,34 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         System.out.println("passwor=" + passwor);
         if (TextUtils.isEmpty(nickname1)) {
             Toast.makeText(this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+            return;
         } else if (TextUtils.isEmpty(phone1)) {
             Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+            return;
         }else
         if (!isEmailValid(phone1)) {//设置手机格式
             Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         else if (TextUtils.isEmpty(code1)) {
             Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+            return;
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            return;
         }
          else if (!code1.equals(verification)) {
             Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
+            return;
         }else
          if (!password.equals(passwor)){
             Toast.makeText(this,"两次密码不相同",Toast.LENGTH_SHORT).show();
+             return;
        }else
         if (!isPasswordValid(password)) {//设置密码必须不少于6个
             Toast.makeText(this, "密码不能低于六位", Toast.LENGTH_SHORT).show();
+            return;
         }
         else {
             String url = UrlUtils.REGISTER;
@@ -177,10 +185,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 String phone1 = phone.getText().toString();
                 if (TextUtils.isEmpty(nickname1)) {
                     Toast.makeText(this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+                    return;
                 }else
 
                 if (!isEmailValid(phone1)) {//设置手机格式
                     Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    return;
                 }else {
                     sendServer();//向服务器发送验证码
                 }

@@ -102,13 +102,5 @@
             android:layout_below="@+id/textView3"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上传文件结果"
-            android:id="@+id/uploadImageResult"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
-
     </RelativeLayout>
 </LinearLayout>

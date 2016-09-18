@@ -82,14 +82,23 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
 
         if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+            return;
         } else if (!isEmailValid(phone)) {//设置手机格式
             Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+            return;
         } else if (TextUtils.isEmpty(et)) {
             Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+            return;
         } else if (TextUtils.isEmpty(new_password_edit)) {
             Toast.makeText(this, "请输入新密码", Toast.LENGTH_SHORT).show();
+            return;
         }
-
+        if (!verification.equals(et)) {
+            Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
+            return;
+        }else if (verification.equals(et)){
+            submit();
+        }
     }
 
     private boolean isEmailValid(String email) {
@@ -107,8 +116,10 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
                 phone = phoneEdit.getText().toString();
                 if (TextUtils.isEmpty(phone)) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (!isEmailValid(phone)) {//设置手机格式
                     Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 time.start();// 开始计时
                 sendVerification();
@@ -116,11 +127,7 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
                 break;
             case R.id.new_register_btn://完成
                 ifInput();
-                if (!verification.equals(et)) {
-                    Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
-                }else if (verification.equals(et)){
-                    submit();
-                }
+
                 break;
             case R.id.arrow_left://
                finish();

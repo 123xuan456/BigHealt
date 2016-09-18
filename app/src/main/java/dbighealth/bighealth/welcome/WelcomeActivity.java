@@ -1,5 +1,6 @@
 package dbighealth.bighealth.welcome;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -7,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
@@ -17,9 +17,8 @@ import android.widget.Toast;
 
 import dbighealth.bighealth.MainActivity;
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.fragment.HomeFragment;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends Activity {
 
 
     private ImageView img;
@@ -30,7 +29,6 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_welcome);
         img = (ImageView)findViewById(R.id.welcome_img);
         initIntener();

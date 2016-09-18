@@ -1,35 +1,37 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dbighealth.bighealth.R;
-import utils.UploadUtil;
-import utils.UploadUtil.OnUploadProcessListener;
+import okhttp3.Call;
 
 /**
  * 资讯详情
  */
-public class Information_DetailsActivity extends Activity implements View.OnClickListener,OnUploadProcessListener{
+public class Information_DetailsActivity extends Activity implements View.OnClickListener{
+
 
     @Bind(R.id.arrow_left)
     ImageView arrowLeft;
@@ -51,36 +53,62 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     TextView textView3;
     @Bind(R.id.imageView22)
     ImageView imageView22;
-    private static final String TAG = "uploadImage";
+    // 线程通知上传成功
+    String[] arrayString = { "拍照", "相册" };
+    String title = "上传照片";
 
-    /**
-     * 去上传文件
-     */
-    protected static final int TO_UPLOAD_FILE = 1;
-    /**
-     * 上传文件响应
-     */
-    protected static final int UPLOAD_FILE_DONE = 2;  //
-    /**
-     * 选择文件
-     */
-    public static final int TO_SELECT_PHOTO = 3;
-    /**
-     * 上传初始化
-     */
-    private static final int UPLOAD_INIT_PROCESS = 4;
-    /**
-     * 上传中
-     */
-    private static final int UPLOAD_IN_PROCESS = 5;
-    /***
-     * 这里的这个URL是我服务器的javaEE环境URL
-     */
-    private static String requestURL = "http://192.168.0.43:8080/qq/file!upload";
+    // 上传的地址
+    String uploadUrl = "http://192.168.0.43:8080/JianKangChanYe/homepictures/getAppLog?";
 
-    private String picPath = null;
-    private ProgressDialog progressDialog;
-    private TextView uploadImageResult;
+    private static final int PHOTO_REQUEST_TAKEPHOTO = 1;// 拍照
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    private static final int PHOTO_REQUEST_CUT = 3;// 结果
+
+
+    // 创建一个以当前时间为名称的文件
+    File tempFile = new File(Environment.getExternalStorageDirectory(),
+            getPhotoFileName());
+    
+    // 对话框
+    DialogInterface.OnClickListener onDialogClick = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case 0:
+                    startCamearPicCut(dialog);// 开启照相
+                    break;
+                case 1:
+                    startImageCaptrue(dialog);// 开启图库
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void startCamearPicCut(DialogInterface dialog) {
+            // TODO Auto-generated method stub
+            dialog.dismiss();
+            // 调用系统的拍照功能
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            intent.putExtra("camerasensortype", 2);// 调用前置摄像头
+            intent.putExtra("autofocus", true);// 自动对焦
+            intent.putExtra("fullScreen", false);// 全屏
+            intent.putExtra("showActionIcons", false);
+            // 指定调用相机拍照后照片的储存路径
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+            startActivityForResult(intent, PHOTO_REQUEST_TAKEPHOTO);
+        }
+
+        private void startImageCaptrue(DialogInterface dialog) {
+            // TODO Auto-generated method stub
+            dialog.dismiss();
+            Intent intent = new Intent(Intent.ACTION_PICK, null);
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    "image/*");
+            startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,50 +117,84 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
         ButterKnife.bind(this);
         tit.setVisibility(View.GONE);
         rightTv.setText("提交");
-        progressDialog = new ProgressDialog(this);
-        uploadImageResult = (TextView) findViewById(R.id.uploadImageResult);
 
 
     }
 
-    @OnClick({R.id.arrow_left, R.id.tit, R.id.imageView22,R.id.right_tv})
+    @OnClick({R.id.arrow_left, R.id.tit, R.id.imageView22, R.id.right_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.arrow_left:
                 finish();
                 break;
             case R.id.imageView22://图片
-                Intent intent = new Intent(this,SelectPicActivity.class);
-                startActivityForResult(intent, TO_SELECT_PHOTO);
+                AlertDialog.Builder dialog = AndroidClass.getListDialogBuilder(
+                        Information_DetailsActivity.this, arrayString, title,
+                        onDialogClick);
+                dialog.show();
+
                 break;
 
             case R.id.right_tv://提交
-                if(picPath!=null)
-                {
-                    handler.sendEmptyMessage(TO_UPLOAD_FILE);
-                }else{
-                    Toast.makeText(this, "上传的文件路径出错", Toast.LENGTH_LONG).show();
-                }
+                picHindin();
+
                 break;
 
         }
     }
 
+    private void picHindin() {
+        System.out.println("tempFile="+tempFile);
+        System.out.println("tempFile.getName()="+tempFile.getName());
+        OkHttpUtils
+                .post()
+                .url("http://192.168.0.43:8080/JianKangChanYe/homepictures/getAppLog")
+                .addParams("appLog", tempFile.getName())
+                .addFile("appLogFiles", "a.txt", tempFile)
+                .build()
+                .execute(new StringCallback() {
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                            System.out.println("失败、"+e);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        System.out.println("成功、"+response);
+                    }
+                });
+
+    }
+
+    // 使用系统当前日期加以调整作为照片的名称
+    private String getPhotoFileName() {
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "'IMG'_yyyyMMdd_HHmmss");
+        return dateFormat.format(date) + ".jpg";
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case PHOTO_REQUEST_TAKEPHOTO:
+                startPhotoZoom(Uri.fromFile(tempFile), 150);
+                break;
 
-        if(resultCode==Activity.RESULT_OK && requestCode == TO_SELECT_PHOTO)
-        {
-            picPath = data.getStringExtra(SelectPicActivity.KEY_PHOTO_PATH);
-            Log.i(TAG, "最终选择的图片="+picPath);
-            Bitmap bm = BitmapFactory.decodeFile(picPath);
-            imageView22.setImageBitmap(bm);
-            //startPhotoZoom(data.getData(), 150);
+            case PHOTO_REQUEST_GALLERY:
+                if (data != null) {
+                    startPhotoZoom(data.getData(), 150);
+                }
+                break;
 
+            case PHOTO_REQUEST_CUT:
+                if (data != null) {
+                    setPicToView(data);
+                }
+                break;
         }
-
-
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void startPhotoZoom(Uri uri, int size) {
@@ -150,77 +212,17 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
         intent.putExtra("outputY", size);
         intent.putExtra("return-data", true);
 
+        startActivityForResult(intent, PHOTO_REQUEST_CUT);
     }
 
-    /**
-     * 上传服务器响应回调
-     */
-    public void onUploadDone(int responseCode, String message) {
-        progressDialog.dismiss();
-        Message msg = Message.obtain();
-        msg.what = UPLOAD_FILE_DONE;
-        msg.arg1 = responseCode;
-        msg.obj = message;
-        handler.sendMessage(msg);
-    }
-
-    private void toUploadFile()
-    {
-        uploadImageResult.setText("正在上传中...");
-        progressDialog.setMessage("正在上传文件...");
-        progressDialog.show();
-        String fileKey = "pic";
-        UploadUtil uploadUtil = UploadUtil.getInstance();;
-        uploadUtil.setOnUploadProcessListener((UploadUtil.OnUploadProcessListener) this);  //设置监听器监听上传状态
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("orderId", "11111");
-        uploadUtil.uploadFile( picPath,fileKey, requestURL,params);
-    }
-
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case TO_UPLOAD_FILE:
-                    toUploadFile();
-                    break;
-
-                case UPLOAD_INIT_PROCESS:
-                    progressBar.setMax(msg.arg1);
-                    Toast.makeText(getApplicationContext(), "上传的文件！！！！", Toast.LENGTH_LONG).show();
-                    break;
-                case UPLOAD_IN_PROCESS:
-                    progressBar.setProgress(msg.arg1);
-
-                    Toast.makeText(getApplicationContext(), "上传的文件中！！！！", Toast.LENGTH_LONG).show();
-                    break;
-                case UPLOAD_FILE_DONE:
-                    String result = "响应码："+msg.arg1+"\n响应信息："+msg.obj+"\n耗时："+ UploadUtil.getRequestTime()+"秒";
-                    uploadImageResult.setText(result);
-                    break;
-                default:
-                    break;
-            }
-            super.handleMessage(msg);
+    // 将进行剪裁后的图片显示到UI界面上
+    private void setPicToView(Intent picdata) {
+        Bundle bundle = picdata.getExtras();
+        if (bundle != null) {
+            final Bitmap photo = bundle.getParcelable("data");
+            imageView22.setImageBitmap(photo);
         }
-
-    };
-
-    public void onUploadProcess(int uploadSize) {
-        Message msg = Message.obtain();
-        msg.what = UPLOAD_IN_PROCESS;
-        msg.arg1 = uploadSize;
-        handler.sendMessage(msg );
     }
-
-    public void initUpload(int fileSize) {
-        Message msg = Message.obtain();
-        msg.what = UPLOAD_INIT_PROCESS;
-        msg.arg1 = fileSize;
-        handler.sendMessage(msg );
-    }
-
 
 
 

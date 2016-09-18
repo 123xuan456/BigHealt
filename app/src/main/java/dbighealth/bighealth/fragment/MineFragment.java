@@ -34,6 +34,7 @@ import dbighealth.bighealth.activity.ArchivingActivity;
 import dbighealth.bighealth.activity.ConditionActivity;
 import dbighealth.bighealth.activity.InformationActivity;
 import dbighealth.bighealth.activity.LoginActivity;
+import dbighealth.bighealth.activity.Me_LogoutActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
@@ -230,8 +231,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
             case R.id.rl1:
-                //Intent i1=new Intent(getContext(), Me_LogoutActivity.class);//已经登录后，点击进入详情
-                //startActivity(i1);
+               Intent i1=new Intent(getContext(), Me_LogoutActivity.class);//已经登录后，点击进入详情
+               startActivity(i1);
                 break;
             case R.id.textView12:
                 /**
