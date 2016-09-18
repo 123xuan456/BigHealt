@@ -17,12 +17,11 @@ import dbighealth.bighealth.bean.TreatmentBean;
 /**
  * Created by de on 2016/9/2.
  */
-public class TreatmentAdapter extends BaseAdapter{
+public class TreatmentAdapter extends BaseAdapter {
   //  private String images[];
     private List<TreatmentBean.ResultBean.ResultsBean> list;
     private Context context;
     private LayoutInflater mInflat;
-
 
     public TreatmentAdapter(Context context, List<TreatmentBean.ResultBean.ResultsBean> list) {
         this.list = list;
@@ -62,4 +61,5 @@ public class TreatmentAdapter extends BaseAdapter{
         return convertView;
 
     }
+
 }

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -69,7 +70,6 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         recyclerView.setLayoutManager(linearLayoutManager);
         initInternet();
         recyclerView.setOnRefreshListener(this);
-
         return view;
     }
 
@@ -156,6 +156,8 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
 
     @Override
     public void onItemClick(int position) {
+
+        Toast.makeText(getActivity(),"点击了条目："+position,Toast.LENGTH_SHORT).show();
 
     }
     @Override

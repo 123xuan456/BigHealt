@@ -88,7 +88,12 @@
             ></activity>
         -->
         <activity android:name=".activity.Particular_subscribeActivity" />
-        <activity android:name=".activity.RewritePhysical"></activity>
+        <activity android:name=".activity.RewritePhysical" />
+        <activity
+            android:name=".activity.DetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name=".activity.MedicalDetailActivity"></activity>
     </application>
 
 </manifest>

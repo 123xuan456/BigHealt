@@ -30,5 +30,7 @@ public class UrlUtils {
     public static String TREATMENT = BASEURL+"/hathappenedat/selecthealth";
     //医疗养生选择
     public static String SELECTED_TREATMENT = BASEURL+"/hathappenedat/condition";
+    //医疗养生详情页
+    public static String DETAIL_TREATMENT = BASEURL2+"/medicalcareInside/healthlist";
 
 }
