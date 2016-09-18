@@ -238,7 +238,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 /**
                  * 判断是否提交过
                  */
-
                     Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
                     startActivity(i2);
 
