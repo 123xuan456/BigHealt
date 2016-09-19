@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.List;
-
-import dbighealth.bighealth.bean.CommonHomeBean;
 
 /**
  * BaseAdapter
@@ -96,6 +95,9 @@ public class BaseAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView
      */
     public interface OnItemClickListener {
         void onItemClick(int position);
+
+        void onItemClick(AdapterView<?> parent, View view,
+                         int position, long id);
     }
 
     /**

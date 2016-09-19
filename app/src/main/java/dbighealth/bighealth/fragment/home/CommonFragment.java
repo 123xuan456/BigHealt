@@ -3,7 +3,6 @@ package dbighealth.bighealth.fragment.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.adapter.InfoAdapter1;
 import dbighealth.bighealth.bean.CommonHomeBean;
 import dbighealth.bighealth.view.BaseAdapter;
@@ -160,6 +159,12 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         Toast.makeText(getActivity(),"点击了条目："+position,Toast.LENGTH_SHORT).show();
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
     @Override
     public void onItemLongClick(int position) {
 

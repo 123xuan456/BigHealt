@@ -235,10 +235,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 intent.putExtra("username",username);
                 System.out.println("过去！！username"+username);
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-
                 finish();
-            }else {
-                Toast.makeText(getApplicationContext(),"登录失败",Toast.LENGTH_LONG).show();
+            }else if(log.getCode()==400){
+                String hint=log.getHint();
+                Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
             }
 
 

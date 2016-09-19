@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请输入手机号："
+            android:text="手机号："
             android:padding="10dp"
             android:layout_marginTop="5dp"
             android:textSize="18sp"
@@ -89,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请输入验证码："
+            android:text="验证码："
             android:padding="10dp"
             android:textSize="18sp"
             android:id="@+id/textView41"
