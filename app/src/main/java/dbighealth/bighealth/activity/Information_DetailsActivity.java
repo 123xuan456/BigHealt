@@ -68,7 +68,6 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     // 创建一个以当前时间为名称的文件
     File tempFile = new File(Environment.getExternalStorageDirectory(),
             getPhotoFileName());
-    
     // 对话框
     DialogInterface.OnClickListener onDialogClick = new DialogInterface.OnClickListener() {
         @Override
@@ -148,9 +147,9 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
         System.out.println("tempFile.getName()="+tempFile.getName());
         OkHttpUtils
                 .post()
-                .url("http://192.168.0.43:8080/JianKangChanYe/homepictures/getAppLog")
+                .url("http://192.168.0.43:8080/JianKangChanYe/homepictures/getAppLog?")
                 .addParams("appLog", tempFile.getName())
-                .addFile("appLogFiles", "a.txt", tempFile)
+               // .addFile("appLogFiles", "a.txt", tempFile)
                 .build()
                 .execute(new StringCallback() {
 
@@ -219,6 +218,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     private void setPicToView(Intent picdata) {
         Bundle bundle = picdata.getExtras();
         if (bundle != null) {
+
             final Bitmap photo = bundle.getParcelable("data");
             imageView22.setImageBitmap(photo);
         }
