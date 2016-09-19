@@ -71,13 +71,26 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
     EditText dinnertime;
     @Bind(R.id.l1)
     LinearLayout l1;
+    @Bind(R.id.textView1)
+    TextView textView1;
+    @Bind(R.id.addsize)
+    EditText addsize;
+    @Bind(R.id.textView2)
+    TextView textView2;
+    @Bind(R.id.textView3)
+    TextView textView3;
+    @Bind(R.id.addtime)
+    EditText addtime;
     private String bf;
     private String bft;
     private String ls;
     private String lt;
+    private String as;
+    private String at;
     private String ds;
     private String dt;
     private String id;
+    private static int Condition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +98,44 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
         setContentView(R.layout.activity_condition_add);
         ButterKnife.bind(this);
         id = BaseApplication.userid;
+
         rightTv.setOnClickListener(this);
         arrowLeft.setOnClickListener(this);
 
     }
 
     //拿到用户输入的数据
+    public String submit() {
+        getUserData();
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("userId", id);
+            obj.put("breakfastsize", bf);
+            obj.put("breakfasttime", bft);
+            obj.put("lunchsize", ls);
+            obj.put("lunchtime", lt);
+            obj.put("addsize", as);
+            obj.put("addtime", at);
+            obj.put("dinnersize", ds);
+            obj.put("dinnertime", dt);
+
+            return obj.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void getUserData() {
+        bf = breakfast.getText().toString();
+        bft = breakfasttime.getText().toString();
+        ls = lunchsize.getText().toString();
+        lt = lunchtime.getText().toString();
+        as = addsize.getText().toString();
+        at = addtime.getText().toString();
+        ds = dinnersize.getText().toString();
+        dt = dinnertime.getText().toString();
+/*    //拿到用户输入的数据
     public String submit() {
         getUserData();
         JSONObject obj = new JSONObject();
@@ -110,15 +155,7 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
         }
 
 
-    }
-
-    private void getUserData() {
-        bf = breakfast.getText().toString();
-        bft = breakfasttime.getText().toString();
-        ls = lunchsize.getText().toString();
-        lt = lunchtime.getText().toString();
-        ds = dinnersize.getText().toString();
-        dt = dinnertime.getText().toString();
+    }*/
     }
 
     @Override
@@ -131,6 +168,7 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
                 getUserData();//先判断用户输入的数据
                 if (TextUtils.isEmpty(bf) || TextUtils.isEmpty(bft) ||
                         TextUtils.isEmpty(ls) || TextUtils.isEmpty(lt) ||
+                        TextUtils.isEmpty(as) || TextUtils.isEmpty(at) ||
                         TextUtils.isEmpty(ds) || TextUtils.isEmpty(dt)
                         ) {
                     Toast.makeText(getApplicationContext(), "信息填写不全", Toast.LENGTH_SHORT).show();
@@ -140,17 +178,20 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
                     OkHttpUtils.postString()
                             .url(UrlUtils.CONDITIONADD)
                             .content(submit())//吧用户输入的数据传给服务器
+                            .id(Condition)
                             .build()
                             .execute(new StringCallback() {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
                                     System.out.println("今日健康失败" + e);
                                     Toast.makeText(getApplicationContext(), "保存失败,请稍后提交", Toast.LENGTH_SHORT).show();
+
                                 }
 
                                 @Override
                                 public void onResponse(String response, int id) {
                                     System.out.println("今日健康成功" + response);
+
                                     Toast.makeText(getApplicationContext(), "保存成功", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent();
                                     // 返回intent

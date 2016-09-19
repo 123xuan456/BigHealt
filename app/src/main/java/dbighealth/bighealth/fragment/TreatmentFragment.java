@@ -25,6 +25,7 @@ import java.util.Map;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.CooparateActivity;
+import dbighealth.bighealth.activity.DetailActivity;
 import dbighealth.bighealth.adapter.HealthCareAdpter;
 import dbighealth.bighealth.adapter.TreatmentAdapter;
 import dbighealth.bighealth.bean.HealthCare;
@@ -184,6 +185,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
        });
 
         listview = (ListView) r.findViewById(R.id.listView2);
+        //listview.setOnItemClickListener();
 
        /* getImageUrls();
         TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), images);
@@ -213,7 +215,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
 
         @Override
         public void onResponse(String response, int id) {
-            
+
             if(id==HOME_TREATMENT){
                 Gson gson = new Gson();
                 TreatmentBean treatmentBean = gson.fromJson(response, TreatmentBean.class);
@@ -233,6 +235,15 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
 
                     TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), results);
                     listview.setAdapter(adapter2);
+                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            int id1 = results.get(position).getId();
+                            Intent intent = new Intent(getActivity(), DetailActivity.class);
+                            intent.putExtra("imgId",id1);
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
@@ -247,6 +258,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                 Log.e("mhysa-->",medicalList.size()+"");
                 HealthCareAdpter healthcare = new HealthCareAdpter(getContext(), medicalList);
                 listview.setAdapter(healthcare);
+
             }
         }
     };

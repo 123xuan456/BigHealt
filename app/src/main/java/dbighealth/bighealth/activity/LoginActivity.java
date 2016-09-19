@@ -128,7 +128,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                    .setAction(android.R.string.ok, new OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
@@ -204,10 +204,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                     .addParams("regphone",email)
                     .addParams("password",password)
                     .build().execute(MyStringLogin);
-
-
-
-
         }
 
 

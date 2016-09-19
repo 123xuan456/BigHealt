@@ -57,7 +57,7 @@ public class ConditionAdapter extends BaseAdapter{
             holder.tv52= (TextView) convertView.findViewById(R.id.textView52);
             convertView.setTag(holder);
         }else{
-           holder= (ViewHolder) convertView.getTag();
+            holder= (ViewHolder) convertView.getTag();
         }
         if (list != null && list.size() > 0) {
             condition = list.get(position);
@@ -73,16 +73,17 @@ public class ConditionAdapter extends BaseAdapter{
     }
 
     class ViewHolder{
-     TextView time;//时间
-     TextView con;//餐量
+        TextView time;//时间
+        TextView con;//餐量
 
-     TextView tv45;//早晨
-     TextView tv47;
-     TextView tv49;//晚餐
-     TextView tv52;
-     TextView year;//年月
+        TextView tv45;//早晨
+        TextView tv47;
+        TextView tv49;//晚餐
+        TextView tv52;
+        TextView year;//年月
 
     }
+
 
 
 }
