@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import dbighealth.bighealth.R;
 
@@ -27,7 +26,9 @@ public class SystemFragment extends Fragment implements View.OnClickListener{
     private TextView tv1,tv2,tv3,tv4,tv5;
     private View l11;
 
-    public SystemFragment() {
+    public static Fragment newInstance() {
+        SystemFragment f = new SystemFragment();
+        return f;
     }
     private static int TOUCH;
 

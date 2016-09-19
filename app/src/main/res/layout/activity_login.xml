@@ -36,40 +36,40 @@
                     android:maxLines="1" android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            >
-
-            <Button android:id="@+id/email_register_button"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/action_register"
-                android:background="@null"
-                android:gravity="left"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:textColor="#BEBEBE"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/forget_password"
-                android:textSize="15sp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/button"
-                android:background="@null"
-                android:textColor="#BEBEBE"
-                android:gravity="right"
-                android:paddingLeft="10dp" />
+                <Button android:id="@+id/email_register_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_register"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:textColor="#BEBEBE"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forget_password"
+                    android:textSize="15sp"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/button"
+                    android:background="@null"
+                    android:textColor="#BEBEBE"
+                    android:gravity="right"
+                    android:paddingLeft="10dp" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
 
 

@@ -1,29 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
-    <FrameLayout  android:id="@+id/contentLayout"
+   >
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:layout_weight="1">
-
     </FrameLayout>
-    <android.support.v4.app.FragmentTabHost
-        android:id="@android:id/tabhost"
+    <RadioGroup
+        android:id="@+id/radioGroup1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F6F6F6"
-        >
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            />
-    </android.support.v4.app.FragmentTabHost>
+        android:background="#4BC9B4"
+        android:orientation="horizontal">
 
+        <RadioButton
+            style="@style/MTabStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="首页"
+            android:checked="true"
+            android:id="@+id/tab_one" />
+        <RadioButton
+            style="@style/MTabStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="体系"
+            android:id="@+id/tab_two" />
+        <RadioButton
+            style="@style/MTabStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="医疗养生"
+            android:id="@+id/tab_three" />
+        <RadioButton
+            style="@style/MTabStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="产品"
+            android:id="@+id/tab_four" />
+        <RadioButton
+            style="@style/MTabStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="我的"
+            android:id="@+id/tab_four1" />
+    </RadioGroup>
 
 
 </LinearLayout>

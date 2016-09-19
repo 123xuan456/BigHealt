@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -25,7 +25,6 @@ import java.util.Map;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.CooparateActivity;
-import dbighealth.bighealth.activity.DetailActivity;
 import dbighealth.bighealth.adapter.HealthCareAdpter;
 import dbighealth.bighealth.adapter.TreatmentAdapter;
 import dbighealth.bighealth.bean.HealthCare;
@@ -49,6 +48,10 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
     private Map map;
     private List<String> province_list;
     private Map<Integer, Storage> map1;
+    public static Fragment newInstance() {
+        TreatmentFragment f = new TreatmentFragment();
+        return f;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,10 +64,6 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         right_tv.setText("加盟");
         right_tv.setOnClickListener(this);
         sp1 = (Spinner) r.findViewById(R.id.spinner1);
-        listview = (ListView) r.findViewById(R.id.listView2);
-      //  listview.setOnClickListener(this);
-      //  listview.setOnItemClickListener(this);
-
         map = new HashMap<Integer,String>();
         map1 = new HashMap<Integer,Storage>();
         province_list = new ArrayList<String>();
@@ -75,13 +74,6 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         setView();
         return r;
     }
-
-    /*@Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
-        getActivity().startActivity(intent);
-    }
-*/
     /**
      * 存储地区和编号
      */
@@ -191,7 +183,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
            }
        });
 
-
+        listview = (ListView) r.findViewById(R.id.listView2);
 
        /* getImageUrls();
         TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), images);
@@ -240,24 +232,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                     results = result.get(i).getResults();
 
                     TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), results);
-                  /*listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                           // listview.getChildAt(position).getId()
-
-                        }
-                    });*/
                     listview.setAdapter(adapter2);
-                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            int imgId = results.get(position).getId();
-                            Intent imgIntent = new Intent(getActivity(),DetailActivity.class);
-                           // Bundle bundle = new Bundle();
-                            imgIntent.putExtra("imgId",imgId);
-                            startActivity(imgIntent);
-                        }
-                    });
                 }
 
                 ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),

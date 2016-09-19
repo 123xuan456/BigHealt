@@ -7,7 +7,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Map;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.ConditionBean;

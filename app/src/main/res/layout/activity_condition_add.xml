@@ -190,12 +190,6 @@
                 android:layout_toEndOf="@+id/textView32" />
         </RelativeLayout>
     </LinearLayout>
-
-
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -256,4 +250,5 @@
                 android:layout_toEndOf="@+id/textView2" />
         </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

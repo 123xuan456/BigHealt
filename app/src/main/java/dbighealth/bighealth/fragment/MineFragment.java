@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
@@ -27,13 +26,14 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ArchivingActivity;
 import dbighealth.bighealth.activity.ConditionActivity;
-import dbighealth.bighealth.activity.Home_Page_Details;
 import dbighealth.bighealth.activity.InformationActivity1;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
@@ -51,43 +51,118 @@ public class MineFragment extends Fragment implements View.OnClickListener{
   /*  LinearLayout ra;
     private RelativeLayout rl;//点击进入登录页面（没有登录时）
     private RelativeLayout rl1;//（登录之后）
-     boolean isLogin= true;
+    boolean isLogin;
     private TextView textView12;//今日
     private TextView textView13;//体质
     private TextView textView14;//方案
     private TextView textView15;//资讯
     private TextView textView16;//预约
     private TextView textView19;//体检报告
+    private TextView textView9;//温馨提示
+    private TextView textView11;//每日一读
+    private TextView textView50;//昵称
+    String id;//用户id
     TextView archiving;
     private SharedPreferences sp;
+<<<<<<< HEAD
     private boolean first;*/
+   // private boolean first;
+  //  private Thread mThread;
+  //  String username;
+  /*  private Handler mHandler = new Handler() {
+        public void handleMessage (Message msg) {//此方法在ui线程运行
+            switch(msg.what) {
+                case 1:
+                    id = BaseApplication.userid;
+                    System.out.println("拿到id="+id);
+                    if(!id.equals("")){//如果有id
+                        rl1.setVisibility(View.VISIBLE);
+                        rl.setVisibility(View.GONE);
+                    }else
+                    if (id.equals("")){//没有用户id
+                        rl1.setVisibility(View.GONE);
+                        rl.setVisibility(View.VISIBLE);
+                    }
+                    break;
+            }
+
+        }
+    };*/
 
   /*  @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ra = (LinearLayout) inflater.inflate(R.layout.fragment_mine, null);
         TextView tvTab= (TextView) ra.findViewById(R.id.tvTab);
-        //档案
-        archiving = (TextView) ra.findViewById(R.id.textView18);
         tvTab.setText("我的");
         setView();
-
+        username=BaseApplication.username;
+        textView50.setText(username);
+        sp = getActivity().getSharedPreferences("commit",
+                Activity.MODE_PRIVATE);
+        first = sp.getBoolean("First", false);
         Log.i("mhysa-->","是否保存了"+first);
         return ra;
     }*/
-
    /* private void setView() {
+=======
+    private void everyday() {
+        String url = "http://192.168.0.120:8081/JianKangChanYe/HomePage/list";
+        OkHttpUtils.get().url(url).id(1)
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                System.out.println("每日一读失败"+e);
+            }
+            @Override
+            public void onResponse(String response, int id) {
+                System.out.println("每日一读"+response);
+                Gson g=new Gson();
+                EveryDayBean everyday = g.fromJson(response, EveryDayBean.class);
+                if (everyday.getCode()==200){
+                    EveryDayBean.MessageBean mes = everyday.getMessage();
+                    List<EveryDayBean.MessageBean.DailyBean> day = mes.getDaily();
+                    for (int i=0;i<day.size();i++){
+                        EveryDayBean.MessageBean.DailyBean d = day.get(i);
+                        int dailyId = d.getDailyId();
+                        String dailyRead = d.getDailyRead();
+                        textView11.setText(dailyRead);
+                        String dailyDate = d.getDailyDate();
+
+                    }
+                    List<EveryDayBean.MessageBean.ReminderBean> r = mes.getReminder();
+                    for (int j=0;j<r.size();j++){
+                        EveryDayBean.MessageBean.ReminderBean remind = r.get(j);
+                        int  reminderId=remind.getReminderId();
+                        String  reminder=remind.getReminder();
+                        textView9.setText(reminder);
+                        String  reminderDate=remind.getReminderDate();
+                    }
+                }
+            }
+        });
+
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
+
+
+    private void setView() {
+
+        //档案
+        archiving = (TextView) ra.findViewById(R.id.textView18);
+>>>>>>> f5f8d3b4c9a190e5e3297d07ab1f8b8a4b320fda
         rl=(RelativeLayout)ra.findViewById(R.id.rl);
         rl.setOnClickListener(this);
         rl1=(RelativeLayout)ra.findViewById(R.id.rl1);
         rl1.setOnClickListener(this);
-//        if (isLogin=true){
-//            rl1.setVisibility(View.VISIBLE);
-//            rl.setVisibility(View.GONE);
-//        }else if (isLogin=false){
-//            rl1.setVisibility(View.GONE);
-//            rl.setVisibility(View.VISIBLE);
-//        }
         textView12=(TextView)ra.findViewById(R.id.textView12);
         textView12.setOnClickListener(this);
         textView13=(TextView)ra.findViewById(R.id.textView13);
@@ -99,9 +174,24 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         textView16=(TextView)ra.findViewById(R.id.textView16);
         textView16.setOnClickListener(this);
         textView19 = (TextView)ra.findViewById(R.id.textView19);
+        textView50 = (TextView)ra.findViewById(R.id.textView50);
         textView19.setOnClickListener(this);
         archiving.setOnClickListener(this);
 
+        textView9 = (TextView)ra.findViewById(R.id.textView9);
+        textView11 = (TextView)ra.findViewById(R.id.textView11);
+
+        id = BaseApplication.userid;
+        System.out.println("拿到id="+id);
+        if(!id.equals("")){//如果有id
+            rl1.setVisibility(View.VISIBLE);
+            rl.setVisibility(View.GONE);
+        }else
+        if (id.equals("")){//没有用户id
+            rl1.setVisibility(View.GONE);
+            rl.setVisibility(View.VISIBLE);
+        }
+        everyday();//每日一读
     }
 */
 
@@ -299,6 +389,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
 
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -308,8 +399,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
             case R.id.rl1:
-                Intent i1=new Intent(getContext(), Me_LogoutActivity.class);//已经登录后，点击进入详情
-                startActivity(i1);
+               Intent i1=new Intent(getContext(), Me_LogoutActivity.class);//已经登录后，点击进入详情
+               startActivity(i1);
                 break;
             case R.id.textView12:
                 /**
@@ -321,8 +412,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 }else {
                     Toast.makeText(getActivity(),"请先登录",Toast.LENGTH_SHORT).show();
                 }
-
-
                 break;
 
           /*  case R.id.rl:
@@ -342,11 +431,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
                 break;*/
             case R.id.textView13:
-                sp = getActivity().getSharedPreferences("commit",
-                        Activity.MODE_PRIVATE);
-                first = sp.getBoolean("First", false);
                     if(first){
-
                         Intent intent = new Intent(getContext(),RewritePhysical.class);
                         startActivity(intent);
                     }else{

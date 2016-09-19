@@ -3,6 +3,7 @@ package dbighealth.bighealth.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 /**退出登录*/
 public class Me_LogoutActivity extends Activity implements View.OnClickListener{
@@ -51,7 +53,14 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.email_sign_in_button:
+                BaseApplication.userid="";
                 Toast.makeText(this,"退出成功",Toast.LENGTH_LONG).show();
+                //退出成功之后发送一个广播
+                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+                intent.putExtra("username","");
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+
+                finish();
                 break;
             case R.id.remind:
                 Intent i=new Intent(this,RemindActivity.class);

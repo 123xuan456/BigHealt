@@ -29,7 +29,6 @@
     <style name="subtv">
         <item name="android:text">在线预约</item>
         <item name="android:textColor">#ffff</item>
-        <item name="android:layout_margin">20dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
@@ -41,4 +40,15 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="MTabStyle">
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:drawablePadding">1dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@color/slector_radiobutton</item>
+    </style>
 </resources>

@@ -18,11 +18,10 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GridViewAdapter1;
 import dbighealth.bighealth.bean.ProductBean;
 import dbighealth.bighealth.ben.Model;
-import dbighealth.bighealth.R;
-import dbighealth.bighealth.adapter.GridViewAdapter;
 import dbighealth.bighealth.ben.Type;
 import okhttp3.Call;
 import utils.UrlUtils;

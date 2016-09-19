@@ -39,6 +39,11 @@ public class ProductFragment extends Fragment {
     private int PRODUCT = 1;
     View ra;
 
+    public static Fragment newInstance() {
+        ProductFragment f = new ProductFragment();
+        return f;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
