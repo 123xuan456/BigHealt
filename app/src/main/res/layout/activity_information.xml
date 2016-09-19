@@ -9,15 +9,16 @@
     <include
         layout="@layout/footer_tab_3"
         android:id="@+id/include5"></include>
-<ListView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/list"
-    android:divider="#ffff"
-    android:dividerHeight="10dp"
-    android:layout_below="@+id/include5">
 
-</ListView>
+    <ListView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#ffff"
+        android:dividerHeight="10dp"
+        android:layout_below="@+id/include5"
+        android:orientation="vertical">
+    </ListView>
 
 
 </RelativeLayout>

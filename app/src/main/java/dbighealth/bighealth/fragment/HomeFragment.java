@@ -75,15 +75,15 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
               SpecialFragment1 PiFuBing = new SpecialFragment1();
                 CommonFragment Jiaoqi=new CommonFragment(UrlUtils.CommonHome,"8");
 
-                newsChannelList.add(recommandFragment);
+               // newsChannelList.add(recommandFragment);
                 newsChannelList.add(TangNiaoBing);
                 newsChannelList.add(JingZhuiBing);
                 newsChannelList.add(JianZhouyan);
                 newsChannelList.add(XinNaoXueGuan);
                 newsChannelList.add(Fukebing);
-                newsChannelList.add(Qianliexian);
+              //  newsChannelList.add(Qianliexian);
                 newsChannelList.add(PiFuBing);
-                newsChannelList.add(Jiaoqi);
+              //  newsChannelList.add(Jiaoqi);
 
 
 

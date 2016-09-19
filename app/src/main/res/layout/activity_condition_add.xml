@@ -39,7 +39,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText1"
+                android:id="@+id/breakfast"
                 android:layout_alignBottom="@+id/textView26"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="30dp"
@@ -59,7 +59,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/breakfasttime"
                 android:layout_marginRight="30dp"
                 android:layout_alignBottom="@+id/textView27"
                 android:layout_alignParentEnd="true"
@@ -94,7 +94,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2"
+                android:id="@+id/lunchsize"
                 android:layout_alignBottom="@+id/textView29"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="30dp"
@@ -121,7 +121,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3"
+                android:id="@+id/lunchtime"
                 android:layout_marginRight="30dp"
                 android:layout_alignBottom="@+id/textView30"
                 android:layout_alignParentEnd="true"
@@ -133,6 +133,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content"
+        android:id="@+id/l1"
         android:background="#ffff"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/linearLayout2"
@@ -155,7 +156,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText4"
+                android:id="@+id/dinnersize"
                 android:layout_alignBottom="@+id/textView32"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="30dp"
@@ -182,7 +183,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText5"
+                android:id="@+id/dinnertime"
                 android:layout_marginRight="30dp"
                 android:layout_alignBottom="@+id/textView33"
                 android:layout_alignParentEnd="true"
@@ -190,4 +191,69 @@
         </RelativeLayout>
     </LinearLayout>
 
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="#ffff"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/l1"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加餐餐"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:id="@+id/textView1"
+            android:layout_gravity="center_horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/biankuang_top"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addsize"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:layout_toEndOf="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="餐量："
+                android:padding="15dp"
+                android:id="@+id/textView2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间："
+                android:padding="15dp"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/textView2"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addtime"
+                android:layout_marginRight="30dp"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/textView2" />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

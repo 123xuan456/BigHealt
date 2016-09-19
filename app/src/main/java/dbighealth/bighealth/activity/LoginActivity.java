@@ -9,12 +9,12 @@ import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -36,7 +37,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.bean.LoginokBean;
 import okhttp3.Call;
 import utils.UrlUtils;
 
@@ -62,7 +65,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -126,7 +128,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                    .setAction(android.R.string.ok, new OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
@@ -157,9 +159,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
      * 判断用户输入的是否是有用的登录名和密码.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -205,15 +204,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                     .addParams("regphone",email)
                     .addParams("password",password)
                     .build().execute(MyStringLogin);
-
-            //模拟登录，现在已经没用
-//            mAuthTask = new UserLoginTask(email, password);
-//            mAuthTask.execute((Void) null);
-
         }
 
 
     }
+
+    private LoginokBean log;
     StringCallback MyStringLogin =new StringCallback() {
         //失败
         @Override
@@ -224,7 +220,26 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         @Override
         public void onResponse(String response, int id) {
             System.out.println("传递成功="+response);
-            Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_LONG).show();
+            Gson gson=new Gson();
+            log=gson.fromJson(response, LoginokBean.class);
+            if(log.getCode()==200){
+                String hint=log.getHint();
+                String username=log.getUsername();
+                String id1=String.valueOf(log.getId());
+
+                BaseApplication.userid=id1;//吧id传到
+                BaseApplication.username=username;
+                Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
+                //登录成功之后发送一个广播
+                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+                intent.putExtra("username",username);
+                System.out.println("过去！！username"+username);
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+
+                finish();
+            }else {
+                Toast.makeText(getApplicationContext(),"登录失败",Toast.LENGTH_LONG).show();
+            }
 
 
         }
@@ -298,66 +313,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         mEmailView.setAdapter(adapter);
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // 模拟网络访问.
-              Thread.sleep(2000);
-            } catch (Exception e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // 账户存在,返回true,如果密码匹配.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-        }
-    }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button:
+            case R.id.button://忘记密码
                 Intent i=new Intent(this,LostPasswordActivity.class);
                 startActivity(i);
                 break;
@@ -369,7 +330,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 startActivity(i1);
                 finish();
                 break;
-            case  R.id.email_sign_in_button:
+            case  R.id.email_sign_in_button://登录
                 attemptLogin();
 
                 break;

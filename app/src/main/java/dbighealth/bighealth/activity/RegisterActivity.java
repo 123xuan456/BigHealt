@@ -63,31 +63,36 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         System.out.println("passwor=" + passwor);
         if (TextUtils.isEmpty(nickname1)) {
             Toast.makeText(this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+            return;
         } else if (TextUtils.isEmpty(phone1)) {
             Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+            return;
         }else
         if (!isEmailValid(phone1)) {//设置手机格式
             Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         else if (TextUtils.isEmpty(code1)) {
             Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+            return;
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            return;
         }
          else if (!code1.equals(verification)) {
             Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
+            return;
         }else
          if (!password.equals(passwor)){
             Toast.makeText(this,"两次密码不相同",Toast.LENGTH_SHORT).show();
+             return;
        }else
         if (!isPasswordValid(password)) {//设置密码必须不少于6个
             Toast.makeText(this, "密码不能低于六位", Toast.LENGTH_SHORT).show();
+            return;
         }
-
-
         else {
-            Toast.makeText(this, "完事了", Toast.LENGTH_SHORT).show();
             String url = UrlUtils.REGISTER;
             OkHttpUtils.get().url(url).id(REGISTER)
                     .addParams("regphone", phone1)
@@ -176,11 +181,17 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
             case  R.id.button2:
+                String nickname1 = nickname.getText().toString();
                 String phone1 = phone.getText().toString();
+                if (TextUtils.isEmpty(nickname1)) {
+                    Toast.makeText(this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }else
+
                 if (!isEmailValid(phone1)) {//设置手机格式
                     Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    return;
                 }else {
-                    time.start();// 开始计时
                     sendServer();//向服务器发送验证码
                 }
                 break;
@@ -212,12 +223,14 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 codebean=gson.fromJson(response, CodeBean.class);
                 String  c= codebean.getCode();
                 int code=Integer.parseInt(c);
-                if (code==200){
+                if (code==200){//验证码发送成功
+                    time.start();// 开始计时
                     String res = codebean.getHint();
                     verification = codebean.getVerification();
                     Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
-                }else {
-                    return;
+                }else if(code==400){//发送失败
+                    String res = codebean.getHint();
+                    Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
                 }
 
 

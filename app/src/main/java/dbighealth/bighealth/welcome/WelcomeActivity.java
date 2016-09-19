@@ -1,5 +1,6 @@
 package dbighealth.bighealth.welcome;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,7 +20,7 @@ import dbighealth.bighealth.MainActivity;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.fragment.HomeFragment;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends Activity {
 
 
     private ImageView img;

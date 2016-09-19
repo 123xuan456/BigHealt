@@ -23,7 +23,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GuideViewPagerAdapter;
 import dbighealth.bighealth.fragment.HomeFragment;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends Activity {
 
     private ViewPager viewpager;
     private List<View> list;
