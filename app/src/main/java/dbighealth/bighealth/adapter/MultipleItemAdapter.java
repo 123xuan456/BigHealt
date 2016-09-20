@@ -32,13 +32,15 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private String address;
     private String tel;
     private String content;
-    public MultipleItemAdapter(Context context , List<CompanyDetail.MessageBean.LittlePicBean> list, String name,String address,String tel,String content){
+    private String ImgUrl;
+    public MultipleItemAdapter(Context context , List<CompanyDetail.MessageBean.LittlePicBean> list, String name,String address,String tel,String content,String ImgUrl){
         this.context = context ;
         this.list = list;
         this.name = name;
         this.address = address;
         this.tel = tel;
         this.content = content;
+
         mLayoutInflater = LayoutInflater.from(context);
     }
     @Override
@@ -59,6 +61,14 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((Item1ViewHolder) holder).tv_companyAddress.setText("地址："+address);
             ((Item1ViewHolder) holder).tv_companyTel.setText("电话："+tel);
             ((Item1ViewHolder) holder).tv_companyArea.setText("可容纳："+content+"人");
+
+            Glide.with(context)
+                    .load(ImgUrl)
+                    .placeholder(R.mipmap.home)
+                    .error(R.mipmap.home)
+                    .centerCrop()
+                    .crossFade()
+                    .into(((Item1ViewHolder) holder).iv_detail);
         } else if (holder instanceof Item2ViewHolder) {
             //((Item2ViewHolder) holder).mTextView.setText(titles[position]);
             Glide.with(context)

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -79,6 +80,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
      */
     public void initInternet() {
 
+        Log.i("mhysa-->",UrlUtils.DETAIL_TREATMENT+"?picId="+imgId);
         OkHttpUtils.get()
                 .url(UrlUtils.DETAIL_TREATMENT)
                 .id(ITEM_SELECTED)
@@ -98,27 +100,33 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void onResponse(String response, int id) {
-            Gson gson = new Gson();
-            CompanyDetail companyDetail = gson.fromJson(response, CompanyDetail.class);
-            String name = companyDetail.getMessage().getName();
-            String address = companyDetail.getMessage().getAddress();
-            String telephone = companyDetail.getMessage().getTelephone();
-            String size = companyDetail.getMessage().getSize();
-            String bigPic = companyDetail.getMessage().getBigPic();
-            List<CompanyDetail.MessageBean.LittlePicBean> littlePic = companyDetail.getMessage().getLittlePic();
-            Glide.with(getApplicationContext())
-                    .load(bigPic)
-                    .placeholder(R.mipmap.home)
-                    .error(R.mipmap.home)
-                    .centerCrop()
-                    .crossFade()
-                    .into(ivDetail);
-            tvCompanyName.setText("名称："+name);
-            tvCompanyAddress.setText("地址："+address);
-            tvCompanyTel.setText("电话："+telephone);
-            tvCompanyArea.setText("可容纳："+size+"人");
-            ItemDetailAdapter itemdetailadapter = new ItemDetailAdapter(getApplicationContext(),littlePic);
-            lvCompanyDescribe.setAdapter(itemdetailadapter);
+
+
+            if(id==ITEM_SELECTED) {
+                Gson gson = new Gson();
+                CompanyDetail companyDetail = gson.fromJson(response, CompanyDetail.class);
+                if (companyDetail.getCode() == 200) {
+                    String name = companyDetail.getMessage().getName();
+                    String address = companyDetail.getMessage().getAddress();
+                    String telephone = companyDetail.getMessage().getTelephone();
+                    String size = companyDetail.getMessage().getSize();
+                    String bigPic = companyDetail.getMessage().getBigPic();
+                    List<CompanyDetail.MessageBean.LittlePicBean> littlePic = companyDetail.getMessage().getLittlePic();
+                    Glide.with(getApplicationContext())
+                            .load(bigPic)
+                            .placeholder(R.mipmap.home)
+                            .error(R.mipmap.home)
+                            .centerCrop()
+                            .crossFade()
+                            .into(ivDetail);
+                    tvCompanyName.setText("名称：" + name);
+                    tvCompanyAddress.setText("地址：" + address);
+                    tvCompanyTel.setText("电话：" + telephone);
+                    tvCompanyArea.setText("可容纳：" + size + "人");
+                    ItemDetailAdapter itemdetailadapter = new ItemDetailAdapter(getApplicationContext(), littlePic);
+                    lvCompanyDescribe.setAdapter(itemdetailadapter);
+                }
+            }
         }
     };
 

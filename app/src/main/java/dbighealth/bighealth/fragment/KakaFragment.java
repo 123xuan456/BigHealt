@@ -90,8 +90,14 @@ public class KakaFragment extends Fragment {
             Gson gson =new Gson();
             ProductBean productBean = gson.fromJson(response, ProductBean.class);
             List<ProductBean.ProductList> productList = productBean.getProductList();
-            adapter = new GridViewAdapter1(getActivity().getApplicationContext(), (ArrayList<ProductBean.ProductList>) productList);
-            gridView.setAdapter(adapter);
+            if(productList!=null){
+                adapter = new GridViewAdapter1(getActivity(), productList);
+            }
+
+
+                gridView.setAdapter(adapter);
+
+
 
         }
     };

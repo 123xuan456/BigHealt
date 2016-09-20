@@ -53,7 +53,6 @@ public class TreatmentAdapter extends BaseAdapter {
             Glide.with(context)
                     .load(list.get(position).getImageUrl())
                     .centerCrop()
-                    .placeholder(R.mipmap.ic_launcher)
                     .crossFade()
                     .into(iv);
         }

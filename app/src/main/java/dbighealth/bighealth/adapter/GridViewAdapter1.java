@@ -20,12 +20,12 @@ import dbighealth.bighealth.ben.Type;
 
 public class GridViewAdapter1 extends BaseAdapter {
 
-	private ArrayList<ProductBean.ProductList> list;
+	private List<ProductBean.ProductList> list;
 	private ProductBean.ProductList type;
 	private Context context;
 	Holder view;
 
-	public GridViewAdapter1(Context context, ArrayList<ProductBean.ProductList> list) {
+	public GridViewAdapter1(Context context, List<ProductBean.ProductList> list) {
 		this.list = list;
 		this.context = context;
 	}
@@ -74,11 +74,9 @@ public class GridViewAdapter1 extends BaseAdapter {
 
 		return convertView;
 	}
-
 	private class Holder {
 		private ImageView icon;
 		private TextView name;
-
 		public Holder(View view) {
 			icon = (ImageView) view.findViewById(R.id.typeicon);
 			name = (TextView) view.findViewById(R.id.typename);

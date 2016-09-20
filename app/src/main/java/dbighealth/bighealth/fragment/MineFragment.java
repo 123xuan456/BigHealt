@@ -285,10 +285,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         }
 
         setView();
-        sp = getActivity().getSharedPreferences("commit",
-                Activity.MODE_PRIVATE);
-        first = sp.getBoolean("First", false);
-        Log.i("mhysa-->","是否保存了"+first);
+
         return ra;
     }
 
@@ -379,17 +376,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         everyday();//每日一读
     }
 
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -406,6 +392,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 /**
                  * 判断是否提交过
                  */
+
                 if (!TextUtils.isEmpty(id)){
                     Intent i2=new Intent(getContext(), ConditionActivity.class);//每日情况
                     startActivity(i2);
@@ -431,6 +418,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
                 break;*/
             case R.id.textView13:
+                sp = getActivity().getSharedPreferences("commit",
+                        Activity.MODE_PRIVATE);
+                first = sp.getBoolean("First", false);
+                Log.i("mhysa-->","是否保存了"+first);
                     if(first){
                         Intent intent = new Intent(getContext(),RewritePhysical.class);
                         startActivity(intent);
