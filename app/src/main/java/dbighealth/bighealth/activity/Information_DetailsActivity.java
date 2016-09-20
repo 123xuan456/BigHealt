@@ -28,8 +28,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GridAdapter;
+import dbighealth.bighealth.imageUtils.AlbumActivity;
 import dbighealth.bighealth.imageUtils.Bimp;
 import dbighealth.bighealth.imageUtils.FileUtils;
+import dbighealth.bighealth.imageUtils.GalleryActivity;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import dbighealth.bighealth.imageUtils.PublicWay;
 

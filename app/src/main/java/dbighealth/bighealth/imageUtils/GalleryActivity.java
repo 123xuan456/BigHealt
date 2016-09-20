@@ -1,4 +1,4 @@
-package dbighealth.bighealth.activity;
+package dbighealth.bighealth.imageUtils;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

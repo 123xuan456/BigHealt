@@ -236,9 +236,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 System.out.println("过去！！username"+username);
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                 finish();
+                return;
             }else if(log.getCode()==400){
                 String hint=log.getHint();
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
+                return;
             }
 
 

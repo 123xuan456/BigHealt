@@ -1,4 +1,4 @@
-package dbighealth.bighealth.activity;
+package dbighealth.bighealth.imageUtils;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -15,13 +16,8 @@ import java.util.List;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.AlbumAdapter;
-import dbighealth.bighealth.imageUtils.AlbumHelper;
-import dbighealth.bighealth.imageUtils.Bimp;
-import dbighealth.bighealth.imageUtils.ImageBucket;
-import dbighealth.bighealth.imageUtils.ImageItem;
-import dbighealth.bighealth.imageUtils.PublicWay;
 
-
+/**相册选择页*/
 public class AlbumActivity extends Activity implements OnClickListener {
 
 	private AlbumHelper helper;
@@ -110,7 +106,8 @@ public class AlbumActivity extends Activity implements OnClickListener {
 	 */
 	private void initViews() {
 		mGridView = (GridView) findViewById(R.id.myGrid);
-
+		RelativeLayout bottom_layout = (RelativeLayout) findViewById(R.id.bottom_layout);
+		bottom_layout.getBackground().setAlpha(100);
 		okButton = (Button) findViewById(R.id.ok_button);
 		okButton.setOnClickListener(this);
 		//设置默认
