@@ -1,36 +1,42 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dbighealth.bighealth.R;
-import okhttp3.Call;
+import dbighealth.bighealth.adapter.GridAdapter;
+import dbighealth.bighealth.imageUtils.Bimp;
+import dbighealth.bighealth.imageUtils.FileUtils;
+import dbighealth.bighealth.imageUtils.ImageItem;
+import dbighealth.bighealth.imageUtils.PublicWay;
 
 /**
  * 资讯详情
  */
-public class Information_DetailsActivity extends Activity implements View.OnClickListener{
+public class Information_DetailsActivity extends Activity implements View.OnClickListener {
 
 
     @Bind(R.id.arrow_left)
@@ -51,64 +57,20 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     EditText help;
     @Bind(R.id.textView3)
     TextView textView3;
-    @Bind(R.id.imageView22)
-    ImageView imageView22;
-    // 线程通知上传成功
-    String[] arrayString = { "拍照", "相册" };
-    String title = "上传照片";
 
     // 上传的地址
     String uploadUrl = "http://192.168.0.43:8080/JianKangChanYe/homepictures/getAppLog?";
+    @Bind(R.id.grid_view)
+    GridView mGridView;
+    @Bind(R.id.rl_grid_view)
+    RelativeLayout parentView;
 
-    private static final int PHOTO_REQUEST_TAKEPHOTO = 1;// 拍照
-    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
-    private static final int PHOTO_REQUEST_CUT = 3;// 结果
+    private PopupWindow pop = null;
+    private LinearLayout ll_popup;
+    private GridAdapter adapter;
+    public static Bitmap bimap;
+    private static final int TAKE_PICTURE = 0;
 
-
-    // 创建一个以当前时间为名称的文件
-    File tempFile = new File(Environment.getExternalStorageDirectory(),
-            getPhotoFileName());
-    
-    // 对话框
-    DialogInterface.OnClickListener onDialogClick = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which) {
-                case 0:
-                    startCamearPicCut(dialog);// 开启照相
-                    break;
-                case 1:
-                    startImageCaptrue(dialog);// 开启图库
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void startCamearPicCut(DialogInterface dialog) {
-            // TODO Auto-generated method stub
-            dialog.dismiss();
-            // 调用系统的拍照功能
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            intent.putExtra("camerasensortype", 2);// 调用前置摄像头
-            intent.putExtra("autofocus", true);// 自动对焦
-            intent.putExtra("fullScreen", false);// 全屏
-            intent.putExtra("showActionIcons", false);
-            // 指定调用相机拍照后照片的储存路径
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-            startActivityForResult(intent, PHOTO_REQUEST_TAKEPHOTO);
-        }
-
-        private void startImageCaptrue(DialogInterface dialog) {
-            // TODO Auto-generated method stub
-            dialog.dismiss();
-            Intent intent = new Intent(Intent.ACTION_PICK, null);
-            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    "image/*");
-            startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,112 +80,136 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
         tit.setVisibility(View.GONE);
         rightTv.setText("提交");
 
+        initViews();
 
     }
 
-    @OnClick({R.id.arrow_left, R.id.tit, R.id.imageView22, R.id.right_tv})
+    private void initViews() {
+        initPopu();//提示框
+        // 点击GridView时出现背景色设置为透明
+        mGridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        adapter = new GridAdapter(this);
+        mGridView.setAdapter(adapter);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == Bimp.tempSelectBitmap.size()) {
+                    ll_popup.startAnimation(AnimationUtils.loadAnimation(
+                            Information_DetailsActivity.this, R.anim.activity_translate_in));
+                    pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
+                } else {
+                    Intent intent = new Intent(Information_DetailsActivity.this,
+                            GalleryActivity.class);
+                    intent.putExtra("ID", position);
+                    startActivity(intent);
+                }
+            }
+        });
+
+    }
+
+    private void initPopu() {
+        pop = new PopupWindow(Information_DetailsActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
+        ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
+
+        pop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        pop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setFocusable(true);
+        pop.setOutsideTouchable(true);
+        pop.setContentView(view);
+
+        RelativeLayout parent = (RelativeLayout) view.findViewById(R.id.parent);
+        Button bt1 = (Button) view.findViewById(R.id.item_popupwindows_camera);
+        Button bt2 = (Button) view.findViewById(R.id.item_popupwindows_Photo);
+        Button bt3 = (Button) view.findViewById(R.id.item_popupwindows_cancel);
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                photo();
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Information_DetailsActivity.this,
+                        AlbumActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.activity_translate_in,
+                        R.anim.activity_translate_out);
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        mGridView.setAdapter(adapter);
+    }
+    protected void photo() {
+        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(openCameraIntent, TAKE_PICTURE);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case TAKE_PICTURE:
+                if (Bimp.tempSelectBitmap.size() < 9 && resultCode == RESULT_OK) {
+
+                    String fileName = String.valueOf(System.currentTimeMillis());
+                    Bitmap bm = (Bitmap) data.getExtras().get("data");
+                    FileUtils.saveBitmap(bm, fileName);
+
+                    ImageItem takePhoto = new ImageItem();
+                    takePhoto.setBitmap(bm);
+                    Bimp.tempSelectBitmap.add(takePhoto);
+                }
+                break;
+        }
+    }
+
+    @OnClick({R.id.arrow_left, R.id.right_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.arrow_left:
                 finish();
                 break;
-            case R.id.imageView22://图片
-                AlertDialog.Builder dialog = AndroidClass.getListDialogBuilder(
-                        Information_DetailsActivity.this, arrayString, title,
-                        onDialogClick);
-                dialog.show();
-
-                break;
 
             case R.id.right_tv://提交
-                picHindin();
 
                 break;
 
         }
     }
 
-    private void picHindin() {
-        System.out.println("tempFile="+tempFile);
-        System.out.println("tempFile.getName()="+tempFile.getName());
-        OkHttpUtils
-                .post()
-                .url("http://192.168.0.43:8080/JianKangChanYe/homepictures/getAppLog")
-                .addParams("appLog", tempFile.getName())
-                .addFile("appLogFiles", "a.txt", tempFile)
-                .build()
-                .execute(new StringCallback() {
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                            System.out.println("失败、"+e);
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        System.out.println("成功、"+response);
-                    }
-                });
-
-    }
-
-    // 使用系统当前日期加以调整作为照片的名称
-    private String getPhotoFileName() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "'IMG'_yyyyMMdd_HHmmss");
-        return dateFormat.format(date) + ".jpg";
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case PHOTO_REQUEST_TAKEPHOTO:
-                startPhotoZoom(Uri.fromFile(tempFile), 150);
-                break;
-
-            case PHOTO_REQUEST_GALLERY:
-                if (data != null) {
-                    startPhotoZoom(data.getData(), 150);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            for (int i = 0; i < PublicWay.activityList.size(); i++) {
+                if (null != PublicWay.activityList.get(i)) {
+                    PublicWay.activityList.get(i).finish();
                 }
-                break;
-
-            case PHOTO_REQUEST_CUT:
-                if (data != null) {
-                    setPicToView(data);
-                }
-                break;
+            }
+            System.exit(0);
         }
-        super.onActivityResult(requestCode, resultCode, data);
+        return true;
     }
-
-    private void startPhotoZoom(Uri uri, int size) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        // crop为true是设置在开启的intent中设置显示的view可以剪裁
-        intent.putExtra("crop", "true");
-
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-
-        // outputX,outputY 是剪裁图片的宽高
-        intent.putExtra("outputX", size);
-        intent.putExtra("outputY", size);
-        intent.putExtra("return-data", true);
-
-        startActivityForResult(intent, PHOTO_REQUEST_CUT);
-    }
-
-    // 将进行剪裁后的图片显示到UI界面上
-    private void setPicToView(Intent picdata) {
-        Bundle bundle = picdata.getExtras();
-        if (bundle != null) {
-            final Bitmap photo = bundle.getParcelable("data");
-            imageView22.setImageBitmap(photo);
-        }
-    }
-
-
 
 }

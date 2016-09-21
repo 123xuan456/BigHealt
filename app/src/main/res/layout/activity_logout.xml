@@ -61,6 +61,7 @@
         android:background="#b3b3b3"
         ></View>
     <RelativeLayout
+        android:id="@+id/rl_collection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10">
@@ -100,6 +101,7 @@
         android:background="#b3b3b3"
         ></View>
     <RelativeLayout
+        android:id="@+id/rl_shoppingCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10">

@@ -58,14 +58,12 @@ public class HealthCareAdpter extends BaseAdapter {
             Glide.with(context)
                     .load(list.get(position).getImageUrl())
                     .centerCrop()
-                    .placeholder(R.mipmap.ic_launcher)
                     .crossFade()
                     .into(holder.line);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-
         return convertView;
 
     }

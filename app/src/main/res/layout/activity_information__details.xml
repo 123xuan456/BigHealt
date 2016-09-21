@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f0eff5"
+        android:id="@+id/rl_grid_view"
         >
 
         <TextView
@@ -92,15 +93,18 @@
             android:layout_below="@+id/help"
             android:layout_alignParentStart="true" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/photo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:id="@+id/imageView22"
-            android:layout_below="@+id/textView3"
-            android:layout_centerHorizontal="true" />
+        <GridView
+            android:id="@+id/grid_view"
+            android:layout_width="290dp"
+            android:layout_height="350dp"
+            android:horizontalSpacing="3dp"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/problem"
+            android:layout_alignEnd="@+id/problem"
+            android:layout_below="@+id/textView3" />
 
     </RelativeLayout>
 </LinearLayout>

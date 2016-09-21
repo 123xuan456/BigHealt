@@ -31,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import dbighealth.bighealth.BaseApplication;
+import dbighealth.bighealth.BllDemo;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ArchivingActivity;
 import dbighealth.bighealth.activity.ConditionActivity;
@@ -336,7 +337,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
     }
 
-
     private void setView() {
 
         //档案
@@ -422,6 +422,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                         Activity.MODE_PRIVATE);
                 first = sp.getBoolean("First", false);
                 Log.i("mhysa-->","是否保存了"+first);
+                if (!TextUtils.isEmpty(id)){
                     if(first){
                         Intent intent = new Intent(getContext(),RewritePhysical.class);
                         startActivity(intent);
@@ -430,29 +431,65 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                         startActivity(i3);
                     }
 
+                }else {
+                    Toast.makeText(getActivity(),"请先登录",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.textView14:
                 /*Intent i4=new Intent(getContext(), ConditionActivity.class);//方案
                 startActivity(i4);*/
-                Toast.makeText(getActivity(),"暂未开通，敬请期待",Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(id)){
+                    Toast.makeText(getActivity(),"方案生成中，请稍后！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.textView15:
-                Intent i5=new Intent(getContext(), InformationActivity1.class);//资讯
-                startActivity(i5);
+            if (!TextUtils.isEmpty(id)){
+                    Intent i5=new Intent(getContext(), InformationActivity1.class);//资讯
+                    startActivity(i5);
+                }else{
+                    Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+                }
+
+              /*  Intent intent11 = new Intent(getContext(), BllDemo.class);
+                startActivity(intent11);*/
+
                 break;
             case R.id.textView16:
-                Intent i6=new Intent(getContext(), SubscribeActivity.class);//预约
-                startActivity(i6);
+                if (!TextUtils.isEmpty(id)){
+                    Intent i6=new Intent(getContext(), SubscribeActivity.class);//预约
+                    startActivity(i6);
+                }else{
+                    Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.textView19:
-                /*Intent i9=new Intent(getContext(), Home_Page_Details.class);//体检报告
-                startActivity(i9);*/
-                Toast.makeText(getActivity(),"暂未开通，敬请期待",Toast.LENGTH_SHORT).show();
+                sp = getActivity().getSharedPreferences("commit",
+                        Activity.MODE_PRIVATE);
+                first = sp.getBoolean("First", false);
+                if (!TextUtils.isEmpty(id)){
+                if(first){
+                    Toast.makeText(getActivity(),"体检报告生成中，请稍后！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(),"请先填写体质测试！！",Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                    Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.textView18:
-                Intent intent = new Intent(getContext(), ArchivingActivity.class);
-                startActivity(intent);
+                if (!TextUtils.isEmpty(id)){
+                    Intent intent = new Intent(getContext(), ArchivingActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
-    }
-}
+        }
+        }

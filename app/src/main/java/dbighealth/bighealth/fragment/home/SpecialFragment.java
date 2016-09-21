@@ -6,28 +6,25 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.UrlLoader;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.ItemAdapter;
 import dbighealth.bighealth.bean.CommonHealth;
 import dbighealth.bighealth.view.BaseAdapter;
-import dbighealth.bighealth.view.ItemBaseAdapter;
 import dbighealth.bighealth.view.PullBaseView;
 import dbighealth.bighealth.view.PullRecyclerView;
 import okhttp3.Call;
@@ -136,6 +133,11 @@ public class SpecialFragment extends Fragment implements BaseAdapter.OnItemClick
 
     @Override
     public void onItemClick(int position) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
 

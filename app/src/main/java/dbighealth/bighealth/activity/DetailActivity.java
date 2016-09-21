@@ -2,16 +2,13 @@ package dbighealth.bighealth.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
@@ -25,6 +22,7 @@ import butterknife.ButterKnife;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.ItemDetailAdapter;
 import dbighealth.bighealth.bean.CompanyDetail;
+import dbighealth.bighealth.view.NoScrollListview;
 import okhttp3.Call;
 import utils.UrlUtils;
 
@@ -47,7 +45,9 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     @Bind(R.id.tv_companyArea)
     TextView tvCompanyArea;
     @Bind(R.id.lv_companyDescribe)
-    ListView lvCompanyDescribe;
+    NoScrollListview lvCompanyDescribe;
+    /*    @Bind(R.id.lv_companyDescribe)
+        ListView lvCompanyDescribe;*/
     private int imgId;
     private int ITEM_SELECTED = 1;
     /**
@@ -80,7 +80,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
      */
     public void initInternet() {
 
-        Log.i("mhysa-->",UrlUtils.DETAIL_TREATMENT+"?picId="+imgId);
+        Log.i("mhysa-->", UrlUtils.DETAIL_TREATMENT + "?picId=" + imgId);
         OkHttpUtils.get()
                 .url(UrlUtils.DETAIL_TREATMENT)
                 .id(ITEM_SELECTED)
@@ -102,7 +102,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         public void onResponse(String response, int id) {
 
 
-            if(id==ITEM_SELECTED) {
+            if (id == ITEM_SELECTED) {
                 Gson gson = new Gson();
                 CompanyDetail companyDetail = gson.fromJson(response, CompanyDetail.class);
                 if (companyDetail.getCode() == 200) {

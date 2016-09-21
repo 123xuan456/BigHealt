@@ -3,16 +3,17 @@ package dbighealth.bighealth.fragment.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.adapter.InfoAdapter1;
 import dbighealth.bighealth.bean.CommonHomeBean;
 import dbighealth.bighealth.view.BaseAdapter;
@@ -54,10 +54,12 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
 
     @SuppressLint("ValidFragment")
     public CommonFragment(String url,String params){
-//        Log.e("mhysa", UrlUtils.CommonHome);
+       Log.e("mhysa", UrlUtils.CommonHome+"?id="+params);
         this.url = UrlUtils.CommonHome;
         this.params = params;
+
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
        // initData();
         View  view= inflater.inflate(R.layout.fragment_common,container,false);
         recyclerView = (PullRecyclerView) view.findViewById(R.id.recyclerView);
+        //System.out.println("第二次加载");
         LinearLayoutManager  linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayout.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -92,48 +95,34 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         @Override
         public void onError(Call call, Exception e, int id) {
 
-            Log.e("mhysa-->","加载失败");
+            //Log.e("mhysa-->","加载失败");
+            Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onResponse(String response, int id) {
 
-            Message msg = new Message();
+         /*   Message msg = new Message();
             msg.what = 1;
             Bundle bundle = new Bundle();
             bundle.putString("result",response);
             msg.setData(bundle);
-            handler.sendMessage(msg);
-
-        }
-    };
-    public Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 1:
-                    Bundle data = msg.getData();
-                    String result = data.getString("result");
-                  //  Log.e("mhysa","请求到的接口"+result);
-                    Gson gson = new Gson();
-                    CommonHomeBean commonHomeBean = gson.fromJson(result, CommonHomeBean.class);
-                    int code = commonHomeBean.getCode();
-                    if(code ==200){
-                        List<CommonHomeBean.ResultBean> result1 = commonHomeBean.getResult();
-                        List<Object> feng = new ArrayList<Object>();
-                        feng.add(result1);
-                        infoAdapter = new InfoAdapter1(getActivity(),result1);
-                      //  Log.e("mhysa",infoAdapter.toString());
+            handler.sendMessage(msg);*/
+            Gson gson = new Gson();
+            CommonHomeBean commonHomeBean = gson.fromJson(response, CommonHomeBean.class);
+            int code = commonHomeBean.getCode();
+            if(code ==200){
+                List<CommonHomeBean.ResultBean> result1 = commonHomeBean.getResult();
+               /* List<Object> feng = new ArrayList<Object>();
+                feng.add(result1);*/
+                infoAdapter = new InfoAdapter1(getActivity(),result1);
+                //  Log.e("mhysa",infoAdapter.toString());
 //                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        recyclerView.setAdapter(infoAdapter);
-                    }
-
-                    break;
+                recyclerView.setAdapter(infoAdapter);
             }
-
         }
     };
+
     /*public void initData(){
         *//**
          * 暂时用假图片
@@ -160,6 +149,12 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         Toast.makeText(getActivity(),"点击了条目："+position,Toast.LENGTH_SHORT).show();
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
     @Override
     public void onItemLongClick(int position) {
 

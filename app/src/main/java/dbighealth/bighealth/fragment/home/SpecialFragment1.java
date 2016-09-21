@@ -5,15 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -87,6 +87,7 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
         public void onError(Call call, Exception e, int id) {
 
             Log.e("mhysa","特殊页请求失败");
+            Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -167,6 +168,11 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
 
     @Override
     public void onItemClick(int position) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
 

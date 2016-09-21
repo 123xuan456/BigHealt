@@ -98,6 +98,7 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
             return;
         }else if (verification.equals(et)){
             submit();
+            return;
         }
     }
 

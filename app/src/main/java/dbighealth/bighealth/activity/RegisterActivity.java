@@ -192,7 +192,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                     Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }else {
-                    sendServer();//向服务器发送验证码
+                    sendServer(phone1);//向服务器发送验证码
+                    time.start();// 开始计时
                 }
                 break;
             case  R.id.button3:
@@ -201,13 +202,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    private void sendServer() {
-        String phone1=phone.getText().toString();
-
-        System.out.println("拿到手机号"+phone1);
+    private void sendServer(String s) {
         String url= UrlUtils.REGISTER_CODE;
         OkHttpUtils.get().url(url).id(REGISTER_CODE)
-                .addParams("regphone",phone1)
+                .addParams("regphone",s)
                 .build().execute(new StringCallback() {
 
 
@@ -224,7 +222,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 String  c= codebean.getCode();
                 int code=Integer.parseInt(c);
                 if (code==200){//验证码发送成功
-                    time.start();// 开始计时
                     String res = codebean.getHint();
                     verification = codebean.getVerification();
                     Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
