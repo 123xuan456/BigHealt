@@ -8,6 +8,7 @@
     android:layout_marginTop="10dp"
     android:layout_height="100dp"
     android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp"
     android:id="@+id/iv_spcific_list"
     android:src="@mipmap/spcificpic"
     android:scaleType="fitXY"

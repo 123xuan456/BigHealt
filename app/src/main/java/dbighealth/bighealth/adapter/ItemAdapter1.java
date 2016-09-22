@@ -32,6 +32,7 @@ public class ItemAdapter1 extends BaseAdapter {
     private ImageView iv_spcific_list;
     private TextView tv_description;
     private TextView tv_time;
+    private CharSequence charSequence;
 
     public ItemAdapter1(Context context, List<CommonHealth.ItemListBean>listDatas)
     {
@@ -90,6 +91,11 @@ public class ItemAdapter1 extends BaseAdapter {
                .error(R.mipmap.spcificpic)
                .crossFade()
                .into(holder.iv_spcific_list);
+        if(desciption.length()>70){
+            charSequence = desciption.subSequence(0, 40);
+            desciption = charSequence+"......";
+
+        }
         holder.tv_description.setText("    "+desciption);
         //转换时间格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
