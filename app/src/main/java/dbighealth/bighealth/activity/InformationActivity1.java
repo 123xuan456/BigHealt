@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,17 +54,17 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
 
     public void init(){
         String id = BaseApplication.userid;
-        if (TextUtils.isEmpty(id)){
-            Toast.makeText(getApplication(), "请先登录", Toast.LENGTH_LONG)
-                    .show();
-            return;
-        }else{
+//        if (TextUtils.isEmpty(id)){
+//            Toast.makeText(getApplication(), "请先登录", Toast.LENGTH_LONG)
+//                    .show();
+//            return;
+//        }else{
             OkHttpUtils.get()
                     .url(UrlUtils.INFORMATIONLISTVIEW)
-                    .addParams("userId", id)
+                    .addParams("userId",id)//id
                     .build()
                     .execute(MyStringCallBack);
-        }
+//        }
     }
     public StringCallback MyStringCallBack=new StringCallback(){
 
