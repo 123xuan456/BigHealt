@@ -32,6 +32,7 @@
                 android:gravity="center"
                 android:checked="false"
                 android:layout_gravity="left"
+                android:textColor="@drawable/textcolor_selector"
                 android:text="医疗" />
 
             <TextView
@@ -49,6 +50,7 @@
                 android:gravity="center"
                 android:checked="true"
                 android:text="养生"
+                android:textColor="@drawable/textcolor_selector"
                 android:background="@drawable/radiobutton_selector"
                 android:layout_gravity="right" />
 

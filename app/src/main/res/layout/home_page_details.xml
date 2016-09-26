@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
     <include
         android:id="@+id/title"
         android:layout_width="fill_parent"
@@ -15,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title"
+        android:fillViewport="true"
         >
 
         <LinearLayout
@@ -23,23 +25,57 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <WebView
+
+        <!--<WebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </WebView>
+        </WebView>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_title"
+                android:textColor="#666666"
+                android:text="眼病二级界面"
+               android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_secondPic"
+                android:src="@mipmap/home"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_secondDesciption"
+                android:text="这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评论"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
 
-        <ListView
+                />
+        <dbighealth.bighealth.view.ListViewForScrollView
             android:id="@+id/mcomment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </ListView>
-
-
+        </dbighealth.bighealth.view.ListViewForScrollView>
 
         </LinearLayout>
     </ScrollView>
-    <RelativeLayout
+    <android.support.percent.PercentRelativeLayout
         android:id="@+id/ndewbfhwb"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
@@ -47,16 +83,15 @@
         android:background="#4bcab4"
         android:gravity="center_vertical"
         >
-
         <RelativeLayout
             android:id="@+id/txtbottomshare"
             android:layout_width="wrap_content"
+            app:layout_widthPercent="60%"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_margin="10dp"
             android:background="@drawable/write_comment"
              >
-
             <EditText
                 android:id="@+id/txtedit"
                 android:layout_width="wrap_content"
@@ -91,5 +126,5 @@
             android:visibility="visible"
             android:layout_alignTop="@+id/btnpinglun"
             android:layout_toEndOf="@+id/btnpinglun" />
-    </RelativeLayout>
-</RelativeLayout>
+    </android.support.percent.PercentRelativeLayout>
+</android.support.percent.PercentRelativeLayout>

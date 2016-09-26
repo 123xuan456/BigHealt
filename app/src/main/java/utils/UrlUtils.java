@@ -51,5 +51,11 @@ public class UrlUtils {
     public static  String CONDITION = BASEURL2+"/DailyReport/list?userId=";
     //每日情况
     public static  String CONDITIONADD = BASEURL2+"/DailyReport/saveDaily";
+    //眼病二级界面
+    public static  String  FORMATIONDETAIL = BASEURL +"/homepictures/formationdetails";
+    //评论
+    public static  String COMMENT = BASEURL+"/transfer/comment";
+    //s上传图片
+    public static  String UPLOADPIC = BASEURL2+"/PublicController/uploadPic";
 
 }

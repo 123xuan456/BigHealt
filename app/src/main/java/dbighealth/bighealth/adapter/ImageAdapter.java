@@ -2,6 +2,7 @@ package dbighealth.bighealth.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.SecondActivity;
 import dbighealth.bighealth.bean.CommonHomeBean;
 import dbighealth.bighealth.view.BaseAdapter1;
 
@@ -29,7 +31,7 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
 
     FinalBitmap fb = null;
     DisplayMetrics dm;
-
+  // private Context context;
     public ImageAdapter(Context context, List<CommonHomeBean.ResultBean.ResultsBean> listDatas) {
         super(context, listDatas);
        // List<CommonHomeBean.ResultBean.ResultsBean> list = ( List<CommonHomeBean.ResultBean.ResultsBean>)listDatas;
@@ -37,6 +39,7 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
         fb = FinalBitmap.create(context);
         dm = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+        this.context = context;
     }
 
     @Override
@@ -53,6 +56,7 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
         String url = (String) listDatas.get(position).getImages();//转换
+        int picid = listDatas.get(position).getPicid();
         Glide.with(context)
                 .load(url)
                 .centerCrop()
@@ -67,7 +71,9 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 Log.e("mhysa", "" + position);
-               // Intent intent = new
+                Intent intent = new Intent(context, SecondActivity.class);
+                intent.putExtra("picId",listDatas.get(position).getId());
+                context.startActivity(intent);
             }
         });
 

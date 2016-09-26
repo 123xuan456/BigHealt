@@ -240,8 +240,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String hint=log.getHint();
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
             }
-
-
         }
     };
     private boolean isEmailValid(String email) {

@@ -78,10 +78,10 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
                 CommonFragment JingZhuiBing=new CommonFragment(UrlUtils.CommonHome,"3");
                 CommonFragment JianZhouyan=new CommonFragment(UrlUtils.CommonHome,"4");
                 CommonFragment XinNaoXueGuan=new CommonFragment(UrlUtils.CommonHome,"5");
-                CommonFragment Fukebing=new CommonFragment(UrlUtils.CommonHome,"6");
+        //        CommonFragment Fukebing=new CommonFragment(UrlUtils.CommonHome,"6");
        //         CommonFragment Qianliexian=new CommonFragment(UrlUtils.CommonHome,"7");
       //         CommonFragment PiFuBing=new CommonFragment();
-              SpecialFragment1 PiFuBing = new SpecialFragment1();
+                SpecialFragment1 PiFuBing = new SpecialFragment1();
         //        CommonFragment Jiaoqi=new CommonFragment(UrlUtils.CommonHome,"8");
 
                // newsChannelList.add(recommandFragment);
@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
                 newsChannelList.add(JingZhuiBing);
                 newsChannelList.add(JianZhouyan);
                 newsChannelList.add(XinNaoXueGuan);
-                newsChannelList.add(Fukebing);
+            //    newsChannelList.add(Fukebing);
               //  newsChannelList.add(Qianliexian);
                 newsChannelList.add(PiFuBing);
               //  newsChannelList.add(Jiaoqi);
@@ -111,8 +111,8 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
             RadioGroup.LayoutParams params=new
                     RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT,
                     RadioGroup.LayoutParams.WRAP_CONTENT);
-
-            rgChannel.addView(rb,params);
+            rb.setLayoutParams(params);
+            rgChannel.addView(rb);
         }
         rgChannel.check(0);
     }
@@ -154,7 +154,6 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         int len=left+width/2-screenWidth/2;
         hvChannel.smoothScrollTo(len, 0);
     }
-
 
 
 }

@@ -123,7 +123,11 @@
             android:name=".activity.GalleryActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".BllDemo"></activity>
+        <activity android:name=".BllDemo" />
+        <activity android:name=".activity.SecondActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            ></activity>
     </application>
 
 </manifest>
