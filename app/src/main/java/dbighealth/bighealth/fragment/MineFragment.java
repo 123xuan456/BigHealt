@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import dbighealth.bighealth.BaseApplication;
-import dbighealth.bighealth.BllDemo;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ArchivingActivity;
 import dbighealth.bighealth.activity.ConditionActivity;
@@ -43,6 +42,7 @@ import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
 import dbighealth.bighealth.bean.EveryDayBean;
 import okhttp3.Call;
+import utils.UrlUtils;
 
 /**
  *  simple {@link Fragment} subclass.
@@ -291,7 +291,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     }
 
     private void everyday() {
-        String url = "http://192.168.0.120:8081/JianKangChanYe/HomePage/list";
+        String url = UrlUtils.EVERYDAYHealth;
         OkHttpUtils.get().url(url).id(1)
                 .build().execute(new StringCallback() {
             @Override
