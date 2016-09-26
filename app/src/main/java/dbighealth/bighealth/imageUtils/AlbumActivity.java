@@ -107,7 +107,7 @@ public class AlbumActivity extends Activity implements OnClickListener {
 	private void initViews() {
 		mGridView = (GridView) findViewById(R.id.myGrid);
 		RelativeLayout bottom_layout = (RelativeLayout) findViewById(R.id.bottom_layout);
-		bottom_layout.getBackground().setAlpha(100);
+		bottom_layout.getBackground().setAlpha(200);
 		okButton = (Button) findViewById(R.id.ok_button);
 		okButton.setOnClickListener(this);
 		//设置默认

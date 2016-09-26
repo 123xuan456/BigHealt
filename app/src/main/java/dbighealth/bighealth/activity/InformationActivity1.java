@@ -2,9 +2,9 @@ package dbighealth.bighealth.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,11 +17,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
 import java.util.List;
+
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.InformationAdapter1;
 import dbighealth.bighealth.bean.InformationBean;
 import okhttp3.Call;
+import utils.UrlUtils;
 
 public class InformationActivity1 extends Activity implements View.OnClickListener{
 
@@ -49,11 +53,18 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
     }
 
     public void init(){
-        String a = "http://192.168.0.120:8081/JianKangChanYe/advice/advicelist?userId=2";
-        OkHttpUtils.get()
-                .url(a)
-                .build()
-                .execute(MyStringCallBack);
+        String id = BaseApplication.userid;
+        if (TextUtils.isEmpty(id)){
+            Toast.makeText(getApplication(), "请先登录", Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }else{
+            OkHttpUtils.get()
+                    .url(UrlUtils.INFORMATIONLISTVIEW)
+                    .addParams("userId", id)
+                    .build()
+                    .execute(MyStringCallBack);
+        }
     }
     public StringCallback MyStringCallBack=new StringCallback(){
 

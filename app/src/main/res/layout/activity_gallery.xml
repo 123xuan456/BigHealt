@@ -9,15 +9,18 @@
         android:id="@+id/headview"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:gravity="center_vertical"
+        android:background="#22292C"
         >
         <Button
             android:textColor="#fff"
             android:id="@+id/gallery_back"
             android:text="返回"
             android:layout_width="wrap_content"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingLeft="15dp"
             android:textSize="14sp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             />
         <Button
@@ -25,9 +28,12 @@
             android:textColor="#fff"
             android:id="@+id/gallery_del"
             android:layout_alignParentRight="true"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingRight="15dp"
             android:layout_width="wrap_content"
             android:text="删除"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             />
     </RelativeLayout>
     

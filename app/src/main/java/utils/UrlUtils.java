@@ -51,5 +51,9 @@ public class UrlUtils {
     public static  String CONDITION = BASEURL2+"/DailyReport/list?userId=";
     //每日情况
     public static  String CONDITIONADD = BASEURL2+"/DailyReport/saveDaily";
+  //咨询的listview
+  public static String INFORMATIONLISTVIEW =BASEURL2+ "/advice/advicelist";
+
+
 
 }

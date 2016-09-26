@@ -9,7 +9,7 @@
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="#181414"
+        android:background="#22292C"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="3dp"
         >

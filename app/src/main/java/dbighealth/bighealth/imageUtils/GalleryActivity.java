@@ -8,16 +8,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.MyPageAdapter;
-import dbighealth.bighealth.imageUtils.Bimp;
-import dbighealth.bighealth.imageUtils.PhotoView;
-import dbighealth.bighealth.imageUtils.PublicWay;
-import dbighealth.bighealth.imageUtils.ViewPagerFixed;
 
 
 public class GalleryActivity extends Activity implements OnClickListener{
@@ -29,6 +26,7 @@ public class GalleryActivity extends Activity implements OnClickListener{
 	private Button gallery_del;
 	//当前的位置
 	private int location = 0;
+	private RelativeLayout headview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +56,8 @@ public class GalleryActivity extends Activity implements OnClickListener{
 		viewpager = (ViewPagerFixed) findViewById(R.id.viewpager);
 		gallery_back = (Button) findViewById(R.id.gallery_back);
 		gallery_del = (Button) findViewById(R.id.gallery_del);
-		
+		headview=(RelativeLayout) findViewById(R.id.headview);
+		//headview.getBackground().setAlpha(50);
 		gallery_back.setOnClickListener(this);
 		gallery_del.setOnClickListener(this);
 		viewpager.addOnPageChangeListener(new OnPageChangeListener() {
@@ -83,6 +82,7 @@ public class GalleryActivity extends Activity implements OnClickListener{
 	}
 
 	@Override
+
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.gallery_back:
@@ -102,7 +102,6 @@ public class GalleryActivity extends Activity implements OnClickListener{
 				adapter.notifyDataSetChanged();
 			}
 			break;	
-
 		default:
 			break;
 		}
