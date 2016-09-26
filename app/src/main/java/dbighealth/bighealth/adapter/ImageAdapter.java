@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import net.tsz.afinal.FinalBitmap;
 
 import java.util.ArrayList;
@@ -51,7 +53,12 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
         String url = (String) listDatas.get(position).getImages();//转换
-        fb.display(holder.iv, url);
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .crossFade()
+                .into(holder.iv);
+      //  fb.display(holder.iv, url);
         holder.tv_PicTxt.setText(listDatas.get(position).getTitle());
         /**
          * 跳转到二级界面

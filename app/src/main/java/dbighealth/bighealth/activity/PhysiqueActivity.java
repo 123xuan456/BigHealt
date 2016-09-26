@@ -143,6 +143,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 ultraLv.setAdapter(physicalAdapter);
             }if(id== SAVE_SYMPTON){
                 Toast.makeText(getApplicationContext(),"保存成功",Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         }

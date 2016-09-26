@@ -48,6 +48,7 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
         linearLayoutManager = new LinearLayoutManager(getApplication());
         linearLayoutManager.setOrientation(LinearLayout.VERTICAL);
         arrow_left.setOnClickListener(this);
+        right_tv.setText("我要咨询");
         right_tv.setOnClickListener(this);
 
     }

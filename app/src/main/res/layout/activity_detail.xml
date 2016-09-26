@@ -65,13 +65,19 @@
             />
 
   </LinearLayout>
-    <ListView
+   <!-- <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lv_companyDescribe"
         android:divider="@null"
         >
-    </ListView>
+    </ListView>-->
+       <dbighealth.bighealth.view.NoScrollListview
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:id="@+id/lv_companyDescribe"
+           android:divider="@null"
+           />
    </LinearLayout>
 </ScrollView>
 </LinearLayout>

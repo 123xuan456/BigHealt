@@ -59,7 +59,7 @@ public class ItemAdapter extends ItemBaseAdapter<ItemAdapter.MyViewHolder> {
                 .error(R.mipmap.spcificpic)
                 .crossFade()
                 .into(holder.iv_spcific_list);
-        holder.tv_description.setText(desciption);
+        holder.tv_description.setText("  "+desciption);
         //转换时间格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {

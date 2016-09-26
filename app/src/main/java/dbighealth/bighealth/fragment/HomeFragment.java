@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +33,12 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private RadioGroup rgChannel=null;
     private ViewPager viewPager;
     private HorizontalScrollView hvChannel=null;
-
+    private List<Fragment> newsChannelList=new ArrayList<Fragment>();
+    private NewsFragmentPagerAdapter adapter;
     public static Fragment newInstance() {
         HomeFragment f = new HomeFragment();
         return f;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +54,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
                         @Override
                         public void onCheckedChanged(RadioGroup group,
                                                      int checkedId) {
+                         //   Toast.makeText(getActivity(),"当前坐标："+checkedId,Toast.LENGTH_SHORT).show();
                             viewPager.setCurrentItem(checkedId);
                         }
                     });
@@ -64,23 +67,22 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         }
         return view;
     }
-    private List<Fragment> newsChannelList=new ArrayList<Fragment>();
-    private NewsFragmentPagerAdapter adapter;
+
     private void initViewPager(){
       
 
         List<Channel> channelList= ChannelDb.getSelectedChannel();//获取到上标题///暂时用不着
                 NewsChannelFragment fragment=new NewsChannelFragment();
-                CommonFragment recommandFragment=new CommonFragment(UrlUtils.CommonHome,"1");
+             //   CommonFragment recommandFragment=new CommonFragment(UrlUtils.CommonHome,"1");
                 CommonFragment TangNiaoBing=new CommonFragment(UrlUtils.CommonHome,"2");
                 CommonFragment JingZhuiBing=new CommonFragment(UrlUtils.CommonHome,"3");
                 CommonFragment JianZhouyan=new CommonFragment(UrlUtils.CommonHome,"4");
                 CommonFragment XinNaoXueGuan=new CommonFragment(UrlUtils.CommonHome,"5");
                 CommonFragment Fukebing=new CommonFragment(UrlUtils.CommonHome,"6");
-                CommonFragment Qianliexian=new CommonFragment(UrlUtils.CommonHome,"7");
+       //         CommonFragment Qianliexian=new CommonFragment(UrlUtils.CommonHome,"7");
       //         CommonFragment PiFuBing=new CommonFragment();
               SpecialFragment1 PiFuBing = new SpecialFragment1();
-                CommonFragment Jiaoqi=new CommonFragment(UrlUtils.CommonHome,"8");
+        //        CommonFragment Jiaoqi=new CommonFragment(UrlUtils.CommonHome,"8");
 
                // newsChannelList.add(recommandFragment);
                 newsChannelList.add(TangNiaoBing);
@@ -91,14 +93,12 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
               //  newsChannelList.add(Qianliexian);
                 newsChannelList.add(PiFuBing);
               //  newsChannelList.add(Jiaoqi);
-
-
-
-        System.out.println("dkalsd"+newsChannelList);
-        adapter=new NewsFragmentPagerAdapter(super.getActivity().getSupportFragmentManager(), newsChannelList);
+      //  adapter=new NewsFragmentPagerAdapter(super.getActivity().getSupportFragmentManager(), newsChannelList);
+        adapter=new NewsFragmentPagerAdapter(getChildFragmentManager(), newsChannelList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
-        viewPager.setCurrentItem(0);
+        int currentItem = viewPager.getCurrentItem();
+           viewPager.setCurrentItem(0);
         viewPager.setOnPageChangeListener(this);
     }
     private void initTab(LayoutInflater inflater){

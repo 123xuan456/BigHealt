@@ -26,6 +26,7 @@ import java.util.Map;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.CooparateActivity;
 import dbighealth.bighealth.activity.DetailActivity;
+import dbighealth.bighealth.activity.MedicalDetailActivity;
 import dbighealth.bighealth.adapter.HealthCareAdpter;
 import dbighealth.bighealth.adapter.TreatmentAdapter;
 import dbighealth.bighealth.bean.HealthCare;
@@ -232,8 +233,8 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                         province_list.add(province);
                     }
                     results = result.get(i).getResults();
-
-                    TreatmentAdapter adapter2 = new TreatmentAdapter(getContext(), results);
+                  //  Log.e("fei-->",results.size()+"");
+                    TreatmentAdapter adapter2 = new TreatmentAdapter(getActivity(), results);
                     listview.setAdapter(adapter2);
                     listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -86,6 +87,7 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
         public void onError(Call call, Exception e, int id) {
 
             Log.e("mhysa","特殊页请求失败");
+            Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
         }
 
         @Override

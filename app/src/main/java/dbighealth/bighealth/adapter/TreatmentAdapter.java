@@ -26,7 +26,10 @@ public class TreatmentAdapter extends BaseAdapter {
     public TreatmentAdapter(Context context, List<TreatmentBean.ResultBean.ResultsBean> list) {
         this.list = list;
         this.context=context;
-        mInflat= LayoutInflater.from(context);
+        if(context!=null){
+            mInflat= LayoutInflater.from(context);
+        }
+
 
     }
 
@@ -53,7 +56,6 @@ public class TreatmentAdapter extends BaseAdapter {
             Glide.with(context)
                     .load(list.get(position).getImageUrl())
                     .centerCrop()
-                    .placeholder(R.mipmap.ic_launcher)
                     .crossFade()
                     .into(iv);
         }
