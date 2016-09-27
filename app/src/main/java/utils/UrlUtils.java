@@ -37,6 +37,8 @@ public class UrlUtils {
 
     //登录
     public  static String   LOGIN=BASEURL+"/user/login.do?";
+    //修改密码
+    public  static String   CHANGPASSWORD=BASEURL2+"/user/changepsw";
     //注册验证码
     public  static String   REGISTER_CODE=BASEURL+"/user/register?";
     //注册

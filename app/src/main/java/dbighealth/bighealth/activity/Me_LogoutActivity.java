@@ -26,6 +26,8 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
     RelativeLayout rlCollection;
     @Bind(R.id.rl_shoppingCart)
     RelativeLayout rlShoppingCart;
+    @Bind(R.id.user)
+    ImageView user;
     private Button email_sign_in_button;
     private RelativeLayout remind;
     private TextView tvTab;
@@ -57,6 +59,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         remind.setOnClickListener(this);
         rlCollection.setOnClickListener(this);
         rlShoppingCart.setOnClickListener(this);
+        user.setOnClickListener(this);
     }
 
     @Override
@@ -83,6 +86,10 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 break;
             case R.id.rl_shoppingCart:
                 Toast.makeText(getApplicationContext(),"暂未开通，敬请期待！",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.user:
+                Intent i1 = new Intent(this, EditdataActivity.class);
+                startActivity(i1);
                 break;
         }
 

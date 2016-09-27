@@ -46,7 +46,7 @@ import utils.UrlUtils;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- *  ogin screen that offers login via email/password.
+ *  登录页面
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,OnClickListener{
 
@@ -199,6 +199,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             focusView.requestFocus();
         } else {
             //用户输入的规范正确，向服务器发送判断是否是正确用户
+            BaseApplication.password=password;
+            BaseApplication.regphone=email;
             String url= UrlUtils.LOGIN;
             OkHttpUtils.get().url(url).id(LOGINID)
                     .addParams("regphone",email)
