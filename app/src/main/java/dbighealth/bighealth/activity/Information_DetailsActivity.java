@@ -94,6 +94,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
         tit.setVisibility(View.GONE);
         rightTv.setText("提交");
         id= BaseApplication.userid;
+        BaseActivity.activityList.add(this);
         initViews();
 
     }
@@ -209,7 +210,11 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
 
             case R.id.right_tv://提交
                 present();
-                finish();
+                for (int i = 0; i < BaseActivity.activityList.size(); i++) {
+                    if (null != BaseActivity.activityList.get(i)) {
+                        BaseActivity.activityList.get(i).finish();
+                    }
+                }
                 break;
 
         }
