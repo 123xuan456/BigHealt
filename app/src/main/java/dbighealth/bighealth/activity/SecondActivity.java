@@ -76,6 +76,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
     private int SECOND = 101;
     private int COMMENT_USER = 102;
     private String userid;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +89,11 @@ public class SecondActivity extends Activity implements View.OnClickListener {
         rightTv.setVisibility(View.INVISIBLE);
         btnpinglun.setOnClickListener(this);
         Intent intent = getIntent();
-        picId = intent.getIntExtra("picId", 0);
+        Bundle extras = intent.getExtras();
+         picId = extras.getInt("picId");
+        id = extras.getInt("id");
         userid = BaseApplication.userid;
         InitInternet();
-
     }
 
     /**
@@ -102,13 +104,25 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                    .url(UrlUtils.FORMATIONDETAIL)
                    .addParams()*/
 
-        Log.i("mhysa-->", UrlUtils.FORMATIONDETAIL + "?id=" + picId);
-        OkHttpUtils.get()
-                .url(UrlUtils.FORMATIONDETAIL)
-                .id(SECOND)
-                .addParams("id", String.valueOf(picId))
-                .build()
-                .execute(MyStringCallBack);
+
+        if(id ==1){
+            Log.i("mhysa-->", UrlUtils.FORMATIONDETAIL + "?id=" + picId);
+            OkHttpUtils.get()
+                    .url(UrlUtils.FORMATIONDETAIL)
+                    .id(SECOND)
+                    .addParams("id", String.valueOf(picId))
+                    .build()
+                    .execute(MyStringCallBack);
+        }
+        if(id==2){
+            OkHttpUtils.get()
+                    .url(UrlUtils.SPECIALITEM)
+                    .id(SECOND)
+                    .addParams("id", String.valueOf(picId))
+                    .build()
+                    .execute(MyStringCallBack);
+        }
+
     }
 
     private StringCallback MyStringCallBack = new StringCallback() {

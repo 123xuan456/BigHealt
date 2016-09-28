@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -53,11 +54,13 @@ public class TreatmentAdapter extends BaseAdapter {
         if(convertView==null){
             convertView=  mInflat.inflate(R.layout.item_list_treatment,null,false);
             ImageView iv= (ImageView) convertView.findViewById(R.id.line);
+            TextView tv_companyDescribe = (TextView) convertView.findViewById(R.id.tv_companyDescribe);
             Glide.with(context)
                     .load(list.get(position).getImageUrl())
                     .centerCrop()
                     .crossFade()
                     .into(iv);
+            tv_companyDescribe.setText(list.get(position).getName());
         }
 
         return convertView;

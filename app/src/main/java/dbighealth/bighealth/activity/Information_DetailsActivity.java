@@ -167,6 +167,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     protected void photo() {
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(openCameraIntent, TAKE_PICTURE);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

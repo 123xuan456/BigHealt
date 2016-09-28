@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     // 点击俩次退出的判断
     private long firstTime = 0;
    // private Editor edit;
-    @Override
+  /*  @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
         switch (keyCode) {
@@ -73,7 +73,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         }
 
         return super.onKeyUp(keyCode, event);
-    }
+    }*/
 
 
     @Override

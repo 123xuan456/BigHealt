@@ -216,7 +216,7 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
 
         @Override
         public void onResponse(String response, int id) {
-
+            Log.e("mhysa-->","返回的数据时：："+response);
             if(id==HOME_TREATMENT){
                 Gson gson = new Gson();
                 TreatmentBean treatmentBean = gson.fromJson(response, TreatmentBean.class);
@@ -247,16 +247,19 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                     });
                 }
 
-                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_spinner_item, province_list);
-                adapter1.setDropDownViewResource(R.layout.item_spinner);
-                sp1.setAdapter(adapter1);
+                if(province_list!=null&&getActivity()!=null){
+                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_spinner_item, province_list);
+                    adapter1.setDropDownViewResource(R.layout.item_spinner);
+                    sp1.setAdapter(adapter1);
+                }
+
             }
             if(id == REGION){
                 Gson gson1 = new Gson();
                 HealthCare healthCare = gson1.fromJson(response, HealthCare.class);
                 List<HealthCare.MedicalListBean> medicalList = healthCare.getMedicalList();
-                Log.e("mhysa-->",medicalList.size()+"");
+                Log.e("mhysa-->","返回的数据时：："+response);
                 HealthCareAdpter healthcare = new HealthCareAdpter(getContext(), medicalList);
                 listview.setAdapter(healthcare);
 
@@ -270,35 +273,6 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
         list.add("养生");
         return list;
     }
-    public List<String> getData1() {
-        List<String> list = new ArrayList<>();
-        list.add("养生");
-        list.add("地区");
-        list.add("北京");
-        list.add("上海");
-        list.add("广州");
-        list.add("深圳");
-        list.add("山东");
-        list.add("青岛");
-        return list;
-    }
-/*
-   public void getImageUrls() {
-        images = new String[]{
-                "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383291_6518.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383291_8239.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383290_9329.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383290_1042.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383275_3977.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383265_8550.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383264_3954.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383264_4787.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383264_8243.jpg",
-                "http://img.my.csdn.net/uploads/201407/26/1406383248_3693.jpg",
-        };
-    }*/
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){

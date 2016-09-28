@@ -8,10 +8,11 @@ import java.util.List;
  */
 public class TreatmentBean {
 
+
     /**
      * code : 200
      * hint : 获取成功
-     * result : [{"region":[{"id":1,"province":"北京市"},{"id":2,"province":"天津市"},{"id":3,"province":"河北省"},{"id":4,"province":"山西省"}],"results":[{"id":1,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906151816.jpg","med":"1","region":1},{"id":2,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906151835.jpg","med":"1","region":1},{"id":9,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906152356.jpg","med":"2","region":1}]}]
+     * result : [{"region":[{"id":1,"province":"北京市"},{"id":2,"province":"天津市"},{"id":3,"province":"河北省"},{"id":4,"province":"山西省"}],"results":[{"id":1,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/0fb505d5492100a651da4b97.png","med":"1","region":1,"name":"王吉吉"},{"id":2,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/1-151112102610I8.jpg","med":"1","region":1,"name":"王吉吉"},{"id":13,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20141112034433983.jpg","med":"2","region":1,"name":"公司名称"},{"id":15,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/201411131415847532953.jpg","med":"2","region":1,"name":"公司名称"}]}]
      */
 
     private int code;
@@ -51,9 +52,10 @@ public class TreatmentBean {
         private List<RegionBean> region;
         /**
          * id : 1
-         * imageUrl : http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906151816.jpg
+         * imageUrl : http://192.168.0.43:8080/JianKangChanYe/upload/care/0fb505d5492100a651da4b97.png
          * med : 1
          * region : 1
+         * name : 王吉吉
          */
 
         private List<ResultsBean> results;
@@ -100,6 +102,7 @@ public class TreatmentBean {
             private String imageUrl;
             private String med;
             private int region;
+            private String name;
 
             public int getId() {
                 return id;
@@ -131,6 +134,14 @@ public class TreatmentBean {
 
             public void setRegion(int region) {
                 this.region = region;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
             }
         }
     }

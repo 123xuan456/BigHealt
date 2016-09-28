@@ -8,8 +8,9 @@ import java.util.List;
  */
 public class HealthCare {
 
+
     /**
-     * medicalList : [{"id":9,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906152356.jpg","med":"2","region":1},{"id":11,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906151816.jpg","med":"2","region":1},{"id":13,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906151816.jpg","med":"2","region":1},{"id":15,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906152304.jpg","med":"2","region":1}]
+     * medicalList : [{"id":1,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/0fb505d5492100a651da4b97.png","med":"1","region":1,"name":"王吉吉"},{"id":2,"imageUrl":"http://192.168.0.43:8080/JianKangChanYe/upload/care/1-151112102610I8.jpg","med":"1","region":1,"name":"王吉吉"}]
      * code : 200
      * hint : 获取成功
      */
@@ -17,10 +18,11 @@ public class HealthCare {
     private int code;
     private String hint;
     /**
-     * id : 9
-     * imageUrl : http://192.168.0.43:8080/JianKangChanYe/upload/care/20160906152356.jpg
-     * med : 2
+     * id : 1
+     * imageUrl : http://192.168.0.43:8080/JianKangChanYe/upload/care/0fb505d5492100a651da4b97.png
+     * med : 1
      * region : 1
+     * name : 王吉吉
      */
 
     private List<MedicalListBean> medicalList;
@@ -54,6 +56,7 @@ public class HealthCare {
         private String imageUrl;
         private String med;
         private int region;
+        private String name;
 
         public int getId() {
             return id;
@@ -85,6 +88,14 @@ public class HealthCare {
 
         public void setRegion(int region) {
             this.region = region;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

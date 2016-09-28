@@ -96,7 +96,7 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
         public void onError(Call call, Exception e, int id) {
 
             //Log.e("mhysa-->","加载失败");
-            Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -115,7 +115,13 @@ public class CommonFragment extends Fragment implements BaseAdapter.OnItemClickL
                 List<CommonHomeBean.ResultBean> result1 = commonHomeBean.getResult();
                /* List<Object> feng = new ArrayList<Object>();
                 feng.add(result1);*/
-                infoAdapter = new InfoAdapter1(getActivity(),result1);
+                if(result1!=null){
+                    if(getActivity()!=null){
+                        infoAdapter = new InfoAdapter1(getActivity(),result1);
+                    }
+
+                }
+
                 //  Log.e("mhysa",infoAdapter.toString());
 //                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setAdapter(infoAdapter);

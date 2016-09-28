@@ -223,16 +223,20 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             Gson gson=new Gson();
             log=gson.fromJson(response, LoginokBean.class);
             if(log.getCode()==200){
+
+                System.out.println("d登录返回接口："+response);
                 String hint=log.getHint();
                 String username=log.getUsername();
+                String imgurl = log.getImgurl();
                 String id1=String.valueOf(log.getId());
-
                 BaseApplication.userid=id1;//吧id传到
                 BaseApplication.username=username;
+                BaseApplication.photoPic = imgurl;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 //登录成功之后发送一个广播
                 Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                 intent.putExtra("username",username);
+                intent.putExtra("photoUrl", imgurl);
                 System.out.println("过去！！username"+username);
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                 finish();

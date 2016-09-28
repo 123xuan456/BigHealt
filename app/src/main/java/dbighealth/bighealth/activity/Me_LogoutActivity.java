@@ -1,5 +1,6 @@
 package dbighealth.bighealth.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -9,9 +10,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,9 +39,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.imageUtils.Bimp;
-import dbighealth.bighealth.imageUtils.FileUtils;
-import dbighealth.bighealth.imageUtils.ImageItem;
 import utils.HttpPostUploadUtil;
 import utils.UrlUtils;
 
@@ -68,7 +68,14 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
     private String path;
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
+    private String name;
+    private String picUrl;
+    private String uid;
 
+    private Intent lastIntent;
+    private Uri photoUri;
+
+    private String picPath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +83,20 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         Fresco.initialize(getApplicationContext());
         setContentView(R.layout.activity_logout);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        picUrl = extras.getString("picUrl");
+        uid = extras.getString("uid");
+        if(picUrl !=null){
+            Uri uri = Uri.parse(picUrl);
+            rcvArticlePhoto.setImageURI(uri);
+
+        }
+        name = extras.getString("name");
+
         sp = getSharedPreferences("potrait", Activity.MODE_PRIVATE);
         edit = sp.edit();
+        lastIntent = getIntent();
         setView();
     }
     private void setView() {
@@ -158,7 +177,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         });
         bt1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //  photo();
+                photo();
                 pop.dismiss();
                 ll_popup.clearAnimation();
             }
@@ -186,16 +205,31 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case TAKE_PICTURE:
-                if (resultCode == RESULT_OK) {
+                if (resultCode==RESULT_OK) {
+                    rcvArticlePhoto.setImageURI(Uri.fromFile(tempFile));
 
-                    String fileName = String.valueOf(System.currentTimeMillis());
-                    Bitmap bm = (Bitmap) data.getExtras().get("data");
-                    FileUtils.saveBitmap(bm, fileName);
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            Map<String, String> textMap = new HashMap<String, String>();
+                            textMap.put("name", "testname");
+                            Map<String, String> fileMap = new HashMap<String, String>();
+                            fileMap.put("file", getPath(null,Uri.fromFile(tempFile)));
+                            String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
+                            edit.putString("touxiang",getPicUrl);
+                            edit.commit();
+                            BaseApplication.photoPic =getPicUrl;
+                            BaseApplication.username = name;
+                            BaseApplication.userid = uid;
+                            Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+                            intent.putExtra("photoUrl", getPicUrl);
+                            intent.putExtra("username",name);
+                            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+                        }
+                    }.start();
 
-                    ImageItem takePhoto = new ImageItem();
-                    takePhoto.setBitmap(bm);
-                    Bimp.tempSelectBitmap.add(takePhoto);
                 }
+
                 break;
             case GET_GALLEY:
                 System.out.println("data获取到的信息" + data);
@@ -203,42 +237,38 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 // 外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
                 ContentResolver resolver = getContentResolver();
                 try {
-                    Uri originalUri = data.getData(); // 获得图片的uri
+                    if(data!=null){
+                        final Uri originalUri = data.getData(); // 获得图片的uri
+                        bm = MediaStore.Images.Media.getBitmap(resolver, originalUri); // 显得到bitmap图片
+                        // 这里开始的第二部分，获取图片的路径：
+                        String[] proj = {MediaStore.Images.Media.DATA};
+                        // 好像是android多媒体数据库的封装接口，具体的看Android文档
+                       Cursor cursor = managedQuery(originalUri, proj, null, null, null);
+                        // 按我个人理解 这个是获得用户选择的图片的索引值
+                        path = getPath(cursor,originalUri);
+                        rcvArticlePhoto.setImageURI(originalUri);
+                        new Thread() {
 
-                    bm = MediaStore.Images.Media.getBitmap(resolver, originalUri); // 显得到bitmap图片
-                    // 这里开始的第二部分，获取图片的路径：
-                    String[] proj = {MediaStore.Images.Media.DATA};
-
-                    // 好像是android多媒体数据库的封装接口，具体的看Android文档
-                    @SuppressWarnings("deprecation")
-                    Cursor cursor = managedQuery(originalUri, proj, null, null, null);
-                    // 按我个人理解 这个是获得用户选择的图片的索引值
-                    Log.i("mhysa-->", "tupian" + MediaStore.Images.Media.DATA);
-                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    // 将光标移至开头 ，这个很重要，不小心很容易引起越界
-                    cursor.moveToFirst();
-                    // 最后根据索引值获取图片路径
-                    Log.i("mhysa--->", "光标位置" + column_index);
-                    path = cursor.getString(column_index);
-                    //ivTouxiang.setImageURI(originalUri);
-                    rcvArticlePhoto.setImageURI(originalUri);
-                    Log.i("mhysa-->", path);
-                    File file = new File(path); //这里的path就是那个地址的全局变量
-
-                    //     String result = UploadUtil.uploadFile(file, "http://192.168.0.120:8081/JianKangChanYe/advice/editItemsSubmit");
-                    new Thread() {
-
-                        @Override
-                        public void run() {
-                            Map<String, String> textMap = new HashMap<String, String>();
-                            textMap.put("name", "testname");
-                            Map<String, String> fileMap = new HashMap<String, String>();
-                            fileMap.put("file", path);
-                            String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
-                            edit.putString("touxiang",getPicUrl);
-                            edit.commit();
-                        }
-                    }.start();
+                            @Override
+                            public void run() {
+                                Map<String, String> textMap = new HashMap<String, String>();
+                                textMap.put("name", "testname");
+                                Map<String, String> fileMap = new HashMap<String, String>();
+                                fileMap.put("file", path);
+                                String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
+                                edit.putString("touxiang",getPicUrl);
+                                edit.commit();
+                                BaseApplication.photoPic =getPicUrl;
+                                BaseApplication.username = name;
+                                BaseApplication.userid = uid;
+                                System.out.println("返回图片的地址"+getPicUrl);
+                                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+                                intent.putExtra("photoUrl", getPicUrl);
+                                intent.putExtra("username",name);
+                                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+                            }
+                        }.start();
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -247,8 +277,47 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         }
     }
 
-    protected void photo() {
-        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(openCameraIntent, TAKE_PICTURE);
+    public String getPath(Cursor cursor,Uri uri){
+        if(cursor == null){
+            String str = uri.toString();
+            System.out.println(str);
+            if(str.contains("file:///")){
+                str = str.substring(7);
+                return str;
+            }
+        }
+
+        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String path = cursor.getString(index);
+        return path;
     }
+    // 创建一个以当前时间为名称的文件
+    File tempFile = new File(Environment.getExternalStorageDirectory(),
+            getPhotoFileName());
+
+    // 使用系统当前日期加以调整作为照片的名称
+    @SuppressLint("SimpleDateFormat")
+    private String getPhotoFileName() {
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "'IMG'_yyyyMMdd_HHmmss");
+        return dateFormat.format(date) + ".jpg";
+    }
+    protected void photo() {
+
+        String SDState = Environment.getExternalStorageState();
+        if (SDState.equals(Environment.MEDIA_MOUNTED)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// "android.media.action.IMAGE_CAPTURE"
+            // 指定调用相机拍照后照片的储存路径
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+            startActivityForResult(intent, TAKE_PICTURE);
+
+        } else {
+            Toast.makeText(getApplicationContext(), "内存卡不存在",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }

@@ -1,6 +1,8 @@
 package dbighealth.bighealth.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.SecondActivity;
 import dbighealth.bighealth.bean.CommonHealth;
 import dbighealth.bighealth.view.ItemBaseAdapter;
 
@@ -60,13 +64,13 @@ public class ItemAdapter1 extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         LayoutInflater.from(context);
         //View view =  mInflater.inflate(R.layout.item_specific, parent, false);
         String itemUrl = listDatas.get(position).getItemUrl();
-        int id = listDatas.get(position).getId();
-        Log.i("mhysa--->",itemUrl+"itemurl");
+       final int id = listDatas.get(position).getId();
+        Log.i("mhysa--->",id+"::::::id");
         String desciption = listDatas.get(position).getDesciption();
         String time = listDatas.get(position).getTime();
         MyViewHolder holder= null;
@@ -78,12 +82,27 @@ public class ItemAdapter1 extends BaseAdapter {
             holder.iv_spcific_list = (ImageView)convertView.findViewById(R.id.iv_spcific_list);
             holder.tv_description = (TextView) convertView.findViewById(R.id.tv_description);
             holder.tv_time = (TextView)convertView.findViewById(R.id.tv_time);
+            holder.rl_totalItem = (RelativeLayout) convertView.findViewById(R.id.rl_totalItem);
             convertView.setTag(holder);
         }else
         {
             holder = (MyViewHolder)convertView.getTag();
         }
 
+
+        holder.rl_totalItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  int id1 = listDatas.get(position).getId();
+                Intent intent = new Intent(context, SecondActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("picId",listDatas.get(position).getId());
+                Log.i("mhysa-->","图片的Id"+id);
+                bundle.putInt("id",2);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
        Glide.with(context)
                 .load(itemUrl)
              .centerCrop()
@@ -140,6 +159,6 @@ public class ItemAdapter1 extends BaseAdapter {
         ImageView iv_spcific_list;
         TextView tv_description;
         TextView tv_time;
-
+        RelativeLayout rl_totalItem;
     }
 }

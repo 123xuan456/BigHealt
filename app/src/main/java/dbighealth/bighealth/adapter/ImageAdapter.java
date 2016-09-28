@@ -3,6 +3,7 @@ package dbighealth.bighealth.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -72,7 +73,10 @@ public class ImageAdapter extends BaseAdapter1<ImageAdapter.MyViewHolder> {
             public void onClick(View v) {
                 Log.e("mhysa", "" + position);
                 Intent intent = new Intent(context, SecondActivity.class);
-                intent.putExtra("picId",listDatas.get(position).getId());
+                Bundle bundle = new Bundle();
+                bundle.putInt("picId",listDatas.get(position).getId());
+                bundle.putInt("id",1);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });

@@ -13,5 +13,14 @@
         android:layout_margin="20dp"
         android:background="@drawable/chaye1"
          />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_companyDescribe"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:text="北京德普科技有限公司"
+        />
 
 </LinearLayout>

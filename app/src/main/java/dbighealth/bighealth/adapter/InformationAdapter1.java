@@ -85,16 +85,5 @@ public class InformationAdapter1 extends BaseAdapter {
 
     }
 
-//    class MyViewHolder extends RecyclerView.ViewHolder {
-//
-//        TextView time;
-//        TextView textView22;
-//        public MyViewHolder(View view) {
-//            super(view);
-//            time = (TextView)view.findViewById(R.id.time);
-//            textView22 = (TextView) view.findViewById(R.id.textView22);
-//
-//        }
-//    }
 
 }

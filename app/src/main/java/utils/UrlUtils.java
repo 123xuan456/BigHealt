@@ -1,6 +1,9 @@
 package utils;
 
 import android.os.Environment;
+
+import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader;
+
 /**
  * 接口
  * Created by mhysa on 2016/8/31.
@@ -57,5 +60,8 @@ public class UrlUtils {
     public static  String COMMENT = BASEURL+"/transfer/comment";
     //s上传图片
     public static  String UPLOADPIC = BASEURL2+"/PublicController/uploadPic";
-
+  //首页特殊页条目点击
+    public static String SPECIALITEM = BASEURL +"/homepictures/commonsensedetails";
+  //更改头像
+    public static  String   UPDATEPIC = BASEURL+"/user/updatemodifypicture";
 }

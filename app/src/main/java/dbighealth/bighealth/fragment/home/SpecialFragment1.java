@@ -1,6 +1,7 @@
 package dbighealth.bighealth.fragment.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +24,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.List;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.SecondActivity;
 import dbighealth.bighealth.adapter.ItemAdapter;
 import dbighealth.bighealth.adapter.ItemAdapter1;
 import dbighealth.bighealth.bean.CommonHealth;
@@ -44,7 +46,7 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
     private PullRecyclerView rv_spcific;
     private ItemAdapter itemAdapter;
     private ListView rv_spcific1;
-
+    private List<CommonHealth.ItemListBean> itemList;
     public SpecialFragment1() {
         // Required empty public constructor
     }
@@ -57,11 +59,8 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
         iv_spcific = (ImageView) view.findViewById(R.id.iv_spcific);
         rv_spcific1 = (ListView)view.findViewById(R.id.rv_spcific);
 
-     /*   LinearLayoutManager  linearLayoutManager=new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayout.VERTICAL);
-        rv_spcific.setLayoutManager(linearLayoutManager);*/
         initInternet();
-       // rv_spcific1.setOnRefreshListener(this);
+
         return view;
     }
 
@@ -87,7 +86,7 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
         public void onError(Call call, Exception e, int id) {
 
             Log.e("mhysa","特殊页请求失败");
-            Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -112,20 +111,18 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
                            .crossFade()
                            .into(iv_spcific);
 
-                   List<CommonHealth.ItemListBean> itemList = commonHealth.getItemList();
+                   final List<CommonHealth.ItemListBean> itemList = commonHealth.getItemList();
                    itemAdapter11 = new ItemAdapter1(getActivity(),itemList);
-                   //   itemAdapter.setOnItemClickListener((ItemBaseAdapter.OnItemClickListener) getActivity().getApplicationContext());
-                  /*  LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-                    llm.setOrientation(OrientationHelper.VERTICAL);
-                  //  rv_spcific.setHasFixedSize(true);
-                    rv_spcific.setLayoutManager(llm);*/
                    rv_spcific1.setAdapter(itemAdapter11);
+
                }
            }
         }
     };
 
     public Handler handler = new Handler(){
+
+
 
         @Override
         public void handleMessage(Message msg) {
@@ -150,15 +147,10 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
                                     .error(R.mipmap.home)
                                     .crossFade()
                                     .into(iv_spcific);
-
-                            List<CommonHealth.ItemListBean> itemList = commonHealth.getItemList();
-                            itemAdapter = new ItemAdapter(getActivity(),itemList);
-                            //   itemAdapter.setOnItemClickListener((ItemBaseAdapter.OnItemClickListener) getActivity().getApplicationContext());
-                  /*  LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-                    llm.setOrientation(OrientationHelper.VERTICAL);
-                  //  rv_spcific.setHasFixedSize(true);
-                    rv_spcific.setLayoutManager(llm);*/
+                            itemList = commonHealth.getItemList();
+                            itemAdapter = new ItemAdapter(getActivity(), itemList);
                             rv_spcific1.setAdapter((ListAdapter) itemAdapter);
+
                         }
 
                     break;
@@ -168,7 +160,6 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
 
     @Override
     public void onItemClick(int position) {
-
     }
 
     @Override
