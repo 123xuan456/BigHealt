@@ -26,7 +26,9 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.DetailsMessageAdapter;
 import dbighealth.bighealth.bean.DetailsMessageBean;
 import okhttp3.Call;
+import utils.UrlUtils;
 
+//资讯详情
 public class Details_MessageActivity extends Activity implements View.OnClickListener {
 
     @Bind(R.id.arrow_left)
@@ -79,8 +81,9 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        String u = UrlUtils.INFORMATION_DETAILES_LISTVIEW;
         OkHttpUtils.postString()
-                .url("http://192.168.0.120:8081/JianKangChanYe/advice/saveAddQuest")
+                .url(u)//内容
                 .content(jsonObject.toString())
                 .id(2)
                 .build()
@@ -90,7 +93,8 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
 
 
     public void init() {
-        String a = "http://192.168.0.120:8081/JianKangChanYe/advice/talk";
+
+        String a = UrlUtils.INFORMATION_DETAILES;//listview
         OkHttpUtils.get()
                 .url(a)
                 .addParams("problemId", 49 + "")
@@ -125,13 +129,7 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
                         adapter = new DetailsMessageAdapter(getApplication(), result1);
                         listview.setAdapter(adapter);
                     }
-//                List<InformationBean.Message> result1 = informationBean.getMessage();
-//                Log.e("liuliuliu",result1.toString());
-//                adapter = new InformationAdapter1(getApplication(), result1);
-                    //  Log.e("mhysa",infoAdapter.toString());
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                recyclerView.setAdapter(adapter);
-//                recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
                     break;
                 case 2:
                     Toast.makeText(getApplication(), "okokok!", Toast.LENGTH_LONG)
@@ -150,7 +148,8 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
 
             case R.id.textView8:
                 initDate();
-                finish();
+                init();
+                et_content.setText("");
                 break;
 
          case R.id.arrow_left:

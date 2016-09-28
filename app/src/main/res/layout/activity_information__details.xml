@@ -100,6 +100,7 @@
             android:horizontalSpacing="3dp"
             android:numColumns="4"
             android:scrollbars="none"
+            android:padding="5dp"
             android:verticalSpacing="5dp"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/problem"

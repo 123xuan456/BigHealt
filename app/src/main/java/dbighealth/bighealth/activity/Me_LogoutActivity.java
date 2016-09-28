@@ -1,6 +1,7 @@
 package dbighealth.bighealth.activity;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -152,6 +154,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
 
     }
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     private void initPopu() {
         pop = new PopupWindow(Me_LogoutActivity.this);
         View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
@@ -183,6 +186,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
             }
         });
         bt2.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.ECLAIR)
             public void onClick(View v) {
 
                 Intent intent = new Intent(Intent.ACTION_PICK);

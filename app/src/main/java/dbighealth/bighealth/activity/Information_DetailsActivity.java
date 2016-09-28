@@ -1,11 +1,13 @@
 package dbighealth.bighealth.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Gravity;
@@ -28,8 +30,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GridAdapter;
+import dbighealth.bighealth.imageUtils.AlbumActivity;
 import dbighealth.bighealth.imageUtils.Bimp;
 import dbighealth.bighealth.imageUtils.FileUtils;
+import dbighealth.bighealth.imageUtils.GalleryActivity;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import dbighealth.bighealth.imageUtils.PublicWay;
 
@@ -109,6 +113,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
 
     }
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     private void initPopu() {
         pop = new PopupWindow(Information_DetailsActivity.this);
         View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
@@ -140,6 +145,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
             }
         });
         bt2.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.ECLAIR)
             public void onClick(View v) {
                 Intent intent = new Intent(Information_DetailsActivity.this,
                         AlbumActivity.class);

@@ -1,6 +1,8 @@
 package dbighealth.bighealth.activity;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +37,7 @@ public class MedicalDetailActivity extends AppCompatActivity {
     RecyclerView rvDetailMedical;
     private int imgId;
     private int ITEM_SELECTED = 1;
+    @TargetApi(Build.VERSION_CODES.ECLAIR_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,7 @@ public class MedicalDetailActivity extends AppCompatActivity {
 
         }
 
+        @TargetApi(Build.VERSION_CODES.ECLAIR_MR1)
         @Override
         public void onResponse(String response, int id) {
 

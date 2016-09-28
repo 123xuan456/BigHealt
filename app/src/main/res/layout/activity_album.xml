@@ -8,7 +8,8 @@
     <RelativeLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
+        android:background="#22292C"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="3dp"
         >
@@ -19,6 +20,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:textColor="#ffff"
+            android:background="@null"
             android:text="返回"            
             />
         <Button
@@ -28,6 +31,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:background="@null"
+            android:textColor="#ffff"
             android:textSize="14sp"
             />
     </RelativeLayout>

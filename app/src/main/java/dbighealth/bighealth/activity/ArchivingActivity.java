@@ -161,23 +161,6 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
         habitDesciption = habitEt.getText().toString();
 
         JSONObject jsonObject = new JSONObject();
-        /*{
-        "userId": 2,
-                "name": "我的天啊啊啊啊",
-                "nation": "汉族",
-                "sex": "男",
-                "bloodType": "A",
-                "living": "北京",
-                "height": 182,
-                "weight": 50,
-                "birth": "1888-05-23",
-                "allergy": "无",
-                "familyHistory": "无",
-                "pastMedical": "无",
-                "habit_diet": "无",
-                "habit_sleep": "无",
-                "habit_motion": 我的
-    }*/
         try {
             jsonObject.put("userId",2);
             jsonObject.put("name",userName);

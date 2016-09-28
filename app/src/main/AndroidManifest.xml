@@ -12,14 +12,14 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".welcome.WelcomeActivity"
             android:label="@string/app_name"
@@ -31,15 +31,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".welcome.GuideActivity"
+        <activity android:name=".welcome.GuideActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name=".MainActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+        <activity android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
         <activity android:name=".activity.LoginActivity" />
+
         <activity
             android:name=".activity.Me_LogoutActivity"
             android:screenOrientation="portrait"
@@ -90,6 +91,7 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".activity.PhysiqueActivity"
+
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
@@ -100,27 +102,25 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <activity android:name=".activity.Particular_subscribeActivity" />
         <activity
             android:name=".activity.DetailActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".activity.MedicalDetailActivity" />
-        <activity
-            android:name=".activity.InformationActivity1"
+        <activity android:name=".activity.MedicalDetailActivity"></activity>
+        <activity android:name=".activity.InformationActivity1"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name=".activity.Details_MessageActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+        <activity android:name=".activity.Details_MessageActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name=".activity.AlbumActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+        <activity android:name=".imageUtils.AlbumActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name=".activity.GalleryActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+        <activity android:name=".imageUtils.GalleryActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity android:name=".BllDemo" />
@@ -128,6 +128,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             ></activity>
+
     </application>
 
 </manifest>

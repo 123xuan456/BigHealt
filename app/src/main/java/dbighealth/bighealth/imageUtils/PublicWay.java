@@ -17,6 +17,6 @@ public class PublicWay {
 	//存放方所有的file的路径
 	public static List<String> list = new ArrayList<String>();
 	
-	public static int num = 9;
+	public static int num = 8;
 	
 }

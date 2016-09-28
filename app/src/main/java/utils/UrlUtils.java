@@ -64,4 +64,13 @@ public class UrlUtils {
     public static String SPECIALITEM = BASEURL +"/homepictures/commonsensedetails";
   //更改头像
     public static  String   UPDATEPIC = BASEURL+"/user/updatemodifypicture";
+    //每日一读
+    public static  String EVERYDAYHealth = BASEURL2+"/HomePage/list";
+    //咨询的listview
+    public static String INFORMATIONLISTVIEW =BASEURL2+ "/advice/advicelist";
+    //咨询详情list
+    public static String INFORMATION_DETAILES_LISTVIEW =BASEURL2+ "/advice/talk";
+    //咨询详情内容
+    public static String INFORMATION_DETAILES =BASEURL2+ "/advice/saveAddQuest";
+
 }

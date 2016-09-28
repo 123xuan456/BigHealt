@@ -202,7 +202,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     }
 
     private void everyday() {
-        String url = "http://192.168.0.120:8081/JianKangChanYe/HomePage/list";
+        String url = UrlUtils.EVERYDAYHealth;
         OkHttpUtils.get().url(url).id(1)
                 .build().execute(new StringCallback() {
             @Override
