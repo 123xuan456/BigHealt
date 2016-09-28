@@ -61,6 +61,8 @@ public class UrlUtils {
     public static String INFORMATION_DETAILES_LISTVIEW =BASEURL2+ "/advice/talk";
     //咨询详情内容
     public static String INFORMATION_DETAILES =BASEURL2+ "/advice/saveAddQuest";
+    //我要咨询
+    public static String INFORMATION =BASEURL2+ "/advice/needhelp";
 
 
 

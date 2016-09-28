@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 临时存储
  */
-public class PublicWay {
+public class BaseActivity {
 	//存放所有的list在最后退出时一起关闭
 	public static List<Activity> activityList = new ArrayList<Activity>();
 	//存放所有的file的集合

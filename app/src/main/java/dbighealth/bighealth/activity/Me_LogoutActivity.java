@@ -16,6 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.imageUtils.BaseActivity;
 
 /**
  * 退出登录
@@ -41,7 +42,8 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_logout);
         ButterKnife.bind(this);
-
+        //吧次activity放到集合里，等到修改密码成功之后统一取消
+        BaseActivity.activityList.add(this);
         setView();
     }
 

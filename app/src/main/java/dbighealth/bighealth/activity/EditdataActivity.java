@@ -13,6 +13,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.imageUtils.BaseActivity;
 import dbighealth.bighealth.view.RoundImageView;
 
 public class EditdataActivity extends Activity {
@@ -51,6 +52,9 @@ public class EditdataActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editdata);
         ButterKnife.bind(this);
+        //吧次activity放到集合里，等到修改密码成功之后统一取消
+        BaseActivity.activityList.add(this);
+
         tvTab.setText("个人信息");
         rightAdd.setVisibility(View.GONE);
         image.setType(RoundImageView.TYPE_ROUND);//圆角
