@@ -11,8 +11,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dbighealth.bighealth.R;
 import okhttp3.Call;
@@ -32,6 +36,7 @@ public class Particular_subscribeActivity extends Activity implements View.OnCli
     String yiliaoyangsheng;//选择医疗or养生
     String genre;//类型
     String tels;//电话
+    boolean cancel = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +81,11 @@ public class Particular_subscribeActivity extends Activity implements View.OnCli
                     return;
                 }
 
-
+                if (!tel(tels)){
+                    Toast.makeText(this, "请正确输入联系方式", Toast.LENGTH_SHORT).show();
+                    cancel=true;
+                    return;
+                }
 
                 try {
                     OkHttpUtils.get().url(UrlUtils.SUBSCRIBE_PARTICULAR)
@@ -91,6 +100,14 @@ public class Particular_subscribeActivity extends Activity implements View.OnCli
 
             break;
         }
+    }
+
+    private boolean tel(String tel) {
+        Pattern p = Pattern
+                .compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher m = p.matcher(tel);
+        System.out.println(m.matches() + "---");
+        return m.matches();
     }
 
     private StringCallback MyStringCallBack = new StringCallback(){

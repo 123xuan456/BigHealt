@@ -1,34 +1,51 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
-
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.format.DateFormat;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import dbighealth.bighealth.MainActivity;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.wheel.JudgeDate;
 import dbighealth.bighealth.wheel.ScreenInfo;
 import dbighealth.bighealth.wheel.WheelMain;
+import okhttp3.Call;
+import utils.UrlUtils;
 
 public class RemindSetActivity extends Activity implements View.OnClickListener {
 
     private RelativeLayout rl_time, rl_day;
     private Button btn_time, btn_day;
+    private ImageView arrow_left;
+    private TextView right_tv;
+    private EditText text;
     WheelMain wheelMain;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar currentTime;
+    String time,date;
+//    String title;//输入的药品名字
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +58,13 @@ public class RemindSetActivity extends Activity implements View.OnClickListener 
         rl_day.setOnClickListener(this);
         btn_time = (Button)findViewById(R.id.btn_time);
         btn_day = (Button)findViewById(R.id.btn_day);
+        text = (EditText)findViewById(R.id.text);
+
+        arrow_left = (ImageView)findViewById(R.id.arrow_left);
+        arrow_left.setOnClickListener(this);
+
+        right_tv = (TextView)findViewById(R.id.right_tv);
+        right_tv.setOnClickListener(this);
 
     }
 
@@ -91,7 +115,7 @@ public class RemindSetActivity extends Activity implements View.OnClickListener 
 
         case R.id.rl_time:
 
-            Calendar currentTime = Calendar.getInstance();
+            currentTime = Calendar.getInstance();
 
             new TimePickerDialog(RemindSetActivity.this, 0,
                     new TimePickerDialog.OnTimeSetListener() {
@@ -109,12 +133,80 @@ public class RemindSetActivity extends Activity implements View.OnClickListener 
                     }, currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE), false).show();
             btn_time.setText(currentTime.get(Calendar.HOUR_OF_DAY)+":"+currentTime.get(Calendar.MINUTE));
             break;
+
+        case R.id.arrow_left:
+            finish();
+            break;
+        case R.id.right_tv:
+            //调用保存的接口
+            http();
+
+            break;
         default:
             break;
+        }
+    }
 
+    public void http(){
+        int userId = 11;
+        String medicineName = text.getText().toString();
+
+        if(TextUtils.isEmpty(medicineName)){
+            Toast.makeText(this, "标题不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(btn_time.getText().equals("")){
+            Toast.makeText(this, "请设置时间", Toast.LENGTH_SHORT).show();
+            return;
+        }else
+        {
+            time = btn_time.getText().toString();
+            Log.e("12345", time);
+        }
+
+        if(btn_day.getText().equals("")){
+            Toast.makeText(this, "请设置日期", Toast.LENGTH_SHORT).show();
+            return;
+        }else {
+            date = btn_day.getText().toString();
+        }
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("userId",userId);
+            jsonObject.put("medicineName",medicineName);
+            jsonObject.put("time",time);
+            jsonObject.put("date",date);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            OkHttpUtils.postString()
+                    .url(UrlUtils.REMINDSET)
+                    .content(jsonObject.toString())
+                    .build()
+                    .execute(MyStringCallBack);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
-    }
+
+    public StringCallback MyStringCallBack=new StringCallback(){
+            @Override
+            public void onError(Call call, Exception e, int id) {
+
+            Log.e("mhysa-->", "加载失败");
+            }
+            @Override
+            public void onResponse(String response, int id) {
+                    Toast.makeText(getApplication(), "okokok!", Toast.LENGTH_LONG)
+                            .show();
+//                finish();
+            }
+    };
 
 
 }

@@ -61,12 +61,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/breakfasttime"
                 android:layout_marginRight="30dp"
+                android:text="00:00"
+                android:gravity="center"
                 android:layout_alignBottom="@+id/textView27"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView26" />
+                android:layout_toEndOf="@+id/textView26"
+                android:layout_below="@+id/textView26" />
         </RelativeLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -121,11 +123,14 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lunchtime"
                 android:layout_marginRight="30dp"
+                android:text="00:00"
+                android:id="@+id/lunchtime"
+                android:gravity="center"
                 android:layout_alignBottom="@+id/textView30"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView29" />
+                android:layout_toEndOf="@+id/textView29"
+                android:layout_below="@+id/lunchsize" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -185,11 +190,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/dinnertime"
                 android:layout_marginRight="30dp"
+                android:text="00:00"
+                android:gravity="center"
                 android:layout_alignBottom="@+id/textView33"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView32" />
+                android:layout_toEndOf="@+id/textView32"
+                android:layout_alignTop="@+id/textView33" />
         </RelativeLayout>
     </LinearLayout>
+
 
 
 </RelativeLayout>

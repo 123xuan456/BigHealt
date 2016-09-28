@@ -63,7 +63,8 @@ public class UrlUtils {
     public static String INFORMATION_DETAILES =BASEURL2+ "/advice/saveAddQuest";
     //我要咨询
     public static String INFORMATION =BASEURL2+ "/advice/needhelp";
-
+  //设置提醒
+  public static String REMINDSET = BASEURL2+"/medicineremind/newremind";
 
 
 }
