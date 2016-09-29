@@ -85,6 +85,16 @@
             android:id="@+id/imageView20"
             android:layout_marginTop="5dp"
             android:src="@drawable/tubiao"
+
+            android:layout_below="@+id/textView50"
+            android:layout_toEndOf="@+id/imageView" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView21"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:src="@drawable/woman"
             android:layout_below="@+id/textView50"
             android:layout_toEndOf="@+id/imageView" />
 
@@ -93,11 +103,11 @@
             android:layout_height="wrap_content"
             android:text="18岁"
             android:textSize="12sp"
-
             android:id="@+id/textView20"
-            android:layout_alignTop="@+id/imageView20"
-            android:layout_toEndOf="@+id/imageView20"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_alignTop="@+id/imageView21"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginStart="30dp" />
 
         <ImageView
             android:layout_width="wrap_content"

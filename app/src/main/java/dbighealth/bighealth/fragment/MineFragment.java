@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -87,6 +88,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
         }
     };
+    private String sex;
+    private ImageView imageView20;
+    private ImageView imageView21;
 
     public static Fragment newInstance() {
         MineFragment f = new MineFragment();
@@ -100,12 +104,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.intent.action.CART_BROADCAST");//
+        intentFilter.addAction("android.intent.action.CART_BROADCAST");//修改昵称
         BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context context, Intent intent){
-
                 username = intent.getStringExtra("username");
                 System.out.println("接收到了"+username);
                 textView50.setText(username);
@@ -122,6 +125,25 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             }
         };
         broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
+        
+        intentFilter.addAction("android.intent.action.CART_SEX");//修改性别
+        BroadcastReceiver mItemViewListClickReceiver1 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent){
+                sex = intent.getStringExtra("sex");
+                System.out.println("接收到了b="+sex);
+                if ("男".equals(sex)){
+                    imageView20.setVisibility(View.VISIBLE);
+                    imageView21.setVisibility(View.GONE);
+                }else if ("女".equals(sex)){
+                    imageView21.setVisibility(View.VISIBLE);
+                    imageView20.setVisibility(View.GONE);
+                }
+
+            }
+        };
+        broadcastManager.registerReceiver(mItemViewListClickReceiver1, intentFilter);
     }
 
 
@@ -214,6 +236,15 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
         textView9 = (TextView)ra.findViewById(R.id.textView9);
         textView11 = (TextView)ra.findViewById(R.id.textView11);
+        imageView20 = (ImageView)ra.findViewById(R.id.imageView20);//男
+        imageView21 = (ImageView)ra.findViewById(R.id.imageView21);//女
+        if (sex=="男"){
+            imageView20.setVisibility(View.VISIBLE);
+            imageView21.setVisibility(View.GONE);
+        }else if (sex=="女"){
+            imageView21.setVisibility(View.VISIBLE);
+            imageView20.setVisibility(View.GONE);
+        }
 
         id = BaseApplication.userid;
         System.out.println("拿到id="+id);

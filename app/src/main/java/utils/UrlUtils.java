@@ -39,6 +39,10 @@ public class UrlUtils {
     public  static String   LOGIN=BASEURL+"/user/login.do?";
     //修改密码
     public  static String   CHANGPASSWORD=BASEURL2+"/user/changepsw";
+    //修改昵称
+    public  static String   CHANGUSER=BASEURL2+"/user/changereguser";
+    //修改性别
+    public  static String   CHANGESEX=BASEURL2+"/user/changesex";
     //注册验证码
     public  static String   REGISTER_CODE=BASEURL+"/user/register?";
     //注册

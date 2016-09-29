@@ -227,16 +227,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             if(log.getCode()==200){
                 String hint=log.getHint();
                 String username=log.getUsername();
+                String sex=log.getSex();
                 String id1=String.valueOf(log.getId());
 
                 BaseApplication.userid=id1;//吧id传到
+                BaseApplication.sex=sex;//吧性别传到
                 BaseApplication.username=username;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 //登录成功之后发送一个广播
-                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
-                intent.putExtra("username",username);
-                System.out.println("过去！！username"+username);
-                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+               sendIntent(username,sex);
                 finish();
                 return;
             }else if(log.getCode()==400){
@@ -246,6 +245,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             }
 
 
+        }
+
+        private void sendIntent(String username, String sex) {
+            Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+            intent.putExtra("username",username);
+            System.out.println("过去！！username"+username);
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+
+            Intent i = new Intent("android.intent.action.CART_SEX");
+            intent.putExtra("sex",sex);
+            System.out.println("过去！！性别1"+sex);
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
         }
     };
     private boolean isEmailValid(String email) {
