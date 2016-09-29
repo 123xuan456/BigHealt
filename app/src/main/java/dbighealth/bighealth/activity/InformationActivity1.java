@@ -23,9 +23,12 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.InformationAdapter1;
 import dbighealth.bighealth.bean.InformationBean;
+import dbighealth.bighealth.imageUtils.BaseActivity;
 import okhttp3.Call;
 import utils.UrlUtils;
-
+/*
+* 我的咨询页
+* */
 public class InformationActivity1 extends Activity implements View.OnClickListener{
 
     private ListView recyclerView;
@@ -37,6 +40,7 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
+        BaseActivity.activityList.add(this);
         initView();
         init();
     }

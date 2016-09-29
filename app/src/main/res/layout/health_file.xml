@@ -387,38 +387,6 @@
                     android:textSize="16sp"
                     />
             </RadioGroup>
-          <!--  <CheckBox
-                android:id="@+id/allergy"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:text="药物过敏"
-                android:button="@null"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:checked="true"
-                android:background="@drawable/allergy"
-                android:textSize="17sp"
-                />
-
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-            <CheckBox
-                android:id="@+id/rest"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/allergy"
-                android:button="@null"
-                android:text="其他"
-                android:textColor="#666666"
-                android:checked="false"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:layout_alignParentEnd="true" />-->
         </LinearLayout>
 
         <TextView

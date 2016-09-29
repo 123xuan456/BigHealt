@@ -2,6 +2,7 @@ package dbighealth.bighealth.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -52,7 +53,7 @@ public class SubscribeActivity extends Activity implements View.OnClickListener{
         imageView22 = (TextView)findViewById(R.id.imageView22);
         imageView22.setOnClickListener(this);
         tel = (TextView)findViewById(R.id.tel);
-
+        tel.setOnClickListener(this);
         http();
 
 
@@ -90,6 +91,7 @@ public class SubscribeActivity extends Activity implements View.OnClickListener{
         }
     };
 
+    private SubscribeBean subscribeBean;
     public Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -100,7 +102,7 @@ public class SubscribeActivity extends Activity implements View.OnClickListener{
                     String result = data.getString("result");
                     Log.e("liu", "请求到的接口" + result);
                     Gson gson = new Gson();
-                    SubscribeBean subscribeBean = gson.fromJson(result, SubscribeBean.class);
+                   subscribeBean = gson.fromJson(result, SubscribeBean.class);
                     int code = subscribeBean.getCode();
                     if(code ==200){
                         textView34.setText(subscribeBean.getTitle());
@@ -131,6 +133,14 @@ public class SubscribeActivity extends Activity implements View.OnClickListener{
             case R.id.imageView22:
                 Intent intent = new Intent(this,Particular_subscribeActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.tel:
+                Log.e("liu", "aaaaaa" +subscribeBean.getTelephone() );
+                Intent intent1 = new Intent(); // 意图: 描述一个动作, 并且携带一些参数.
+                intent1.setAction(Intent.ACTION_CALL); // 指定当前意图的动作是打电话
+                intent1.setData(Uri.parse("tel:" + subscribeBean.getTelephone())); // 设置拨号的信息
+                startActivity(intent1); // 开启拨号应用
+
                 break;
         }
     }

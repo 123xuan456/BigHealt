@@ -6,8 +6,6 @@
     >
     <include
         android:id="@+id/tit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         layout="@layout/footer_tab_2"
         />
 
@@ -17,62 +15,63 @@
         android:layout_below="@id/tit"
         android:background="#f0eff5">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ffffff"
-        android:id="@+id/relativeLayout">
-
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="输入药品名称"
-            android:gravity="center"
-            android:background="@null"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:id="@+id/relativeLayout">
 
-    <RelativeLayout
-        android:id="@+id/rl_time"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ffffff"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp">
-        <Button
-            android:id="@+id/btn_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableLeft="@drawable/time"
-            android:text="   时间"
-            android:padding="10dp"
-            android:textSize="17sp"
-            android:layout_centerVertical="true"
-             />
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="输入药品名称"
+                android:gravity="center"
+                android:background="@null"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_day"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ffffff"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="121dp">
-        <Button
-            android:id="@+id/btn_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableLeft="@drawable/day"
-            android:text="   日期"
-            android:padding="10dp"
-            android:textSize="17sp"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_time"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="29dp">
+            <Button
+                android:id="@+id/btn_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableLeft="@drawable/time"
+                android:hint="      时间"
+                android:padding="10dp"
+                android:textSize="17sp"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_day"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="121dp">
+            <Button
+                android:id="@+id/btn_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableLeft="@drawable/day"
+                android:hint="      日期"
+                android:padding="10dp"
+                android:textSize="17sp"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
 
 
 

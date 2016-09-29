@@ -3,21 +3,24 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
-
-
     <ImageView
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/chaye1"
          />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/tv_companyDescribe"
-        android:layout_gravity="center_horizontal"
+        android:background="#ffffff"
+        android:gravity="center"
         android:singleLine="true"
         android:textSize="16sp"
         android:text="北京德普科技有限公司"

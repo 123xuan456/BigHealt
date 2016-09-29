@@ -40,6 +40,8 @@ public class UrlUtils {
 
     //登录
     public  static String   LOGIN=BASEURL+"/user/login.do?";
+    //修改密码
+    public  static String   CHANGPASSWORD=BASEURL2+"/user/changepsw";
     //注册验证码
     public  static String   REGISTER_CODE=BASEURL+"/user/register?";
     //注册
@@ -72,5 +74,12 @@ public class UrlUtils {
     public static String INFORMATION_DETAILES_LISTVIEW =BASEURL2+ "/advice/talk";
     //咨询详情内容
     public static String INFORMATION_DETAILES =BASEURL2+ "/advice/saveAddQuest";
+    //我要咨询
+    public static String INFORMATION =BASEURL2+ "/advice/needhelp";
+
+    //设置提醒
+    public static String REMINDSET = BASEURL2+"/medicineremind/newremind";
+    //提醒listview
+    public static String REMIND = BASEURL2+"/medicineremind/remindlist";
 
 }

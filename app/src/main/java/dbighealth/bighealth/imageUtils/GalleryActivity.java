@@ -32,7 +32,7 @@ public class GalleryActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gallery);
-		PublicWay.activityList.add(this);
+		BaseActivity.activityList.add(this);
 		
 		for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++) {
 			initListViews( Bimp.tempSelectBitmap.get(i).getBitmap() );

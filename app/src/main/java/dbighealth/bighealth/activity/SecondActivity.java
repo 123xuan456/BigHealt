@@ -5,10 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -93,6 +97,34 @@ public class SecondActivity extends Activity implements View.OnClickListener {
          picId = extras.getInt("picId");
         id = extras.getInt("id");
         userid = BaseApplication.userid;
+        txtedit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Resources resources = getApplicationContext().getResources();
+                Drawable drawable = resources.getDrawable(R.drawable.write_bg);
+                txtedit.setCompoundDrawables(drawable,null,null,null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(txtedit.getText().equals("")){
+                    Resources resources = getApplicationContext().getResources();
+                    Drawable drawable = resources.getDrawable(R.drawable.write_bg);
+                    Log.i("mhysa","走没有这个方法");
+                    txtedit.setCompoundDrawables(drawable,null,null,null);
+                }else{
+                    txtedit.setCompoundDrawables(null,null,null,null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Resources resources = getApplicationContext().getResources();
+                Drawable drawable = resources.getDrawable(R.drawable.write_bg);
+                txtedit.setCompoundDrawables(drawable,null,null,null);
+            }
+        });
         InitInternet();
     }
 
@@ -193,6 +225,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
         }
     };
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -213,6 +246,9 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                                 .id(COMMENT_USER)
                                 .build()
                                 .execute(MyStringCallBack);
+                        Resources resources = getApplicationContext().getResources();
+                        Drawable drawable = resources.getDrawable(R.drawable.write_bg);
+                        txtedit.setCompoundDrawables(drawable,null,null,null);
                     }else{
                         Toast.makeText(getApplicationContext(),"请先输入评论内容！！",Toast.LENGTH_SHORT).show();
                     }

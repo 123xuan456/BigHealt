@@ -1,5 +1,6 @@
 package dbighealth.bighealth.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -13,8 +14,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +46,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.imageUtils.BaseActivity;
+import dbighealth.bighealth.imageUtils.Bimp;
+import dbighealth.bighealth.imageUtils.FileUtils;
+import dbighealth.bighealth.imageUtils.ImageItem;
 import utils.HttpPostUploadUtil;
 import utils.UrlUtils;
 
@@ -53,10 +62,8 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
     RelativeLayout rlCollection;
     @Bind(R.id.rl_shoppingCart)
     RelativeLayout rlShoppingCart;
-  /*  @Bind(R.id.iv_touxiang)
-    ImageView ivTouxiang;*/
     @Bind(R.id.rcv_article_photo)
-    com.facebook.drawee.view.SimpleDraweeView rcvArticlePhoto;
+    SimpleDraweeView rcvArticlePhoto;
     private Button email_sign_in_button;
     private RelativeLayout remind;
     private TextView tvTab;
@@ -73,11 +80,10 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
     private String name;
     private String picUrl;
     private String uid;
-
     private Intent lastIntent;
     private Uri photoUri;
-
     private String picPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,22 +91,29 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         Fresco.initialize(getApplicationContext());
         setContentView(R.layout.activity_logout);
         ButterKnife.bind(this);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+           requestPermissions(new String[]{
+                   Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE
+           },2);
+        }
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         picUrl = extras.getString("picUrl");
         uid = extras.getString("uid");
-        if(picUrl !=null){
+        if (picUrl != null) {
             Uri uri = Uri.parse(picUrl);
             rcvArticlePhoto.setImageURI(uri);
-
         }
         name = extras.getString("name");
 
         sp = getSharedPreferences("potrait", Activity.MODE_PRIVATE);
         edit = sp.edit();
         lastIntent = getIntent();
+        //吧次activity放到集合里，等到修改密码成功之后统一取消
+        BaseActivity.activityList.add(this);
         setView();
     }
+
     private void setView() {
         tvTab = (TextView) findViewById(R.id.tvTab);
         tvTab.setText("我的");
@@ -114,7 +127,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         remind.setOnClickListener(this);
         rlCollection.setOnClickListener(this);
         rlShoppingCart.setOnClickListener(this);
-      //  ivTouxiang.setOnClickListener(this);
+        //  ivTouxiang.setOnClickListener(this);
         rcvArticlePhoto.setOnClickListener(this);
     }
 
@@ -149,6 +162,10 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
             case R.id.rl_shoppingCart:
                 Toast.makeText(getApplicationContext(), "暂未开通，敬请期待！", Toast.LENGTH_SHORT).show();
                 break;
+         /*   case R.id.user:
+                Intent i1 = new Intent(this, EditdataActivity.class);
+                startActivity(i1);
+                break;*/
         }
 
 
@@ -209,25 +226,34 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case TAKE_PICTURE:
-                if (resultCode==RESULT_OK) {
-                    rcvArticlePhoto.setImageURI(Uri.fromFile(tempFile));
 
+
+                if (resultCode == RESULT_OK) {
+
+                    String fileName = String.valueOf(System.currentTimeMillis());
+                    Bitmap bm = (Bitmap) data.getExtras().get("data");
+                    FileUtils.saveBitmap(bm, fileName);
+                    final File f = new File(Environment.getExternalStorageDirectory()
+                            + "/Photo_LJ/", fileName + ".JPEG");
+                    rcvArticlePhoto.setImageURI(Uri.fromFile(f));
                     new Thread() {
                         @Override
                         public void run() {
                             Map<String, String> textMap = new HashMap<String, String>();
                             textMap.put("name", "testname");
                             Map<String, String> fileMap = new HashMap<String, String>();
-                            fileMap.put("file", getPath(null,Uri.fromFile(tempFile)));
+                            fileMap.put("file", getPath(null, Uri.fromFile(f)));
                             String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
-                            edit.putString("touxiang",getPicUrl);
+
+                            Log.i("mhysa--->","地址是22222:"+getPath(null, Uri.fromFile(f)));
+                            edit.putString("touxiang", getPicUrl);
                             edit.commit();
-                            BaseApplication.photoPic =getPicUrl;
+                            BaseApplication.photoPic = getPicUrl;
                             BaseApplication.username = name;
                             BaseApplication.userid = uid;
                             Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                             intent.putExtra("photoUrl", getPicUrl);
-                            intent.putExtra("username",name);
+                            intent.putExtra("username", name);
                             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                         }
                     }.start();
@@ -241,15 +267,15 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 // 外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
                 ContentResolver resolver = getContentResolver();
                 try {
-                    if(data!=null){
+                    if (data != null) {
                         final Uri originalUri = data.getData(); // 获得图片的uri
                         bm = MediaStore.Images.Media.getBitmap(resolver, originalUri); // 显得到bitmap图片
                         // 这里开始的第二部分，获取图片的路径：
                         String[] proj = {MediaStore.Images.Media.DATA};
                         // 好像是android多媒体数据库的封装接口，具体的看Android文档
-                       Cursor cursor = managedQuery(originalUri, proj, null, null, null);
+                        Cursor cursor = managedQuery(originalUri, proj, null, null, null);
                         // 按我个人理解 这个是获得用户选择的图片的索引值
-                        path = getPath(cursor,originalUri);
+                        path = getPath(cursor, originalUri);
                         rcvArticlePhoto.setImageURI(originalUri);
                         new Thread() {
 
@@ -260,15 +286,15 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                                 Map<String, String> fileMap = new HashMap<String, String>();
                                 fileMap.put("file", path);
                                 String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
-                                edit.putString("touxiang",getPicUrl);
+                                edit.putString("touxiang", getPicUrl);
                                 edit.commit();
-                                BaseApplication.photoPic =getPicUrl;
+                                BaseApplication.photoPic = getPicUrl;
                                 BaseApplication.username = name;
                                 BaseApplication.userid = uid;
-                                System.out.println("返回图片的地址"+getPicUrl);
+                                System.out.println("返回图片的地址" + getPicUrl);
                                 Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                 intent.putExtra("photoUrl", getPicUrl);
-                                intent.putExtra("username",name);
+                                intent.putExtra("username", name);
                                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                             }
                         }.start();
@@ -281,12 +307,23 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         }
     }
 
-    public String getPath(Cursor cursor,Uri uri){
-        if(cursor == null){
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String picurl = data.getString("picurl");
+            rcvArticlePhoto.setImageURI(picurl);
+        }
+    };
+
+    public String getPath(Cursor cursor, Uri uri) {
+        if (cursor == null) {
             String str = uri.toString();
-            System.out.println(str);
-            if(str.contains("file:///")){
+
+            if (str.contains("file:///")) {
                 str = str.substring(7);
+                System.out.println(str);
                 return str;
             }
         }
@@ -296,6 +333,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         String path = cursor.getString(index);
         return path;
     }
+
     // 创建一个以当前时间为名称的文件
     File tempFile = new File(Environment.getExternalStorageDirectory(),
             getPhotoFileName());
@@ -308,13 +346,14 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 "'IMG'_yyyyMMdd_HHmmss");
         return dateFormat.format(date) + ".jpg";
     }
+
     protected void photo() {
 
         String SDState = Environment.getExternalStorageState();
         if (SDState.equals(Environment.MEDIA_MOUNTED)) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// "android.media.action.IMAGE_CAPTURE"
             // 指定调用相机拍照后照片的储存路径
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+         //   intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
             startActivityForResult(intent, TAKE_PICTURE);
 
         } else {

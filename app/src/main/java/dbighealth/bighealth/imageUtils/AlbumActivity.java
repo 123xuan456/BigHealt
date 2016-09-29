@@ -32,7 +32,7 @@ public class AlbumActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_album);
-		PublicWay.activityList.add(this);
+		BaseActivity.activityList.add(this);
 		helper = AlbumHelper.getHelper();
 		helper.init(getApplicationContext());
 
@@ -52,7 +52,7 @@ public class AlbumActivity extends Activity implements OnClickListener {
 			@Override
 			public void onItemClick(final ToggleButton toggleButton,
 					int position, boolean isChecked, Button chooseBt) {
-				if (Bimp.tempSelectBitmap.size() >= PublicWay.num) {
+				if (Bimp.tempSelectBitmap.size() >= BaseActivity.num) {
 					toggleButton.setChecked(false);
 					chooseBt.setVisibility(View.GONE);
 					if (!removeOneData(dataList.get(position))) {
@@ -63,11 +63,11 @@ public class AlbumActivity extends Activity implements OnClickListener {
 				if (isChecked) {
 					chooseBt.setVisibility(View.VISIBLE);
 					Bimp.tempSelectBitmap.add(dataList.get(position));
-					okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/" + PublicWay.num + ")");
+					okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/" + BaseActivity.num + ")");
 				} else {
 					Bimp.tempSelectBitmap.remove(dataList.get(position));
 					chooseBt.setVisibility(View.GONE);
-					okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/" + PublicWay.num + ")");
+					okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/" + BaseActivity.num + ")");
 				}
 				isShowOkBt();
 			}
@@ -79,13 +79,13 @@ public class AlbumActivity extends Activity implements OnClickListener {
 	 */
 	protected void isShowOkBt() {
 		if (Bimp.tempSelectBitmap.size() > 0) {
-			okButton.setText("完成(" + Bimp.tempSelectBitmap.size() + "/"+PublicWay.num+")");
+			okButton.setText("完成(" + Bimp.tempSelectBitmap.size() + "/"+ BaseActivity.num+")");
 			okButton.setPressed(true);
 			okButton.setClickable(true);
 			okButton.setTextColor(Color.WHITE);
 			preview.setTextColor(Color.WHITE);
 		} else {
-			okButton.setText("完成(" + Bimp.tempSelectBitmap.size() + "/"+PublicWay.num+")");
+			okButton.setText("完成(" + Bimp.tempSelectBitmap.size() + "/"+ BaseActivity.num+")");
 			okButton.setPressed(false);
 			okButton.setClickable(false);
 			okButton.setTextColor(Color.parseColor("#E1E0DE"));
@@ -95,7 +95,7 @@ public class AlbumActivity extends Activity implements OnClickListener {
 	private boolean removeOneData(ImageItem imageItem) {
 		if (Bimp.tempSelectBitmap.contains(imageItem)) {
 			Bimp.tempSelectBitmap.remove(imageItem);
-			okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/" + PublicWay.num + ")");
+			okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/" + BaseActivity.num + ")");
 			return true;
 		}
 		return false;
@@ -111,7 +111,7 @@ public class AlbumActivity extends Activity implements OnClickListener {
 		okButton = (Button) findViewById(R.id.ok_button);
 		okButton.setOnClickListener(this);
 		//设置默认
-		okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/"+ PublicWay.num + ")");
+		okButton.setText("完成" + "(" + Bimp.tempSelectBitmap.size() + "/"+ BaseActivity.num + ")");
 
 		preview = (Button) findViewById(R.id.preview);
 		preview.setOnClickListener(this);

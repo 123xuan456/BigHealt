@@ -30,6 +30,7 @@
         android:id="@+id/tv_commentTime"
         android:text="2016-9-22"
         android:textSize="10sp"
+        android:textColor="#636363"
         android:layout_gravity="right"
         android:layout_marginRight="10dp"
         />

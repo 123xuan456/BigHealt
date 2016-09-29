@@ -79,6 +79,9 @@
             android:padding="5dp"
             fresco:actualImageScaleType="centerInside"
             fresco:roundAsCircle="true"
+            android:scaleType="fitXY"
+            android:maxWidth="40dp"
+            android:maxHeight="40dp"
             fresco:placeholderImage="@drawable/user"
             android:layout_centerVertical="true"
             fresco:roundingBorderWidth="1dp" />
