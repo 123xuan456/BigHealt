@@ -210,11 +210,6 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
 
             case R.id.right_tv://提交
                 present();
-                for (int i = 0; i < BaseActivity.activityList.size(); i++) {
-                    if (null != BaseActivity.activityList.get(i)) {
-                        BaseActivity.activityList.get(i).finish();
-                    }
-                }
                 break;
 
         }
@@ -234,6 +229,11 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
                     public void onResponse(String response, int id) {
                     System.out.println("咨询上传成功"+response);
                         Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+                        Intent i=new Intent();
+                        // 返回intent
+                        setResult(RESULT_OK, i);
+                        finish();
+
                     }
                 });
 
