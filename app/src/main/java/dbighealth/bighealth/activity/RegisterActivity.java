@@ -3,10 +3,14 @@ package dbighealth.bighealth.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.TextUtils;
-import android.util.Log;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +45,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     String verification;
     private RegisterBean registerbean;
     private TimeCount time;//验证码倒计时
+    private boolean isHidden=true;
+    private CheckBox checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +161,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         getcode.setOnClickListener(this);
         register=(Button)findViewById(R.id.button3);
         register.setOnClickListener(this);
+        checkbox=(CheckBox)findViewById(R.id.checkBox);
+        checkbox.setOnClickListener(this);
 
         time = new TimeCount(60000, 1000);
     }
@@ -199,6 +207,31 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 break;
             case  R.id.button3:
                 attemptLogin();//拿到用户输入的数据
+                break;
+            case R.id.checkBox:
+                if (isHidden) {
+                    //设置EditText文本为可见的
+                    password1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    password2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //设置EditText文本为隐藏的
+                    password1.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    password2.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                isHidden = !isHidden;
+                password1.postInvalidate();
+                password2.postInvalidate();
+                //切换后将EditText光标置于末尾
+                CharSequence charSequence = password2.getText();
+                if (charSequence instanceof Spannable) {
+                    Spannable spanText = (Spannable) charSequence;
+                    Selection.setSelection(spanText, charSequence.length());
+                }
+                CharSequence charSequence1 = password1.getText();
+                if (charSequence1 instanceof Spannable) {
+                    Spannable spanText = (Spannable) charSequence1;
+                    Selection.setSelection(spanText, charSequence1.length());
+                }
                 break;
         }
     }

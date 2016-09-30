@@ -4,9 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +33,9 @@ import dbighealth.bighealth.bean.LostpwSubmitBean;
 import dbighealth.bighealth.imageUtils.BaseActivity;
 import okhttp3.Call;
 import utils.UrlUtils;
-
+/**
+ * 修改密码
+ * */
 public class ChangePasswordActivity extends Activity {
 
     @Bind(R.id.arrow_left)
@@ -49,13 +56,15 @@ public class ChangePasswordActivity extends Activity {
     EditText editText12;
     @Bind(R.id.button3)
     Button button3;
+    @Bind(R.id.checkBox)
+    CheckBox checkBox;
     private String password;
     private String regphone;
     private String phone;
     private String et;
     private LostpwSubmitBean l;
     private String et1;
-
+    private boolean isHidden=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +80,7 @@ public class ChangePasswordActivity extends Activity {
 
     }
 
-    @OnClick({R.id.arrow_left, R.id.button3})
+    @OnClick({R.id.arrow_left, R.id.button3,R.id.checkBox})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.arrow_left:
@@ -79,6 +88,31 @@ public class ChangePasswordActivity extends Activity {
                 break;
             case R.id.button3:
                 ifInput();
+                break;
+            case R.id.checkBox:
+                if (isHidden) {
+                    //设置EditText文本为可见的
+                    editText12.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    editText1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //设置EditText文本为隐藏的
+                    editText12.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    editText1.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                isHidden = !isHidden;
+                editText12.postInvalidate();
+                editText1.postInvalidate();
+                //切换后将EditText光标置于末尾
+                CharSequence charSequence = editText12.getText();
+                if (charSequence instanceof Spannable) {
+                    Spannable spanText = (Spannable) charSequence;
+                    Selection.setSelection(spanText, charSequence.length());
+                }
+                CharSequence charSequence1 = editText1.getText();
+                if (charSequence1 instanceof Spannable) {
+                    Spannable spanText = (Spannable) charSequence1;
+                    Selection.setSelection(spanText, charSequence1.length());
+                }
                 break;
         }
     }
