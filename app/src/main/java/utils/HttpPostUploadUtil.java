@@ -51,8 +51,7 @@ public static String formUpload(String urlStr, Map<String, String> textMap,
             conn.setUseCaches(false);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Connection", "Keep-Alive");
-            conn
-                    .setRequestProperty("User-Agent",
+            conn.setRequestProperty("User-Agent",
                             "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.6)");
             conn.setRequestProperty("Content-Type",
                     "multipart/form-data; boundary=" + BOUNDARY);

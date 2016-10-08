@@ -124,20 +124,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             private String photoPic;
 
             @Override
-/*<<<<<<< HEAD
-            public void onReceive(Context context, Intent intent) {
-
-                userid = BaseApplication.userid;
-
-                if(!BaseApplication.photoPic.equals("")){
-                    photoUrl = BaseApplication.photoPic;
-                    imgUrl = BaseApplication.imgUrl;
-
-                    Log.i("mhysa","打印此时的地址："+imgUrl);
-                }else{
-                    photoUrl = intent.getStringExtra("photoUrl");
-                }
-=======*/
             public void onReceive(Context context, Intent intent){
 
                 userid = BaseApplication.userid;

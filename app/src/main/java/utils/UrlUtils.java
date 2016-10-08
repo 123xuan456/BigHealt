@@ -11,7 +11,8 @@ import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader;
 public class UrlUtils {
 
     public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
-    public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
+  //  public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
+  public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
  // public  static String   BASEURL2 = "http://192.168.0.43:8080/JianKangChanYe";
     public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";
   //  public  static String   REGISTER_CODE="http://192.168.0.43:8080/JianKangChanYe/user/register?";

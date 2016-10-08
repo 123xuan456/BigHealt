@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:background="#EFEFF5"
     tools:context="dbighealth.bighealth.activity.EditdataActivity">
 
@@ -31,14 +32,27 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
                 android:id="@+id/textView54" />
-            <dbighealth.bighealth.view.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                fresco:actualImageScaleType="centerInside"
+                fresco:roundAsCircle="true"
+                fresco:placeholderImage="@drawable/user"
+                fresco:roundingBorderWidth="1dp"
+                android:layout_alignTop="@+id/textView54"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+
+                />
+         <!--   <dbighealth.bighealth.view.RoundImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:id="@+id/image"
                 android:src="@drawable/cha"
                 android:layout_alignTop="@+id/textView54"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp" />
+                android:layout_marginEnd="10dp" />-->
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"

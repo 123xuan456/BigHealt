@@ -1,6 +1,7 @@
 package dbighealth.bighealth;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 
@@ -16,5 +17,6 @@ public class BaseApplication extends Application{
     public static String regphone="";//用户手机号
     public static Uri imgUrl = null;
     public static String sex="";//用户性别
+    public static Bitmap bitmap =null; //传递本地图片
 
 }
