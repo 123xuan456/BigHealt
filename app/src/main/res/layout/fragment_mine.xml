@@ -105,9 +105,9 @@
             android:textSize="12sp"
             android:id="@+id/textView20"
             android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/imageView21"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_marginStart="30dp" />
+            android:layout_marginStart="30dp"
+            android:layout_alignTop="@+id/imageView20"
+            android:layout_toEndOf="@+id/imageView" />
 
         <ImageView
             android:layout_width="wrap_content"
