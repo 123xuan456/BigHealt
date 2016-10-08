@@ -231,8 +231,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String hint=log.getHint();
                 String username=log.getUsername();
                 String imgurl = log.getImgurl();
+                String sex=log.getSex();
                 String id1=String.valueOf(log.getId());
                 BaseApplication.userid=id1;//吧id传到
+                BaseApplication.sex=sex;//吧性别传到
                 BaseApplication.username=username;
                 BaseApplication.photoPic = imgurl;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
@@ -241,7 +243,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 intent.putExtra("username",username);
                 intent.putExtra("photoUrl", imgurl);
                 System.out.println("过去！！username"+username);
-                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+             //   LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+               sendIntent(username,sex,imgurl);
+
                 finish();
                 return;
             }else if(log.getCode()==400){
@@ -249,6 +253,19 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 return;
             }
+        }
+
+        private void sendIntent(String username, String sex,String imgUrl) {
+            Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+            intent.putExtra("username",username);
+            intent.putExtra("photoUrl", imgUrl);
+            System.out.println("过去！！username"+username);
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+
+            Intent i = new Intent("android.intent.action.CART_SEX");
+            intent.putExtra("sex",sex);
+            System.out.println("过去！！性别1"+sex);
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
         }
     };
     private boolean isEmailValid(String email) {

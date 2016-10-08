@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -99,6 +100,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private String touxiang;
     private String photoPic;
     private String userid;
+    private String sex;
+    private ImageView imageView20;
+    private ImageView imageView21;
 
     public static Fragment newInstance() {
         MineFragment f = new MineFragment();
@@ -113,13 +117,14 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.intent.action.CART_BROADCAST");//
+        intentFilter.addAction("android.intent.action.CART_BROADCAST");//修改昵称
         BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
 
 
             private String photoPic;
 
             @Override
+/*<<<<<<< HEAD
             public void onReceive(Context context, Intent intent) {
 
                 userid = BaseApplication.userid;
@@ -132,15 +137,32 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 }else{
                     photoUrl = intent.getStringExtra("photoUrl");
                 }
+=======*/
+            public void onReceive(Context context, Intent intent){
+
+                userid = BaseApplication.userid;
                 username = intent.getStringExtra("username");
                 System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
                 textView50.setText(username);
+
+                if(!BaseApplication.photoPic.equals("")){
+                    photoUrl = BaseApplication.photoPic;
+                    imgUrl = BaseApplication.imgUrl;
+
+                    Log.i("mhysa","打印此时的地址："+photoUrl);
+                }else{
+                    photoUrl = intent.getStringExtra("photoUrl");
+                }
+
                 if(imgUrl!=null&&ivTouxiang != null){
+                    Log.i("mhysa","接收到的地址是："+imgUrl.toString());
                     ivTouxiang.setImageURI(imgUrl);
                 }else if (photoUrl != null && ivTouxiang != null) {
                     Uri uri = Uri.parse(photoUrl);
+                    Log.i("mhysa","接收到的地址是："+photoUrl);
                     ivTouxiang.setImageURI(uri);
                 }
+
                 Log.i("pengpeng--->", UrlUtils.UPDATEPIC + "?id=" + userid + "&image=" + intent.getStringExtra("photoUrl"));
                 OkHttpUtils.get()
                         .url(UrlUtils.UPDATEPIC)
@@ -163,6 +185,25 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             }
         };
         broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
+        
+        intentFilter.addAction("android.intent.action.CART_SEX");//修改性别
+        BroadcastReceiver mItemViewListClickReceiver1 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent){
+                sex = intent.getStringExtra("sex");
+                System.out.println("接收到了b="+sex);
+                if ("男".equals(sex)){
+                    imageView20.setVisibility(View.VISIBLE);
+                    imageView21.setVisibility(View.GONE);
+                }else if ("女".equals(sex)){
+                    imageView21.setVisibility(View.VISIBLE);
+                    imageView20.setVisibility(View.GONE);
+                }
+
+            }
+        };
+        broadcastManager.registerReceiver(mItemViewListClickReceiver1, intentFilter);
     }
 
 
@@ -205,7 +246,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         }
         if(imgUrl!=null){
             ivTouxiang.setImageURI(imgUrl);
-        }else if (photoPic != null) {
+        }else if (!photoPic.equals("")) {
             Uri uri = Uri.parse(photoPic);
             ivTouxiang.setImageURI(uri);
         }
@@ -282,8 +323,17 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         textView19.setOnClickListener(this);
         archiving.setOnClickListener(this);
 
-        textView9 = (TextView) ra.findViewById(R.id.textView9);
-        textView11 = (TextView) ra.findViewById(R.id.textView11);
+        textView9 = (TextView)ra.findViewById(R.id.textView9);
+        textView11 = (TextView)ra.findViewById(R.id.textView11);
+        imageView20 = (ImageView)ra.findViewById(R.id.imageView20);//男
+        imageView21 = (ImageView)ra.findViewById(R.id.imageView21);//女
+        if (sex=="男"){
+            imageView20.setVisibility(View.VISIBLE);
+            imageView21.setVisibility(View.GONE);
+        }else if (sex=="女"){
+            imageView21.setVisibility(View.VISIBLE);
+            imageView20.setVisibility(View.GONE);
+        }
 
         id = BaseApplication.userid;
         if (!id.equals("")) {//如果有id

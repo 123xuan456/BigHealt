@@ -10,7 +10,7 @@
         layout="@layout/footer_tabs"
         ></include>
 
-    <RelativeLayout
+  <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,7 +22,6 @@
         android:layout_marginLeft="15dp"
         android:visibility="gone"
         android:padding="8dp">
-
 
         <ImageView
             android:layout_width="wrap_content"
@@ -93,6 +92,15 @@
             android:text="齐先生（会员）"
             android:layout_alignTop="@+id/iv_touxiang"
             android:layout_toEndOf="@+id/iv_touxiang" />
+       <!-- <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView20"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/tubiao"
+            android:layout_below="@+id/textView50"
+            android:layout_toEndOf="@+id/imageView" />-->
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,6 +110,15 @@
             android:layout_below="@+id/textView50"
             android:layout_toEndOf="@+id/iv_touxiang" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView21"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:src="@drawable/woman"
+            android:layout_below="@+id/textView50"
+            android:layout_toEndOf="@+id/iv_touxiang" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,7 +135,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView1"
             android:layout_marginRight="10dp"
-
             android:src="@drawable/finsh"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
