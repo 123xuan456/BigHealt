@@ -76,9 +76,6 @@ public class PhysicalAdapter extends BaseAdapter implements RadioGroup.OnChecked
             holder = (ViewHolder)convertView.getTag();
         }
         holder.problemDescribe.setText(list.get(position).getSymptom());
-      /*  holder.img.setBackgroundResource((Integer)data.get(position).get("img"));
-        holder.title.setText((String)data.get(position).get("title"));
-        holder.info.setText((String)data.get(position).get("info"));*/
 
         holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

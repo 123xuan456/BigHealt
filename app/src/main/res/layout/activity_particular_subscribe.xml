@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             >
 
             <RadioButton
@@ -63,7 +63,7 @@
             android:textSize="15sp"
             android:layout_marginTop="15dp"
             />
-        <RelativeLayout
+      <!--  <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
             >
@@ -71,14 +71,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#ffffff"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/tv_detail"
                 />
-        </RelativeLayout>
+        </RelativeLayout>-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:padding="5dp"
+            android:gravity="top"
+            android:background="#ffffff"
+            android:layout_marginTop="20dp"
+            android:id="@+id/tv_detail"
+            />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -101,13 +110,14 @@
                     android:id="@+id/et_tel"
                     android:background="#ffffff"
                     android:textSize="15sp"
-                    android:layout_marginLeft="10dp"
+                    android:maxLength="11"
+                android:layout_marginLeft="10dp"
                     />
             </RelativeLayout>
         </RelativeLayout>
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
             android:id="@+id/btn_quiz"
             android:text="预约"
             android:textColor="#ffffff"

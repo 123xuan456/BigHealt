@@ -123,6 +123,7 @@
         android:id="@+id/et_tel"
         android:background="#ffffff"
         android:textSize="15sp"
+        android:maxLength="11"
         android:layout_marginLeft="10dp"
         />
        </RelativeLayout>

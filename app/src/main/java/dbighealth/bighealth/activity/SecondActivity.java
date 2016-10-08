@@ -81,7 +81,6 @@ public class SecondActivity extends Activity implements View.OnClickListener {
     private int COMMENT_USER = 102;
     private String userid;
     private int id;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,34 +96,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
          picId = extras.getInt("picId");
         id = extras.getInt("id");
         userid = BaseApplication.userid;
-        txtedit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Resources resources = getApplicationContext().getResources();
-                Drawable drawable = resources.getDrawable(R.drawable.write_bg);
-                txtedit.setCompoundDrawables(drawable,null,null,null);
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if(txtedit.getText().equals("")){
-                    Resources resources = getApplicationContext().getResources();
-                    Drawable drawable = resources.getDrawable(R.drawable.write_bg);
-                    Log.i("mhysa","走没有这个方法");
-                    txtedit.setCompoundDrawables(drawable,null,null,null);
-                }else{
-                    txtedit.setCompoundDrawables(null,null,null,null);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                Resources resources = getApplicationContext().getResources();
-                Drawable drawable = resources.getDrawable(R.drawable.write_bg);
-                txtedit.setCompoundDrawables(drawable,null,null,null);
-            }
-        });
         InitInternet();
     }
 
@@ -194,6 +166,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                             .crossFade()
                             .into(ivSecondPic);
                     tvSecondDesciption.setText("   " + content);
+                    Log.i("mhysa","打印集合内容"+comList.toString());
                     secondAdapter = new SecondAdapter(getApplicationContext(), comList);
                     mcomment.setAdapter(secondAdapter);
                 }
@@ -220,7 +193,35 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                 comList.add(0,commentList);
                 secondAdapter.notifyDataSetChanged();
                 txtedit.setText("");
-                Log.i("mhysa-->",BaseApplication.username+"用戶名");
+                txtedit.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        Resources resources = getApplicationContext().getResources();
+                        Drawable drawable = resources.getDrawable(R.drawable.write_bg);
+                        txtedit.setCompoundDrawables(drawable,null,null,null);
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        if(txtedit.getText().equals("")){
+                            Log.i("mhysa","方法为空");
+                            Resources resources = getApplicationContext().getResources();
+                            Drawable drawable = resources.getDrawable(R.drawable.write_bg);
+                            txtedit.setCompoundDrawables(drawable,null,null,null);
+                        }else{
+                            Log.i("mhysa-->","edittext返回值"+txtedit.getText().toString());
+                            txtedit.setCompoundDrawables(null,null,null,null);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        Resources resources = getApplicationContext().getResources();
+                        Drawable drawable = resources.getDrawable(R.drawable.write_bg);
+                        txtedit.setCompoundDrawables(drawable,null,null,null);
+                    }
+                });
             }
         }
     };

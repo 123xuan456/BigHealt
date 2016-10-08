@@ -68,6 +68,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
     private PhysicalAdapter physicalAdapter;
     private int SAVE_SYMPTON =2;
     private SharedPreferences sp;
+    private int count =1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +91,6 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
         //设置数据刷新的会回调，因为UltraRefreshListView实现了PtrHandler
         ultraPtr.setPtrHandler(ultraLv);
 
-//        mAdapter = new SimpleBaseAdapter(datas);
-//
-//        mLv.setAdapter(mAdapter);
 //
 //        //设置数据刷新回调接口
         ultraLv.setUltraRefreshListener(this);
@@ -110,7 +108,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
         OkHttpUtils.get()
                 .url(UrlUtils.Symptom)
                 .id(SYMPTOM)
-                .addParams("id", "1")
+                .addParams("id", String.valueOf(count))
                 .build()
                 .execute(MyStringCallBack);
     }
@@ -251,6 +249,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 //刷新完成
 
               /*  Toast.makeText(getApplicationContext(), "刷新完成", Toast.LENGTH_SHORT).show();*/
+                count++;
                 ultraLv.refreshComplete();
                 physicalAdapter.notifyDataSetChanged();
             }

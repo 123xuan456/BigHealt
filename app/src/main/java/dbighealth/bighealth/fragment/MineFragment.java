@@ -76,6 +76,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private Thread mThread;
     String username;
     private int UPDATE = 101;
+    private Uri imgUrl;
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {//此方法在ui线程运行
             switch (msg.what) {
@@ -114,24 +115,38 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.CART_BROADCAST");//
         BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
+
+
+            private String photoPic;
+
             @Override
             public void onReceive(Context context, Intent intent) {
 
                 userid = BaseApplication.userid;
+
+                if(!BaseApplication.photoPic.equals("")){
+                    photoUrl = BaseApplication.photoPic;
+                    imgUrl = BaseApplication.imgUrl;
+
+                    Log.i("mhysa","打印此时的地址："+imgUrl);
+                }else{
+                    photoUrl = intent.getStringExtra("photoUrl");
+                }
                 username = intent.getStringExtra("username");
-                photoUrl = intent.getStringExtra("photoUrl");
-                System.out.println("接收到了id" + userid);
+                System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
                 textView50.setText(username);
-                if (photoUrl != null && ivTouxiang != null) {
+                if(imgUrl!=null&&ivTouxiang != null){
+                    ivTouxiang.setImageURI(imgUrl);
+                }else if (photoUrl != null && ivTouxiang != null) {
                     Uri uri = Uri.parse(photoUrl);
                     ivTouxiang.setImageURI(uri);
                 }
-                Log.i("pengpeng--->", UrlUtils.UPDATEPIC + "?id=" + userid + "&image=" + photoUrl);
+                Log.i("pengpeng--->", UrlUtils.UPDATEPIC + "?id=" + userid + "&image=" + intent.getStringExtra("photoUrl"));
                 OkHttpUtils.get()
                         .url(UrlUtils.UPDATEPIC)
                         .id(UPDATE)
                         .addParams("id", userid)
-                        .addParams("imgage", photoUrl)
+                        .addParams("imgage", intent.getStringExtra("photoUrl"))
                         .build()
                         .execute(MyStringCallBack);
 
@@ -175,6 +190,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
         username = BaseApplication.username;
         photoPic = BaseApplication.photoPic;
+        Uri imgUrl = BaseApplication.imgUrl;
         Fresco.initialize(getActivity());
 
         ra = (LinearLayout) inflater.inflate(R.layout.fragment_mine, null);
@@ -187,7 +203,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         if (username != null) {
             textView50.setText(username);
         }
-        if (photoPic != null) {
+        if(imgUrl!=null){
+            ivTouxiang.setImageURI(imgUrl);
+        }else if (photoPic != null) {
             Uri uri = Uri.parse(photoPic);
             ivTouxiang.setImageURI(uri);
         }
@@ -239,7 +257,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     private void setView() {
@@ -290,6 +307,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.rl1:
                 Intent i1 = new Intent();//已经登录后，点击进入详情
                 Bundle bundle = new Bundle();
+                if(BaseApplication.imgUrl!=null){
+                    bundle.putString("imgurl",BaseApplication.imgUrl.toString());
+                }
                 bundle.putString("picUrl", BaseApplication.photoPic);
                 bundle.putString("name", BaseApplication.username);
                 bundle.putString("uid", BaseApplication.userid);
@@ -301,7 +321,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 /**
                  * 判断是否提交过
                  */
-
                 if (!TextUtils.isEmpty(id)) {
                     Intent i2 = new Intent(getActivity(), ConditionActivity.class);//每日情况
                     startActivity(i2);
@@ -345,7 +364,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.textView15:
-                if (!TextUtils.isEmpty(id)) {
                    // Intent i5 = new Intent(getContext(), InformationActivity1.class);//资讯
                     if (!TextUtils.isEmpty(id)) {
                        Intent i5 = new Intent(getActivity(), InformationActivity1.class);
@@ -353,10 +371,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     } else {
                         Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
                     }
-                }
               /*  Intent intent11 = new Intent(getContext(), BllDemo.class);
                 startActivity(intent11);*/
-
                     break;
                     case R.id.textView16:
                         if (!TextUtils.isEmpty(id)) {

@@ -9,7 +9,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileUtils {
-	
+
+
+	public static  File createFile(String filePath) {
+		File f = new File(filePath);
+		if (!f.exists()) {
+			f.getParentFile().mkdirs();
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return  f;
+	};
+
 	public static String SDPATH = Environment.getExternalStorageDirectory()
 			+ "/Photo_LJ/";
 

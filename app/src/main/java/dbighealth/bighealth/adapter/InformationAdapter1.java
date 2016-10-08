@@ -29,14 +29,6 @@ public class InformationAdapter1 extends BaseAdapter {
     }
 
 
-
-//    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        MyViewHolder holder;
-//        View view = LayoutInflater.from(context).inflate(R.layout.item_information, parent, false);
-//        holder = new MyViewHolder(view);
-//        return holder;
-//    }
-
     public int getItemCount() {
         return listDatas.size();
     }

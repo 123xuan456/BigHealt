@@ -15,12 +15,19 @@
         android:layout_below="@id/tit"
         android:background="#f0eff5">
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:id="@+id/relativeLayout">
+ <!--       <EditText
+            android:id="@+id/text"
+>>>>>>> 3412068dde7bdbd9adad4319cf51d8e3e5e7b5a5
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff"
             android:id="@+id/relativeLayout">
-
+-->
             <EditText
                 android:id="@+id/text"
                 android:layout_width="match_parent"
@@ -72,8 +79,5 @@
                 android:textSize="17sp"
                 android:layout_centerVertical="true" />
         </RelativeLayout>
-
-
-
     </RelativeLayout>
 </RelativeLayout>

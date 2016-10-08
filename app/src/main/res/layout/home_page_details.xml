@@ -97,6 +97,7 @@
                 android:textSize="15dp"
                 android:drawableLeft="@drawable/write_bg"
                 android:background="@null"
+                android:windowSoftInputMode="adjustUnspecified|stateHidden"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>

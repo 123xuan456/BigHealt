@@ -16,7 +16,8 @@ import android.widget.Toast;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,6 +59,7 @@ public class CooparateActivity extends Activity implements View.OnClickListener 
     String company;//名称内容
     String details;//详情
     String tels;//电话
+    boolean cancel = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,6 @@ public class CooparateActivity extends Activity implements View.OnClickListener 
         tvTab.setText("医疗养生");
 
     }
-
 
     @Override
     public void onClick(View v) {
@@ -105,6 +106,12 @@ public class CooparateActivity extends Activity implements View.OnClickListener 
                     return;
                 }
 
+                if (!tel(tels)){
+                    Toast.makeText(this, "请正确输入联系方式", Toast.LENGTH_SHORT).show();
+                    cancel=true;
+                    return;
+                }
+
                 try {
                     OkHttpUtils.get().url(UrlUtils.LEAGUE)
                             .addParams("type", yiliaoyangsheng)
@@ -118,6 +125,18 @@ public class CooparateActivity extends Activity implements View.OnClickListener 
                 }
                 break;
         }
+    }
+
+    private boolean tel(String tel) {
+       /* Pattern p = Pattern
+                .compile("^((17[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher m = p.matcher(tel);
+        System.out.println(m.matches() + "---");
+        return m.matches();*/
+
+        String telRegex = "13\\d{9}|14[57]\\d{8}|15[012356789]\\d{8}|18[01256789]\\d{8}|17[0678]\\d{8}";
+              if (TextUtils.isEmpty(tel)) return false;
+             else return tel.matches(telRegex);
     }
 
     private StringCallback MyStringCallBack = new StringCallback(){

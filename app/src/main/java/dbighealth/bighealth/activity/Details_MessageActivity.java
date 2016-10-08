@@ -1,6 +1,7 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.DetailsMessageAdapter;
 import dbighealth.bighealth.bean.DetailsMessageBean;
@@ -43,6 +45,8 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
     DetailsMessageAdapter adapter;
     private EditText et_content;
     private TextView textView8;
+    private int itemid;
+    private int userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,10 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
         setContentView(R.layout.message_details);
         ButterKnife.bind(this);
         initView();
+        Intent intent = getIntent();
+        itemid = intent.getIntExtra("itemid",0);
+        userid = intent.getIntExtra("userid",0);
+        Log.i("mhysa","itemid++++"+itemid);
         init();
         arrowLeft.setOnClickListener(this);
 
@@ -68,7 +76,7 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
     }
 
     public void initDate() {
-        String problemId = 49 + "";
+
         String addQuest = et_content.getText().toString();
 
         if (TextUtils.isEmpty(addQuest)) {
@@ -76,12 +84,12 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
         }
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("problemId", problemId);
+            jsonObject.put("problemId", itemid);
             jsonObject.put("addQuest", addQuest);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String u = UrlUtils.INFORMATION_DETAILES_LISTVIEW;
+        String u = UrlUtils.INFORMATION_DETAILES;
         OkHttpUtils.postString()
                 .url(u)//内容
                 .content(jsonObject.toString())
@@ -94,11 +102,12 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
 
     public void init() {
 
-        String a = UrlUtils.INFORMATION_DETAILES;//listview
+        String a = UrlUtils.INFORMATION_DETAILES_LISTVIEW;//listview
+        Log.i("mhysa","咨詢頁的接口："+a+"?problemId="+itemid+"&userId="+userid);
         OkHttpUtils.get()
                 .url(a)
-                .addParams("problemId", 49 + "")
-                .addParams("userId", 1 + "")
+                .addParams("problemId", String.valueOf(itemid))
+                .addParams("userId", String.valueOf(userid))
                 .id(1)
                 .build()
                 .execute(MyStringCallBack);
@@ -132,8 +141,9 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
 
                     break;
                 case 2:
-                    Toast.makeText(getApplication(), "okokok!", Toast.LENGTH_LONG)
+                    Toast.makeText(getApplication(), "提交成功!", Toast.LENGTH_LONG)
                             .show();
+                    init();
                     break;
 
             }

@@ -214,11 +214,11 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
                 break;
 
             case R.id.right_tv://提交
-                present();
-                for (int i = 0; i < BaseActivity.activityList.size(); i++) {
-                    if (null != BaseActivity.activityList.get(i)) {
-                        BaseActivity.activityList.get(i).finish();
-                    }
+                if(!problem1.getText().toString().equals("")&&!help1.getText().toString().equals("")){
+                    present();
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(),"请填写信息!",Toast.LENGTH_SHORT).show();
                 }
                 break;
 

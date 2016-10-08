@@ -1,13 +1,11 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
-
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -31,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import dbighealth.bighealth.MainActivity;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.DetailsMessageAdapter;
 import dbighealth.bighealth.bean.DetailsMessageBean;
@@ -205,15 +200,15 @@ public class RemindSetActivity extends Activity implements View.OnClickListener 
         @Override
         public void onError(Call call, Exception e, int id) {
 
-            Log.e("mhysa-->", "加载失败");
+           // Log.e("mhysa-->", "加载失败");
         }
         @Override
         public void onResponse(String response, int id) {
-            Toast.makeText(getApplication(), "okokok!", Toast.LENGTH_LONG)
-                    .show();
             finish();
         }
     };
+
+
 
 
 }

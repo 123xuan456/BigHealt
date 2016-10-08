@@ -42,6 +42,7 @@ public class ConditionActivity extends Activity implements View.OnClickListener{
         userid=BaseApplication.userid;
         System.out.println("id="+userid);
         setView();
+        tvTab.setVisibility(View.INVISIBLE);
         getDate();
 
     }

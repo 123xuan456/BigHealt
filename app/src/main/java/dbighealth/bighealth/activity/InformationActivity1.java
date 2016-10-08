@@ -85,7 +85,7 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
             InformationBean informationBean = gson.fromJson(response, InformationBean.class);
             int code = informationBean.getCode();
             if (code == 200) {
-                List<InformationBean.Message> result1 = informationBean.getMessage();
+                final List<InformationBean.Message> result1 = informationBean.getMessage();
                 Log.e("liuliuliu",result1.toString());
                 adapter = new InformationAdapter1(getApplication(), result1);
                 Log.i("mhysa-->",recyclerView.toString()+"recyclerview长度");
@@ -94,8 +94,10 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                      //   Intent intent = new Intent();
-                        Toast.makeText(getApplication(),"打印的item值："+position,Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(getApplication(),"打印的item值："+result1.get(position).getProblemId(),Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplication(),Details_MessageActivity.class);
+                        intent.putExtra("itemid",result1.get(position).getProblemId());
+                        intent.putExtra("userid",result1.get(position).getUserId());
                         startActivity(intent);
                     }
                 });
@@ -112,7 +114,6 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
             case R.id.right_tv:
                 Intent i=new Intent(getApplication(),Information_DetailsActivity.class);
                 startActivity(i);
-
                 break;
             case R.id.arrow_left:
                 finish();

@@ -22,7 +22,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.List;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.bean.RemindAdapter;
+import dbighealth.bighealth.adapter.RemindAdapter;
 import dbighealth.bighealth.bean.RemindBean;
 import okhttp3.Call;
 import utils.UrlUtils;
@@ -38,7 +38,7 @@ public class RemindActivity extends Activity implements View.OnClickListener {
     private ListView listview;
     RemindBean remindBean;
     RemindAdapter adapter;
-    Boolean isshow = false;
+    Boolean isshow = true;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -92,8 +92,6 @@ public class RemindActivity extends Activity implements View.OnClickListener {
         @Override
         public void onError(Call call, Exception e, int id) {
 
-            // Log.e("mhysa-->", "加载失败加载失败加载失败");
-//            Toast.makeText(getApplication(),"登录失败！"+e.toString(),Toast.LENGTH_SHORT).show();
             rl.setVisibility(View.GONE);
             listview.setVisibility(View.VISIBLE);
         }
@@ -101,7 +99,6 @@ public class RemindActivity extends Activity implements View.OnClickListener {
         @Override
         public void onResponse(String response, int id) {
 
-            Toast.makeText(getApplication(), "登录成功！", Toast.LENGTH_SHORT).show();
             Gson gson = new Gson();
             remindBean = gson.fromJson(response, RemindBean.class);
             int code = remindBean.getCode();
@@ -113,7 +110,7 @@ public class RemindActivity extends Activity implements View.OnClickListener {
                     rl.setVisibility(View.GONE);
                     listview.setVisibility(View.VISIBLE);
                 }
-                Log.e("liuyongzhen", result1.toString());
+                Log.e("liuyongzhen",response);
                 adapter = new RemindAdapter(getApplication(), result1);
                 listview.setAdapter(adapter);
 

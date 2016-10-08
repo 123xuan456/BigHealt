@@ -21,6 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.view.DateTimePickerDialog;
 import okhttp3.Call;
 import utils.UrlUtils;
 
@@ -44,7 +45,7 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
     @Bind(R.id.textView27)
     TextView textView27;
     @Bind(R.id.breakfasttime)
-    EditText breakfasttime;
+    TextView breakfasttime;
     @Bind(R.id.linearLayout)
     LinearLayout linearLayout;
     @Bind(R.id.textView28)
@@ -56,19 +57,19 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
     @Bind(R.id.textView30)
     TextView textView30;
     @Bind(R.id.lunchtime)
-    EditText lunchtime;
+    TextView lunchtime;
     @Bind(R.id.linearLayout2)
     LinearLayout linearLayout2;
     @Bind(R.id.textView31)
     TextView textView31;
     @Bind(R.id.dinnersize)
-    EditText dinnersize;
+    TextView dinnersize;
     @Bind(R.id.textView32)
     TextView textView32;
     @Bind(R.id.textView33)
     TextView textView33;
     @Bind(R.id.dinnertime)
-    EditText dinnertime;
+    TextView dinnertime;
     @Bind(R.id.l1)
     LinearLayout l1;
     private String bf;
@@ -84,9 +85,13 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_condition_add);
         ButterKnife.bind(this);
+        tit.setVisibility(View.INVISIBLE);
         id = BaseApplication.userid;
         rightTv.setOnClickListener(this);
         arrowLeft.setOnClickListener(this);
+        breakfasttime.setOnClickListener(this);
+        lunchtime.setOnClickListener(this);
+        dinnertime.setOnClickListener(this);
 
     }
 
@@ -160,7 +165,22 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
                             });
                 }
                 break;
+            case R.id.breakfasttime:
+                DateTimePickerDialog dateTimePicKDialog = new DateTimePickerDialog(
+                        ConditionAddActivity.this);
+                dateTimePicKDialog.dateTimePicKDialog(breakfasttime, 2);
 
+                break;
+            case R.id.lunchtime:
+                DateTimePickerDialog dateTimePicKDialog1 = new DateTimePickerDialog(
+                        ConditionAddActivity.this);
+                dateTimePicKDialog1.dateTimePicKDialog(lunchtime, 2);
+                break;
+            case R.id.dinnertime:
+                DateTimePickerDialog dateTimePicKDialog2 = new DateTimePickerDialog(
+                        ConditionAddActivity.this);
+                dateTimePicKDialog2.dateTimePicKDialog(dinnertime, 2);
+                break;
 
         }
     }

@@ -8,7 +8,12 @@
     tools:context=".activity.SubscribeActivity">
     <include
         layout="@layout/footer_tab_1"
-        android:id="@+id/include4"></include>
+        android:id="@+id/include4"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        >
+
+    </include>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,9 +22,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingRight="10dp"
+        android:layout_centerVertical="true"
         android:background="#ffff"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:id="@+id/relativeLayout2">
 
 
@@ -75,8 +81,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView22"
-
+        android:layout_below="@+id/relativeLayout2"
+        android:id="@+id/rl_include5"
+        android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true">
 
         <TextView
@@ -105,8 +112,7 @@
         android:id="@+id/imageView22"
         style="@style/subtv"
         android:background="@drawable/biankuang_yuan_blue"
-        android:layout_marginBottom="82dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/rl_include5"
         android:layout_centerHorizontal="true"
         />
 

@@ -141,7 +141,7 @@ public static String formUpload(String urlStr, Map<String, String> textMap,
             reader.close();
             reader = null;
         } catch (Exception e) {
-            System.out.println("发送POST请求出错。" + urlStr);
+            System.out.println("发送POST请求出错。" + e.toString());
             e.printStackTrace();
         } finally {
             if (conn != null) {

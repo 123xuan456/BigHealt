@@ -61,7 +61,12 @@ public class SecondAdapter extends BaseAdapter{
         {
             holder = (ViewHolder)convertView.getTag();
         }
-        holder.username.setText(list.get(position).getName());
+        if(list!=null&&list.get(position).getName()!=null&&list.get(position).getName().equals("")){
+            holder.username.setText("匿名");
+        }else{
+            holder.username.setText(list.get(position).getName());
+        }
+
         holder.userComment.setText(list.get(position).getComment());
         holder.commentTime.setText(list.get(position).getTime());
         return convertView;

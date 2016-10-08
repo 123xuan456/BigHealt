@@ -1,6 +1,7 @@
 package dbighealth.bighealth;
 
 import android.app.Application;
+import android.net.Uri;
 import android.os.Build;
 
 /**
@@ -13,4 +14,5 @@ public class BaseApplication extends Application{
     public static String photoPic="";//用户头像
     public static String password="";//用户密码
     public static String regphone="";//用户手机号
+    public static Uri imgUrl = null;
 }

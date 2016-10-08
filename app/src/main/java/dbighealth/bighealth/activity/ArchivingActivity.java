@@ -213,16 +213,26 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
              * 提交档案的代码
              */
             case R.id.right_tv:
-                if(userName==null||nation1==null||height1==null||weight1==null){
+                getUserInfo();
+                if(userName==null||nation1==null||height1.equals("")||weight1.equals("")){
                     Toast.makeText(getApplicationContext(),"信息填写不全",Toast.LENGTH_SHORT).show();
+
                 }else{
-                    Log.i("mhysa-->",getUserInfo());
-                    OkHttpUtils.postString()
-                               .url(UrlUtils.FileSave)
-                               .content(getUserInfo())
-                               .id(CommitHealth)
-                               .build()
-                               .execute(MyStringCallBack);
+                    try{
+                        if(Integer.parseInt(height1)!=0&&Integer.parseInt(weight1)!=0){
+                            Log.i("mhysa-->",getUserInfo());
+                            OkHttpUtils.postString()
+                                    .url(UrlUtils.FileSave)
+                                    .content(getUserInfo())
+                                    .id(CommitHealth)
+                                    .build()
+                                    .execute(MyStringCallBack);
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(),"身高或体重请填写数字!",Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
                 break;
             case R.id.date:
