@@ -31,6 +31,7 @@ import utils.UrlUtils;
 * */
 public class InformationActivity1 extends Activity implements View.OnClickListener{
 
+    private static final int INFORMATION_CODE =1 ;
     private ListView recyclerView;
     private ImageView arrow_left;
     private TextView right_tv;
@@ -114,10 +115,27 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
             case R.id.right_tv:
                 Intent i=new Intent(getApplication(),Information_DetailsActivity.class);
                 startActivity(i);
+                // 开始一个新的 Activity等候返回结果
+                startActivityForResult(i, INFORMATION_CODE);
+                Log.i("芝麻开门", "过去!!!!");
+
                 break;
             case R.id.arrow_left:
                 finish();
                 break;
         }
     }
+
+    //处理从ConditionAddActivity返回的结果
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == INFORMATION_CODE) {
+            if (resultCode == RESULT_OK) {
+                Log.i("芝麻开门", "回来!!!!");
+                init();
+            }
+        }
+    }
+
 }
