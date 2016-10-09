@@ -139,7 +139,6 @@ public class TreatmentFragment extends Fragment implements View.OnClickListener{
                                 .build()
                                 .execute(MyStringCallBack);
                     }
-
                     }else{
                     map1.clear();
                     map1.put(0,new Storage(0,"地区"));
