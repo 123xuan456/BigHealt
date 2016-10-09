@@ -50,7 +50,6 @@ import utils.UrlUtils;
  */
 public class Information_DetailsActivity extends Activity implements View.OnClickListener {
 
-
     @Bind(R.id.arrow_left)
     ImageView arrowLeft;
     @Bind(R.id.tit)
