@@ -8,7 +8,7 @@
     android:orientation="vertical">
     <include
         layout="@layout/footer_tabs"
-        ></include>
+        />
 
   <RelativeLayout
         android:id="@+id/rl"
@@ -129,6 +129,7 @@
             android:layout_toEndOf="@+id/iv_touxiang"
             android:layout_toRightOf="@+id/imageView21"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
             android:layout_gravity="center_horizontal"
             />
         <ImageView
@@ -329,6 +330,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+
+
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
