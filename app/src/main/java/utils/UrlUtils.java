@@ -2,8 +2,6 @@ package utils;
 
 import android.os.Environment;
 
-import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader;
-
 /**
  * 接口
  * Created by mhysa on 2016/8/31.
@@ -12,9 +10,11 @@ public class UrlUtils {
 
     public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
   //  public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
-  public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
+  //public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
+  public static String BASEURL="http://106.2.219.210:1314/";
  // public  static String   BASEURL2 = "http://192.168.0.43:8080/JianKangChanYe";
-    public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";
+  //  public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";
+    public  static String   BASEURL2 = "http://106.2.219.210:1314/";
   //  public  static String   REGISTER_CODE="http://192.168.0.43:8080/JianKangChanYe/user/register?";
   //  public  static String   REGISTER="http://192.168.0.43:8080/JianKangChanYe/user/regiontoamaster?";
     //-------------------------------API接口----------------------------------

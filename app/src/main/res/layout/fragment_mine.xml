@@ -90,7 +90,6 @@
             android:id="@+id/textView50"
             android:layout_marginTop="5dp"
             android:text="齐先生（会员）"
-            android:layout_alignTop="@+id/iv_touxiang"
             android:layout_toEndOf="@+id/iv_touxiang" />
        <!-- <ImageView
             android:layout_width="wrap_content"
