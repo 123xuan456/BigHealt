@@ -1,13 +1,11 @@
 package dbighealth.bighealth.activity;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Gravity;
@@ -125,7 +123,6 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
 
     }
 
-    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     private void initPopu() {
         pop = new PopupWindow(Information_DetailsActivity.this);
         View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
@@ -157,7 +154,6 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
             }
         });
         bt2.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.ECLAIR)
             public void onClick(View v) {
                 Intent intent = new Intent(Information_DetailsActivity.this,
                         AlbumActivity.class);
@@ -185,7 +181,6 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     protected void photo() {
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(openCameraIntent, TAKE_PICTURE);
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -213,14 +208,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
                 break;
 
             case R.id.right_tv://提交
-                if(!problem1.getText().toString().equals("")&&!help1.getText().toString().equals("")){
-                    present();
-                    finish();
-                }else{
-                    Toast.makeText(getApplicationContext(),"请填写信息!",Toast.LENGTH_SHORT).show();
-                }
                 present();
-
                 break;
 
         }
@@ -238,12 +226,12 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
 
                     @Override
                     public void onResponse(String response, int id) {
-                    System.out.println("咨询上传成功"+response);
+                        System.out.println("咨询上传成功"+response);
                         Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
                         Intent i=new Intent();
                         // 返回intent
                         setResult(RESULT_OK, i);
-                        Information_DetailsActivity.this.finish();
+                        finish();
 
                     }
                 });

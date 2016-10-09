@@ -23,7 +23,6 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.InformationAdapter1;
 import dbighealth.bighealth.bean.InformationBean;
-import dbighealth.bighealth.imageUtils.BaseActivity;
 import okhttp3.Call;
 import utils.UrlUtils;
 /*
@@ -41,7 +40,6 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-        BaseActivity.activityList.add(this);
         initView();
         init();
     }
@@ -64,11 +62,11 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
 //                    .show();
 //            return;
 //        }else{
-            OkHttpUtils.get()
-                    .url(UrlUtils.INFORMATIONLISTVIEW)
-                    .addParams("userId",id)//id
-                    .build()
-                    .execute(MyStringCallBack);
+        OkHttpUtils.get()
+                .url(UrlUtils.INFORMATIONLISTVIEW)
+                .addParams("userId",id)//id
+                .build()
+                .execute(MyStringCallBack);
 //        }
     }
     public StringCallback MyStringCallBack=new StringCallback(){
@@ -86,19 +84,19 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
             InformationBean informationBean = gson.fromJson(response, InformationBean.class);
             int code = informationBean.getCode();
             if (code == 200) {
-                final List<InformationBean.Message> result1 = informationBean.getMessage();
+                List<InformationBean.Message> result1 = informationBean.getMessage();
                 Log.e("liuliuliu",result1.toString());
                 adapter = new InformationAdapter1(getApplication(), result1);
+                //  Log.e("mhysa",infoAdapter.toString());
+//                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 Log.i("mhysa-->",recyclerView.toString()+"recyclerview长度");
                 recyclerView.setAdapter(adapter);
                 recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                     //   Intent intent = new Intent();
-                     //   Toast.makeText(getApplication(),"打印的item值："+result1.get(position).getProblemId(),Toast.LENGTH_SHORT).show();
+                        //   Intent intent = new Intent();
+                        Toast.makeText(getApplication(),"打印的item值："+position,Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplication(),Details_MessageActivity.class);
-                        intent.putExtra("itemid",result1.get(position).getProblemId());
-                        intent.putExtra("userid",result1.get(position).getUserId());
                         startActivity(intent);
                     }
                 });
@@ -114,7 +112,6 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
         switch (v.getId()){
             case R.id.right_tv:
                 Intent i=new Intent(getApplication(),Information_DetailsActivity.class);
-                startActivity(i);
                 // 开始一个新的 Activity等候返回结果
                 startActivityForResult(i, INFORMATION_CODE);
                 Log.i("芝麻开门", "过去!!!!");
@@ -126,7 +123,7 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
         }
     }
 
-    //处理从ConditionAddActivity返回的结果
+    //处理从Information_DetailsActivity返回的结果
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
