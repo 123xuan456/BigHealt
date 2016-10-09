@@ -335,7 +335,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.rl:
                 Intent i = new Intent(getActivity(), LoginActivity.class);//没有登录点击进入登录页面
                 startActivity(i);

@@ -12,9 +12,9 @@ public class UrlUtils {
 
     public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
   //  public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
-  public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
+  public static String BASEURL="http://106.2.219.210:1314";
  // public  static String   BASEURL2 = "http://192.168.0.43:8080/JianKangChanYe";
-    public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";
+    public  static String   BASEURL2 = "http://106.2.219.210:1314";
   //  public  static String   REGISTER_CODE="http://192.168.0.43:8080/JianKangChanYe/user/register?";
   //  public  static String   REGISTER="http://192.168.0.43:8080/JianKangChanYe/user/regiontoamaster?";
     //-------------------------------API接口----------------------------------
@@ -39,7 +39,6 @@ public class UrlUtils {
     public static String SELECTED_TREATMENT = BASEURL+"/hathappenedat/condition";
     //医疗养生详情页
     public static String DETAIL_TREATMENT = BASEURL2+"/medicalcareInside/healthlist";
-
     //登录
     public  static String   LOGIN=BASEURL+"/user/login.do?";
     //修改密码
@@ -80,12 +79,10 @@ public class UrlUtils {
     public static String INFORMATION_DETAILES_LISTVIEW =BASEURL2+ "/advice/talk";
     //咨询详情内容
     public static String INFORMATION_DETAILES =BASEURL2+ "/advice/saveAddQuest";
-
     //我要咨询
     public static String INFORMATION =BASEURL2+ "/advice/needhelp";
     //设置提醒advice/saveAddQuest
-
-  public static String REMINDSET = BASEURL2+"/medicineremind/newremind";
+    public static String REMINDSET = BASEURL2+"/medicineremind/newremind";
     //提醒listview
     public static String REMIND = BASEURL2+"/medicineremind/remindlist";
 
