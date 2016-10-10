@@ -58,12 +58,13 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.imageUtils.BaseActivity;
 import dbighealth.bighealth.imageUtils.FileUtils;
-import dbighealth.bighealth.view.RoundImageView;
 import okhttp3.Call;
 import utils.BitmapUtils;
 import utils.HttpPostUploadUtil;
 import utils.UrlUtils;
-
+/**
+ * 个人信息
+ * */
 public class EditdataActivity extends Activity {
 
     @Bind(R.id.arrow_left)
@@ -130,8 +131,6 @@ public class EditdataActivity extends Activity {
         setContentView(R.layout.activity_editdata);
         ButterKnife.bind(this);
         //吧次activity放到集合里，等到修改密码成功之后统一取消
-
-
         BaseActivity.activityList.add(this);
         name = BaseApplication.username;
         sexa = BaseApplication.sex;//打开拿到性别
@@ -273,7 +272,7 @@ public class EditdataActivity extends Activity {
                                         message.setData(bundle);
                                         handler.sendMessage(message);
                                         Toast.makeText(getContext(), "修改成功", Toast.LENGTH_LONG).show();
-                                        //登录成功之后发送一个广播
+                                        //修改成功之后发送一个广播
                                         Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);

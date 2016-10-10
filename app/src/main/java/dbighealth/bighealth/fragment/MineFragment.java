@@ -39,9 +39,11 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ArchivingActivity;
 import dbighealth.bighealth.activity.ConditionActivity;
+import dbighealth.bighealth.activity.HasCommitReport;
 import dbighealth.bighealth.activity.InformationActivity1;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
+import dbighealth.bighealth.activity.MedicalReportActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
@@ -103,6 +105,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private String sex;
     private ImageView imageView20;
     private ImageView imageView21;
+    private SharedPreferences hasCommitReport;
+    private boolean commitreport;
 
     public static Fragment newInstance() {
         MineFragment f = new MineFragment();
@@ -417,19 +421,25 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                             Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
                         }
                         break;
-                    case R.id.textView19:
-                        sp = getActivity().getSharedPreferences("commit",
-                                Activity.MODE_PRIVATE);
-                        first = sp.getBoolean("First", false);
-                        if (!TextUtils.isEmpty(id)) {
-                            if (first) {
-                                Toast.makeText(getActivity(), "体检报告生成中，请稍后！", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getActivity(), "请先填写体质测试！！", Toast.LENGTH_SHORT).show();
+            /**
+             * 体检报告
+             */
+            case R.id.textView19:
+                        if (!TextUtils.isEmpty(id)){
+                            hasCommitReport = getActivity().getSharedPreferences("hasCommitReport", Activity.MODE_PRIVATE);
+                            commitreport = hasCommitReport.getBoolean("commitreport", false);
+                            if(commitreport){
+                                Intent hascommit = new Intent(getActivity(), HasCommitReport.class);
+                                startActivity(hascommit);
+                            }else{
+                                Intent medicalintent = new Intent(getActivity(), MedicalReportActivity.class);
+                                startActivity(medicalintent);
                             }
-                        } else {
+
+                        }else{
                             Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
                         }
+
                         break;
                     case R.id.textView18:
                         if (!TextUtils.isEmpty(id)) {

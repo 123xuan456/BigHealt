@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,11 +14,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.imageUtils.Bimp1;
 import dbighealth.bighealth.imageUtils.BitmapCache;
 import dbighealth.bighealth.imageUtils.ImageItem;
+import utils.HttpPostUploadUtil;
+import utils.UrlUtils;
 
 
 public class AlbumAdapter extends BaseAdapter{
@@ -109,10 +115,14 @@ public class AlbumAdapter extends BaseAdapter{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		String path;
+		final String path;
 		if (dataList != null && dataList.size() > position)
+		{
 			path = dataList.get(position).imagePath;
-		else
+			Log.i("mhysa","相册中的图片地址是："+path);
+
+		}	else
+
 			path = "camera_default";
 		if (path.contains("camera_default")) {
 			viewHolder.imageView.setImageResource(R.drawable.plugin_camera_no_pictures);
@@ -120,6 +130,7 @@ public class AlbumAdapter extends BaseAdapter{
 			final ImageItem item = dataList.get(position);
 			viewHolder.imageView.setTag(item.imagePath);
 			cache.displayBmp(viewHolder.imageView, item.thumbnailPath, item.imagePath,callback);
+
 		}
 		viewHolder.toggleButton.setTag(position);
 		viewHolder.choosetoggle.setTag(position);
