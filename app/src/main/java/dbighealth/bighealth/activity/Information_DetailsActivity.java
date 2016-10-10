@@ -158,7 +158,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
                 Intent intent = new Intent(Information_DetailsActivity.this,
                         AlbumActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.activity_translate_in,
+                overridePendingTransition(R.anim.activity_translate_in,//activity显示的动画
                         R.anim.activity_translate_out);
                 pop.dismiss();
                 ll_popup.clearAnimation();

@@ -124,16 +124,17 @@
             android:name=".imageUtils.GalleryActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".activity.SecondActivity"
+        <activity
+            android:name=".activity.SecondActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@android:style/Theme.Light.NoTitleBar"
-            ></activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".activity.EditdataActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity android:name=".activity.ChangePasswordActivity" />
-        <activity android:name=".activity.SexActivity"></activity>
+        <activity android:name=".activity.SexActivity" />
+        <activity android:name=".activity.YearActivity"></activity>
     </application>
 
 </manifest>

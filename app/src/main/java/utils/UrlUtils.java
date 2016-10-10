@@ -10,11 +10,9 @@ public class UrlUtils {
 
     public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
   //  public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
-  //public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
   public static String BASEURL="http://106.2.219.210:1314/";
- // public  static String   BASEURL2 = "http://192.168.0.43:8080/JianKangChanYe";
-  //  public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";
     public  static String   BASEURL2 = "http://106.2.219.210:1314/";
+  public  static String   BASEURL3 = "http://192.168.0.120:8081/JianKangChanYe";//本地测试
   //  public  static String   REGISTER_CODE="http://192.168.0.43:8080/JianKangChanYe/user/register?";
   //  public  static String   REGISTER="http://192.168.0.43:8080/JianKangChanYe/user/regiontoamaster?";
     //-------------------------------API接口----------------------------------
@@ -46,6 +44,9 @@ public class UrlUtils {
     public  static String   CHANGPASSWORD=BASEURL2+"/user/changepsw";
     //修改昵称
     public  static String   CHANGUSER=BASEURL2+"/user/changereguser";
+    //修改年龄
+    public  static String   CHANGYEAR=BASEURL3+"/user/changeage";
+
     //修改性别
     public  static String   CHANGESEX=BASEURL2+"/user/changesex";
     //注册验证码

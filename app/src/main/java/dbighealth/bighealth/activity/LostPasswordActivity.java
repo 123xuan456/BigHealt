@@ -60,8 +60,8 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
     ImageView arrowLeft;
     @Bind(R.id.right_add)
     ImageView rightAdd;
-    @Bind(R.id.checkBox)
-    CheckBox checkBox;
+    @Bind(R.id.btn_no)
+    CheckBox radioButton;
     private String phone;
     private String et;
     private String new_password_edit;
@@ -81,7 +81,7 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
         btnVerification.setOnClickListener(this);
         newRegisterBtn.setOnClickListener(this);
         arrowLeft.setOnClickListener(this);
-        checkBox.setOnClickListener(this);
+        radioButton.setOnClickListener(this);
         time = new TimeCount(60000, 1000);
     }
 
@@ -144,7 +144,7 @@ public class LostPasswordActivity extends Activity implements View.OnClickListen
                finish();
 
                 break;
-            case R.id.checkBox:
+            case R.id.btn_no:
             if (isHidden) {
                 //设置EditText文本为可见的
                 newPasswordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
