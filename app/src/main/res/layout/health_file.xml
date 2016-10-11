@@ -339,7 +339,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@null"
-                android:hint="1992年2月"
+                android:hint="1992-02-01"
                 android:textColor="#666666"
                 android:layout_alignParentEnd="true" />
         </LinearLayout>
@@ -569,10 +569,10 @@
             android:id="@+id/habit_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:hint="例如：吃甜食不吃早饭"
+            android:textSize="15sp"
             android:textColor="#666666"
-            android:textSize="16sp"
+            android:gravity="top"
             />
     </RelativeLayout>
 

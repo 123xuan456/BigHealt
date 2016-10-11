@@ -30,6 +30,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -208,10 +211,24 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
                 break;
 
             case R.id.right_tv://提交
+                for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++) {
+                    BaseActivity.fileList.add(new File(Bimp.tempSelectBitmap.get(i).getImagePath()));
+                }
+                doAn();
+
                 present();
                 break;
 
         }
+    }
+
+    private void doAn() {
+        List<File> a = BaseActivity.fileList;
+        for (int i=0;i<a.size();i++){
+            File b = a.get(i);
+            System.out.println("b="+b);
+        }
+
     }
 
     private void present() {
