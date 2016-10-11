@@ -275,11 +275,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         }
     };
     private boolean isEmailValid(String email) {
-          /*  Pattern p = Pattern
-                    .compile("^((17[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-            Matcher m = p.matcher(email);
-            System.out.println(m.matches() + "---");
-            return m.matches();*/
         String telRegex = "13\\d{9}|14[57]\\d{8}|15[012356789]\\d{8}|18[01256789]\\d{8}|17[0678]\\d{8}";
         if (TextUtils.isEmpty(email)) return false;
         else return email.matches(telRegex);
