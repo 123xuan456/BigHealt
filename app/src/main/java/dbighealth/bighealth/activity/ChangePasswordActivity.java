@@ -32,6 +32,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.LostpwSubmitBean;
 import dbighealth.bighealth.imageUtils.BaseActivity;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 /**
  * 修改密码
@@ -172,7 +173,8 @@ public class ChangePasswordActivity extends Activity {
                         if (Integer.parseInt(s) == 200) {
                             BaseApplication.password="";
 //                            BaseApplication.userid="";
-                            BaseApplication.username="";
+                            SharedPreferencesUtils.saveString(ChangePasswordActivity.this,UrlUtils.LOGIN,"");
+
                             String hint = l.getHint();
                             Toast.makeText(getApplicationContext(), hint, Toast.LENGTH_LONG).show();
 

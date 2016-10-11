@@ -26,11 +26,16 @@
   </component>
   <component name="AndroidLogFilters">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="pengpeng" />
+=======
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="接收到了id" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="504ac776-23f0-4de1-894d-b30c2b2b03e2" name="Default" comment="">
+<<<<<<< HEAD
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_23.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" afterPath="" />
@@ -72,6 +77,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="健康档案成功" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
@@ -150,6 +158,24 @@
     <favorites_list name="BigHealt" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
+    <leaf>
+      <file leaf-file-name="Me_LogoutActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/Me_LogoutActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.322034">
+              <caret line="198" column="46" selection-start-line="198" selection-start-column="46" selection-end-line="198" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MineFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.4915254">
+              <caret line="136" column="62" selection-start-line="136" selection-start-column="62" selection-end-line="136" selection-end-column="62" />
+=======
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
 <<<<<<< HEAD
       <file leaf-file-name="MineFragment.java" pinned="false" current-in-tab="true">
@@ -172,21 +198,66 @@
         </entry>
       </file>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <file leaf-file-name="Information_DetailsActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/Information_DetailsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.89285713">
+=======
+      <file leaf-file-name="ChangePasswordActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ChangePasswordActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="174" column="43" selection-start-line="174" selection-start-column="43" selection-end-line="174" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditdataActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/EditdataActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.8983052">
+              <caret line="388" column="49" selection-start-line="388" selection-start-column="49" selection-end-line="388" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InformationActivity1.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/InformationActivity1.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="59" column="79" selection-start-line="59" selection-start-column="79" selection-end-line="59" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Information_DetailsActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/Information_DetailsActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
               <caret line="95" column="71" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-19.928572">
               <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
+=======
+      <file leaf-file-name="HasCommitReport.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/HasCommitReport.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="51" column="7" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
       <file leaf-file-name="BaseApplication.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/BaseApplication.java">
@@ -199,8 +270,20 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="MedicalReportActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/MedicalReportActivity.java">
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.14917128">
+              <caret line="276" column="48" selection-start-line="276" selection-start-column="48" selection-end-line="276" selection-end-column="48" />
+=======
+      <file leaf-file-name="ConditionAddActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionAddActivity.java">
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
             <state vertical-scroll-proportion="127.67857">
@@ -2043,9 +2126,25 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" />
 <<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/MainActivity.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ChangePasswordActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionAddActivity.java" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionAddActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/HasCommitReport.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/InformationActivity1.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/Information_DetailsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/MedicalReportActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/Me_LogoutActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/BaseApplication.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/EditdataActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ChangePasswordActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/SecondActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/bean/LoginokBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java" />
@@ -2064,6 +2163,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ArchivingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/health_file.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/BaseApplication.java" />
+<<<<<<< HEAD
 <<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/MedicalReportActivity.java" />
@@ -2087,6 +2187,9 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
 =======
+=======
+>>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
       </list>
     </option>
   </component>
@@ -2345,6 +2448,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -2359,11 +2463,33 @@
     <property name="FullScreen" value="false" />
     <property name="device.picker.selection" value="127.0.0.1:62001" />
 =======
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BigHealt" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bighealth" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
+=======
               <option name="myItemId" value="BigHealt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="BigHealt" />
+>>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2771,6 +2897,7 @@
   </component>
   <component name="ToolWindowManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <frame x="-9" y="0" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
@@ -2804,6 +2931,41 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+=======
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29810902" sideWeight="0.49573562" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850778" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23507462" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
     <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
     <editor active="false" />
@@ -3172,6 +3334,9 @@
         <state />
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionActivity.java">
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/EditdataActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41509435">
@@ -3182,6 +3347,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/InformationActivity1.java">
+>>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
 <<<<<<< HEAD
@@ -3192,6 +3358,9 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionAddActivity.java">
+=======
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zhy/okhttputils/2.6.1/7c20fb3b31abbead28f4f7952c0bb330fddae020/okhttputils-2.6.1-sources.jar!/com/zhy/http/okhttp/OkHttpUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22351234">
@@ -3240,6 +3409,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/Information_DetailsActivity.java">
+>>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="189" column="30" selection-start-line="189" selection-start-column="30" selection-end-line="189" selection-end-column="30" />
@@ -3314,6 +3484,14 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/MedicalReportActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="203" column="88" selection-start-line="203" selection-start-column="88" selection-end-line="203" selection-end-column="88" />
+          <folding>
+            <element signature="e#7777#7793#0" expanded="true" />
+=======
     <entry file="file://D:/SDK/sources/android-23/android/widget/CompoundButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33236575">
@@ -3321,10 +3499,17 @@
           <folding>
             <element signature="e#4416#4417#0" expanded="false" />
             <element signature="e#4447#4448#0" expanded="false" />
+>>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/BaseApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="29" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="29" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/bean/SubscribeBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41509435">
@@ -3351,8 +3536,13 @@
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ChangePasswordActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.6447602">
           <caret line="137" column="13" selection-start-line="137" selection-start-column="13" selection-end-line="137" selection-end-column="13" />
+=======
+        <state vertical-scroll-proportion="0.0">
+          <caret line="174" column="43" selection-start-line="174" selection-start-column="43" selection-end-line="174" selection-end-column="43" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/SexActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3364,10 +3554,17 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/SecondActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8206039">
           <caret line="247" column="52" selection-start-line="247" selection-start-column="52" selection-end-line="247" selection-end-column="52" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/EditdataActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8983052">
+          <caret line="388" column="49" selection-start-line="388" selection-start-column="49" selection-end-line="388" selection-end-column="49" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ChangePasswordActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3379,6 +3576,7 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/InformationActivity1.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.56660414">
@@ -3387,6 +3585,13 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3095#3628#0" expanded="true" />
             <element signature="e#3627#3628#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/SecondActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.184669">
+          <caret line="187" column="116" selection-start-line="187" selection-start-column="116" selection-end-line="187" selection-end-column="116" />
+          <folding />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/bean/ConditionBean.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3434,6 +3639,7 @@
             <element signature="e#4084#4085#0" expanded="false" />
 >>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
           </folding>
+>>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
         </state>
       </provider>
     </entry>
@@ -3453,6 +3659,7 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/HasCommitReport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.25">
@@ -3465,6 +3672,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.928572">
           <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/fragment/MineFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.4915254">
+          <caret line="136" column="62" selection-start-line="136" selection-start-column="62" selection-end-line="136" selection-end-column="62" />
+>>>>>>> 1306f709eb7ac14f6cbef552f3270f24781b6cfd
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/ConditionAddActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3494,12 +3707,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="270" column="45" selection-start-line="270" selection-start-column="45" selection-end-line="270" selection-end-column="45" />
+>>>>>>> d213ca734d33417ba791d27e9ab4636e50dd97ec
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/activity/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14917128">
+          <caret line="276" column="48" selection-start-line="276" selection-start-column="48" selection-end-line="276" selection-end-column="48" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dbighealth/bighealth/BaseApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22351234">

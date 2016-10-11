@@ -61,6 +61,7 @@ import dbighealth.bighealth.imageUtils.FileUtils;
 import okhttp3.Call;
 import utils.BitmapUtils;
 import utils.HttpPostUploadUtil;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 /**
  * 个人信息
@@ -136,7 +137,7 @@ public class EditdataActivity extends Activity {
         ButterKnife.bind(this);
         //吧次activity放到集合里，等到修改密码成功之后统一取消
         BaseActivity.activityList.add(this);
-        name = BaseApplication.username;
+        name = SharedPreferencesUtils.getString(EditdataActivity.this,BaseApplication.name, "");
         sexa = BaseApplication.sex;//打开拿到性别
         photoPic = BaseApplication.photoPic;
         imgUrl = BaseApplication.imgUrl;
@@ -245,7 +246,6 @@ public class EditdataActivity extends Activity {
                         @Override
                         public void onResponse(String response, int id) {
                             System.out.println("修改年龄成功" + response);
-                            Toast.makeText(getApplication(), "修改成功", Toast.LENGTH_LONG).show();
                             //修改成功之后发送一个广播
                             Intent intent = new Intent("android.intent.action.CART_YEAR");
                             intent.putExtra("year", year);
@@ -327,6 +327,7 @@ public class EditdataActivity extends Activity {
                                         Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
+                                        SharedPreferencesUtils.saveString(EditdataActivity.this,BaseApplication.name,et);
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
                                     }
@@ -435,7 +436,9 @@ public class EditdataActivity extends Activity {
                                 Map<String, String> fileMap = new HashMap<String, String>();
                                 fileMap.put("file", path1);
                                 String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
-                                BaseApplication.username = name;
+//                                BaseApplication.username = name;
+                                //修改用户名称重新赋值
+                                SharedPreferencesUtils.saveString(EditdataActivity.this,BaseApplication.name, name);
                                 //  BaseApplication.userid = uid;
                                 BaseApplication.imgUrl = imgUrl;
                                 BaseApplication.photoPic = getPicUrl;

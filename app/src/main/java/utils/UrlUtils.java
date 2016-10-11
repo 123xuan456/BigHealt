@@ -100,4 +100,5 @@ public class UrlUtils {
   //保存体检报告
   public static String UPLOADREPORT = BASEURL3+"/medicalReport/saveReporty";
 
+
 }

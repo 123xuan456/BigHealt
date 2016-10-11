@@ -161,7 +161,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
 
         String userid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
         OkHttpUtils.postString()
-                .url( UrlUtils.FileSubmit+userid)
+                .url( UrlUtils.FileSubmit+ SharedPreferencesUtils.getString(ArchivingActivity.this,UrlUtils.LOGIN,""))
                 .content(getUserInfo())
                 .id(Commit)
                 .build()
