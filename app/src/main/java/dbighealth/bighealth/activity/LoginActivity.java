@@ -35,8 +35,6 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
@@ -235,6 +233,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 username=log.getUsername();
                 String imgurl = log.getImgurl();
                 String sex=log.getSex();
+                String age=log.getAge();
                 String id1=String.valueOf(log.getId());
                 SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
 //                BaseApplication.userid=id1;//把id传到
@@ -243,14 +242,20 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 //sp存储用户名称
                 SharedPreferencesUtils.saveString(context,BaseApplication.name, log.getUsername());
                 BaseApplication.photoPic = imgurl;
+                BaseApplication.age = age;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 //登录成功之后发送一个广播
 //                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
 //                intent.putExtra("username",username);
 //                intent.putExtra("photoUrl", imgurl);
 //                System.out.println("过去！！username"+username);
+
              //   LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-               sendIntent(username,sex,imgurl);
+//               sendIntent(username,sex,imgurl);
+
+//                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+               sendIntent(username,sex,imgurl,age);
+
 
                 finish();
                 return;
@@ -261,7 +266,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             }
         }
 
-        private void sendIntent(String username, String sex,String imgUrl) {
+        private void sendIntent(String username, String sex,String imgUrl,String age) {
             Intent intent = new Intent("android.intent.action.CART_BROADCAST");
             intent.putExtra("username",username);
             intent.putExtra("photoUrl", imgUrl);
@@ -269,9 +274,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
 
             Intent i = new Intent("android.intent.action.CART_SEX");
-            intent.putExtra("sex",sex);
+            i.putExtra("sex",sex);
             System.out.println("过去！！性别1"+sex);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+            Intent i1 = new Intent("android.intent.action.CART_YEAR");
+            i1.putExtra("year",age);
+            System.out.println("过去！！年龄1"+age);
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i1);
         }
     };
     private boolean isEmailValid(String email) {

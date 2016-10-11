@@ -35,6 +35,8 @@ public class ConditionActivity extends Activity implements View.OnClickListener{
     private TextView tvTab;
     private String userid;
     List<ConditionBean.MessageBean> message=new ArrayList<>();
+    private TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +45,13 @@ public class ConditionActivity extends Activity implements View.OnClickListener{
         userid= SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
         System.out.println("id="+userid);
         setView();
-        tvTab.setVisibility(View.INVISIBLE);
         getDate();
 
     }
 
     private void setView() {
         tvTab=(TextView)findViewById(R.id.tvTab);
+        tv=(TextView)findViewById(R.id.textView);
         tvTab.setText("每日情况");
         arrow_left=(ImageView)findViewById(R.id.arrow_left);
         right_add=(ImageView)findViewById(R.id.right_add);
@@ -73,9 +75,14 @@ public class ConditionActivity extends Activity implements View.OnClickListener{
                 Gson g=new Gson();
                 ConditionBean cb = g.fromJson(response, ConditionBean.class);
                 if (cb.getCode()==200){
+                    tv.setVisibility(View.GONE);
+                    listview.setVisibility(View.VISIBLE);
                    message = cb.getMessage();
                     ConditionAdapter adapter=new ConditionAdapter(getApplicationContext(),message);
                     listview.setAdapter(adapter);
+                }else if (cb.getCode()==400){
+                    tv.setVisibility(View.VISIBLE);
+                    listview.setVisibility(View.GONE);
                 }
             }
         });

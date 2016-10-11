@@ -20,6 +20,7 @@ public class LoginokBean {
     private String imgurl;
     private String hint;
     private String sex;
+    private String age;
 
     public int getCode() {
         return code;
@@ -66,5 +67,11 @@ public class LoginokBean {
     }
     public String getSex() {
         return sex;
+    }
+    public void setAge(String age) {
+        this.age = age;
+    }
+    public String getAge() {
+        return age;
     }
 }

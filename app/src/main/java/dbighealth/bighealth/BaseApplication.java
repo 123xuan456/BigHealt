@@ -3,7 +3,6 @@ package dbighealth.bighealth;
 import android.app.Application;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 
 /**
  * Created by de on 2016/9/6.
@@ -20,4 +19,5 @@ public class BaseApplication extends Application{
     public static Bitmap bitmap =null; //传递本地图片
     public static String name;
 
+    public static String age;//年龄
 }

@@ -100,6 +100,8 @@ public class EditdataActivity extends Activity {
     TextView sex1;
     @Bind(R.id.relativeLayout5)
     RelativeLayout relativeLayout5;
+    @Bind(R.id.year)
+    EditText year1;
     @Bind(R.id.image)
     SimpleDraweeView image;
     private String name;
@@ -124,6 +126,8 @@ public class EditdataActivity extends Activity {
     private RelativeLayout parent;
     private String photoPic;
     private Uri imgUrl;
+    private String year;
+    private String phone;
 
 
     @Override
@@ -163,6 +167,7 @@ public class EditdataActivity extends Activity {
                 pop.showAtLocation(relativeLayout5, Gravity.CENTER, 10, 10);
             }
         });
+        year=year1.getText().toString();
         broadcast();//接收修改性别的广播
 
     }
@@ -183,14 +188,23 @@ public class EditdataActivity extends Activity {
 
     }
 
-    @OnClick({R.id.relativeLayout1, R.id.relativeLayout2, R.id.relativeLayout3, R.id.relativeLayout5, R.id.arrow_left})
+    @OnClick({R.id.relativeLayout1, R.id.relativeLayout2, R.id.relativeLayout3, R.id.relativeLayout5,
+            R.id.relativeLayout4,R.id.arrow_left})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.arrow_left:
                 finish();
                 break;
             case R.id.relativeLayout1:
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{
+                            Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    }, 2);
+                }
+                initPopu();
+                ll_popup.startAnimation(AnimationUtils.loadAnimation(
+                        EditdataActivity.this, R.anim.activity_translate_in));
+                pop.showAtLocation(relativeLayout5, Gravity.CENTER, 10, 10);
                 break;
             case R.id.relativeLayout2://修改昵称
                 //初始化一个自定义的Dialog
@@ -206,6 +220,42 @@ public class EditdataActivity extends Activity {
                 Intent intent = new Intent(this, ChangePasswordActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+    //关闭activity时把年龄修改
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        JSONObject obj = new JSONObject();
+        year=year1.getText().toString();
+        phone = BaseApplication.regphone;
+        System.out.println("year=" + year);
+        System.out.println("phone=" + phone);
+        try {
+            obj.put("regphone", phone);
+            obj.put("age", year);
+            String url = UrlUtils.CHANGYEAR;
+            OkHttpUtils.postString().url(url).content(obj.toString()).
+                    build().
+                    execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            System.out.println("修改年龄失败" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            System.out.println("修改年龄成功" + response);
+                            //修改成功之后发送一个广播
+                            Intent intent = new Intent("android.intent.action.CART_YEAR");
+                            intent.putExtra("year", year);
+                            System.out.println("过去！！year" + year);
+                            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+                        }
+                    });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -232,7 +282,7 @@ public class EditdataActivity extends Activity {
             // TODO Auto-generated method stub
             super.onCreate(savedInstanceState);
             this.setContentView(R.layout.dialog);
-            final String phone = BaseApplication.regphone;
+            phone = BaseApplication.regphone;
             editText2 = (EditText) findViewById(R.id.editText2);
             editText2.setText(name);
 
@@ -277,6 +327,7 @@ public class EditdataActivity extends Activity {
                                         Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
+                                        SharedPreferencesUtils.saveString(EditdataActivity.this,BaseApplication.name,et);
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
                                     }
@@ -353,7 +404,6 @@ public class EditdataActivity extends Activity {
 
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         switch (requestCode) {
-
             case 1:
                 if (resultCode == RESULT_OK) {
                     cropPhoto(data.getData());// 裁剪图片

@@ -3,7 +3,6 @@ package dbighealth.bighealth.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,8 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -26,14 +25,18 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.bean.ArchivingBean;
 import dbighealth.bighealth.wheel.JudgeDate;
 import dbighealth.bighealth.wheel.ScreenInfo;
 import dbighealth.bighealth.wheel.WheelMain;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -136,6 +139,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
     private String habitDesciption;
     private String habit1;
     private static int CommitHealth=1;
+    private static int Commit=2;
     WheelMain wheelMain;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Override
@@ -145,9 +149,101 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
         ButterKnife.bind(this);
         tit.setText("健康档案");
         rightTv.setText("提交");
+
+        display();//先判断用户是否有填写
         initListener();
 
+
+
     }
+
+    private void display() {
+        OkHttpUtils.postString()
+                .url( UrlUtils.FileSubmit+ SharedPreferencesUtils.getString(ArchivingActivity.this,UrlUtils.LOGIN,""))
+                .content(getUserInfo())
+                .id(Commit)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        System.out.println("健康档案失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        System.out.println("健康档案成功="+response);
+                        Gson g=new Gson();
+                        ArchivingBean archiving = g.fromJson(response, ArchivingBean.class);
+                        int code = archiving.getCode();
+                        if (code==400){
+                            System.out.println("健康档案没有数据");
+                            return ;
+                        }else if (code==200){
+                            List<ArchivingBean.MessageBean> message = archiving.getMessage();
+                            for (int i=0;i<message.size();i++){
+                                ArchivingBean.MessageBean mes = message.get(i);
+                                name.setText(mes.getName());
+                                nation.setText(mes.getNation());
+                                height.setText(mes.getHeight()+"");
+                                weight.setText(mes.getWeight()+"");
+                                System.out.println("健康档案时间"+mes.getBirth()+"");
+                                date.setText(mes.getBirth()+"");
+                                medicalHistory.setText(mes.getPastMedical()+"");
+                                habitEt.setText(mes.getTextExplain()+"");
+                                String sex=mes.getSex();
+                                if ("男".equals(sex)){
+                                    man.setChecked(true);
+                                }else if ("女".equals(sex)){
+                                    woman.setChecked(true);
+                                }
+                                String bloodType = mes.getBloodType();
+                                if ("AB".equals(bloodType)){
+                                    rbBloodAb.setChecked(true);
+                                }else if ("A".equals(bloodType)){
+                                    rbBloodA.setChecked(true);
+                                }else if ("B".equals(bloodType)){
+                                    rbBloodB.setChecked(true);
+                                }else if ("O".equals(bloodType)){
+                                    rbBloodO.setChecked(true);
+                                }
+                                String allergy = mes.getAllergy()+"";
+                                if ("药物过敏".equals(allergy)){
+                                    btnMedicine.setChecked(true);
+                                }else if ("其他".equals(allergy)){
+                                    btnOther.setChecked(true);
+                                }
+
+                               String familyHistory=mes.getFamilyHistory()+"";
+                                if ("糖尿病".equals(familyHistory)){
+                                    diabetes.setChecked(true);
+                                }else if ("皮肤病".equals(familyHistory)){
+                                    dermatosis.setChecked(true);
+                                }else if ("先天性心脏病".equals(familyHistory)){
+                                    heart.setChecked(true);
+                                }
+                               String habit_diet=mes.getHabit_diet()+"";
+                                if ("1".equals(habit_diet)){
+                                    diet.setChecked(true);
+                                }else if ("0".equals(habit_diet)){
+                                }
+                               String habit_sleep=mes.getHabit_sleep()+"";
+                                if ("1".equals(habit_sleep)){
+                                    sleep.setChecked(true);
+                                }else if ("0".equals(habit_sleep)){
+                                }
+                               String habit_motion=mes.getHabit_motion()+"";
+                                if ("1".equals(habit_motion)){
+                                    play.setChecked(true);
+                                }else if ("0".equals(habit_motion)){
+                                }
+
+                            }
+
+                        }
+                    }
+                });
+    }
+
     /**
      * 获取用户填写数据
      */
@@ -171,7 +267,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userId",2);
+            jsonObject.put("userId",SharedPreferencesUtils.getString(ArchivingActivity.this,UrlUtils.LOGIN,""));
             jsonObject.put("name",userName);
             jsonObject.put("nation",nation1);
             jsonObject.put("sex",sex1);
