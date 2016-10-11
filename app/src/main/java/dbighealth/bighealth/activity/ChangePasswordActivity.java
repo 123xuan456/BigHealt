@@ -171,7 +171,7 @@ public class ChangePasswordActivity extends Activity {
                         String s = l.getCode();
                         if (Integer.parseInt(s) == 200) {
                             BaseApplication.password="";
-                            BaseApplication.userid="";
+//                            BaseApplication.userid="";
                             BaseApplication.username="";
                             String hint = l.getHint();
                             Toast.makeText(getApplicationContext(), hint, Toast.LENGTH_LONG).show();

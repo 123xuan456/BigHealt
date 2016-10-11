@@ -61,6 +61,7 @@ import dbighealth.bighealth.imageUtils.FileUtils;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import utils.BitmapUtils;
 import utils.HttpPostUploadUtil;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -113,7 +114,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         picUrl = extras.getString("picUrl");
-        uid = extras.getString("uid");
+//        uid = extras.getString("uid");
         imgurl = extras.getString("imgurl");
         if(imgurl!=null){
             Uri uri = Uri.parse(imgurl);
@@ -148,7 +149,6 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (BaseApplication.bitmap!=null){
-
                   /*  String photoPic = BaseApplication.photoPic;
                    // String   photoUrl = intent.getStringExtra("photoUrl");
                     Uri uri = Uri.parse(photoPic);*/
@@ -185,7 +185,6 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 Intent i1 = new Intent(this, EditdataActivity.class);
                 i1.putExtra("imgurl1",imgurl);
                 startActivity(i1);
-
 /*
                 initPopu();
                 ll_popup.startAnimation(AnimationUtils.loadAnimation(
@@ -196,7 +195,11 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.email_sign_in_button:
-                BaseApplication.userid = "";
+//                BaseApplication.userid = "";
+                SharedPreferencesUtils.saveString(this, UrlUtils.LOGIN, "");
+                BaseApplication.bitmap=null;
+                BaseApplication.photoPic="";
+                BaseApplication.imgUrl = null;
                 Toast.makeText(this, "退出成功", Toast.LENGTH_LONG).show();
                 //退出成功之后发送一个广播
                 Intent intent = new Intent("android.intent.action.CART_BROADCAST");

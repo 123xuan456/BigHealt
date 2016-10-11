@@ -273,6 +273,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="身高："
                 android:textColor="#343434"
                 android:textSize="16sp"
@@ -280,7 +281,8 @@
 
             <EditText
                 android:id="@+id/height"
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
@@ -288,7 +290,9 @@
                 />
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+
                 android:text="CM  "
                 android:textColor="#343434"
                 android:textSize="14sp"
@@ -303,7 +307,8 @@
 
             <EditText
                 android:id="@+id/weight"
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
@@ -311,6 +316,7 @@
                 />
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="KG"
                 android:textColor="#343434"

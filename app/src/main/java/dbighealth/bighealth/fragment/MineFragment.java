@@ -69,7 +69,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private TextView textView9;//温馨提示
     private TextView textView11;//每日一读
     private TextView textView50;//昵称
-    private TextView textView20;//年龄
     private String photoUrl;
     String id;//用户id
     TextView archiving;
@@ -104,7 +103,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private String sex;
     private ImageView imageView20;
     private ImageView imageView21;
-    private String year;
 
     public static Fragment newInstance() {
         MineFragment f = new MineFragment();
@@ -121,7 +119,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.CART_BROADCAST");//修改昵称
         BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
+
+
             private String photoPic;
+
             @Override
             public void onReceive(Context context, Intent intent){
 
@@ -189,19 +190,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             }
         };
         broadcastManager.registerReceiver(mItemViewListClickReceiver1, intentFilter);
-
-
-        intentFilter.addAction("android.intent.action.CART_YEAR");//修改年龄
-        BroadcastReceiver mItemViewListClickReceiver2 = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent){
-                year = intent.getStringExtra("year");
-                System.out.println("接收到了year="+year);
-                textView20.setText(year);
-            }
-        };
-        broadcastManager.registerReceiver(mItemViewListClickReceiver2, intentFilter);
     }
 
 
@@ -229,7 +217,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
         username = BaseApplication.username;
         photoPic = BaseApplication.photoPic;
-        year = BaseApplication.age;
         Uri imgUrl = BaseApplication.imgUrl;
         Fresco.initialize(getActivity());
 
@@ -237,8 +224,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, ra);
         TextView tvTab = (TextView) ra.findViewById(R.id.tvTab);
         textView50 = (TextView) ra.findViewById(R.id.textView50);
-        textView20=(TextView)ra.findViewById(R.id.textView20);
-        textView20.setText(year);
         tvTab.setText("我的");
         Log.i("mhysa--->", "用户名：" + username);
 

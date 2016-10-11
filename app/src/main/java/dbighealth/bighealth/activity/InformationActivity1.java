@@ -24,6 +24,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.InformationAdapter1;
 import dbighealth.bighealth.bean.InformationBean;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 /*
 * 我的咨询页
@@ -56,7 +57,7 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
     }
 
     public void init(){
-        String id = BaseApplication.userid;
+        String id = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
 //        if (TextUtils.isEmpty(id)){
 //            Toast.makeText(getApplication(), "请先登录", Toast.LENGTH_LONG)
 //                    .show();
@@ -84,7 +85,7 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
             InformationBean informationBean = gson.fromJson(response, InformationBean.class);
             int code = informationBean.getCode();
             if (code == 200) {
-                List<InformationBean.Message> result1 = informationBean.getMessage();
+                final List<InformationBean.Message> result1 = informationBean.getMessage();
                 Log.e("liuliuliu",result1.toString());
                 adapter = new InformationAdapter1(getApplication(), result1);
                 //  Log.e("mhysa",infoAdapter.toString());
@@ -97,6 +98,8 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
                         //   Intent intent = new Intent();
                         Toast.makeText(getApplication(),"打印的item值："+position,Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplication(),Details_MessageActivity.class);
+                        intent.putExtra("itemid",result1.get(position).getProblemId());
+                        intent.putExtra("userid",result1.get(position).getUserId());
                         startActivity(intent);
                     }
                 });

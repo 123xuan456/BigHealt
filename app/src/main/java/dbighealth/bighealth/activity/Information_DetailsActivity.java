@@ -46,6 +46,7 @@ import dbighealth.bighealth.imageUtils.FileUtils;
 import dbighealth.bighealth.imageUtils.GalleryActivity;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -95,7 +96,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
         ButterKnife.bind(this);
         tit.setVisibility(View.GONE);
         rightTv.setText("提交");
-        id= BaseApplication.userid;
+        id= SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
         BaseActivity.activityList.add(this);
         initViews();
 

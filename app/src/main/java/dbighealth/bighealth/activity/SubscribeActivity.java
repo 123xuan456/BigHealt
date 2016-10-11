@@ -116,7 +116,7 @@ public class SubscribeActivity extends Activity implements View.OnClickListener{
                         textView34.setText(subscribeBean.getTitle());
                         textView36.setText(subscribeBean.getContent());
                         textView37.setText(subscribeBean.getDatetime());
-                        tel.setText(subscribeBean.getTelephone());
+                    //    tel.setText(subscribeBean.getTelephone());
                         String imageurl = subscribeBean.getImageurl();
 
                         Glide.with(getApplication())
@@ -144,7 +144,7 @@ public class SubscribeActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.tel:
                 Log.e("liu", "aaaaaa" +subscribeBean.getTelephone() );
-                Uri telUri = Uri.parse("tel:" + subscribeBean.getTelephone());
+                Uri telUri = Uri.parse("tel:" + "18211094821");
                 Intent intent1 = new Intent(Intent.ACTION_DIAL, telUri); // 意图: 描述一个动作, 并且携带一些参数.
              /*   intent1.setAction(Intent.ACTION_CALL); // 指定当前意图的动作是打电话
                 intent1.setData(Uri.parse("tel:" + subscribeBean.getTelephone())); // 设置拨号的信息*/

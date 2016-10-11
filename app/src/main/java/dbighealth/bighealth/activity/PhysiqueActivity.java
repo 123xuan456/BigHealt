@@ -116,6 +116,8 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
     private StringCallback MyStringCallBack = new StringCallback() {
 
 
+        private List<PhysicalBean.ContentBean.ResultBean> result;
+
         @Override
         public void onError(Call call, Exception e, int id) {
            // Log.e("mhysa--->", "体质请求失败");
@@ -135,7 +137,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 Gson gson = new Gson();
                 PhysicalBean physicalBean = gson.fromJson(response, PhysicalBean.class);
                 int code = physicalBean.getCode();
-                List<PhysicalBean.ContentBean.ResultBean> result = physicalBean.getContent().getResult();
+                result = physicalBean.getContent().getResult();
                 physicalAdapter = new PhysicalAdapter(getApplicationContext(), result);
                 // listview.setAdapter(physicalAdapter);
                 ultraLv.setAdapter(physicalAdapter);
@@ -248,7 +250,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
 //                }
                 //刷新完成
 
-              /*  Toast.makeText(getApplicationContext(), "刷新完成", Toast.LENGTH_SHORT).show();*/
+               Toast.makeText(getApplicationContext(), "刷新", Toast.LENGTH_SHORT).show();
                 count++;
                 ultraLv.refreshComplete();
                 physicalAdapter.notifyDataSetChanged();
