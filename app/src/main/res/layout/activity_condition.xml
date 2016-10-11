@@ -16,8 +16,24 @@
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:visibility="gone"
     android:layout_height="match_parent"
     android:layout_below="@+id/include3">
-
 </ListView>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/bg_await"
+        android:text="请您点击右上角添加"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="#c8c8c8"
+        android:layout_below="@+id/include3"
+        android:layout_centerHorizontal="true" />
+
+
+
 </RelativeLayout>

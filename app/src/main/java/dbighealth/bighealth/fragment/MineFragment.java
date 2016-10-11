@@ -50,6 +50,7 @@ import dbighealth.bighealth.activity.SubscribeActivity;
 import dbighealth.bighealth.adapter.ReportPicAdapter;
 import dbighealth.bighealth.bean.EveryDayBean;
 import dbighealth.bighealth.bean.HasCommitBean;
+import dbighealth.bighealth.bean.PhysicalBean;
 import okhttp3.Call;
 import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
@@ -78,12 +79,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     String id;//用户id
     TextView archiving;
     private SharedPreferences sp;
-
     private boolean first;
     private Thread mThread;
     String username;
     private int UPDATE = 101;
     private int SEARCH =102;
+    private int SYMPTOM = 103;
     private Uri imgUrl;
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {//此方法在ui线程运行
@@ -113,7 +114,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private ImageView imageView21;
     private SharedPreferences hasCommitReport;
     private boolean commitreport;
-
+    private int count = 1;
     public static Fragment newInstance() {
         MineFragment f = new MineFragment();
         return f;
@@ -229,6 +230,21 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     startActivity(medicalintent);
                 }
 
+            }
+
+            if(id==SYMPTOM){
+                Gson gson = new Gson();
+                PhysicalBean physicalBean = gson.fromJson(response, PhysicalBean.class);
+                int code = physicalBean.getCode();
+                if(code==400){
+                    //充填体质
+                    Intent intent = new Intent(getActivity(), RewritePhysical.class);
+                    startActivity(intent);
+                }
+                if(code ==200){
+                    Intent i3 = new Intent(getActivity(), PhysiqueActivity.class);//体质
+                    startActivity(i3);
+                }
             }
 
         }
@@ -407,8 +423,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                         Intent intent = new Intent(getActivity(), RewritePhysical.class);
                         startActivity(intent);
                     } else {
-                        Intent i3 = new Intent(getActivity(), PhysiqueActivity.class);//体质
-                        startActivity(i3);
+                        OkHttpUtils.get()
+                                .url(UrlUtils.Symptom)
+                                .id(SYMPTOM)
+                                .addParams("id", String.valueOf(count))
+                                .build()
+                                .execute(MyStringCallBack);
+                      /*  if(){
+
+                        }*/
+
                     }
 
                 } else {

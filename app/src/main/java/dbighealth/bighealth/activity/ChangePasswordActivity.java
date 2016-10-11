@@ -133,7 +133,7 @@ public class ChangePasswordActivity extends Activity {
             return;
         }else
         if (!password.equals(phone)) {
-            Toast.makeText(this, "请输入正确密码", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "原密码不正确", Toast.LENGTH_SHORT).show();
             return;
         }else
 
