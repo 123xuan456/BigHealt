@@ -36,6 +36,7 @@ import dbighealth.bighealth.wheel.JudgeDate;
 import dbighealth.bighealth.wheel.ScreenInfo;
 import dbighealth.bighealth.wheel.WheelMain;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -158,7 +159,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
 
     private void display() {
         OkHttpUtils.postString()
-                .url( UrlUtils.FileSubmit+BaseApplication.userid)
+                .url( UrlUtils.FileSubmit+ SharedPreferencesUtils.getString(ArchivingActivity.this,UrlUtils.LOGIN,""))
                 .content(getUserInfo())
                 .id(Commit)
                 .build()
@@ -266,7 +267,7 @@ public class ArchivingActivity extends Activity implements View.OnClickListener 
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userId",BaseApplication.userid);
+            jsonObject.put("userId",SharedPreferencesUtils.getString(ArchivingActivity.this,UrlUtils.LOGIN,""));
             jsonObject.put("name",userName);
             jsonObject.put("nation",nation1);
             jsonObject.put("sex",sex1);

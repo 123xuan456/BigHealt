@@ -185,7 +185,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                  private String name;
                  */
                 SecondCommntBean.ComListBean commentList = new  SecondCommntBean.ComListBean();
-                commentList.setName(BaseApplication.username);
+                commentList.setName(SharedPreferencesUtils.getString(SecondActivity.this,BaseApplication.name, ""));
                 commentList.setComment(txtedit.getText().toString());
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
