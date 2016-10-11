@@ -8,7 +8,6 @@
     <SOURCES>
       <root url="jar://D:/eclipse/adt-bundle-windows-x86-20130917/sdk/extras/android/m2repository/com/android/support/support-vector-drawable/23.2.1/support-vector-drawable-23.2.1-sources.jar!/" />
       <root url="jar://D:/SDK/extras/android/m2repository/com/android/support/support-vector-drawable/23.2.1/support-vector-drawable-23.2.1-sources.jar!/" />
-      <root url="jar://D:/eclipse/adt-bundle-windows-x86-20130917/sdk/extras/android/m2repository/com/android/support/support-vector-drawable/23.2.1/support-vector-drawable-23.2.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
