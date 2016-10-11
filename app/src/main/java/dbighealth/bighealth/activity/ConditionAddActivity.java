@@ -23,6 +23,7 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.view.DateTimePickerDialog;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -86,7 +87,7 @@ public class ConditionAddActivity extends Activity implements View.OnClickListen
         setContentView(R.layout.activity_condition_add);
         ButterKnife.bind(this);
         tit.setVisibility(View.INVISIBLE);
-        id = BaseApplication.userid;
+        id = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
         rightTv.setOnClickListener(this);
         arrowLeft.setOnClickListener(this);
         breakfasttime.setOnClickListener(this);

@@ -24,6 +24,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.InformationAdapter1;
 import dbighealth.bighealth.bean.InformationBean;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 /*
 * 我的咨询页
@@ -56,7 +57,7 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
     }
 
     public void init(){
-        String id = BaseApplication.userid;
+        String id = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
 //        if (TextUtils.isEmpty(id)){
 //            Toast.makeText(getApplication(), "请先登录", Toast.LENGTH_LONG)
 //                    .show();

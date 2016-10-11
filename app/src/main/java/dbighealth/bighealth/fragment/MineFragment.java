@@ -49,6 +49,7 @@ import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
 import dbighealth.bighealth.bean.EveryDayBean;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -84,7 +85,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         public void handleMessage(Message msg) {//此方法在ui线程运行
             switch (msg.what) {
                 case 1:
-                    id = BaseApplication.userid;
+//                    id = BaseApplication.userid;
+                    id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                     System.out.println("拿到id=" + id);
                     if (!id.equals("")) {//如果有id
                         rl1.setVisibility(View.VISIBLE);
@@ -130,7 +132,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onReceive(Context context, Intent intent){
 
-                userid = BaseApplication.userid;
+                userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                 username = intent.getStringExtra("username");
                 System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
                 textView50.setText(username);
@@ -325,7 +327,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             imageView20.setVisibility(View.GONE);
         }
 
-        id = BaseApplication.userid;
+//        id = BaseApplication.userid;
+        id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
         if (!id.equals("")) {//如果有id
             rl1.setVisibility(View.VISIBLE);
             rl.setVisibility(View.GONE);
@@ -351,7 +354,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 }
                 bundle.putString("picUrl", BaseApplication.photoPic);
                 bundle.putString("name", BaseApplication.username);
-                bundle.putString("uid", BaseApplication.userid);
+//                bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);
                 i1.putExtras(bundle);
                 startActivity(i1);

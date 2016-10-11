@@ -21,6 +21,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.ConditionAdapter;
 import dbighealth.bighealth.bean.ConditionBean;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**每日情况*/
@@ -39,7 +40,7 @@ public class ConditionActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_condition);
         listview=(ListView)findViewById(R.id.listView);
-        userid=BaseApplication.userid;
+        userid= SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
         System.out.println("id="+userid);
         setView();
         tvTab.setVisibility(View.INVISIBLE);

@@ -44,6 +44,7 @@ import dbighealth.bighealth.adapter.SecondAdapter;
 import dbighealth.bighealth.bean.SecondCommntBean;
 import dbighealth.bighealth.view.ListViewForScrollView;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -95,7 +96,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
         Bundle extras = intent.getExtras();
          picId = extras.getInt("picId");
         id = extras.getInt("id");
-        userid = BaseApplication.userid;
+        userid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
 
         InitInternet();
     }
@@ -234,16 +235,17 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.btnpinglun:
-                if(BaseApplication.userid.isEmpty()){
+                if(SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "").isEmpty()){
                     Toast.makeText(getApplicationContext(),"请登录！",Toast.LENGTH_SHORT).show();
                 }else{
 
                     if(txtedit.getText().length()!=0){
+                        String userid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
                         OkHttpUtils.get()
                                 .url(UrlUtils.COMMENT)
                                 .addParams("articleId",String.valueOf(picId))
                                 .addParams("comment",txtedit.getText().toString())
-                                .addParams("userid",BaseApplication.userid)
+                                .addParams("userid",userid)
                                 .id(COMMENT_USER)
                                 .build()
                                 .execute(MyStringCallBack);

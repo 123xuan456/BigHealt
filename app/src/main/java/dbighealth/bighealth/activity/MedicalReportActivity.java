@@ -58,6 +58,7 @@ import dbighealth.bighealth.imageUtils.GalleryActivity1;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import okhttp3.Call;
 import utils.HttpPostUploadUtil;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -259,7 +260,8 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         }
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userId", BaseApplication.userid);
+            String userid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
+            jsonObject.put("userId",userid);
             jsonObject.put("url",str);
         } catch (JSONException e) {
             e.printStackTrace();
