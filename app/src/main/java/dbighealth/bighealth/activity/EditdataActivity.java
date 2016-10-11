@@ -61,7 +61,6 @@ import dbighealth.bighealth.imageUtils.FileUtils;
 import okhttp3.Call;
 import utils.BitmapUtils;
 import utils.HttpPostUploadUtil;
-import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 /**
  * 个人信息
@@ -137,16 +136,16 @@ public class EditdataActivity extends Activity {
         ButterKnife.bind(this);
         //吧次activity放到集合里，等到修改密码成功之后统一取消
         BaseActivity.activityList.add(this);
-        name = SharedPreferencesUtils.getString(EditdataActivity.this,BaseApplication.name, "");
+        name = BaseApplication.username;
         sexa = BaseApplication.sex;//打开拿到性别
         photoPic = BaseApplication.photoPic;
         imgUrl = BaseApplication.imgUrl;
         sex1.setText(sexa);
-
+        year1.setText(BaseApplication.age);
         textView59.setText(name);
         tvTab.setText("个人信息");
         rightAdd.setVisibility(View.GONE);
-      //  image.setType(RoundImageView.TYPE_ROUND);//圆角
+        //  image.setType(RoundImageView.TYPE_ROUND);//圆角
         if(imgUrl!=null){
             image.setImageURI(imgUrl);
         } else if (photoPic!=null){
@@ -250,6 +249,7 @@ public class EditdataActivity extends Activity {
                             Intent intent = new Intent("android.intent.action.CART_YEAR");
                             intent.putExtra("year", year);
                             System.out.println("过去！！year" + year);
+                            BaseApplication.age=year;
                             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                         }
                     });
@@ -327,7 +327,7 @@ public class EditdataActivity extends Activity {
                                         Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
-                                        SharedPreferencesUtils.saveString(EditdataActivity.this,BaseApplication.name,et);
+                                        BaseApplication.username=et;
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
                                     }
@@ -436,9 +436,7 @@ public class EditdataActivity extends Activity {
                                 Map<String, String> fileMap = new HashMap<String, String>();
                                 fileMap.put("file", path1);
                                 String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
-//                                BaseApplication.username = name;
-                                //修改用户名称重新赋值
-                                SharedPreferencesUtils.saveString(EditdataActivity.this,BaseApplication.name, name);
+                                BaseApplication.username = name;
                                 //  BaseApplication.userid = uid;
                                 BaseApplication.imgUrl = imgUrl;
                                 BaseApplication.photoPic = getPicUrl;

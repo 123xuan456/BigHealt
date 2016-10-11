@@ -3,7 +3,6 @@ package dbighealth.bighealth.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -40,7 +39,6 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.LoginokBean;
 import okhttp3.Call;
-import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -211,16 +209,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
 
     }
-    public Context context;
+
     private LoginokBean log;
-    public String username;
     StringCallback MyStringLogin =new StringCallback() {
         //失败
         @Override
         public void onError(Call call, Exception e, int id) {
             System.out.println("传递失败原因="+e);
         }
-            //成功
+        //成功
         @Override
         public void onResponse(String response, int id) {
             System.out.println("传递成功="+response);
@@ -230,17 +227,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
                 System.out.println("d登录返回接口："+response);
                 String hint=log.getHint();
-                username=log.getUsername();
+                String username=log.getUsername();
                 String imgurl = log.getImgurl();
                 String sex=log.getSex();
                 String age=log.getAge();
                 String id1=String.valueOf(log.getId());
-                SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
-//                BaseApplication.userid=id1;//把id传到
-                BaseApplication.sex=sex;//把性别传到
-//                BaseApplication.username=username;
-                //sp存储用户名称
-                SharedPreferencesUtils.saveString(context,BaseApplication.name, log.getUsername());
+                BaseApplication.userid=id1;//吧id传到
+                BaseApplication.sex=sex;//吧性别传到
+                BaseApplication.username=username;
                 BaseApplication.photoPic = imgurl;
                 BaseApplication.age = age;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
@@ -249,13 +243,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 //                intent.putExtra("username",username);
 //                intent.putExtra("photoUrl", imgurl);
 //                System.out.println("过去！！username"+username);
-
-             //   LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-//               sendIntent(username,sex,imgurl);
-
 //                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-               sendIntent(username,sex,imgurl,age);
-
+                sendIntent(username,sex,imgurl,age);
 
                 finish();
                 return;
@@ -284,6 +273,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         }
     };
     private boolean isEmailValid(String email) {
+          /*  Pattern p = Pattern
+                    .compile("^((17[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+            Matcher m = p.matcher(email);
+            System.out.println(m.matches() + "---");
+            return m.matches();*/
         String telRegex = "13\\d{9}|14[57]\\d{8}|15[012356789]\\d{8}|18[01256789]\\d{8}|17[0678]\\d{8}";
         if (TextUtils.isEmpty(email)) return false;
         else return email.matches(telRegex);

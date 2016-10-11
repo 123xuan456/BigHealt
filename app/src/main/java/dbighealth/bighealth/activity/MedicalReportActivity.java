@@ -39,7 +39,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GridAdapter2;
 import dbighealth.bighealth.imageUtils.AlbumActivity1;
@@ -261,7 +260,7 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
              */
             case R.id.right_tv:
                 OkHttpUtils.postString()
-                        .url(UrlUtils.UPLOADREPORT)
+                       .url(UrlUtils.UPLOADREPORT)
                         .content(getImgList())
                         .id(COMMIT_PIC)
                         .build()

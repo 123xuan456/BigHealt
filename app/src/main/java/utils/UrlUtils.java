@@ -52,7 +52,6 @@ public class UrlUtils {
   public  static String   CHANGUSER=BASEURL2+"/user/changereguser";
   //修改年龄
   public  static String   CHANGYEAR=BASEURL3+"/user/changeage";
-
   //修改性别
   public  static String   CHANGESEX=BASEURL2+"/user/changesex";
   //注册验证码
