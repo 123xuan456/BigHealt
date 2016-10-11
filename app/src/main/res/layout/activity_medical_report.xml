@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="dbighealth.bighealth.activity.MedicalReportActivity">
+    <include
+        layout="@layout/footer_tab_2"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_reportTitle"
+        android:text="请上传体检报告"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        />
+   <!-- <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/addreport"
+       android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        />-->
+
+    <GridView
+        android:id="@+id/grid_view1"
+        android:layout_width="290dp"
+        android:layout_height="350dp"
+        android:horizontalSpacing="3dp"
+        android:numColumns="4"
+        android:scrollbars="none"
+        android:padding="5dp"
+        android:verticalSpacing="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_alignStart="@+id/problem"
+        android:layout_alignEnd="@+id/problem"
+        android:layout_below="@+id/textView3" />
+
+</LinearLayout>
