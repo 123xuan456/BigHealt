@@ -11,12 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import java.util.List;
 
 import dbighealth.bighealth.BaseApplication;
@@ -85,17 +82,12 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
             int code = informationBean.getCode();
             if (code == 200) {
                 final List<InformationBean.Message> result1 = informationBean.getMessage();
-                Log.e("liuliuliu",result1.toString());
                 adapter = new InformationAdapter1(getApplication(), result1);
-                //  Log.e("mhysa",infoAdapter.toString());
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                Log.i("mhysa-->",recyclerView.toString()+"recyclerview长度");
                 recyclerView.setAdapter(adapter);
                 recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //   Intent intent = new Intent();
-                        Toast.makeText(getApplication(),"打印的item值："+position,Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(getApplication(),Details_MessageActivity.class);
                         intent.putExtra("itemid",result1.get(position).getProblemId());
                         intent.putExtra("userid",result1.get(position).getUserId());

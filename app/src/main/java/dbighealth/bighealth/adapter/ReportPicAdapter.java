@@ -2,11 +2,14 @@ package dbighealth.bighealth.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,23 +50,21 @@ public class ReportPicAdapter extends BaseAdapter {
 	@SuppressLint("NewApi") @Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = View.inflate(context, R.layout.item_gridview, null);
+			convertView = View.inflate(context, R.layout.item_report_gridview, null);
 			view = new Holder(convertView);
 			convertView.setTag(view);
 		} else {
 			view = (Holder) convertView.getTag();
 		}
-
+		String url = list.get(position).getUrl();
+		Uri uri = Uri.parse(url);
+		view.icon.setImageURI(uri);
 		return convertView;
 	}
-
 	private class Holder {
-		private ImageView icon;
-		private TextView name;
-
+		private SimpleDraweeView icon;
 		public Holder(View view) {
-			icon = (ImageView) view.findViewById(R.id.typeicon);
-			name = (TextView) view.findViewById(R.id.typename);
+			icon = (SimpleDraweeView) view.findViewById(R.id.iv_reporticon);
 		}
 	}
 

@@ -148,11 +148,8 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (BaseApplication.bitmap!=null){
-                  /*  String photoPic = BaseApplication.photoPic;
-                   // String   photoUrl = intent.getStringExtra("photoUrl");
-                    Uri uri = Uri.parse(photoPic);*/
                     rcvArticlePhoto.setImageBitmap(BaseApplication.bitmap);
-                  //  rcvArticlePhoto.setImageURI(BaseApplication.imgUrl);
+
                 }
             }
         };

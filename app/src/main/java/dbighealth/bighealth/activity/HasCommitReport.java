@@ -3,6 +3,7 @@ package dbighealth.bighealth.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -18,11 +19,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.adapter.ReportPicAdapter;
 import dbighealth.bighealth.bean.HasCommitBean;
 import dbighealth.bighealth.imageUtils.Bimp1;
 import okhttp3.Call;
 import utils.UrlUtils;
 
+/**
+ *已经上传过体检报告
+ */
 public class HasCommitReport extends Activity implements View.OnClickListener{
 
     @Bind(R.id.arrow_left)
@@ -46,6 +51,7 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
         rightTv.setOnClickListener(this);
         rightTv.setText("重新上传");
         tvReportTitle.setText("您上传的体检报告");
+        initIntenet();
     }
 
     /**
@@ -64,6 +70,7 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
         @Override
         public void onError(Call call, Exception e, int id) {
 
+            Log.i("mhysa",e.toString());
         }
 
         @Override
@@ -71,9 +78,12 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
 
             Gson gson = new Gson();
             HasCommitBean hasCommit = gson.fromJson(response,HasCommitBean.class);
+
             int code = hasCommit.getCode();
             if(code==200){
                 List<HasCommitBean.UrlsBean> urls = hasCommit.getUrls();
+                ReportPicAdapter reportPicAdapter = new ReportPicAdapter(getApplicationContext(),urls);
+                gridView1.setAdapter(reportPicAdapter);
             }
 
         }
@@ -86,9 +96,9 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
                 finish();
               break;
             case R.id.right_tv:
-
                 Intent intent = new Intent(HasCommitReport.this,MedicalReportActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

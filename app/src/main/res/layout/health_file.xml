@@ -345,7 +345,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@null"
-                android:hint="1992年2月"
+                android:hint="点此选择出生年月"
                 android:textColor="#666666"
                 android:layout_alignParentEnd="true" />
         </LinearLayout>

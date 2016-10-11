@@ -47,7 +47,9 @@ import dbighealth.bighealth.activity.MedicalReportActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
+import dbighealth.bighealth.adapter.ReportPicAdapter;
 import dbighealth.bighealth.bean.EveryDayBean;
+import dbighealth.bighealth.bean.HasCommitBean;
 import okhttp3.Call;
 import utils.UrlUtils;
 
@@ -79,6 +81,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private Thread mThread;
     String username;
     private int UPDATE = 101;
+    private int SEARCH =102;
     private Uri imgUrl;
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {//此方法在ui线程运行
@@ -132,7 +135,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 userid = BaseApplication.userid;
                 username = intent.getStringExtra("username");
-                System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
                 textView50.setText(username);
 
                 if(!BaseApplication.photoPic.equals("")){
@@ -210,6 +212,20 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
             if (id == UPDATE) {
                 Log.i("pengpeng--->", response);
+            }
+            if(id==SEARCH){
+                Gson gson = new Gson();
+                HasCommitBean hasCommit = gson.fromJson(response,HasCommitBean.class);
+                int code = hasCommit.getCode();
+                if(code==200){
+                    Intent hascommit = new Intent(getActivity(), HasCommitReport.class);
+                    startActivity(hascommit);
+                }
+                if(code==400){
+                    Intent medicalintent = new Intent(getActivity(), MedicalReportActivity.class);
+                    startActivity(medicalintent);
+                }
+
             }
 
         }
@@ -410,8 +426,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     } else {
                         Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
                     }
-              /*  Intent intent11 = new Intent(getContext(), BllDemo.class);
-                startActivity(intent11);*/
                     break;
                     case R.id.textView16:
                         if (!TextUtils.isEmpty(id)) {
@@ -426,15 +440,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
              */
             case R.id.textView19:
                         if (!TextUtils.isEmpty(id)){
-                            hasCommitReport = getActivity().getSharedPreferences("hasCommitReport", Activity.MODE_PRIVATE);
-                            commitreport = hasCommitReport.getBoolean("commitreport", false);
-                            if(commitreport){
-                                Intent hascommit = new Intent(getActivity(), HasCommitReport.class);
-                                startActivity(hascommit);
-                            }else{
-                                Intent medicalintent = new Intent(getActivity(), MedicalReportActivity.class);
-                                startActivity(medicalintent);
-                            }
+                            initIntenet();
 
                         }else{
                             Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
@@ -452,6 +458,15 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                         break;
                 }
         }
+
+    public void initIntenet(){
+        OkHttpUtils.get()
+                .url(UrlUtils.SEARCHREPORT)
+                .id(SEARCH)
+                .addParams("userId",BaseApplication.userid)
+                .build()
+                .execute(MyStringCallBack);
+    }
         @Override
         public void onDestroyView () {
             super.onDestroyView();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -39,8 +40,6 @@ public class GalleryActivity1 extends Activity implements OnClickListener{
 		}
 		
 		initViews();
-
-
 	}
 
 	//获取数据
@@ -78,7 +77,6 @@ public class GalleryActivity1 extends Activity implements OnClickListener{
 		
 		adapter = new MyPageAdapter(this,listViews);
 		viewpager.setAdapter(adapter);
-		
 		int id = getIntent().getIntExtra("ID", 0);
 		viewpager.setCurrentItem(id);
 	}
@@ -98,6 +96,7 @@ public class GalleryActivity1 extends Activity implements OnClickListener{
 			} else {
 				Bimp1.tempSelectBitmap.remove(location);
 				Bimp1.imgList.remove(location);
+				Log.i("mhysa-->","删掉的位置是："+location);
 				Bimp1.max--;
 				viewpager.removeAllViews();
 				listViews.remove(location);

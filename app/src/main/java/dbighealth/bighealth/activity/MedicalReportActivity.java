@@ -1,12 +1,10 @@
 package dbighealth.bighealth.activity;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -15,7 +13,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,9 +34,6 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,12 +42,9 @@ import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GridAdapter2;
-import dbighealth.bighealth.imageUtils.AlbumActivity;
 import dbighealth.bighealth.imageUtils.AlbumActivity1;
-import dbighealth.bighealth.imageUtils.Bimp;
 import dbighealth.bighealth.imageUtils.Bimp1;
 import dbighealth.bighealth.imageUtils.FileUtils;
-import dbighealth.bighealth.imageUtils.GalleryActivity;
 import dbighealth.bighealth.imageUtils.GalleryActivity1;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import okhttp3.Call;
@@ -81,9 +72,6 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
     private GridAdapter2 adapter;
 
     private int COMMIT_PIC = 1;
-    private SharedPreferences sp;
-    private SharedPreferences.Editor edit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +79,6 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         ButterKnife.bind(this);
         tit.setText("体检报告");
         rightTv.setText("提交");
-        sp = getSharedPreferences("hasCommitReport", MODE_PRIVATE);
-        edit = sp.edit();
         arrowLeft.setOnClickListener(this);
         rightTv.setOnClickListener(this);
         initViews();
@@ -206,7 +192,6 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
                             fileMap.put("file", path1);
                             String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
                             Bimp1.imgList.add(getPicUrl);
-                            Log.i("mhysa","返回的imgurl是"+getPicUrl);
                         }
                     }.start();
                 }
@@ -237,14 +222,6 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         return picPath;
 
     }
-    // 使用系统当前日期加以调整作为照片的名称
-    @SuppressLint("SimpleDateFormat")
-    private String getPhotoFileName() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "'IMG'_yyyyMMdd_HHmmss");
-        return dateFormat.format(date) + ".jpg";
-    }
 
     public String getImgList(){
         String str ="";
@@ -264,6 +241,7 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.i("mhysa","imglist"+jsonObject.toString());
         return jsonObject.toString();
     }
 
@@ -274,8 +252,6 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
              * 返回
              */
             case R.id.arrow_left:
-                edit.putBoolean("commitreport",false);
-                edit.commit();
                 finish();
                 break;
             /**
@@ -299,16 +275,12 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
                 Log.i("mhysa--->",e.toString());
                 Toast.makeText(getApplicationContext(),"上传失败，请稍后重试！",Toast.LENGTH_SHORT).show();
             }
-
         }
         @Override
         public void onResponse(String response, int id) {
 
             if(id==COMMIT_PIC){
                 Toast.makeText(getApplicationContext(),"上传成功！",Toast.LENGTH_SHORT).show();
-
-                edit.putBoolean("commitreport",true);
-                edit.commit();
                 MedicalReportActivity.this.finish();
             }
 
