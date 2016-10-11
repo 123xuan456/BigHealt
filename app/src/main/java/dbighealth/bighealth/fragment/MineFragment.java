@@ -51,6 +51,7 @@ import dbighealth.bighealth.adapter.ReportPicAdapter;
 import dbighealth.bighealth.bean.EveryDayBean;
 import dbighealth.bighealth.bean.HasCommitBean;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -77,6 +78,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     String id;//用户id
     TextView archiving;
     private SharedPreferences sp;
+
     private boolean first;
     private Thread mThread;
     String username;
@@ -87,7 +89,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         public void handleMessage(Message msg) {//此方法在ui线程运行
             switch (msg.what) {
                 case 1:
-                    id = BaseApplication.userid;
+//                    id = BaseApplication.userid;
+                    id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                     System.out.println("拿到id=" + id);
                     if (!id.equals("")) {//如果有id
                         rl1.setVisibility(View.VISIBLE);
@@ -133,10 +136,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onReceive(Context context, Intent intent){
 
-                userid = BaseApplication.userid;
+
                 username = intent.getStringExtra("username");
                 textView50.setText(username);
-
+                userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                 if(!BaseApplication.photoPic.equals("")){
                     photoUrl = BaseApplication.photoPic;
                     imgUrl = BaseApplication.imgUrl;
@@ -240,6 +243,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         Uri imgUrl = BaseApplication.imgUrl;
         Fresco.initialize(getActivity());
 
+        userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
+
+
         ra = (LinearLayout) inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, ra);
         TextView tvTab = (TextView) ra.findViewById(R.id.tvTab);
@@ -341,7 +347,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             imageView20.setVisibility(View.GONE);
         }
 
-        id = BaseApplication.userid;
+//        id = BaseApplication.userid;
+        id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
         if (!id.equals("")) {//如果有id
             rl1.setVisibility(View.VISIBLE);
             rl.setVisibility(View.GONE);
@@ -367,7 +374,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 }
                 bundle.putString("picUrl", BaseApplication.photoPic);
                 bundle.putString("name", BaseApplication.username);
-                bundle.putString("uid", BaseApplication.userid);
+//                bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);
                 i1.putExtras(bundle);
                 startActivity(i1);
@@ -460,10 +467,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         }
 
     public void initIntenet(){
+        userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
+        Log.i("mhysa-->","此时的地址是："+UrlUtils.SEARCHREPORT+"?userId="+userid);
         OkHttpUtils.get()
                 .url(UrlUtils.SEARCHREPORT)
                 .id(SEARCH)
-                .addParams("userId",BaseApplication.userid)
+                .addParams("userId",userid)
                 .build()
                 .execute(MyStringCallBack);
     }

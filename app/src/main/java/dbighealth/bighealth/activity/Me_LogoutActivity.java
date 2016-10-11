@@ -61,6 +61,7 @@ import dbighealth.bighealth.imageUtils.FileUtils;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import utils.BitmapUtils;
 import utils.HttpPostUploadUtil;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -113,7 +114,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         picUrl = extras.getString("picUrl");
-        uid = extras.getString("uid");
+//        uid = extras.getString("uid");
         imgurl = extras.getString("imgurl");
         if(imgurl!=null){
             Uri uri = Uri.parse(imgurl);
@@ -191,7 +192,8 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.email_sign_in_button:
-                BaseApplication.userid = "";
+//                BaseApplication.userid = "";
+                SharedPreferencesUtils.saveString(this, UrlUtils.LOGIN, "");
                 BaseApplication.bitmap=null;
                 BaseApplication.photoPic="";
                 BaseApplication.imgUrl = null;

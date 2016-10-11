@@ -90,7 +90,6 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
 
         //设置数据刷新的会回调，因为UltraRefreshListView实现了PtrHandler
         ultraPtr.setPtrHandler(ultraLv);
-
 //        //设置数据刷新回调接口
         ultraLv.setUltraRefreshListener(this);
 

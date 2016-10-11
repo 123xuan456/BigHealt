@@ -23,6 +23,7 @@ import dbighealth.bighealth.adapter.ReportPicAdapter;
 import dbighealth.bighealth.bean.HasCommitBean;
 import dbighealth.bighealth.imageUtils.Bimp1;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -42,6 +43,7 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
     GridView gridView1;
 
     private int SEARCH =101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +61,11 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
      * @param
      */
     public void initIntenet(){
+        String userid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
         OkHttpUtils.get()
                    .url(UrlUtils.SEARCHREPORT)
                    .id(SEARCH)
-                   .addParams("userId",BaseApplication.userid)
+                   .addParams("userId",userid)
                    .build()
                    .execute(MyStringCallBack);
     }

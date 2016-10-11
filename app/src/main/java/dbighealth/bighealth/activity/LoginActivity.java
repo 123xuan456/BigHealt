@@ -3,6 +3,7 @@ package dbighealth.bighealth.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -41,6 +42,7 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.LoginokBean;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -211,7 +213,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
 
     }
-
+    public Context context;
     private LoginokBean log;
     StringCallback MyStringLogin =new StringCallback() {
         //失败
@@ -233,8 +235,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String imgurl = log.getImgurl();
                 String sex=log.getSex();
                 String id1=String.valueOf(log.getId());
-                BaseApplication.userid=id1;//吧id传到
-                BaseApplication.sex=sex;//吧性别传到
+                SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
+//                BaseApplication.userid=id1;//把id传到
+                BaseApplication.sex=sex;//把性别传到
                 BaseApplication.username=username;
                 BaseApplication.photoPic = imgurl;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
