@@ -15,7 +15,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -45,15 +44,11 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.GridAdapter2;
-import dbighealth.bighealth.imageUtils.AlbumActivity;
 import dbighealth.bighealth.imageUtils.AlbumActivity1;
-import dbighealth.bighealth.imageUtils.Bimp;
 import dbighealth.bighealth.imageUtils.Bimp1;
 import dbighealth.bighealth.imageUtils.FileUtils;
-import dbighealth.bighealth.imageUtils.GalleryActivity;
 import dbighealth.bighealth.imageUtils.GalleryActivity1;
 import dbighealth.bighealth.imageUtils.ImageItem;
 import okhttp3.Call;
@@ -285,7 +280,7 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
              */
             case R.id.right_tv:
                 OkHttpUtils.postString()
-                        .url(UrlUtils.UPLOADREPORT)
+                       .url(UrlUtils.UPLOADREPORT)
                         .content(getImgList())
                         .id(COMMIT_PIC)
                         .build()

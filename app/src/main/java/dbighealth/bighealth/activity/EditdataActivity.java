@@ -141,7 +141,7 @@ public class EditdataActivity extends Activity {
         photoPic = BaseApplication.photoPic;
         imgUrl = BaseApplication.imgUrl;
         sex1.setText(sexa);
-
+        year1.setText(BaseApplication.age);
         textView59.setText(name);
         tvTab.setText("个人信息");
         rightAdd.setVisibility(View.GONE);
@@ -245,11 +245,11 @@ public class EditdataActivity extends Activity {
                         @Override
                         public void onResponse(String response, int id) {
                             System.out.println("修改年龄成功" + response);
-                            Toast.makeText(getApplication(), "修改成功", Toast.LENGTH_LONG).show();
                             //修改成功之后发送一个广播
                             Intent intent = new Intent("android.intent.action.CART_YEAR");
                             intent.putExtra("year", year);
                             System.out.println("过去！！year" + year);
+                            BaseApplication.age=year;
                             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                         }
                     });
@@ -327,6 +327,7 @@ public class EditdataActivity extends Activity {
                                         Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
+                                        BaseApplication.username=et;
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
                                     }

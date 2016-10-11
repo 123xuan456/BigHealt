@@ -16,10 +16,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.HasCommitBean;
-import dbighealth.bighealth.imageUtils.Bimp1;
 import okhttp3.Call;
 import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
@@ -70,7 +68,6 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
 
         @Override
         public void onResponse(String response, int id) {
-
             Gson gson = new Gson();
             HasCommitBean hasCommit = gson.fromJson(response,HasCommitBean.class);
             int code = hasCommit.getCode();

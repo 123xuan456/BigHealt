@@ -39,17 +39,14 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ArchivingActivity;
 import dbighealth.bighealth.activity.ConditionActivity;
-import dbighealth.bighealth.activity.HasCommitReport;
 import dbighealth.bighealth.activity.InformationActivity1;
 import dbighealth.bighealth.activity.LoginActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
-import dbighealth.bighealth.activity.MedicalReportActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
 import dbighealth.bighealth.bean.EveryDayBean;
 import okhttp3.Call;
-import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -72,6 +69,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private TextView textView9;//温馨提示
     private TextView textView11;//每日一读
     private TextView textView50;//昵称
+    private TextView textView20;//年龄
     private String photoUrl;
     String id;//用户id
     TextView archiving;
@@ -85,8 +83,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         public void handleMessage(Message msg) {//此方法在ui线程运行
             switch (msg.what) {
                 case 1:
-//                    id = BaseApplication.userid;
-                    id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
+                    id = BaseApplication.userid;
                     System.out.println("拿到id=" + id);
                     if (!id.equals("")) {//如果有id
                         rl1.setVisibility(View.VISIBLE);
@@ -107,8 +104,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private String sex;
     private ImageView imageView20;
     private ImageView imageView21;
-    private SharedPreferences hasCommitReport;
-    private boolean commitreport;
+    private String year;
 
     public static Fragment newInstance() {
         MineFragment f = new MineFragment();
@@ -125,14 +121,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.CART_BROADCAST");//修改昵称
         BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
-
-
             private String photoPic;
-
             @Override
             public void onReceive(Context context, Intent intent){
 
-                userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
+                userid = BaseApplication.userid;
                 username = intent.getStringExtra("username");
                 System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
                 textView50.setText(username);
@@ -177,7 +170,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             }
         };
         broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
-        
+
         intentFilter.addAction("android.intent.action.CART_SEX");//修改性别
         BroadcastReceiver mItemViewListClickReceiver1 = new BroadcastReceiver() {
 
@@ -196,6 +189,19 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             }
         };
         broadcastManager.registerReceiver(mItemViewListClickReceiver1, intentFilter);
+
+
+        intentFilter.addAction("android.intent.action.CART_YEAR");//修改年龄
+        BroadcastReceiver mItemViewListClickReceiver2 = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent){
+                year = intent.getStringExtra("year");
+                System.out.println("接收到了year="+year);
+                textView20.setText(year);
+            }
+        };
+        broadcastManager.registerReceiver(mItemViewListClickReceiver2, intentFilter);
     }
 
 
@@ -223,6 +229,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
         username = BaseApplication.username;
         photoPic = BaseApplication.photoPic;
+        year = BaseApplication.age;
         Uri imgUrl = BaseApplication.imgUrl;
         Fresco.initialize(getActivity());
 
@@ -230,6 +237,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, ra);
         TextView tvTab = (TextView) ra.findViewById(R.id.tvTab);
         textView50 = (TextView) ra.findViewById(R.id.textView50);
+        textView20=(TextView)ra.findViewById(R.id.textView20);
+        textView20.setText(year);
         tvTab.setText("我的");
         Log.i("mhysa--->", "用户名：" + username);
 
@@ -327,8 +336,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             imageView20.setVisibility(View.GONE);
         }
 
-//        id = BaseApplication.userid;
-        id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
+        id = BaseApplication.userid;
         if (!id.equals("")) {//如果有id
             rl1.setVisibility(View.VISIBLE);
             rl.setVisibility(View.GONE);
@@ -342,6 +350,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.rl:
                 Intent i = new Intent(getActivity(), LoginActivity.class);//没有登录点击进入登录页面
                 startActivity(i);
@@ -354,7 +363,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 }
                 bundle.putString("picUrl", BaseApplication.photoPic);
                 bundle.putString("name", BaseApplication.username);
-//                bundle.putString("uid", BaseApplication.userid);
+                bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);
                 i1.putExtras(bundle);
                 startActivity(i1);
@@ -406,59 +415,53 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.textView15:
-                   // Intent i5 = new Intent(getContext(), InformationActivity1.class);//资讯
-                    if (!TextUtils.isEmpty(id)) {
-                       Intent i5 = new Intent(getActivity(), InformationActivity1.class);
-                        startActivity(i5);
-                    } else {
-                        Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
-                    }
+                // Intent i5 = new Intent(getContext(), InformationActivity1.class);//资讯
+                if (!TextUtils.isEmpty(id)) {
+                    Intent i5 = new Intent(getActivity(), InformationActivity1.class);
+                    startActivity(i5);
+                } else {
+                    Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
+                }
               /*  Intent intent11 = new Intent(getContext(), BllDemo.class);
                 startActivity(intent11);*/
-                    break;
-                    case R.id.textView16:
-                        if (!TextUtils.isEmpty(id)) {
-                            Intent i6 = new Intent(getActivity(), SubscribeActivity.class);//预约
-                            startActivity(i6);
-                        } else {
-                            Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-            /**
-             * 体检报告
-             */
-            case R.id.textView19:
-                        if (!TextUtils.isEmpty(id)){
-                            hasCommitReport = getActivity().getSharedPreferences("hasCommitReport", Activity.MODE_PRIVATE);
-                            commitreport = hasCommitReport.getBoolean("commitreport", false);
-                            if(commitreport){
-                                Intent hascommit = new Intent(getActivity(), HasCommitReport.class);
-                                startActivity(hascommit);
-                            }else{
-                                Intent medicalintent = new Intent(getActivity(), MedicalReportActivity.class);
-                                startActivity(medicalintent);
-                            }
-
-                        }else{
-                            Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-                    case R.id.textView18:
-                        if (!TextUtils.isEmpty(id)) {
-                            Intent intent = new Intent(getActivity(), ArchivingActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
+                break;
+            case R.id.textView16:
+                if (!TextUtils.isEmpty(id)) {
+                    Intent i6 = new Intent(getActivity(), SubscribeActivity.class);//预约
+                    startActivity(i6);
+                } else {
+                    Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
                 }
-        }
-        @Override
-        public void onDestroyView () {
-            super.onDestroyView();
-            ButterKnife.unbind(this);
-        }
+                break;
+            case R.id.textView19:
+                sp = getActivity().getSharedPreferences("commit",
+                        Activity.MODE_PRIVATE);
+                first = sp.getBoolean("First", false);
+                if (!TextUtils.isEmpty(id)) {
+                    if (first) {
+                        Toast.makeText(getActivity(), "体检报告生成中，请稍后！", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "请先填写体质测试！！", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.textView18:
+                if (!TextUtils.isEmpty(id)) {
+                    Intent intent = new Intent(getActivity(), ArchivingActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
+                }
 
+                break;
+        }
     }
+    @Override
+    public void onDestroyView () {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+}
