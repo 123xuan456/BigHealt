@@ -52,6 +52,10 @@ public class UrlUtils {
   public  static String   CHANGUSER=BASEURL2+"/user/changereguser";
   //修改年龄
   public  static String   CHANGYEAR=BASEURL3+"/user/changeage";
+  //查询体检报告
+  public static String SEARCHREPORT = BASEURL3+"/medicalReportarchReport";
+  //保存体检报告
+  public static String UPLOADREPORT = BASEURL3+"/medicalReportveReporty";
 
   //修改性别
   public  static String   CHANGESEX=BASEURL2+"/user/changesex";
@@ -95,5 +99,9 @@ public class UrlUtils {
   public static String REMINDSET = BASEURL2+"/medicineremind/newremind";
   //提醒listview
   public static String REMIND = BASEURL2+"/medicineremind/remindlist";
+  //查询体检报告
+  public static String SEARCHREPORT = BASEURL3+"/medicalReportarchReport";
+  //保存体检报告
+  public static String UPLOADREPORT = BASEURL3+"/medicalReportveReporty";
 
 }
