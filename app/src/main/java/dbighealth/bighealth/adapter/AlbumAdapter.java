@@ -14,16 +14,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.imageUtils.Bimp1;
 import dbighealth.bighealth.imageUtils.BitmapCache;
 import dbighealth.bighealth.imageUtils.ImageItem;
-import utils.HttpPostUploadUtil;
-import utils.UrlUtils;
 
 
 public class AlbumAdapter extends BaseAdapter{
