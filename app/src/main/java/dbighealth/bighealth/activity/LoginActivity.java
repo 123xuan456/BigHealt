@@ -215,6 +215,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
     }
     public Context context;
     private LoginokBean log;
+    public String username;
     StringCallback MyStringLogin =new StringCallback() {
         //失败
         @Override
@@ -231,21 +232,23 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
                 System.out.println("d登录返回接口："+response);
                 String hint=log.getHint();
-                String username=log.getUsername();
+                username=log.getUsername();
                 String imgurl = log.getImgurl();
                 String sex=log.getSex();
                 String id1=String.valueOf(log.getId());
                 SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
 //                BaseApplication.userid=id1;//把id传到
                 BaseApplication.sex=sex;//把性别传到
-                BaseApplication.username=username;
+//                BaseApplication.username=username;
+                //sp存储用户名称
+                SharedPreferencesUtils.saveString(context,BaseApplication.name, log.getUsername());
                 BaseApplication.photoPic = imgurl;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 //登录成功之后发送一个广播
-                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
-                intent.putExtra("username",username);
-                intent.putExtra("photoUrl", imgurl);
-                System.out.println("过去！！username"+username);
+//                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+//                intent.putExtra("username",username);
+//                intent.putExtra("photoUrl", imgurl);
+//                System.out.println("过去！！username"+username);
              //   LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                sendIntent(username,sex,imgurl);
 

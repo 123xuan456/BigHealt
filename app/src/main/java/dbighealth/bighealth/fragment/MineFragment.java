@@ -134,7 +134,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                 username = intent.getStringExtra("username");
-                System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
+                System.out.println("接收到了id" + userid+"username="+username);
                 textView50.setText(username);
 
                 if(!BaseApplication.photoPic.equals("")){
@@ -221,7 +221,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        username = BaseApplication.username;
+        username = SharedPreferencesUtils.getString(getContext(), BaseApplication.name, "");
+        Log.i("99999999--->", "用户名：" + username);
         photoPic = BaseApplication.photoPic;
         Uri imgUrl = BaseApplication.imgUrl;
         Fresco.initialize(getActivity());
@@ -353,7 +354,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     bundle.putString("imgurl",BaseApplication.imgUrl.toString());
                 }
                 bundle.putString("picUrl", BaseApplication.photoPic);
-                bundle.putString("name", BaseApplication.username);
+//                bundle.putString("name", BaseApplication.username);
 //                bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);
                 i1.putExtras(bundle);
