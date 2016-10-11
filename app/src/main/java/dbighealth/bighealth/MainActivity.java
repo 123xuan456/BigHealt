@@ -1,5 +1,6 @@
 package dbighealth.bighealth;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -53,27 +54,42 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     }
 
     // 点击俩次退出的判断
-    private long firstTime = 0;
-   // private Editor edit;
-  /*  @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                long secondTime = System.currentTimeMillis();
-                if (secondTime - firstTime > 2000) { // 如果两次按键时间间隔大于2秒，则不退出
-                    Toast.makeText(this, "再按一次退出换钱", Toast.LENGTH_SHORT).show();
-                    firstTime = secondTime;// 更新firstTime
-                    return true;
-                } else { // 两次按键小于2秒时，退出应用
+//    private long firstTime = 0;
+//   private SharedPreferences.Editor edit;
+//  @Override
+//    public boolean onKeyUp(int keyCode, KeyEvent event) {
+//        // TODO Auto-generated method stub
+//        switch (keyCode) {
+//            case KeyEvent.KEYCODE_BACK:
+//                long secondTime = System.currentTimeMillis();
+//                if (secondTime - firstTime > 2000) { // 如果两次按键时间间隔大于2秒，则不退出
+//                    Toast.makeText(this, "再按一次退出换钱", Toast.LENGTH_SHORT).show();
+//                    firstTime = secondTime;// 更新firstTime
+//                    return true;
+//                } else { // 两次按键小于2秒时，退出应用
+//
+//                    System.exit(0);
+//                }
+//                break;
+//        }
+//
+//        return super.onKeyUp(keyCode, event);
+//    }
 
-                    System.exit(0);
-                }
-                break;
+    private long mExitTime;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
         }
-
-        return super.onKeyUp(keyCode, event);
-    }*/
+        return super.onKeyDown(keyCode, event);
+    }
 
 
     @Override
