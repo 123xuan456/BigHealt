@@ -1,3 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.1.0_df26d9b72dfcb6c5624a791e1c2d6cf20b3bdc4b.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.github.Aspsine\SwipeToLoadLayout\1.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e891efa590a2379d966e96688865282e9ded27ac">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.github.Aspsine-SwipeToLoadLayout-1.0.3_6c1d6074ef482c52d95bd2918cdf22ecef5678a0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\gson-2.7_2e85dbf641c4a16c73925139bd4ff50ebb0450dd.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\bolts-tasks-1.4.0_c64325f78a24c085b700c554244dc03fa6bc6a89.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\percent\23.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fef469dcc3073ecc4706ba216479f2111e05834f">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-percent-23.0.0_53f6e24a3512f716425fee876bc982830e4735b2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\okio-1.8.0_06f7f952010e37a20e0067d81e65675288b9e24f.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\0.11.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3341b66c54367e777a0647e2db96c045329bfeab">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-0.11.0_b8bafa7c26440f3c6b1d14e08fc297729c652f3a.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.2.1_0dd292ef901f0d9f8adf91d067b1aa2575c6ff69.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.2.1_21a796ad32c34bda62983304d9c16680febb6bc6.jar" />
+    </item>
+    <item
+        jar="E:\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0_185e00ed5a1d25ca86b6783161b35e225af01140.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\0.11.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98786c1770b531b9194fb6448b2a2692c64074b6">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-0.11.0_938e9ced6f36f45887810f9344e12fce1aa6599b.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\design\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.2.1_f7defe4f4f1446ae8632b37b5abfa01692226644.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\in.srain.cube\ultra-ptr\1.0.11\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a0bdf70123d26dd83d8462d602b3a83a41934cf6">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\in.srain.cube-ultra-ptr-1.0.11_52ff6d6792be5fbabab19972818328cac37a721c.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\libs\activation.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8acf42612ad530a4fbf4058982555394298b4ed8">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\activation_060c0957b34e67a316cacce2af847fda35cb5172.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.3.0_01a016a2ed1b6071662cc09f4aa37a3fcb67208b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations-java5\15.0\7011b4551a8451906759b05814c58b9eb829ea9b\annotations-java5-15.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="7011b4551a8451906759b05814c58b9eb829ea9b">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\annotations-java5-15.0_8a080744e35bc475075a6bef0a77f4a59e64aabd.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.zhy\okhttputils\2.6.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="774d21c973656c732d722a8fe920e1e21cf36335">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.zhy-okhttputils-2.6.1_f476db1a7ddf4148d790389acf13689cfba796c7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.1\19047bdb6a4fc00a44124f64ca98e88fc204e7e3\okhttp-3.3.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\okhttp-3.3.1_2ea39afb3973a142a4b831a99bc4e2df1de6a0a5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\glide-3.7.0_1f3ddf859a86296da03fddcf50d19f29d652df81.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.2.1_4d8494cfcc1403f63a4bef9f89b8d2abd6bd5020.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.2.1_0fb731d05d264efe0b3df73159238747359c1a6f.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0_870c5067c460ed7abf8ff11c9e49e78cbd6e5eee.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\0.11.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ca63c521b5745ae9a09629d7ca67ff6bc2a967fe">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-base-0.11.0_6f469ae82fc5410ff608d3512908a63421a3f1a5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\library-2.4.0_dd460f45d27a359687729c3c169358b1eda3100b.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.1.0_0c3e472c2bb95989f088ef0fc3a10d18420f3776.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\butterknife-7.0.1_fc861cbde294a7e4a9efd57936d766cb077b60e2.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\0.11.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1137942adeb03984c1311b662363dd38fc238fd3">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-drawee-0.11.0_054cc01cf7c8620de59f082dd24563b0d9a78440.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\0.11.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d31aadf33187c37a7cd63dc1b769f8c6e33f78c3">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fresco-0.11.0_83ca9d0d278a0eaaa6667c061f012f08d6b7afe5.jar" />
+    </item>
+    <item
+        jar="E:\BigHealt\app\libs\afinal_0.5.1_bin.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ae398c74701392473b9cb488c76a92576d6f548c">
+        <dex dex="E:\BigHealt\app\build\intermediates\pre-dexed\debug\afinal_0.5.1_bin_e04d4ca8c47f35d724f90aff6b15643487a049d2.jar" />
+    </item>
+
+</items>
