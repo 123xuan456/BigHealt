@@ -90,7 +90,6 @@ public class UrlUtils {
   //我要咨询
   public static String INFORMATION =BASEURL2+ "/advice/needhelp";
   //设置提醒advice/saveAddQuest
-
   public static String REMINDSET = BASEURL2+"/medicineremind/newremind";
   //提醒listview
   public static String REMIND = BASEURL2+"/medicineremind/remindlist";
@@ -98,7 +97,6 @@ public class UrlUtils {
   public static String SEARCHREPORT = BASEURL3+"/medicalReport/searchReport";
   //保存体检报告
   public static String UPLOADREPORT = BASEURL3+"/medicalReport/saveReporty";
-
   //判读是否填写过体质
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
 

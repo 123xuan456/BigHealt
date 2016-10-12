@@ -69,8 +69,6 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
      *
      */
    public void  initInternet(){
-       Log.e("mhysa","特殊页的地址"+UrlUtils.SpecialHome);
-
        OkHttpUtils.get()
                   .url(UrlUtils.SpecialHome)
                   .id(SPECIAL_HOME)
@@ -85,16 +83,12 @@ public class SpecialFragment1 extends Fragment implements BaseAdapter.OnItemClic
         @Override
         public void onError(Call call, Exception e, int id) {
 
-            Log.e("mhysa","特殊页请求失败");
-        //    Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"网络问题，加载失败!",Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onResponse(String response, int id) {
            if(id==SPECIAL_HOME){
-
-             //  Bundle data = msg.getData();
-             //  String result = data.getString("result");
                Log.e("mhysa","首页特殊页展示"+response);
                Gson gson = new Gson();
                CommonHealth commonHealth = gson.fromJson(response, CommonHealth.class);
