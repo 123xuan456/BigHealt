@@ -142,7 +142,8 @@ public class EditdataActivity extends Activity {
         name = BaseApplication.username;
         name = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERNAME,"");
         sexa = BaseApplication.sex;//打开拿到性别
-        photoPic = BaseApplication.photoPic;
+      //  photoPic = BaseApplication.photoPic;
+        photoPic = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERPIC,"");
         imgUrl = BaseApplication.imgUrl;
         sex1.setText(sexa);
         year1.setText(BaseApplication.age);
@@ -439,6 +440,7 @@ public class EditdataActivity extends Activity {
                                 SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERNAME,name);
                                 //  BaseApplication.userid = uid;
                                 BaseApplication.imgUrl = imgUrl;
+                                SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERPIC,getPicUrl);
                                 BaseApplication.photoPic = getPicUrl;
                                 BaseApplication.bitmap = BitmapUtils.toRoundBitmap(headBitmap);
                                 Log.i("mhysa","本地地址："+imgUrl);

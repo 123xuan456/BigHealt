@@ -99,6 +99,7 @@ public class UrlUtils {
   public static String UPLOADREPORT = BASEURL3+"/medicalReport/saveReporty";
   //判读是否填写过体质
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
-
+  //我的收藏展示
+  public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
 
 }

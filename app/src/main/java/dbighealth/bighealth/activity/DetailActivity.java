@@ -67,9 +67,6 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
         Intent intent = getIntent();
         imgId = intent.getIntExtra("imgId", 0);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         initInternet();
     }
 

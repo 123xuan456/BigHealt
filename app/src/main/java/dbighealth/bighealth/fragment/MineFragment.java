@@ -141,12 +141,18 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
                 textView50.setText(username);
                 userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
-                if(!BaseApplication.photoPic.equals("")){
+                if(!SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,"").isEmpty()){
+                    photoUrl = SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,"");
+                    imgUrl = BaseApplication.imgUrl;
+
+                    Log.i("mhysa","打印此时的地址："+photoUrl);
+                }
+               /* if(!BaseApplication.photoPic.equals("")){
                     photoUrl = BaseApplication.photoPic;
                     imgUrl = BaseApplication.imgUrl;
 
                     Log.i("mhysa","打印此时的地址："+photoUrl);
-                }else{
+                }*/else{
                     photoUrl = intent.getStringExtra("photoUrl");
                 }
 
@@ -284,6 +290,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         username = BaseApplication.username;
         username = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERNAME,"");
         photoPic = BaseApplication.photoPic;
+        photoPic = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERPIC,"");
         year = BaseApplication.age;
         Uri imgUrl = BaseApplication.imgUrl;
         Fresco.initialize(getActivity());
@@ -419,7 +426,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 if(BaseApplication.imgUrl!=null){
                     bundle.putString("imgurl",BaseApplication.imgUrl.toString());
                 }
-                bundle.putString("picUrl", BaseApplication.photoPic);
+                bundle.putString("picUrl", SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,""));
                 bundle.putString("name", SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERNAME,""));
                 bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);
