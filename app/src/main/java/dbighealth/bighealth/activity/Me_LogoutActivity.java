@@ -1,34 +1,18 @@
 package dbighealth.bighealth.activity;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,28 +23,14 @@ import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.imageUtils.BaseActivity;
-import dbighealth.bighealth.imageUtils.Bimp;
-import dbighealth.bighealth.imageUtils.FileUtils;
-import dbighealth.bighealth.imageUtils.ImageItem;
-import utils.BitmapUtils;
-import utils.HttpPostUploadUtil;
 import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
@@ -192,7 +162,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.email_sign_in_button:
-//                BaseApplication.userid = "";
+                BaseApplication.userid = "";
                 SharedPreferencesUtils.saveString(this, UrlUtils.LOGIN, "");
                 BaseApplication.bitmap=null;
                 BaseApplication.photoPic="";

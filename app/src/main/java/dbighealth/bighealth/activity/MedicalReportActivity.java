@@ -236,7 +236,7 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         }
         JSONObject jsonObject = new JSONObject();
         try {
-            String userid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
+            String userid = SharedPreferencesUtils.getString(MedicalReportActivity.this, UrlUtils.LOGIN, "");
             jsonObject.put("userId",userid);
             jsonObject.put("url",str);
         } catch (JSONException e) {

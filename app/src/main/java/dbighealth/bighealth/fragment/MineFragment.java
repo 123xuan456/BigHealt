@@ -50,8 +50,10 @@ import dbighealth.bighealth.activity.SubscribeActivity;
 import dbighealth.bighealth.adapter.ReportPicAdapter;
 import dbighealth.bighealth.bean.EveryDayBean;
 import dbighealth.bighealth.bean.HasCommitBean;
+import dbighealth.bighealth.bean.JudgePhysicalStatus;
 import dbighealth.bighealth.bean.PhysicalBean;
 import okhttp3.Call;
+import utils.ConfigUsers;
 import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
@@ -229,14 +231,28 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 Log.i("pengpeng--->", response);
             }
             if(id==SEARCH){
+              /* Gson gson = new Gson();
+                JudgePhysicalStatus judgePhysicalStatus = gson.fromJson(response, JudgePhysicalStatus.class);
+                int status = judgePhysicalStatus.getStatus();
+                if(status==1){
+                    Intent hascommit = new Intent(getActivity(), HasCommitReport.class);
+                    startActivity(hascommit);
+                }
+                if(status==0){
+                    Intent medicalintent = new Intent(getActivity(), MedicalReportActivity.class);
+                    startActivity(medicalintent);
+                }
+*/
+
                 Gson gson = new Gson();
                 HasCommitBean hasCommit = gson.fromJson(response,HasCommitBean.class);
+
                 int code = hasCommit.getCode();
                 if(code==200){
                     Intent hascommit = new Intent(getActivity(), HasCommitReport.class);
                     startActivity(hascommit);
                 }
-                if(code==400){
+                if(code ==400){
                     Intent medicalintent = new Intent(getActivity(), MedicalReportActivity.class);
                     startActivity(medicalintent);
                 }
@@ -248,7 +264,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 PhysicalBean physicalBean = gson.fromJson(response, PhysicalBean.class);
                 int code = physicalBean.getCode();
                 if(code==400){
-                    //充填体质
+                    //重填体质
                     Intent intent = new Intent(getActivity(), RewritePhysical.class);
                     startActivity(intent);
                 }
@@ -266,6 +282,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         username = BaseApplication.username;
+        username = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERNAME,"");
         photoPic = BaseApplication.photoPic;
         year = BaseApplication.age;
         Uri imgUrl = BaseApplication.imgUrl;
@@ -403,7 +420,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     bundle.putString("imgurl",BaseApplication.imgUrl.toString());
                 }
                 bundle.putString("picUrl", BaseApplication.photoPic);
-                bundle.putString("name", BaseApplication.username);
+                bundle.putString("name", SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERNAME,""));
                 bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);
                 i1.putExtras(bundle);
@@ -437,15 +454,13 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                         Intent intent = new Intent(getActivity(), RewritePhysical.class);
                         startActivity(intent);
                     } else {
+                        Log.i("mhysa-->","此时的提交与否地址："+UrlUtils.JUDGEPHYSICAL+"?userId="+ BaseApplication.userid);
                         OkHttpUtils.get()
-                                .url(UrlUtils.Symptom)
+                                .url(UrlUtils.JUDGEPHYSICAL)
                                 .id(SYMPTOM)
-                                .addParams("id", String.valueOf(count))
+                                .addParams("userId",userid)
                                 .build()
                                 .execute(MyStringCallBack);
-                      /*  if(){
-
-                        }*/
 
                     }
 
@@ -493,7 +508,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
              * 体检报告
              */
             case R.id.textView19:
-                        if (!TextUtils.isEmpty(id)){
+                        if (!TextUtils.isEmpty(userid)){
                             initIntenet();
 
                         }else{
@@ -506,12 +521,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         }
 
     public void initIntenet(){
-        userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
-        Log.i("mhysa-->","此时的地址是："+UrlUtils.SEARCHREPORT+"?userId="+userid);
+
+        Log.i("mhysa-->","此时的地址是："+UrlUtils.SEARCHREPORT+"?userId="+BaseApplication.userid);
         OkHttpUtils.get()
                 .url(UrlUtils.SEARCHREPORT)
                 .id(SEARCH)
-                .addParams("userId",userid)
+                .addParams("userId",BaseApplication.userid)
                 .build()
                 .execute(MyStringCallBack);
     }

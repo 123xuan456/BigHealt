@@ -44,6 +44,7 @@ import dbighealth.bighealth.adapter.SecondAdapter;
 import dbighealth.bighealth.bean.SecondCommntBean;
 import dbighealth.bighealth.view.ListViewForScrollView;
 import okhttp3.Call;
+import utils.ConfigUsers;
 import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
@@ -77,7 +78,6 @@ public class SecondActivity extends Activity implements View.OnClickListener {
     @Bind(R.id.mcomment)
     ListViewForScrollView mcomment;
     private int picId;
-
     private int SECOND = 101;
     private int COMMENT_USER = 102;
     private String userid;
@@ -185,7 +185,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                  private String name;
                  */
                 SecondCommntBean.ComListBean commentList = new  SecondCommntBean.ComListBean();
-                commentList.setName(SharedPreferencesUtils.getString(SecondActivity.this,BaseApplication.name, ""));
+                commentList.setName(SharedPreferencesUtils.getString(SecondActivity.this, ConfigUsers.USERNAME, ""));
                 commentList.setComment(txtedit.getText().toString());
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -234,6 +234,9 @@ public class SecondActivity extends Activity implements View.OnClickListener {
             case R.id.arrow_left:
                 finish();
                 break;
+            /**
+             * 发送评论
+             */
             case R.id.btnpinglun:
                 if(SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "").isEmpty()){
                     Toast.makeText(getApplicationContext(),"请登录！",Toast.LENGTH_SHORT).show();

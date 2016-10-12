@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -60,7 +61,9 @@ import dbighealth.bighealth.imageUtils.BaseActivity;
 import dbighealth.bighealth.imageUtils.FileUtils;
 import okhttp3.Call;
 import utils.BitmapUtils;
+import utils.ConfigUsers;
 import utils.HttpPostUploadUtil;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 /**
  * 个人信息
@@ -137,6 +140,7 @@ public class EditdataActivity extends Activity {
         //吧次activity放到集合里，等到修改密码成功之后统一取消
         BaseActivity.activityList.add(this);
         name = BaseApplication.username;
+        name = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERNAME,"");
         sexa = BaseApplication.sex;//打开拿到性别
         photoPic = BaseApplication.photoPic;
         imgUrl = BaseApplication.imgUrl;
@@ -328,6 +332,7 @@ public class EditdataActivity extends Activity {
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
                                         BaseApplication.username=et;
+                                        SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, et);//把id存储到了sp中
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
                                     }
@@ -384,12 +389,6 @@ public class EditdataActivity extends Activity {
                 Intent intent1 = new Intent(Intent.ACTION_PICK, null);
                 intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(intent1, 1);
-
-                /*Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image*//*");//相片类型
-                startActivityForResult(intent, GET_GALLEY);
-                overridePendingTransition(R.anim.activity_translate_in,
-                        R.anim.activity_translate_out);*/
                 pop.dismiss();
                 ll_popup.clearAnimation();
             }
@@ -437,6 +436,7 @@ public class EditdataActivity extends Activity {
                                 fileMap.put("file", path1);
                                 String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
                                 BaseApplication.username = name;
+                                SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERNAME,name);
                                 //  BaseApplication.userid = uid;
                                 BaseApplication.imgUrl = imgUrl;
                                 BaseApplication.photoPic = getPicUrl;

@@ -3,6 +3,7 @@ package dbighealth.bighealth.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -39,6 +40,8 @@ import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.LoginokBean;
 import okhttp3.Call;
+import utils.ConfigUsers;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -209,7 +212,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 
 
     }
-
+    public Context context;
     private LoginokBean log;
     StringCallback MyStringLogin =new StringCallback() {
         //失败
@@ -217,7 +220,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
         public void onError(Call call, Exception e, int id) {
             System.out.println("传递失败原因="+e);
         }
-        //成功
+            //成功
         @Override
         public void onResponse(String response, int id) {
             System.out.println("传递成功="+response);
@@ -232,9 +235,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String sex=log.getSex();
                 String age=log.getAge();
                 String id1=String.valueOf(log.getId());
-                BaseApplication.userid=id1;//吧id传到
-                BaseApplication.sex=sex;//吧性别传到
+               SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
+                BaseApplication.userid=id1;//把id传到
+                BaseApplication.sex=sex;//把性别传到
                 BaseApplication.username=username;
+                SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, username);//把id存储到了sp中
                 BaseApplication.photoPic = imgurl;
                 BaseApplication.age = age;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
@@ -244,7 +249,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 //                intent.putExtra("photoUrl", imgurl);
 //                System.out.println("过去！！username"+username);
 //                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-                sendIntent(username,sex,imgurl,age);
+               sendIntent(username,sex,imgurl,age);
 
                 finish();
                 return;
