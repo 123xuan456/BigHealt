@@ -139,7 +139,7 @@ public class EditdataActivity extends Activity {
         ButterKnife.bind(this);
         //吧次activity放到集合里，等到修改密码成功之后统一取消
         BaseActivity.activityList.add(this);
-        name = BaseApplication.username;
+//        name = BaseApplication.username;
         name = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERNAME,"");
         sexa = BaseApplication.sex;//打开拿到性别
         photoPic = BaseApplication.photoPic;
@@ -331,7 +331,7 @@ public class EditdataActivity extends Activity {
                                         Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
-                                        BaseApplication.username=et;
+//                                        BaseApplication.username=et;
                                         SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, et);//把id存储到了sp中
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
@@ -435,7 +435,7 @@ public class EditdataActivity extends Activity {
                                 Map<String, String> fileMap = new HashMap<String, String>();
                                 fileMap.put("file", path1);
                                 String getPicUrl = HttpPostUploadUtil.formUpload(UrlUtils.UPLOADPIC, textMap, fileMap);
-                                BaseApplication.username = name;
+//                                BaseApplication.username = name;
                                 SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERNAME,name);
                                 //  BaseApplication.userid = uid;
                                 BaseApplication.imgUrl = imgUrl;

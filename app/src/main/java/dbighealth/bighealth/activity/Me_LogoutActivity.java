@@ -162,7 +162,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.email_sign_in_button:
-                BaseApplication.userid = "";
+//                BaseApplication.userid = "";
                 SharedPreferencesUtils.saveString(this, UrlUtils.LOGIN, "");
                 BaseApplication.bitmap=null;
                 BaseApplication.photoPic="";

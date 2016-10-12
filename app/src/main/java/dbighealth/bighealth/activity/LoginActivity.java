@@ -236,9 +236,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String age=log.getAge();
                 String id1=String.valueOf(log.getId());
                SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
-                BaseApplication.userid=id1;//把id传到
+//                BaseApplication.userid=id1;//把id传到
                 BaseApplication.sex=sex;//把性别传到
-                BaseApplication.username=username;
+//                BaseApplication.username=username;
                 SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, username);//把id存储到了sp中
                 BaseApplication.photoPic = imgurl;
                 BaseApplication.age = age;

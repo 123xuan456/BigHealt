@@ -92,7 +92,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         public void handleMessage(Message msg) {//此方法在ui线程运行
             switch (msg.what) {
                 case 1:
-                    id = BaseApplication.userid;
+                    id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                     System.out.println("拿到id=" + id);
                     if (!id.equals("")) {//如果有id
                         rl1.setVisibility(View.VISIBLE);
@@ -136,7 +136,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onReceive(Context context, Intent intent){
 
-                userid = BaseApplication.userid;
+                userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                 username = intent.getStringExtra("username");
                 System.out.println("接收到了id" + userid+"ivtouxiang="+ivTouxiang);
                 textView50.setText(username);
@@ -281,7 +281,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        username = BaseApplication.username;
+//        username = BaseApplication.username;
         username = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERNAME,"");
         photoPic = BaseApplication.photoPic;
         year = BaseApplication.age;
@@ -394,7 +394,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             imageView20.setVisibility(View.GONE);
         }
 
-        id = BaseApplication.userid;
+        id = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
         if (!id.equals("")) {//如果有id
             rl1.setVisibility(View.VISIBLE);
             rl.setVisibility(View.GONE);
@@ -421,7 +421,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 }
                 bundle.putString("picUrl", BaseApplication.photoPic);
                 bundle.putString("name", SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERNAME,""));
-                bundle.putString("uid", BaseApplication.userid);
+//                bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);
                 i1.putExtras(bundle);
                 startActivity(i1);
@@ -454,7 +454,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                         Intent intent = new Intent(getActivity(), RewritePhysical.class);
                         startActivity(intent);
                     } else {
-                        Log.i("mhysa-->","此时的提交与否地址："+UrlUtils.JUDGEPHYSICAL+"?userId="+ BaseApplication.userid);
+                        Log.i("mhysa-->","此时的提交与否地址："+UrlUtils.JUDGEPHYSICAL+"?userId="+ SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,""));
                         OkHttpUtils.get()
                                 .url(UrlUtils.JUDGEPHYSICAL)
                                 .id(SYMPTOM)
@@ -522,11 +522,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
     public void initIntenet(){
 
-        Log.i("mhysa-->","此时的地址是："+UrlUtils.SEARCHREPORT+"?userId="+BaseApplication.userid);
+        Log.i("mhysa-->","此时的地址是："+UrlUtils.SEARCHREPORT+"?userId="+SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,""));
         OkHttpUtils.get()
                 .url(UrlUtils.SEARCHREPORT)
                 .id(SEARCH)
-                .addParams("userId",BaseApplication.userid)
+                .addParams("userId",SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,""))
                 .build()
                 .execute(MyStringCallBack);
     }

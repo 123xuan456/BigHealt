@@ -140,6 +140,9 @@
         <activity
             android:name=".activity.EditdataActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".activity.ProductActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.SexActivity" />
         <activity android:name=".activity.MedicalReportActivity" />

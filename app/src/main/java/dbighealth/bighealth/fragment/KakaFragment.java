@@ -1,6 +1,7 @@
 package dbighealth.bighealth.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,7 +19,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.ProductActivity;
 import dbighealth.bighealth.adapter.GridViewAdapter1;
 import dbighealth.bighealth.bean.ProductBean;
 import dbighealth.bighealth.ben.Model;
@@ -70,6 +73,9 @@ public class KakaFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
+                Intent intent = new Intent(getActivity(),ProductActivity.class);
+                startActivity(intent);
+
             }
         });
 

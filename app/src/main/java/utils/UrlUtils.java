@@ -99,5 +99,7 @@ public class UrlUtils {
   public static String SEARCHREPORT = BASEURL3+"/medicalReportarchReport";
   //保存体检报告
   public static String UPLOADREPORT = BASEURL3+"/medicalReportveReporty";
+  //判读是否填写过体质
+  public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
 
 }

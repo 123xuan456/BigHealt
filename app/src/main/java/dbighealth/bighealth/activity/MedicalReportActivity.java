@@ -75,7 +75,7 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_report);
+        setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
         tit.setText("体检报告");
         rightTv.setText("提交");
