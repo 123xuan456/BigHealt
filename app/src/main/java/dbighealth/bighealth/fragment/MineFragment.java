@@ -33,6 +33,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
@@ -47,10 +48,8 @@ import dbighealth.bighealth.activity.MedicalReportActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.RewritePhysical;
 import dbighealth.bighealth.activity.SubscribeActivity;
-import dbighealth.bighealth.adapter.ReportPicAdapter;
 import dbighealth.bighealth.bean.EveryDayBean;
 import dbighealth.bighealth.bean.HasCommitBean;
-import dbighealth.bighealth.bean.JudgePhysicalStatus;
 import dbighealth.bighealth.bean.PhysicalBean;
 import okhttp3.Call;
 import utils.ConfigUsers;
@@ -187,7 +186,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             }
         };
         broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
-
+        sex = SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERSEX,"");
         intentFilter.addAction("android.intent.action.CART_SEX");//修改性别
         BroadcastReceiver mItemViewListClickReceiver1 = new BroadcastReceiver() {
 
@@ -291,15 +290,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         username = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERNAME,"");
         photoPic = BaseApplication.photoPic;
         photoPic = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERPIC,"");
-        year = BaseApplication.age;
+        year = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERYEAR,"");
+        //year = BaseApplication.age;
         Uri imgUrl = BaseApplication.imgUrl;
         Fresco.initialize(getActivity());
 
         userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
 
-
         ra = (LinearLayout) inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, ra);
+
         TextView tvTab = (TextView) ra.findViewById(R.id.tvTab);
         textView50 = (TextView) ra.findViewById(R.id.textView50);
         textView20=(TextView)ra.findViewById(R.id.textView20);
@@ -393,10 +393,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         textView11 = (TextView)ra.findViewById(R.id.textView11);
         imageView20 = (ImageView)ra.findViewById(R.id.imageView20);//男
         imageView21 = (ImageView)ra.findViewById(R.id.imageView21);//女
-        if (sex=="男"){
+        sex = SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERSEX,"");
+        System.out.println("是否保存到了sp="+sex);
+        if ("男".equals(sex)){
             imageView20.setVisibility(View.VISIBLE);
             imageView21.setVisibility(View.GONE);
-        }else if (sex=="女"){
+        }else if ("女".equals(sex)){
             imageView21.setVisibility(View.VISIBLE);
             imageView20.setVisibility(View.GONE);
         }

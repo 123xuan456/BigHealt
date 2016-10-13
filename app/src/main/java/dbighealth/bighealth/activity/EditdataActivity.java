@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,6 +22,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Selection;
+import android.text.Spannable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -290,7 +291,11 @@ public class EditdataActivity extends Activity {
             phone = BaseApplication.regphone;
             editText2 = (EditText) findViewById(R.id.editText2);
             editText2.setText(name);
-
+            CharSequence charSequence = editText2.getText();
+            if (charSequence instanceof Spannable) {
+                Spannable spanText = (Spannable) charSequence;
+                Selection.setSelection(spanText, charSequence.length());
+            }
 
             Button b1 = (Button) findViewById(R.id.button4);
             Button b = (Button) findViewById(R.id.button5);//取消
