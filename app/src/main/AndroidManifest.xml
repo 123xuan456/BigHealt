@@ -146,7 +146,8 @@
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.SexActivity" />
         <activity android:name=".activity.MedicalReportActivity" />
-        <activity android:name=".activity.HasCommitReport"></activity>
+        <activity android:name=".activity.HasCommitReport" />
+        <activity android:name=".activity.Affirm_Indent_Activity"></activity>
     </application>
 
 </manifest>

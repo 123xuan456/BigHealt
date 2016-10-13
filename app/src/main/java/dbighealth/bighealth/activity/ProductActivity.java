@@ -101,6 +101,9 @@ public class ProductActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.iv_addcar:
                 //加入到购物车
+                //先跳到确认订单界面，因为购物车没有界面
+                Intent intent = new Intent(this,Affirm_Indent_Activity.class);
+                startActivity(intent);
                 break;
             case R.id.iv_nowbuy:
                 //立即购买
