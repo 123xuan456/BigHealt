@@ -87,11 +87,9 @@ public class UrlUtils {
   public static String INFORMATION_DETAILES_LISTVIEW =BASEURL2+ "/advice/talk";
   //咨询详情内容
   public static String INFORMATION_DETAILES =BASEURL2+ "/advice/saveAddQuest";
-
   //我要咨询
   public static String INFORMATION =BASEURL2+ "/advice/needhelp";
   //设置提醒advice/saveAddQuest
-
   public static String REMINDSET = BASEURL2+"/medicineremind/newremind";
   //提醒listview
   public static String REMIND = BASEURL2+"/medicineremind/remindlist";
@@ -101,5 +99,7 @@ public class UrlUtils {
   public static String UPLOADREPORT = BASEURL3+"/medicalReportveReporty";
   //判读是否填写过体质
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
+  //我的收藏展示
+  public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
 
 }

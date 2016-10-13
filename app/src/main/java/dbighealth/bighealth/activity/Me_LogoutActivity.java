@@ -31,6 +31,7 @@ import butterknife.ButterKnife;
 import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.imageUtils.BaseActivity;
+import utils.ConfigUsers;
 import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
@@ -166,6 +167,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 SharedPreferencesUtils.saveString(this, UrlUtils.LOGIN, "");
                 BaseApplication.bitmap=null;
                 BaseApplication.photoPic="";
+                SharedPreferencesUtils.saveString(getApplicationContext(), ConfigUsers.USERPIC,"");
                 BaseApplication.imgUrl = null;
                 Toast.makeText(this, "退出成功", Toast.LENGTH_LONG).show();
                 //退出成功之后发送一个广播
@@ -178,8 +180,13 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 Intent i = new Intent(this, RemindActivity.class);
                 startActivity(i);
                 break;
+            /**
+             * 我的收藏
+             */
             case R.id.rl_collection:
-                Toast.makeText(getApplicationContext(), "暂未开通，敬请期待！", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(getApplicationContext(), "暂未开通，敬请期待！", Toast.LENGTH_SHORT).show();
+                Intent collectionInent= new Intent(Me_LogoutActivity.this,CollectionActivity.class);
+                startActivity(collectionInent);
                 break;
             case R.id.rl_shoppingCart:
                 Toast.makeText(getApplicationContext(), "暂未开通，敬请期待！", Toast.LENGTH_SHORT).show();

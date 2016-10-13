@@ -71,7 +71,6 @@ public class ProductActivity extends Activity implements View.OnClickListener {
 
             Log.i("liu",e.toString());
         }
-
         @Override
         public void onResponse(String response, int id) {
             //bean文件没有做还有赋值 adapter没有看这ItemDetailAdapter类，用这里的item

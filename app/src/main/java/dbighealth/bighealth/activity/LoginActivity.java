@@ -241,6 +241,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
 //                BaseApplication.username=username;
                 SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, username);//把id存储到了sp中
                 BaseApplication.photoPic = imgurl;
+                SharedPreferencesUtils.saveString(context, ConfigUsers.USERPIC, imgurl);//把id存储到了sp中
                 BaseApplication.age = age;
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 //登录成功之后发送一个广播

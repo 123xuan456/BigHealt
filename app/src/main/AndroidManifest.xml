@@ -148,6 +148,7 @@
         <activity android:name=".activity.MedicalReportActivity" />
         <activity android:name=".activity.HasCommitReport" />
         <activity android:name=".activity.Affirm_Indent_Activity"></activity>
+        <activity android:name=".activity.CollectionActivity"></activity>
     </application>
 
 </manifest>
