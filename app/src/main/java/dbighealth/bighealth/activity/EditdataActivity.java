@@ -142,12 +142,13 @@ public class EditdataActivity extends Activity {
         BaseActivity.activityList.add(this);
 //        name = BaseApplication.username;
         name = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERNAME,"");
-        sexa = BaseApplication.sex;//打开拿到性别
+        sexa = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERSEX,"");
+      //  sexa = BaseApplication.sex;//打开拿到性别
       //  photoPic = BaseApplication.photoPic;
         photoPic = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERPIC,"");
         imgUrl = BaseApplication.imgUrl;
         sex1.setText(sexa);
-        year1.setText(BaseApplication.age);
+        year1.setText(SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERYEAR,""));
         textView59.setText(name);
         tvTab.setText("个人信息");
         rightAdd.setVisibility(View.GONE);
@@ -233,7 +234,8 @@ public class EditdataActivity extends Activity {
         super.onDestroy();
         JSONObject obj = new JSONObject();
         year=year1.getText().toString();
-        phone = BaseApplication.regphone;
+       // phone = BaseApplication.regphone;
+        phone = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERPHONE,"");
         System.out.println("year=" + year);
         System.out.println("phone=" + phone);
         try {

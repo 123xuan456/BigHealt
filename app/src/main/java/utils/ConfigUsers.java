@@ -13,5 +13,7 @@ public class ConfigUsers {
     public static String USERYEAR = "useryear";
     //保存用户性别
     public static String USERSEX = "usersex";
+    //保存用户手机号
+    public static String USERPHONE = "regphone";
 
 }

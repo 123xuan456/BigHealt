@@ -102,4 +102,12 @@ public class UrlUtils {
   //我的收藏展示
   public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
 
+
+  //收货地址查询
+  public static String SEARCH_MANAGESITE =  BASEURL3+"/addressmanager/searchall?userId=";
+  //收货地址设为默认
+  public static String SET_MANAGESITE =  BASEURL3+"/addressmanager/defaults";
+  //删除收货地址
+  public static String DELETE_MANAGESITE =  BASEURL3+"/addressmanager/deleteAddress?addressId=";
+
 }
