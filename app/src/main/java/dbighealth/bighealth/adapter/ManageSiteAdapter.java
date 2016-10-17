@@ -44,7 +44,12 @@ public class ManageSiteAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return list.size();
+        if(list != null && list.size() > 0){
+            return list.size();
+        }
+        else{
+            return 0;
+        }
     }
 
     @Override
@@ -97,50 +102,25 @@ public class ManageSiteAdapter extends BaseAdapter{
             public void onClick(View v) {
 
                 if(!TextUtils.isEmpty(old)){
-                alter(String.valueOf(list.get(position).getAddressId()));//修改地址
-                // 重置，确保最多只有一项被选中
-                for (String key : states.keySet()) {
-                    states.put(key, false);
-                }
-                String newid = String.valueOf(position);
+                    alter(old,String.valueOf(list.get(position).getAddressId()));//修改地址
+                    // 重置，确保最多只有一项被选中
+                    for (String key : states.keySet()) {
+                        states.put(key, false);
+                    }
+                    String newid = String.valueOf(position);
 
-                states.put(newid, radio.isChecked());
+                    states.put(newid, radio.isChecked());
 
-                ManageSiteAdapter.this.notifyDataSetChanged();
+                    ManageSiteAdapter.this.notifyDataSetChanged();
                 }else if (TextUtils.isEmpty(old)){//当默认地址为空时，设置第一条为默认
                     System.out.println("默认的第一条id="+ String.valueOf(list.get(0).getAddressId()));
-                    alter(String.valueOf(list.get(0).getAddressId()));//新的id
+                    alter("0",String.valueOf(list.get(0).getAddressId()));//新的id
                 }
 
 
             }
 
-            private void alter(String newest) {
 
-                System.out.println("新选中的id="+newest);
-                System.out.println("传递之前的id="+old);
-                String u=UrlUtils.SET_MANAGESITE;
-                OkHttpUtils.post().
-                        url(u).
-                        addParams("old",old).
-                        addParams("newest",newest).
-                        build().
-                        execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                System.out.println("修改默认失败="+e.toString());
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                System.out.println("修改默认地址="+response);
-                                Intent i=new Intent("android.intent.action.SET");
-                                LocalBroadcastManager.getInstance(context).sendBroadcast(i);
-                                Toast.makeText(context, "默认地址修改成功", Toast.LENGTH_SHORT).show();
-                                ManageSiteAdapter.this.notifyDataSetChanged();
-                            }
-                        });
-            }
 
         });
         if (states.get(String.valueOf(position)) == null
@@ -159,53 +139,88 @@ public class ManageSiteAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        if (list.size()==1){//当只有一条地址时，不能点击
+            holder.tv4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    return;
                 }
-        });
+            });
+        }else if (list != null && list.size() > 1){
+            holder.tv4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Dialog dialog = new DeleteDialog(context, R.style.DeleteDialog);
+                    //设置它的ContentView
+                    dialog.setContentView(R.layout.dialog_delete);
+                    dialog.show();
+                    Button bt1= (Button) dialog.findViewById(R.id.button7);
+                    bt1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String addressId = list.get(position).getAddressId()+"";
+                            System.out.println("删除地址addressId="+addressId);
+                            String u= UrlUtils.DELETE_MANAGESITE+addressId;
+                            OkHttpUtils.post().
+                                    url(u).
+                                    build().
+                                    execute(new StringCallback() {
+                                        @Override
+                                        public void onError(Call call, Exception e, int id) {
+                                            System.out.println("删除地址失败="+e.toString());
+                                        }
 
-        holder.tv4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new DeleteDialog(context, R.style.DeleteDialog);
-                //设置它的ContentView
-                dialog.setContentView(R.layout.dialog_delete);
-                dialog.show();
-                Button bt1= (Button) dialog.findViewById(R.id.button7);
-                bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String addressId = list.get(position).getAddressId()+"";
-                System.out.println("删除地址addressId="+addressId);
-                String u= UrlUtils.DELETE_MANAGESITE+addressId;
-                OkHttpUtils.post().
-                        url(u).
-                        build().
-                        execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                System.out.println("删除地址失败="+e.toString());
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                System.out.println("删除地址="+response);
-                                list.remove(position);
-                                ManageSiteAdapter.this.notifyDataSetChanged();
-                                dialog.dismiss();
-                            }
-                        });
-            }
-        });
-
-
-            }
-        });
+                                        @Override
+                                        public void onResponse(String response, int id) {
+                                            System.out.println("删除地址="+response);
+                                            list.remove(position);
+                                            alter("0",String.valueOf(list.get(0).getAddressId()));//新的id
+                                            ManageSiteAdapter.this.notifyDataSetChanged();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                        }
+                    });
 
 
+                }
+            });
+
+        }
 
 
         return convertView;
     }
 
+    private void alter(String  old,String newest) {
+
+        System.out.println("默认的第一条id1="+newest);
+        System.out.println("传递之前的id="+old);
+        String u=UrlUtils.SET_MANAGESITE;
+        OkHttpUtils.post().
+                url(u).
+                addParams("old",old).
+                addParams("newest",newest).
+                build().
+                execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        System.out.println("修改默认失败="+e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        System.out.println("修改默认地址="+response);
+                        Intent i=new Intent("android.intent.action.SET");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(i);
+                        Toast.makeText(context, "默认地址修改成功", Toast.LENGTH_SHORT).show();
+                        ManageSiteAdapter.this.notifyDataSetChanged();
+                    }
+                });
+    }
     class ViewHolder{
         TextView tv;//姓名
         TextView tv1;//电话

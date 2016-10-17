@@ -61,7 +61,7 @@ public class ManageSiteActivity extends Activity {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                System.out.println("接收到了getview的广播");
+                System.out.println("接收到了广播SET");
                 getDate();
 
             }
