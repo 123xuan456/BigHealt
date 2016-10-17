@@ -48,7 +48,7 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (viewType == TYPE_HEAD) {
             return new Item1ViewHolder(mLayoutInflater.inflate(R.layout.recyclerviewitem_head, parent, false));
         } else {
-            return new Item2ViewHolder(mLayoutInflater.inflate(R.layout.item_detail, parent, false));
+            return new Item2ViewHolder(mLayoutInflater.inflate(R.layout.item_product, parent, false));
         }
 
     }

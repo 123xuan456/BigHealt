@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.CompanyDetail;
