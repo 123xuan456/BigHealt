@@ -147,7 +147,8 @@
         <activity android:name=".activity.SexActivity" />
         <activity android:name=".activity.MedicalReportActivity" />
         <activity android:name=".activity.HasCommitReport" />
-        <activity android:name=".activity.CollectionActivity"></activity>
+        <activity android:name=".activity.CollectionActivity" />
+        <activity android:name=".activity.ShoppingCartActivity"></activity>
     </application>
 
 </manifest>

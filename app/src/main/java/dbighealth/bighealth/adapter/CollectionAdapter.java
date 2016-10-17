@@ -1,14 +1,23 @@
 package dbighealth.bighealth.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.CollectionActivity;
 import dbighealth.bighealth.bean.ColllectionBean;
 
 /**
@@ -20,12 +29,31 @@ public class CollectionAdapter extends BaseAdapter {
     private Context context;
     private List<ColllectionBean.MessageBean> list;
     private LayoutInflater inflater;
-
-    public CollectionAdapter(Context context, List<ColllectionBean.MessageBean> list) {
+    private boolean Type = false;
+    private static HashMap<Integer,Boolean> isSelected;
+    private boolean flage;
+    private boolean[] checks;//用于保存checkBox的选择状态
+    public CollectionAdapter(Context context, List<ColllectionBean.MessageBean> list,Boolean flage) {
+        checks = new boolean[list.size()];
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
+        isSelected = new HashMap<Integer, Boolean>();
+        for(int i=0; i<list.size();i++) {
+            getIsSelected().put(i,false);
+        }
+         this.flage = flage;
+
     }
+
+    public static HashMap<Integer,Boolean> getIsSelected() {
+        return isSelected;
+    }
+
+    public static void setIsSelected(HashMap<Integer,Boolean> isSelected) {
+        CollectionAdapter.isSelected = isSelected;
+    }
+
 
     @Override
     public int getCount() {
@@ -43,8 +71,9 @@ public class CollectionAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
+        final int pos  = position;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_collection, parent, false);
             holder = new ViewHolder();
@@ -52,23 +81,42 @@ public class CollectionAdapter extends BaseAdapter {
             holder.tvCollection = (TextView) convertView.findViewById(R.id.tv_collectionTitle);
             holder.tvCollectionDate = (TextView) convertView.findViewById(R.id.tv_collectionDate);
             holder.tvCollectionCount = (TextView) convertView.findViewById(R.id.tv_collectionCount);
+            holder.cbcollecion = (CheckBox) convertView.findViewById(R.id.cb_collecion);
+          if(flage){
+                holder.cbcollecion.setVisibility(View.VISIBLE);
+            }else{
+                holder.cbcollecion.setVisibility(View.GONE);
+            }
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        holder.cbcollecion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.i("mhysa-->","选中的状态时："+position);
+                checks[pos] = isChecked;
+            }
+        });
         /**
          * 解析接口数据
          */
+        holder.cbcollecion.setChecked(checks[pos]);
         holder.rcvCollectionPic.setImageURI(list.get(position).getImages());
         holder.tvCollection.setText(list.get(position).getTitle());
         holder.tvCollectionDate.setText(list.get(position).getTime());
         holder.tvCollectionCount.setText(list.get(position).getCount()+"");
+
         return convertView;
     }
     public class ViewHolder {
+        public CheckBox cbcollecion;
         SimpleDraweeView rcvCollectionPic;
         TextView tvCollection;
         TextView tvCollectionDate;
         TextView tvCollectionCount;
     }
+
 }

@@ -16,8 +16,6 @@ public class UrlUtils {
   public  static String   BASEURL3 = "http://192.168.0.120:8081/JianKangChanYe";//本地测试
   // public static String BASEURL="http://106.2.219.210:1314/";
   // public  static String   BASEURL2 = "http://106.2.219.210:1314/";
-
-
   //-------------------------------API接口----------------------------------
   public static String CommonHome=BASEURL+"/homepictures/sickness";
   public static String SpecialHome = BASEURL+"/homepictures/showhealthknowledge";
@@ -28,7 +26,6 @@ public class UrlUtils {
   public static  String  FileSave = BASEURL2+"/filesave/save";
   //获取健康档案数据
   public static  String  FileSubmit = BASEURL2+"/filesave/searchFile?userId=";
-
   //预约一级
   public static  String SUBSCRIBE =BASEURL +"/hathappenedat/onlinebookingselect";
   //详细预约particular
@@ -43,7 +40,6 @@ public class UrlUtils {
   public static String SELECTED_TREATMENT = BASEURL+"/hathappenedat/condition";
   //医疗养生详情页
   public static String DETAIL_TREATMENT = BASEURL2+"/medicalcareInside/healthlist";
-
   //登录
   public  static String   LOGIN=BASEURL+"/user/login.do?";
   //修改密码
@@ -94,12 +90,14 @@ public class UrlUtils {
   //提醒listview
   public static String REMIND = BASEURL2+"/medicineremind/remindlist";
   //查询体检报告
-  public static String SEARCHREPORT = BASEURL3+"/medicalReportarchReport";
+  public static String SEARCHREPORT = BASEURL3+"/medicalReport/searchReport";
   //保存体检报告
-  public static String UPLOADREPORT = BASEURL3+"/medicalReportveReporty";
+  public static String UPLOADREPORT = BASEURL3+"/medicalReport/saveReporty";
   //判读是否填写过体质
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
   //我的收藏展示
   public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
+  //删除我的收藏
+  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
 
 }

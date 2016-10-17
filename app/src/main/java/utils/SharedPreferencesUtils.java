@@ -3,6 +3,8 @@ package utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.List;
+
 public class SharedPreferencesUtils {
 
 	public static final String SP_NAME = "config";
