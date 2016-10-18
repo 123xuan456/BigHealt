@@ -40,6 +40,7 @@ public class ManageSiteActivity extends Activity {
     @Bind(R.id.right_add)
     ImageView rightAdd;
     @Bind(R.id.listView3)
+
     ListView listView3;
     @Bind(R.id.tvTab)
     TextView tvTab;
@@ -78,12 +79,13 @@ public class ManageSiteActivity extends Activity {
                 finish();
                 break;
             case R.id.tv:
-
+                Intent i=new Intent(this,AddSiteActivity.class);
+                startActivity(i);
                 break;
         }
     }
     public void getDate() {
-        OkHttpUtils.post().url(UrlUtils.SEARCH_MANAGESITE+1).build().execute(new StringCallback() {
+        OkHttpUtils.post().url(UrlUtils.SEARCH_MANAGESITE+userid).build().execute(new StringCallback() {
             public List<ManageSiteBean.MessageBean> mes;
 
             @Override

@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+
+
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -148,7 +150,9 @@
         <activity android:name=".activity.MedicalReportActivity" />
         <activity android:name=".activity.HasCommitReport" />
         <activity android:name=".activity.CollectionActivity" />
-        <activity android:name=".activity.ManageSiteActivity"></activity>
+        <activity android:name=".activity.ManageSiteActivity" />
+        <activity android:name=".activity.AddSiteActivity"></activity>
+        <activity android:name=".activity.CitySelect1Activity"></activity>
     </application>
 
 </manifest>

@@ -84,7 +84,7 @@ public class ManageSiteAdapter extends BaseAdapter{
         ManageSiteBean.MessageBean ms = list.get(position);
         holder.tv.setText(ms.getName());
         holder.tv1.setText(ms.getPhoneNumber());
-        holder.tv2.setText(ms.getArea()+ms.getStreet());
+        holder.tv2.setText(ms.getArea()+ms.getAddress());
 
         int defaults = ms.getDefaults();//默认值
         if ("1".equals(defaults+"")){
