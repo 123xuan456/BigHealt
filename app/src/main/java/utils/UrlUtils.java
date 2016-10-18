@@ -101,5 +101,9 @@ public class UrlUtils {
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
   //我的收藏展示
   public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
+  //产品详细
+  public static String INPRODUCT = BASEURL2+"/mountinformation/inProduct";
+  //确认订单
+  public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuyNow";
 
 }

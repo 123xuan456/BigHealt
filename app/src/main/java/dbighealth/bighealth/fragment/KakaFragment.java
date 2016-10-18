@@ -24,6 +24,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.activity.ProductActivity;
 import dbighealth.bighealth.adapter.GridViewAdapter1;
 import dbighealth.bighealth.bean.ProductBean;
+import dbighealth.bighealth.bean.TreatmentBean;
 import dbighealth.bighealth.ben.Model;
 import dbighealth.bighealth.ben.Type;
 import okhttp3.Call;
@@ -41,7 +42,7 @@ public class KakaFragment extends Fragment {
     private String typename;
     private int icon;
     private static  int PRODUCT =1;
-
+    private List<ProductBean.ProductList> productList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,21 +69,24 @@ public class KakaFragment extends Fragment {
         ((TextView) view.findViewById(R.id.toptype)).setText(typename);
       //  GetTypeList();
        // adapter = new GridViewAdapter(getActivity(), list);
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
+                Log.i("mhysa-->","productLists是否为空"+productList);
+                String id1 = productList.get(arg2).getId()+"";
                 Intent intent = new Intent(getActivity(),ProductActivity.class);
+                intent.putExtra("imgId",id1);
                 startActivity(intent);
 
             }
         });
-
         return view;
     }
 
     private StringCallback MyStringCallBack = new StringCallback(){
+
+//        private String ids;
 
         @Override
         public void onError(Call call, Exception e, int id) {
@@ -95,13 +99,20 @@ public class KakaFragment extends Fragment {
             //解析json
             Gson gson =new Gson();
             ProductBean productBean = gson.fromJson(response, ProductBean.class);
-            List<ProductBean.ProductList> productList = productBean.getProductList();
+            productList = productBean.getProductList();
             if(productList!=null){
+//                for(int i= 0 ; i<productList.size();i++){
+//                    ids = productList.get(i).getId()+"";
+//
+//                }
+//                results= productList.get(i).getResults();
                 adapter = new GridViewAdapter1(getActivity(), productList);
+                gridView.setAdapter(adapter);
+
             }
 
 
-                gridView.setAdapter(adapter);
+
 
 
 
