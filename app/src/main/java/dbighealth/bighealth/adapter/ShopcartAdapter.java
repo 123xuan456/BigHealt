@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.ShoppingCartBean;
@@ -25,11 +26,16 @@ public class ShopcartAdapter extends BaseAdapter{
     private List<ShoppingCartBean.MessageBean> list;
     private Context context;
     private LayoutInflater mInflat;
-
-    public ShopcartAdapter(Context context, List<ShoppingCartBean.MessageBean> list) {
-
+    private static HashMap<Integer,Boolean> isSelected;
+    private int flage;
+    public ShopcartAdapter(Context context, List<ShoppingCartBean.MessageBean> list,int flage) {
         this.context = context;
         this.list = list;
+        this.flage = flage;
+        isSelected = new HashMap<Integer, Boolean>();
+        for(int i=0; i<list.size();i++) {
+            getIsSelected().put(i,false);
+        }
         mInflat = LayoutInflater.from(context);
     }
 
@@ -76,13 +82,34 @@ public class ShopcartAdapter extends BaseAdapter{
                 .crossFade()
                 .transform(new GlideRoundTransform(context,10))
                 .into(holder.ivShopImg);
-        holder.tvProductDescribe.setText(list.get(position).getContent());
-        holder.tvProductPrice.setText(list.get(position).getPrice());
-        holder.tvProductNum.setText("x"+list.get(position).getNum());
+        // 根据isSelected来设置checkbox的选中状况
+        holder.cbShopcheck.setChecked(getIsSelected().get(position));
 
+        if(flage==1){
+            holder.tvProductDescribe.setText(list.get(position).getContent());
+            holder.tvProductPrice.setText(list.get(position).getPrice());
+            holder.tvProductNum.setText("x"+list.get(position).getNum());
+        }
+        if(flage==2){
 
+            holder.tvEditShop.setVisibility(View.GONE);
+            holder.tvProductDescribe.setVisibility(View.GONE);
+            holder.tvProductPrice.setVisibility(View.GONE);
+            holder.tvProductNum.setVisibility(View.GONE);
+            holder.tvJianProduct.setVisibility(View.VISIBLE);
+            holder.tvSingleNum1.setVisibility(View.VISIBLE);
+            holder.tvAddProduct1.setVisibility(View.VISIBLE);
+
+        }
 
         return convertView;
+    }
+    public static HashMap<Integer,Boolean> getIsSelected() {
+        return isSelected;
+    }
+
+    public static void setIsSelected(HashMap<Integer,Boolean> isSelected) {
+        ShopcartAdapter.isSelected = isSelected;
     }
    public  class ViewHolder {
         CheckBox cbShopcheck;

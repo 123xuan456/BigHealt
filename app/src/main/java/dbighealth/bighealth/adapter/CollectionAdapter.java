@@ -93,6 +93,7 @@ public class CollectionAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
         holder.cbcollecion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
