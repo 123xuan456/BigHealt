@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
@@ -147,8 +146,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
      * Callback received when a permissions request has been completed.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                            int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();
@@ -203,6 +202,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             //用户输入的规范正确，向服务器发送判断是否是正确用户
             BaseApplication.password=password;
             BaseApplication.regphone=email;
+            SharedPreferencesUtils.saveString(context, ConfigUsers.USERPHONE, email);//把手机号存储到了sp中
             String url= UrlUtils.LOGIN;
             OkHttpUtils.get().url(url).id(LOGINID)
                     .addParams("regphone",email)
@@ -238,11 +238,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
 //                BaseApplication.userid=id1;//把id传到
                 BaseApplication.sex=sex;//把性别传到
+                SharedPreferencesUtils.saveString(context, ConfigUsers.USERSEX, sex);//把性别存储到了sp中
 //                BaseApplication.username=username;
-                SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, username);//把id存储到了sp中
+                SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, username);//把用户名存储到了sp中
                 BaseApplication.photoPic = imgurl;
-                SharedPreferencesUtils.saveString(context, ConfigUsers.USERPIC, imgurl);//把id存储到了sp中
+                SharedPreferencesUtils.saveString(context, ConfigUsers.USERPIC, imgurl);//把图片存储到了sp中
                 BaseApplication.age = age;
+                SharedPreferencesUtils.saveString(context, ConfigUsers.USERYEAR, age);//把年龄存储到了sp中
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();
                 //登录成功之后发送一个广播
 //                Intent intent = new Intent("android.intent.action.CART_BROADCAST");

@@ -149,6 +149,7 @@
         <activity android:name=".activity.HasCommitReport" />
         <activity android:name=".activity.CollectionActivity" />
         <activity android:name=".activity.ShoppingCartActivity"></activity>
+        <activity android:name=".activity.ManageSiteActivity"></activity>
     </application>
 
 </manifest>

@@ -9,5 +9,11 @@ public class ConfigUsers {
     public static String USERNAME = "loginUsername";
     //保存用户头像
     public static String USERPIC = "usertouxiang";
+    //保存用户年龄
+    public static String USERYEAR = "useryear";
+    //保存用户性别
+    public static String USERSEX = "usersex";
+    //保存用户手机号
+    public static String USERPHONE = "regphone";
 
 }
