@@ -34,6 +34,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +55,8 @@ import utils.UrlUtils;
 /**
  * 体检报告
  */
-public class MedicalReportActivity extends Activity implements View.OnClickListener{
+public class MedicalReportActivity extends Activity implements View.OnClickListener {
+
 
     @Bind(R.id.arrow_left)
     ImageView arrowLeft;
@@ -62,6 +64,8 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
     TextView tit;
     @Bind(R.id.right_tv)
     TextView rightTv;
+    @Bind(R.id.tv_reportTitle)
+    TextView tvReportTitle;
     @Bind(R.id.grid_view1)
     GridView gridView1;
     private PopupWindow pop;
@@ -72,10 +76,11 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
     private GridAdapter2 adapter;
 
     private int COMMIT_PIC = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
+        setContentView(R.layout.activity_medical_report);
         ButterKnife.bind(this);
         tit.setText("体检报告");
         rightTv.setText("提交");
@@ -83,7 +88,6 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         rightTv.setOnClickListener(this);
         initViews();
     }
-
 
     private void initViews() {
         initPopu();//提示框
@@ -164,18 +168,20 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(openCameraIntent, TAKE_PICTURE);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
         gridView1.setAdapter(adapter);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (Bimp1.tempSelectBitmap.size() < 9 && resultCode == RESULT_OK) {
 
-                    Log.i("mhysa","data是否为空"+data);
+                    Log.i("mhysa", "data是否为空" + data);
                     String fileName = String.valueOf(System.currentTimeMillis());
                     final Bitmap bm = (Bitmap) data.getExtras().get("data");
                     FileUtils.saveBitmap(bm, fileName);
@@ -223,32 +229,32 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
 
     }
 
-    public String getImgList(){
-        String str ="";
-        for(int i=0;i<Bimp1.imgList.size();i++){
+    public String getImgList() {
+        String str = "";
+        for (int i = 0; i < Bimp1.imgList.size(); i++) {
             String s = Bimp1.imgList.get(i);
-            if(i!=Bimp1.imgList.size()-1){
-                str =str+ s+",";
-            }else{
-                str =str+s;
+            if (i != Bimp1.imgList.size() - 1) {
+                str = str + s + ",";
+            } else {
+                str = str + s;
             }
 
         }
         JSONObject jsonObject = new JSONObject();
         try {
             String userid = SharedPreferencesUtils.getString(MedicalReportActivity.this, UrlUtils.LOGIN, "");
-            jsonObject.put("userId",userid);
-            jsonObject.put("url",str);
+            jsonObject.put("userId", userid);
+            jsonObject.put("url", str);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.i("mhysa","imglist"+jsonObject.toString());
+        Log.i("mhysa", "imglist" + jsonObject.toString());
         return jsonObject.toString();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             /**
              * 返回
              */
@@ -260,7 +266,7 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
              */
             case R.id.right_tv:
                 OkHttpUtils.postString()
-                       .url(UrlUtils.UPLOADREPORT)
+                        .url(UrlUtils.UPLOADREPORT)
                         .content(getImgList())
                         .id(COMMIT_PIC)
                         .build()
@@ -272,16 +278,17 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
     StringCallback MyStringCallBack = new StringCallback() {
         @Override
         public void onError(Call call, Exception e, int id) {
-            if(id==COMMIT_PIC){
-                Log.i("mhysa--->",e.toString());
-                Toast.makeText(getApplicationContext(),"上传失败，请稍后重试！",Toast.LENGTH_SHORT).show();
+            if (id == COMMIT_PIC) {
+                Log.i("mhysa--->", e.toString());
+                Toast.makeText(getApplicationContext(), "上传失败，请稍后重试！", Toast.LENGTH_SHORT).show();
             }
         }
+
         @Override
         public void onResponse(String response, int id) {
 
-            if(id==COMMIT_PIC){
-                Toast.makeText(getApplicationContext(),"上传成功！",Toast.LENGTH_SHORT).show();
+            if (id == COMMIT_PIC) {
+                Toast.makeText(getApplicationContext(), "上传成功！", Toast.LENGTH_SHORT).show();
                 MedicalReportActivity.this.finish();
             }
 
