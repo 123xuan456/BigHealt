@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,6 +22,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Selection;
+import android.text.Spannable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -141,12 +142,13 @@ public class EditdataActivity extends Activity {
         BaseActivity.activityList.add(this);
 //        name = BaseApplication.username;
         name = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERNAME,"");
-        sexa = BaseApplication.sex;//打开拿到性别
+        sexa = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERSEX,"");
+      //  sexa = BaseApplication.sex;//打开拿到性别
       //  photoPic = BaseApplication.photoPic;
         photoPic = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERPIC,"");
         imgUrl = BaseApplication.imgUrl;
         sex1.setText(sexa);
-        year1.setText(BaseApplication.age);
+        year1.setText(SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERYEAR,""));
         textView59.setText(name);
         tvTab.setText("个人信息");
         rightAdd.setVisibility(View.GONE);
@@ -232,7 +234,8 @@ public class EditdataActivity extends Activity {
         super.onDestroy();
         JSONObject obj = new JSONObject();
         year=year1.getText().toString();
-        phone = BaseApplication.regphone;
+       // phone = BaseApplication.regphone;
+        phone = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERPHONE,"");
         System.out.println("year=" + year);
         System.out.println("phone=" + phone);
         try {
@@ -254,7 +257,8 @@ public class EditdataActivity extends Activity {
                             Intent intent = new Intent("android.intent.action.CART_YEAR");
                             intent.putExtra("year", year);
                             System.out.println("过去！！year" + year);
-                            BaseApplication.age=year;
+                            SharedPreferencesUtils.saveString(getApplication(), ConfigUsers.USERYEAR, year);//把修改完的年龄存储到了sp中
+                            //BaseApplication.age=year;
                             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                         }
                     });
@@ -287,10 +291,15 @@ public class EditdataActivity extends Activity {
             // TODO Auto-generated method stub
             super.onCreate(savedInstanceState);
             this.setContentView(R.layout.dialog);
-            phone = BaseApplication.regphone;
+            phone = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERPHONE,"");
+            //phone = BaseApplication.regphone;
             editText2 = (EditText) findViewById(R.id.editText2);
             editText2.setText(name);
-
+            CharSequence charSequence = editText2.getText();
+            if (charSequence instanceof Spannable) {
+                Spannable spanText = (Spannable) charSequence;
+                Selection.setSelection(spanText, charSequence.length());
+            }
 
             Button b1 = (Button) findViewById(R.id.button4);
             Button b = (Button) findViewById(R.id.button5);//取消
@@ -333,7 +342,7 @@ public class EditdataActivity extends Activity {
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
 //                                        BaseApplication.username=et;
-                                        SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, et);//把id存储到了sp中
+                                        SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, et);//把用户名存储到了sp中
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
                                     }

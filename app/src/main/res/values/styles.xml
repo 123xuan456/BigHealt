@@ -59,4 +59,18 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+    <style name="DeleteDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/biankuang_yuan</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <!-- 我的界面请登录 -->
+    <style name="deletedialog">
+        <item name="android:textSize">15sp</item>
+        <item name="android:text">确定要删除该地址吗？</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

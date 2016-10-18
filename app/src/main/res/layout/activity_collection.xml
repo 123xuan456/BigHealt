@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#efeff4"
     tools:context="dbighealth.bighealth.activity.CollectionActivity">
     <include
         layout="@layout/footer_tab_2"
+        android:id="@+id/layout_footer"
         />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lv_collection"
+        android:layout_below="@+id/layout_footer"
+        android:divider="@null"
+        android:layout_above="@+id/view"
         >
-
     </ListView>
-
-</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:id="@+id/view"
+        android:layout_above="@+id/rl_trash"
+        android:visibility="gone"
+        android:background="#e5e5e5"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/rl_trash"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_trash"
+            android:src="@mipmap/trash"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_listCount"
+            android:text="(0)"
+            android:layout_toRightOf="@+id/iv_trash"
+            android:layout_marginLeft="5dp"
+            />
+    </RelativeLayout>
+</RelativeLayout>

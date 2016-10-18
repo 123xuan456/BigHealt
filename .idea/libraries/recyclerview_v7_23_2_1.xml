@@ -11,6 +11,7 @@
     <SOURCES>
       <root url="jar://D:/eclipse/adt-bundle-windows-x86-20130917/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.2.1/recyclerview-v7-23.2.1-sources.jar!/" />
       <root url="jar://E:/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.2.1/recyclerview-v7-23.2.1-sources.jar!/" />
+      <root url="jar://D:/SDK/extras/android/m2repository/com/android/support/recyclerview-v7/23.2.1/recyclerview-v7-23.2.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
