@@ -39,7 +39,6 @@ public class HasCommitReport extends Activity implements View.OnClickListener{
     TextView tvReportTitle;
     @Bind(R.id.grid_view1)
     GridView gridView1;
-
     private int SEARCH =101;
 
     @Override

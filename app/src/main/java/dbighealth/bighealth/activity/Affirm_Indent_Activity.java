@@ -22,7 +22,7 @@ import utils.UrlUtils;
  * 确认订单
  * liu
  */
-public class Affirm_Indent_Activity extends Activity implements View.OnClickListener {
+public class Affirm_Indent_Activity extends Activity implements View.OnClickListener{
 
     private TextView tit,right_tv;
     private ImageView arrow_left;

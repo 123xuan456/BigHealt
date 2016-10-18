@@ -92,6 +92,7 @@ public class GalleryActivity1 extends Activity implements OnClickListener{
 			if (listViews.size() == 1) {
 				Bimp1.tempSelectBitmap.clear();
 				Bimp1.max = 0;
+				Bimp1.imgList.clear();
 				finish();
 			} else {
 				Bimp1.tempSelectBitmap.remove(location);

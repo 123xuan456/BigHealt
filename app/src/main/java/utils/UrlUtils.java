@@ -13,9 +13,9 @@ public class UrlUtils {
   //public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
  // public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";//本地测试
  // public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";//本地测试
-  public  static String   BASEURL3 = "http://106.2.219.210:1314/";//本地测试
- public static String BASEURL="http://106.2.219.210:1314/";
-   public  static String   BASEURL2 = "http://106.2.219.210:1314/";
+  public  static String   BASEURL3 = "http://106.2.219.210:1314";//本地测试
+ public static String BASEURL="http://106.2.219.210:1314";
+   public  static String   BASEURL2 = "http://106.2.219.210:1314";
   //-------------------------------API接口----------------------------------
   public static String CommonHome=BASEURL+"/homepictures/sickness";
   public static String SpecialHome = BASEURL+"/homepictures/showhealthknowledge";
@@ -104,5 +104,7 @@ public class UrlUtils {
   public static String SET_MANAGESITE =  BASEURL3+"/addressmanager/defaults";
   //删除收货地址
   public static String DELETE_MANAGESITE =  BASEURL3+"/addressmanager/deleteAddress?addressId=";
+  //查询购物车
+  public static String SELECTSHOPCART = BASEURL3 +"/shoppingtemp/searchCart";
 
 }
