@@ -77,10 +77,11 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
     //连网操作
     public void initIntenet() {
+        Log.i("mhysa-->","url=="+UrlUtils.DOBUYNOW+"?");
         OkHttpUtils.get()
                 .url(UrlUtils.DOBUYNOW)
 //                   .id(SEARCH)
-                .addParams("userId", 1 + "")//a
+                .addParams("userId", 35 + "")//a
                 .addParams("productId", 1 + "")
                 .build()
                 .execute(MyStringCallBack.get());
@@ -138,7 +139,12 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                 AffirmIndentBean.Message message =urls.get(position);
                 Log.i("liuliuliu-->","num："+message.getNum());
                 message.setNum(message.getNum() + 1);
-                reportPicAdapter.notifyDataSetChanged();
+                ItemProductAdapter.ViewHolder viewHolder = new ItemProductAdapter.ViewHolder();
+
+               // viewHolder.count
+//                viewHolder.num.setText(message.getNum() +"");
+
+             //   reportPicAdapter.notifyDataSetChanged();
 //                lists.get(position).getNum();
 //                lists.get(0).setAge(1+1);
                 //myAdpter.notifyDataSetChanged();这里如果点击速度过快的话，getView重绘时会使数据加载混乱，所以不能用myAdpter.notifyDataSetChanged();
@@ -152,6 +158,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                 message1.setNum(message1.getNum()-1);
                 break;
             default:
+
                 break;
         }
 

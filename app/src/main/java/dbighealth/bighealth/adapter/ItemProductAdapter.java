@@ -1,6 +1,7 @@
 package dbighealth.bighealth.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +20,20 @@ import dbighealth.bighealth.bean.AffirmIndentBean;
 public class ItemProductAdapter extends BaseAdapter  {
 
     private Context context;
-    ViewHolder holder = null;
+
     private final int NUM = 1;
-    public AdpterOnItemClick myAdpterOnclick;
+    private AdpterOnItemClick myAdpterOnclick;
     private List<AffirmIndentBean.Message> list;
     private LayoutInflater mInflater = null;
-    private int count = 0;
-    private Integer[] mCounts;
-    public int q;
-    int b = 1;
+    private int count ;
+//    private Integer[] mCounts;
+//    public int q;
+//    int b = 1;
 
     public ItemProductAdapter(Context context, List<AffirmIndentBean.Message> list) {
         this.context = context;
         this.list = list;
-        mCounts = new Integer[999];
+//        mCounts = new Integer[999];
         mInflater = LayoutInflater.from(context);
 
     }
@@ -60,7 +61,7 @@ public class ItemProductAdapter extends BaseAdapter  {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        ViewHolder holder = null;
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_product, null);
@@ -110,6 +111,7 @@ public class ItemProductAdapter extends BaseAdapter  {
                 if (myAdpterOnclick != null) {
                     int which = v.getId();
                     myAdpterOnclick.onAdpterClick(which, fpostion);
+                    Log.i("liuliuliuliu-->", "num：" + fpostion);
                     show(fpostion, fholder);
 
                 }
@@ -122,6 +124,7 @@ public class ItemProductAdapter extends BaseAdapter  {
                 if (myAdpterOnclick != null) {
                     int which = v.getId();
                     myAdpterOnclick.onAdpterClick(which, fpostion);
+                    Log.i("liuliuliuliu-->", "num1：" + fpostion);
                     show(fpostion, fholder);
                 }
             }
@@ -244,10 +247,10 @@ public class ItemProductAdapter extends BaseAdapter  {
         TextView name_tv;//店铺名称
         TextView tv_product_tit;//商品描述
         TextView price;//价格
-        public static TextView count;//数量
+         TextView count;//数量
         ImageView jian;//减
         ImageView jia;//加
-        public static TextView num;
+         TextView num;
     }
 
     /**
@@ -256,8 +259,11 @@ public class ItemProductAdapter extends BaseAdapter  {
     public void show(int index, ViewHolder holder) {
         if (holder != null) {
             int nums = list.get(index).getNum();
+            Log.i("liuliuliuliu-->", "num：" + nums);
+            holder.num.getTag();
             holder.num.setText(String.valueOf(nums));
-            holder.count.setText("x"+String.valueOf(nums));
+            holder.count.setText("x" + String.valueOf(nums));
+
         }
     }
 }
