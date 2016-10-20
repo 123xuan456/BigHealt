@@ -108,6 +108,8 @@ public class UrlUtils {
   public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuy";
   //确认订单中提交
   public static String SUBMITS = BASEURL2+"/order/goOrder";
+  //我的收藏展示
+  public static String  DELETECOLLECTION = BASEURL3+"/transfer/deletecollection?";
 
 
   //收货地址查询
@@ -119,6 +121,8 @@ public class UrlUtils {
   //添加收货地址
   public static String ADD_MANAGESITE =  BASEURL3+"/addressmanager/saveAddress";
   //删除收藏
-  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
+//  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
+  //编辑收货地址
+  public static String EDIT_MANAGESITE =  BASEURL3+"/addressmanager/updateAddress";
 
 }
