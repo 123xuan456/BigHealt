@@ -39,6 +39,7 @@
             android:layout_toEndOf="@+id/iv_product"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
+            android:lines="3"
             android:id="@+id/tv_product_tit" />
 
         <TextView
