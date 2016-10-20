@@ -39,22 +39,23 @@ public class ManageSiteActivity extends Activity {
     TextView tv;
     @Bind(R.id.right_add)
     ImageView rightAdd;
-    @Bind(R.id.listView3)
-
-    ListView listView3;
     @Bind(R.id.tvTab)
     TextView tvTab;
+    @Bind(R.id.listView3)
+    ListView listView;
     private String userid;
-
+    public List<ManageSiteBean.MessageBean> mes;
+    ManageSiteAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_manage_site);
-            ButterKnife.bind(this);
-            rightAdd.setVisibility(View.GONE);
-            tvTab.setText("管理收货地址");
-            userid = SharedPreferencesUtils.getString(ManageSiteActivity.this, UrlUtils.LOGIN, "");
-            getDate();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_manage_site);
+        ButterKnife.bind(this);
+        //listView3= (ListView) findViewById(R.id.listView3);
+        rightAdd.setVisibility(View.GONE);
+        tvTab.setText("管理收货地址");
+        userid = SharedPreferencesUtils.getString(ManageSiteActivity.this, UrlUtils.LOGIN, "");
+        getDate();
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.SET");//修改昵称
@@ -68,39 +69,41 @@ public class ManageSiteActivity extends Activity {
             }
         };
         broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
+
+
     }
 
 
-
-    @OnClick({R.id.arrow_left,R.id.tv})
+    @OnClick({R.id.arrow_left, R.id.tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.arrow_left:
                 finish();
                 break;
             case R.id.tv:
-                Intent i=new Intent(this,AddSiteActivity.class);
+                Intent i = new Intent(this, AddSiteActivity.class);
                 startActivity(i);
                 break;
         }
     }
+
     public void getDate() {
-        OkHttpUtils.post().url(UrlUtils.SEARCH_MANAGESITE+userid).build().execute(new StringCallback() {
-            public List<ManageSiteBean.MessageBean> mes;
+        OkHttpUtils.post().url(UrlUtils.SEARCH_MANAGESITE + userid).build().execute(new StringCallback() {
+
 
             @Override
             public void onError(Call call, Exception e, int id) {
-            System.out.println("收货地址失败"+e.toString());
+                System.out.println("收货地址失败" + e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
-                System.out.println("收货地址成功"+response);
-                Gson gson=new Gson();
+                System.out.println("收货地址成功" + response);
+                Gson gson = new Gson();
                 ManageSiteBean ms = gson.fromJson(response, ManageSiteBean.class);
                 mes = ms.getMessage();
-                ManageSiteAdapter adapter=new ManageSiteAdapter( ManageSiteActivity.this,mes);
-               listView3.setAdapter(adapter);
+                adapter = new ManageSiteAdapter(ManageSiteActivity.this, mes);
+                listView.setAdapter(adapter);
             }
         });
     }

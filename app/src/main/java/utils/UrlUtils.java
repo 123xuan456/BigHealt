@@ -102,6 +102,8 @@ public class UrlUtils {
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
   //我的收藏展示
   public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
+  //我的收藏展示
+  public static String  DELETECOLLECTION = BASEURL3+"/transfer/deletecollection?";
 
 
   //收货地址查询
@@ -112,5 +114,7 @@ public class UrlUtils {
   public static String DELETE_MANAGESITE =  BASEURL3+"/addressmanager/deleteAddress?addressId=";
   //添加收货地址
   public static String ADD_MANAGESITE =  BASEURL3+"/addressmanager/saveAddress";
+  //编辑收货地址
+  public static String EDIT_MANAGESITE =  BASEURL3+"/addressmanager/updateAddress";
 
 }

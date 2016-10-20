@@ -1,11 +1,12 @@
 package dbighealth.bighealth.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by de on 2016/10/13.
  */
-public class ManageSiteBean {
+public class ManageSiteBean implements Serializable{
 
 
     /**
