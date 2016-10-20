@@ -153,6 +153,7 @@
         <activity android:name=".activity.ManageSiteActivity" />
         <activity android:name=".activity.AddSiteActivity"></activity>
         <activity android:name=".activity.CitySelect1Activity"></activity>
+        <activity android:name=".activity.Affirm_Indent_Activity"></activity>
     </application>
 
 </manifest>

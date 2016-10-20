@@ -93,7 +93,7 @@ public class ItemProductAdapter extends BaseAdapter  {
                 .into(holder.iv_product);
         holder.name_tv.setText(list.get(position).getTitle());
         holder.tv_product_tit.setText(list.get(position).getContent());
-        holder.price.setText(list.get(position).getPrice());
+        holder.price.setText("￥"+list.get(position).getPrice());
         holder.count.setText("x" + list.get(position).getNum() + "");
         count = list.get(position).getNum();
         holder.num.setText(count + "");

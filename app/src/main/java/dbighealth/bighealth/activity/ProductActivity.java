@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
@@ -25,6 +26,7 @@ import dbighealth.bighealth.adapter.InProductAdapter;
 import dbighealth.bighealth.bean.InProductBean;
 import dbighealth.bighealth.view.NoScrollListview;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -135,8 +137,18 @@ public class ProductActivity extends Activity implements View.OnClickListener {
             case R.id.iv_addcar:
                 //加入到购物车
                 //先跳到确认订单界面，因为购物车没有界面
-                Intent intent = new Intent(this, Affirm_Indent_Activity.class);
-                startActivity(intent);
+
+                String useid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
+                Log.i("1234567890","num："+useid);
+                if(!TextUtils.isEmpty(useid)){
+                    Intent intent = new Intent(this, Affirm_Indent_Activity.class);
+                    startActivity(intent);
+
+                }else {
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
+
+                }
                 break;
             case R.id.iv_nowbuy:
                 //立即购买

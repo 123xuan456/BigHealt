@@ -105,7 +105,7 @@ public class UrlUtils {
   //产品详细
   public static String INPRODUCT = BASEURL2+"/mountinformation/inProduct";
   //确认订单
-  public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuyNow";
+  public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuy";
 
 
   //收货地址查询
@@ -116,5 +116,7 @@ public class UrlUtils {
   public static String DELETE_MANAGESITE =  BASEURL3+"/addressmanager/deleteAddress?addressId=";
   //添加收货地址
   public static String ADD_MANAGESITE =  BASEURL3+"/addressmanager/saveAddress";
+  //删除收藏
+  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
 
 }

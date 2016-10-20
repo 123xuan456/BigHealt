@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dbighealth.bighealth.R;
@@ -34,11 +35,17 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
     private TextView tit,right_tv;
     private ImageView arrow_left;
-    private TextView shouhuoren,tel,address;
+    private TextView shouhuoren,tel,address,heji;
     private NoScrollListview product_listview;
     List<AffirmIndentBean.Message> urls;
     ItemProductAdapter reportPicAdapter;
     public Context context;
+    int he;
+    List<Integer> zongia;
+     int qian2;
+    int qian;
+    int a;
+    int w;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +53,11 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_affirm_indent);
         findView();
-        String useid = SharedPreferencesUtils.getString(this,UrlUtils.LOGIN,"");
-        if(!TextUtils.isEmpty(useid)){
-            initIntenet();
-        }else {
-            Intent intent = new Intent(this,LoginActivity.class);
-            startActivity(intent);
-        }
+
+
         initIntenet();
+
+
 
     }
 
@@ -73,16 +77,18 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         //产品的findView
         product_listview = (NoScrollListview)findViewById(R.id.product_listview);//要提交的产品的listview
         //ItemProductAdapter这个类是listview的adapter，item的布局已经完成，坐等数据和bean文件
+
+        heji = (TextView)findViewById(R.id.heji);
     }
 
     //连网操作
     public void initIntenet() {
-        Log.i("mhysa-->","url=="+UrlUtils.DOBUYNOW+"?");
+        String useid = SharedPreferencesUtils.getString(this,UrlUtils.LOGIN,"");
         OkHttpUtils.get()
                 .url(UrlUtils.DOBUYNOW)
 //                   .id(SEARCH)
-                .addParams("userId", 35 + "")//a
-                .addParams("productId", 1 + "")
+                .addParams("userId", 26 + "")//useid
+//                .addParams("shoppingId", 1+ ""+","+2+"")
                 .build()
                 .execute(MyStringCallBack.get());
     }
@@ -105,8 +111,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
                 @Override
                 public void onResponse(String response, int id) {
-                    //bean文件没有做还有赋值 adapter没有看这ItemDetailAdapter类，用这里的item
-                    //上边数据要在这里赋值
+
                     Gson gson = new Gson();
 
                     AffirmIndentBean AffirmIndent = gson.fromJson(response, AffirmIndentBean.class);
@@ -120,6 +125,22 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                         reportPicAdapter = new ItemProductAdapter(getApplicationContext(), urls);
                         reportPicAdapter.onListener(Affirm_Indent_Activity.this);
                         product_listview.setAdapter(reportPicAdapter);
+
+                        zongia = new ArrayList<Integer>();
+                        for (int i=0;i<urls.size();i++){
+                            int p = Integer.valueOf(urls.get(i).getPrice());
+                            int o = Integer.valueOf(urls.get(i).getNum());
+                            qian =p *o;
+                            zongia.add(qian);
+                        }
+//                        int qian = Integer.valueOf(urls.get(0).getPrice()) * Integer.valueOf(urls.get(0).getNum());
+                        a = 0;
+                        for (int b:zongia){
+//                           qian2 += zongia.get(j);
+                            a +=b;
+                        }
+                        heji.setText(a + "");
+
                     }
 
                 }
@@ -128,6 +149,8 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
     };
 
     public void onAdpterClick(int which,final int position) {
+        AffirmIndentBean.Message message =urls.get(position);
+
         switch (which) {
             case R.id.jia:
                 Log.i("liuliuliu-->","wakakjian");
@@ -136,11 +159,17 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 //      lists.get(0).;
 //                    String a = inProduct.getLittleImages().get(i).getLittle();
 //                }
-                AffirmIndentBean.Message message =urls.get(position);
-                Log.i("liuliuliu-->","num："+message.getNum());
+//                AffirmIndentBean.Message message =urls.get(position);
+
                 message.setNum(message.getNum() + 1);
                 ItemProductAdapter.ViewHolder viewHolder = new ItemProductAdapter.ViewHolder();
-
+                int e = Integer.valueOf(message.getPrice());
+                he = Integer.valueOf(message.getPrice()) * Integer.valueOf(message.getNum());
+//                message.setPrice(he+"");
+                w = a+he-e;
+                heji.setText(w+"");
+                a= w;
+                Log.i("liuliuliu-->","num："+a);
                // viewHolder.count
 //                viewHolder.num.setText(message.getNum() +"");
 
@@ -152,10 +181,19 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
                 break;
             case R.id.jian:
-                Log.i("liuliuliu-->","wakak加");
+
 //                person1.setAge(person1.getAge()-1);
-                AffirmIndentBean.Message message1 =urls.get(position);
-                message1.setNum(message1.getNum()-1);
+//                AffirmIndentBean.Message message1 =urls.get(position);
+                message.setNum(message.getNum() - 1);
+                int e1 = Integer.valueOf(message.getPrice());
+                he = Integer.valueOf(message.getPrice()) * Integer.valueOf(message.getNum());
+//                message1.setPrice(he+"");
+//                a= w;
+                w = a-he+e1;
+
+                a= w;
+                Log.i("liuliuliu-->", "qwe"+a);
+                heji.setText(w + "");
                 break;
             default:
 
