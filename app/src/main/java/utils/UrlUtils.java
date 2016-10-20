@@ -106,6 +106,8 @@ public class UrlUtils {
   public static String INPRODUCT = BASEURL2+"/mountinformation/inProduct";
   //确认订单
   public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuy";
+  //确认订单中提交
+  public static String SUBMITS = BASEURL2+"/order/goOrder";
 
 
   //收货地址查询

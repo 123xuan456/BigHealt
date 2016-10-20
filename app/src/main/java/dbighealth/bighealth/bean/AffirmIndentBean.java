@@ -58,6 +58,14 @@ public class AffirmIndentBean {
 
         private String price;
 
+        private int shoppingId;
+
+        public int getShoppingId() {
+            return shoppingId;
+        }
+        public void setShoppingId(int shoppingId) {
+            this.shoppingId = shoppingId;
+        }
         public void setNum(int num){
             this.num = num;
         }
