@@ -10,12 +10,13 @@ public class UrlUtils {
 
   public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
 
-  //public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
- // public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";//本地测试
- // public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";//本地测试
-  public  static String   BASEURL3 = "http://106.2.219.210:1314";//本地测试
- public static String BASEURL="http://106.2.219.210:1314";
-   public  static String   BASEURL2 = "http://106.2.219.210:1314";
+  public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
+  public  static String   BASEURL2 = " http://192.168.0.120:8081/JianKangChanYe";//本地测试
+  public  static String   BASEURL3 = " http://192.168.0.120:8081/JianKangChanYe";//本地测试
+  //http://106.2.219.210:8090/JianKangChanYe/homepictures/sickn
+ /* public static String BASEURL=" http://106.2.219.210:1314";//本地测试
+  public  static String   BASEURL2 = " http://106.2.219.210:1314";//本地测试
+  public  static String   BASEURL3 = " http://106.2.219.210:1314";//本地测试*/
   //-------------------------------API接口----------------------------------
   public static String CommonHome=BASEURL+"/homepictures/sickness";
   public static String SpecialHome = BASEURL+"/homepictures/showhealthknowledge";
@@ -26,6 +27,7 @@ public class UrlUtils {
   public static  String  FileSave = BASEURL2+"/filesave/save";
   //获取健康档案数据
   public static  String  FileSubmit = BASEURL2+"/filesave/searchFile?userId=";
+
   //预约一级
   public static  String SUBSCRIBE =BASEURL +"/hathappenedat/onlinebookingselect";
   //详细预约particular
@@ -40,6 +42,7 @@ public class UrlUtils {
   public static String SELECTED_TREATMENT = BASEURL+"/hathappenedat/condition";
   //医疗养生详情页
   public static String DETAIL_TREATMENT = BASEURL2+"/medicalcareInside/healthlist";
+
   //登录
   public  static String   LOGIN=BASEURL+"/user/login.do?";
   //修改密码
@@ -48,6 +51,7 @@ public class UrlUtils {
   public  static String   CHANGUSER=BASEURL2+"/user/changereguser";
   //修改年龄
   public  static String   CHANGYEAR=BASEURL3+"/user/changeage";
+
   //修改性别
   public  static String   CHANGESEX=BASEURL2+"/user/changesex";
   //注册验证码
@@ -89,15 +93,14 @@ public class UrlUtils {
   //提醒listview
   public static String REMIND = BASEURL2+"/medicineremind/remindlist";
   //查询体检报告
-  public static String SEARCHREPORT = BASEURL3+"/medicalReport/searchReport";
+  public static String SEARCHREPORT = BASEURL3+"/medicalReportarchReport";
   //保存体检报告
-  public static String UPLOADREPORT = BASEURL3+"/medicalReport/saveReporty";
+  public static String UPLOADREPORT = BASEURL3+"/medicalReportveReporty";
   //判读是否填写过体质
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
   //我的收藏展示
   public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
-  //删除我的收藏
-  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
+
   //收货地址查询
   public static String SEARCH_MANAGESITE =  BASEURL3+"/addressmanager/searchall?userId=";
   //收货地址设为默认
@@ -106,5 +109,15 @@ public class UrlUtils {
   public static String DELETE_MANAGESITE =  BASEURL3+"/addressmanager/deleteAddress?addressId=";
   //查询购物车
   public static String SELECTSHOPCART = BASEURL3 +"/shoppingtemp/searchCart";
+  //添加收货地址
+  public static String ADD_MANAGESITE =  BASEURL3+"/addressmanager/saveAddress";
+  //删除收藏
+  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
+  //删除购物车
+  public static String DELETESHOPCART = BASEURL3+"/shoppingtemp/deleteCart";
+  //修改购物车中单件商品的数量
+  public static String UPDATENUMS = BASEURL3+"/shoppingtemp/updateNum";
+  //存储购物车要结算的订单
+  public static String SETTLEMENTORDER = BASEURL3 +"/shoppingtemp/doBuyTemp";
 
 }

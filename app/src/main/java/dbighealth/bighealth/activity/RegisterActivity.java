@@ -27,6 +27,8 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.CodeBean;
 import dbighealth.bighealth.bean.RegisterBean;
 import okhttp3.Call;
+import utils.ConfigUsers;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**注册页面*/
@@ -60,7 +62,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         System.out.println("verification="+verification);
         String nickname1 = nickname.getText().toString();
         System.out.println("nickname1=" + nickname1);
-        String phone1 = phone.getText().toString();
+        final String phone1 = phone.getText().toString();
         System.out.println("phone1=" + phone1);
         String code1 = code.getText().toString();
         System.out.println("code1=" + code1);
@@ -114,7 +116,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
                 @Override
                 public void onResponse(String response, int id) {
-                    System.out.println("传递注册手机号成功" + response);
+                    System.out.println("注册手机号成功" + response);
+                    SharedPreferencesUtils.saveString(getApplication(), ConfigUsers.USERPHONE, phone1);//把注册的手机存储到了sp中
                     Gson gson = new Gson();
                     registerbean = gson.fromJson(response, RegisterBean.class);
                     String c = registerbean.getCode();

@@ -147,19 +147,21 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                  //   ivTouxiang.setImageURI(photoUrl);
                     Log.i("mhysa","打印此时的地址："+photoUrl);
                 }
-               /* if(!BaseApplication.photoPic.equals("")){
+                if(!BaseApplication.photoPic.equals("")){
                     photoUrl = BaseApplication.photoPic;
                     imgUrl = BaseApplication.imgUrl;
 
                     Log.i("mhysa","打印此时的地址："+photoUrl);
-                }*/else{
+                }else{
                     photoUrl = intent.getStringExtra("photoUrl");
                 }
 
                 if(imgUrl!=null&&ivTouxiang != null){
                     Log.i("mhysa","接收到的地址是："+imgUrl.toString());
                     ivTouxiang.setImageURI(imgUrl);
-                }else if (photoUrl != null && ivTouxiang != null) {
+                }else
+
+                if (photoUrl != null && ivTouxiang != null) {
                     Uri uri = Uri.parse(photoUrl);
                     Log.i("mhysa","接收到的地址是："+photoUrl);
                     ivTouxiang.setImageURI(uri);
@@ -276,7 +278,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
 //        username = BaseApplication.username;
         username = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERNAME,"");
-        photoPic = BaseApplication.photoPic;
+        //photoPic = BaseApplication.photoPic;
         photoPic = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERPIC,"");
         year = SharedPreferencesUtils.getString(getContext(), ConfigUsers.USERYEAR,"");
         //year = BaseApplication.age;
@@ -287,7 +289,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
         ra = (LinearLayout) inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, ra);
-
+        setView();
         TextView tvTab = (TextView) ra.findViewById(R.id.tvTab);
         textView50 = (TextView) ra.findViewById(R.id.textView50);
         textView20=(TextView)ra.findViewById(R.id.textView20);
@@ -300,11 +302,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         }
         if(imgUrl!=null){
             ivTouxiang.setImageURI(imgUrl);
-        }else if (!photoPic.equals("")) {
+        }else
+        if (!photoPic.equals("")) {
             Uri uri = Uri.parse(photoPic);
             ivTouxiang.setImageURI(uri);
         }
-        setView();
+
 
         return ra;
 

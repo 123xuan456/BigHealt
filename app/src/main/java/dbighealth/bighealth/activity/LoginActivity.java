@@ -236,6 +236,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 String age=log.getAge();
                 String id1=String.valueOf(log.getId());
                SharedPreferencesUtils.saveString(context,UrlUtils.LOGIN, log.getId()+"");//把id存储到了sp中
+               SharedPreferencesUtils.saveString(context,ConfigUsers.USERID, log.getId()+"");//把id存储到了sp中
 //                BaseApplication.userid=id1;//把id传到
                 BaseApplication.sex=sex;//把性别传到
                 SharedPreferencesUtils.saveString(context, ConfigUsers.USERSEX, sex);//把性别存储到了sp中
@@ -243,6 +244,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
                 SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, username);//把用户名存储到了sp中
                 BaseApplication.photoPic = imgurl;
                 SharedPreferencesUtils.saveString(context, ConfigUsers.USERPIC, imgurl);//把图片存储到了sp中
+                System.out.println("用户拿到了图片="+imgurl);
                 BaseApplication.age = age;
                 SharedPreferencesUtils.saveString(context, ConfigUsers.USERYEAR, age);//把年龄存储到了sp中
                 Toast.makeText(getApplicationContext(),hint,Toast.LENGTH_LONG).show();

@@ -257,7 +257,8 @@ public class EditdataActivity extends Activity {
                             Intent intent = new Intent("android.intent.action.CART_YEAR");
                             intent.putExtra("year", year);
                             System.out.println("过去！！year" + year);
-                            BaseApplication.age=year;
+                            SharedPreferencesUtils.saveString(getApplication(), ConfigUsers.USERYEAR, year);//把修改完的年龄存储到了sp中
+                            //BaseApplication.age=year;
                             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                         }
                     });
@@ -290,7 +291,8 @@ public class EditdataActivity extends Activity {
             // TODO Auto-generated method stub
             super.onCreate(savedInstanceState);
             this.setContentView(R.layout.dialog);
-            phone = BaseApplication.regphone;
+            phone = SharedPreferencesUtils.getString(getApplicationContext(),ConfigUsers.USERPHONE,"");
+            //phone = BaseApplication.regphone;
             editText2 = (EditText) findViewById(R.id.editText2);
             editText2.setText(name);
             CharSequence charSequence = editText2.getText();
@@ -340,7 +342,7 @@ public class EditdataActivity extends Activity {
                                         intent.putExtra("username", et);
                                         System.out.println("过去！！username" + et);
 //                                        BaseApplication.username=et;
-                                        SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, et);//把id存储到了sp中
+                                        SharedPreferencesUtils.saveString(context, ConfigUsers.USERNAME, et);//把用户名存储到了sp中
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                                         dismiss();
                                     }

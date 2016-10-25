@@ -98,7 +98,7 @@ public class SexActivity extends Activity {
                     Intent intent = new Intent("android.intent.action.CART_SEX");
                     intent.putExtra("sex",m);
                     System.out.println("过去！！性别"+m);
-                    SharedPreferencesUtils.saveString(getApplicationContext(), ConfigUsers.USERSEX, m);//把性别存储到了sp中
+                    SharedPreferencesUtils.saveString(getApplication(), ConfigUsers.USERSEX, m);//把修改完的性别存储到了sp中
                     LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                     finish();
                 }
