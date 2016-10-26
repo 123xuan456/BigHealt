@@ -2,6 +2,7 @@ package dbighealth.bighealth.adapter;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import dbighealth.bighealth.R;
+import dbighealth.bighealth.activity.EditSiteActivity;
 import dbighealth.bighealth.activity.ManageSiteActivity;
 import dbighealth.bighealth.bean.ManageSiteBean;
 import dbighealth.bighealth.view.DeleteDialog;
@@ -35,6 +37,7 @@ public class ManageSiteAdapter extends BaseAdapter{
     // 用于记录每个RadioButton的状态，并保证只可选一个
     HashMap<String, Boolean> states = new HashMap<String, Boolean>();
     String old;
+    private int defaults;
 
 
     public ManageSiteAdapter( ManageSiteActivity context, List<ManageSiteBean.MessageBean> list) {
@@ -86,7 +89,7 @@ public class ManageSiteAdapter extends BaseAdapter{
         holder.tv1.setText(ms.getPhoneNumber());
         holder.tv2.setText(ms.getArea()+ms.getAddress());
 
-        int defaults = ms.getDefaults();//默认值
+        defaults = ms.getDefaults();//默认值
         if ("1".equals(defaults+"")){
             old = ms.getAddressId() + "";
             System.out.println("之前默认的id="+old);
@@ -138,7 +141,16 @@ public class ManageSiteAdapter extends BaseAdapter{
         holder.tv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i=new Intent(context, EditSiteActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("addressId",list.get(position).getAddressId()+"");
+                bundle.putString("name",list.get(position).getName());
+                bundle.putString("phoneNumber",list.get(position).getPhoneNumber());
+                bundle.putString("area",list.get(position).getArea());
+                bundle.putString("address",list.get(position).getAddress());
+                bundle.putString("defaults",list.get(position).getDefaults()+"");
+                i.putExtras(bundle);
+                context.startActivity(i);
             }
         });
 
@@ -190,7 +202,21 @@ public class ManageSiteAdapter extends BaseAdapter{
             });
 
         }
-
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context, EditSiteActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("addressId",list.get(position).getAddressId()+"");
+                bundle.putString("name",list.get(position).getName());
+                bundle.putString("phoneNumber",list.get(position).getPhoneNumber());
+                bundle.putString("area",list.get(position).getArea());
+                bundle.putString("address",list.get(position).getAddress());
+                bundle.putString("defaults",list.get(position).getDefaults()+"");
+                i.putExtras(bundle);
+                context.startActivity(i);
+            }
+        });
 
         return convertView;
     }

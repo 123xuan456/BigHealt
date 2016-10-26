@@ -493,9 +493,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
             case R.id.textView16:
                 if (!TextUtils.isEmpty(id)) {
-                   Intent i6 = new Intent(getActivity(), SubscribeActivity.class);//预约
-                   startActivity(i6);
+                  // Intent i6 = new Intent(getActivity(), SubscribeActivity.class);//预约
+                 //  startActivity(i6);
                  /*   Intent i6 = new Intent(getActivity(), ManageSiteActivity.class);//预约
+                    startActivity(i6);*/
+                //   Intent i6 = new Intent(getActivity(), SubscribeActivity.class);//预约
+                 /*  Intent i6 = new Intent(getActivity(), ManageSiteActivity.class);//预约
                     startActivity(i6);*/
                 } else {
                     Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();

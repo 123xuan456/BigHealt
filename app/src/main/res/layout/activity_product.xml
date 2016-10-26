@@ -31,7 +31,7 @@
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:padding="1dp"
             android:background="#ffffff">
 
@@ -130,6 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
+        android:background="#ffffff"
         android:layout_alignParentBottom="true">
         <ImageView
             android:id="@+id/iv_addcar"

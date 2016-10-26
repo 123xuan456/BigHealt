@@ -134,7 +134,9 @@ public class ShopcartAdapter extends BaseAdapter{
                     checks[pos] = isChecked;
                    // mListener.clickListener(buttonView,isChecked);
                      Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
+                    intent.putExtra("position",position);
                      intent.putExtra("getTotal",1);
+                   //  intent.putExtra("postion",position);
                      LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 }
@@ -280,6 +282,7 @@ public class ShopcartAdapter extends BaseAdapter{
                     isSelected.put(position,isChecked);
                     Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
                     intent.putExtra("getTotal",2);
+                    intent.putExtra("postion",position);
                     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 }

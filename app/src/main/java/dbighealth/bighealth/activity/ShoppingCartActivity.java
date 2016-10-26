@@ -73,7 +73,8 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     //存储item选中状态
     private HashMap<Integer, Boolean> saveStatus;
     private int totalPrice = 0;
-
+    //存储item非选中状态
+    private HashMap<Integer,Boolean> unSelectStatus;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         tit.setText("购物车(0)");
 
         saveStatus = new HashMap<Integer, Boolean>();
+        unSelectStatus = new HashMap<Integer, Boolean>();
         initListener();
         InitInternet(SEARCHSHOP);
         checkBoxClick();
@@ -93,6 +95,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                  * 跳转到商品详情页
                  */
                 Intent intent = new Intent(ShoppingCartActivity.this,ProductActivity.class);
+                intent.putExtra("imgId",message.get(position).getShoppingId());
                 startActivity(intent);
             }
         });
@@ -117,12 +120,32 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                     cbShopping.setChecked(true);
                 }
 
-                if (intent.getBooleanExtra("delete", true)) {
-                   // count -= count;
-                }
-                if (intent.getIntExtra("getTotal", 0) == 1) {
 
-                    for (int i = 0; i < message.size(); i++) {
+               if (intent.getIntExtra("getTotal", 0) == 1) {
+
+                   /*int position = intent.getIntExtra("position", 0);
+                   Log.i("count-->", "position==" + position);
+                   if(ShopcartAdapter.getIsSelected().get(position)){
+                       if (!saveStatus.containsKey(position)) {
+                           count=count+1;
+                           saveStatus.put(position, true);
+                           Log.i("count-->", "count=" + count + "i=" + position);
+                       }
+                       String price = message.get(position).getPrice();
+                       int singlePrice = Integer.parseInt(price);
+                       int num = message.get(position).getNum();
+                       int ProductPrice = singlePrice * num;
+                       totalPrice += ProductPrice;
+                   }else{
+                       count -=1;
+                   }
+                   if(tvBalance.VISIBLE==View.VISIBLE){
+                       tvBalance.setText("结算("+count+")");
+                   }
+*/
+
+                 for (int i = 0; i < message.size(); i++) {
+                     Log.i("count-->", "getselect="+ShopcartAdapter.getIsSelected().get(i));
                         if (ShopcartAdapter.getIsSelected().get(i)) {
 
 
@@ -131,6 +154,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                                 Log.i("count-->", "count=" + count + "i=" + i);
                             }
 
+
                             saveStatus.put(i, true);
                             String price = message.get(i).getPrice();
                             int singlePrice = Integer.parseInt(price);
@@ -138,26 +162,53 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                             int ProductPrice = singlePrice * num;
                             totalPrice += ProductPrice;
                         }else{
-                            if(saveStatus.containsKey(i)){
-                                Log.i("count-->","i="+i);
-                                saveStatus.remove(i);
-                                count--;
+                            if(unSelectStatus.get(i)!=null&&unSelectStatus.get(i)){
+                                count -=1;
                             }
+                           /* if(saveStatus.containsKey(i)){
+                                Log.i("count-->","包含了数字：：：i="+i+"选中的"+unSelectStatus.get(i));
+                                if(unSelectStatus.get(i)){
+                                    count -=1;
+                                }
+                               *//* Log.i("count-->","包含了数字：：：i="+i);
+                                if(!saveStatus.get(i)){
+                                    saveStatus.remove(i);
+                                    count--;
+                                }else{
+                                  *//**//*  saveStatus.remove(i);
+                                    count--;*//**//*
+                               }
+*//*
+                            }*/
                         }
 
                     }
 
-                    tvBalance.setText("结算("+count+")");
+                  //  tvBalance.setText("结算("+count+")");
+                   tvBalance.setText("结算("+count+")");
                 }
                 if (intent.getIntExtra("getTotal", 0) == 2){
-
-                    for(int i = 0;i<message.size();i++){
+                  /*  int position = intent.getIntExtra("position", 0);
+                   if(ShopcartAdapter.getIsSelected().get(position)) {
+                       saveStatus.put(position,true);
+                   }else{
+                       count -=1;
+                   }*/
+                   for(int i = 0;i<message.size();i++){
                         if (ShopcartAdapter.getIsSelected().get(i)){
+                            if(saveStatus.get(i)!=null&&!saveStatus.get(i)){
+                                count++;
+                            }
                             saveStatus.put(i,true);
                         }else{
-                            saveStatus.put(i,false);
+                            if(saveStatus.get(i)!=null&&saveStatus.get(i)){
+                                saveStatus.remove(i);
+                            }
+                            unSelectStatus.put(i,true);
+                        //   saveStatus.put(i,false);
                         }
                     }
+
 
                 }
                 tvMoney.setText("￥" + totalPrice);
@@ -386,7 +437,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                            .execute(MyStringCallBack);
 
             }else{
-
+                settleProduct = "";
                 for(int i = 0;i<message.size();i++){
                    if(ShopcartAdapter.getIsSelected().get(i)){
                        if(i!=message.size()-1){
@@ -397,6 +448,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                    }
                 }
+                Log.i("liu-->",settleProduct);
                 //结算
                 OkHttpUtils.get()
                         .url(UrlUtils.SETTLEMENTORDER)

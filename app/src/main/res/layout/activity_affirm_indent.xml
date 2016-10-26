@@ -7,12 +7,23 @@
     >
     <include layout="@layout/footer_tab_2"
         android:id="@+id/include8"></include>
-    
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include8"
+        android:layout_above="@+id/linearLayout6">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="86dp"
-        android:layout_below="@+id/include8">
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,15 +94,19 @@
 
     <dbighealth.bighealth.view.NoScrollListview
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/product_listview"
         android:divider="@null"
+        android:layout_below="@+id/rl"
         />
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout6">
         <RelativeLayout
             android:layout_weight="2"
             android:layout_width="0dp"
@@ -107,9 +122,8 @@
                 android:textSize="22dp"
                 android:textColor="#ffffff"
                 android:layout_centerVertical="true"
-
                 android:id="@+id/textView66"
-                android:layout_toStartOf="@+id/textView67" />
+                android:layout_toStartOf="@+id/heji" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,7 +133,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_alignTop="@+id/textView66"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/textView67" />
+                android:id="@+id/heji" />
         </RelativeLayout>
         <View
             android:layout_width="1dp"
@@ -135,6 +149,7 @@
             android:background="#f58661"
             >
             <TextView
+                android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="提交订单"

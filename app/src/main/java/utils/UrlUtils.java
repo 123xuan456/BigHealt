@@ -100,7 +100,12 @@ public class UrlUtils {
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
   //我的收藏展示
   public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
-
+  //产品详细
+  public static String INPRODUCT = BASEURL2+"/mountinformation/inProduct";
+  //确认订单
+  public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuy";
+  //确认订单中提交
+  public static String SUBMITS = BASEURL2+"/order/goOrder";
   //收货地址查询
   public static String SEARCH_MANAGESITE =  BASEURL3+"/addressmanager/searchall?userId=";
   //收货地址设为默认
@@ -119,5 +124,8 @@ public class UrlUtils {
   public static String UPDATENUMS = BASEURL3+"/shoppingtemp/updateNum";
   //存储购物车要结算的订单
   public static String SETTLEMENTORDER = BASEURL3 +"/shoppingtemp/doBuyTemp";
+//  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
+  //编辑收货地址
+  public static String EDIT_MANAGESITE =  BASEURL3+"/addressmanager/updateAddress";
 
 }
