@@ -127,5 +127,9 @@ public class UrlUtils {
 //  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
   //编辑收货地址
   public static String EDIT_MANAGESITE =  BASEURL3+"/addressmanager/updateAddress";
+  //加入购物车
+  public static String ADDSHOPCART = BASEURL3+"/shoppingtemp/saveCart";
+  //添加收藏
+  public static String ADDCOLLECTIONS =BASEURL3+"/transfer/insertcollection";
 
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.appindexing.Action;
@@ -43,6 +44,8 @@ public class ProductActivity extends Activity implements View.OnClickListener {
     private String ids;
     InProductBean inProduct;
     List<InProductBean.Littleimages> lists;
+    private int DOBUYNOW =101;
+    private int ADDCART = 102;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -83,6 +86,7 @@ public class ProductActivity extends Activity implements View.OnClickListener {
 
         Intent intent = getIntent();
         ids = intent.getStringExtra("imgId");
+        Log.i("mhysa-->",ids);
         OkHttpUtils.get()
                 .url(UrlUtils.INPRODUCT)
 //                   .id(SEARCH)
@@ -96,40 +100,56 @@ public class ProductActivity extends Activity implements View.OnClickListener {
         public void onError(Call call, Exception e, int id) {
 
             Log.i("liu", e.toString());
+            if(id==ADDCART){
+                Toast.makeText(getApplicationContext(),"加入购物车失败！",Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
         public void onResponse(String response, int id) {
 
-            Gson gson = new Gson();
-            inProduct = gson.fromJson(response, InProductBean.class);
-            int code = inProduct.getCode();
-            if (code == 200) {
+            if(id==DOBUYNOW){
+              Log.i("mhysa-->","跳转购买页面成功！");
+            }else if(id ==ADDCART){
+                Toast.makeText(getApplicationContext(),"加入购物车成功！",Toast.LENGTH_SHORT).show();
+            } else{
+                Gson gson = new Gson();
+                inProduct = gson.fromJson(response, InProductBean.class);
+                int code = inProduct.getCode();
+                if (code == 200) {
 
-                Glide.with(ProductActivity.this)
-                        .load(inProduct.getImages())
+                    Glide.with(ProductActivity.this)
+                            .load(inProduct.getImages())
 //                        .placeholder(R.mipmap.home)
 //                        .error(R.mipmap.home)
-                        .centerCrop()
-                        .crossFade()
-                        .into(iv_product);
+                            .centerCrop()
+                            .crossFade()
+                            .into(iv_product);
 
-                tv_title.setText(inProduct.getContent());
-                price.setText(inProduct.getPrice());
-                lists = inProduct.getLittleImages();
-                InProductAdapter reportPicAdapter = new InProductAdapter(getApplicationContext(), lists);
-                lv_companyDescribe.setAdapter(reportPicAdapter);
+                    tv_title.setText(inProduct.getContent());
+                    price.setText(inProduct.getPrice());
+                    lists = inProduct.getLittleImages();
+                    InProductAdapter reportPicAdapter = new InProductAdapter(getApplicationContext(), lists);
+                    lv_companyDescribe.setAdapter(reportPicAdapter);
 
+                }
             }
 
         }
     };
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.right_tv:
                 //跳转到购物车
+                if(!TextUtils.isEmpty(SharedPreferencesUtils.getString(ProductActivity.this, UrlUtils.LOGIN, ""))){
+
+                    Intent intent = new Intent(ProductActivity.this,ShoppingCartActivity.class);
+                    startActivity(intent);
+
+                }else {
+                   Toast.makeText(getApplicationContext(),"请先登录！",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.arrow_left:
                 finish();
@@ -138,9 +158,33 @@ public class ProductActivity extends Activity implements View.OnClickListener {
                 //加入到购物车
                 //先跳到确认订单界面，因为购物车没有界面
 
-                String useid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
-                Log.i("1234567890","num："+useid);
+                String useid = SharedPreferencesUtils.getString(ProductActivity.this, UrlUtils.LOGIN, "");
+                Log.i("1234567890","url："+UrlUtils.ADDSHOPCART+"?userId="+useid+"&shoppingId="+ids);
                 if(!TextUtils.isEmpty(useid)){
+                    OkHttpUtils.get()
+                            .url(UrlUtils.ADDSHOPCART)
+                            .addParams("userId",SharedPreferencesUtils.getString(getApplicationContext(),UrlUtils.LOGIN,""))
+                            .addParams("shoppingId",ids)
+                            .id(ADDCART)
+                            .build()
+                            .execute(MyStringCallBack);
+
+                }else {
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.iv_nowbuy:
+                //立即购买
+                OkHttpUtils.get()
+                        .url(UrlUtils.SETTLEMENTORDER)
+                        .addParams("userId",SharedPreferencesUtils.getString(getApplicationContext(),UrlUtils.LOGIN,""))
+                        .addParams("shoppingId",ids)
+                        .id(DOBUYNOW)
+                        .build()
+                        .execute(MyStringCallBack);
+                String useid1 = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
+                if(!TextUtils.isEmpty(useid1)){
                     Intent intent = new Intent(this, Affirm_Indent_Activity.class);
                     startActivity(intent);
 
@@ -149,9 +193,6 @@ public class ProductActivity extends Activity implements View.OnClickListener {
                     startActivity(intent);
 
                 }
-                break;
-            case R.id.iv_nowbuy:
-                //立即购买
                 break;
         }
     }

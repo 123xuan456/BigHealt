@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -162,24 +163,26 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                             int ProductPrice = singlePrice * num;
                             totalPrice += ProductPrice;
                         }else{
-                            if(unSelectStatus.get(i)!=null&&unSelectStatus.get(i)){
+                         /*   if(saveStatus.containsKey(i)){
+                                count-=1;
+                            }else if(unSelectStatus.get(i)!=null&&unSelectStatus.get(i)){
                                 count -=1;
-                            }
-                           /* if(saveStatus.containsKey(i)){
-                                Log.i("count-->","包含了数字：：：i="+i+"选中的"+unSelectStatus.get(i));
-                                if(unSelectStatus.get(i)){
+                            }*/
+                          if(saveStatus.containsKey(i)){
+                             //   Log.i("count-->","包含了数字：：：i="+i+"选中的"+unSelectStatus.get(i));
+                              /*  if(unSelectStatus.get(i)!=null&&unSelectStatus.get(i)){
                                     count -=1;
-                                }
-                               *//* Log.i("count-->","包含了数字：：：i="+i);
+                                }*/
+                                Log.i("count-->","包含了数字：：：i="+i);
                                 if(!saveStatus.get(i)){
                                     saveStatus.remove(i);
                                     count--;
                                 }else{
-                                  *//**//*  saveStatus.remove(i);
-                                    count--;*//**//*
+                                    saveStatus.remove(i);
+                                    count--;
                                }
-*//*
-                            }*/
+
+                            }
                         }
 
                     }
@@ -316,6 +319,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             if(id == DELETEPRODUCT){
 
                 Toast.makeText(getApplicationContext(),"删除成功！",Toast.LENGTH_SHORT).show();
+                deleteshopId = "";
             }
             tit.setText("购物车(" + message.size() + ")");
             lvShopcart.setAdapter(shopcartAdapter);
@@ -387,7 +391,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                     if (i == 0) {
                         int index = deleteIndex.get(i);
                         if (i != deleteIndex.size() - i - 1) {
-                            deleteshopId+=message.get(index).getShoppingId()+"";
+                            deleteshopId+=message.get(index).getShoppingId()+",";
                         } else {
                             deleteshopId+=message.get(index).getShoppingId();
                         }
@@ -427,7 +431,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 if(cbShopping.isChecked()){
                     cbShopping.setChecked(false);
                 }
-
+                Log.i("delete-->","size："+deleteshopId);
                 OkHttpUtils.get()
                            .url(UrlUtils.DELETESHOPCART)
                            .addParams("userId",SharedPreferencesUtils.getString(getApplicationContext(),UrlUtils.LOGIN,""))
@@ -457,8 +461,22 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                         .id(SETTLEMENTPRODUCT)
                         .build()
                         .execute(MyStringCallBack);
-                Intent intent1 = new Intent(ShoppingCartActivity.this,Affirm_Indent_Activity.class);
-                startActivity(intent1);
+                String useid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
+                if(!TextUtils.isEmpty(useid)){
+                    if(settleProduct.isEmpty()){
+                        Toast.makeText(getApplicationContext(),"您还没有添加宝贝哦！",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Intent intent1 = new Intent(ShoppingCartActivity.this,Affirm_Indent_Activity.class);
+                        startActivity(intent1);
+                    }
+
+                }else {
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
+
+                }
+
+
             }
             break;
 

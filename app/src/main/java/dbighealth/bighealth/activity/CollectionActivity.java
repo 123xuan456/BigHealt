@@ -119,6 +119,17 @@ public class CollectionActivity extends Activity implements View.OnClickListener
         broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
 
         InitInternet();
+        if(rightTv.getText().toString().equals("编辑")){
+            lvCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(CollectionActivity.this,SecondActivity.class);
+                    intent.putExtra("picId",message.get(position).getArticleId());
+                    startActivity(intent);
+                }
+            });
+
+        }
     }
     @Override
     protected void onResume() {
