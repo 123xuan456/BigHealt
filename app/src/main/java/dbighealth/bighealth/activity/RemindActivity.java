@@ -25,6 +25,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.RemindAdapter;
 import dbighealth.bighealth.bean.RemindBean;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 /**
@@ -80,9 +81,10 @@ public class RemindActivity extends Activity implements View.OnClickListener {
     }
 
     public void http() {
+       String id = SharedPreferencesUtils.getString(this,UrlUtils.LOGIN,"");
         OkHttpUtils.get()
                 .url(UrlUtils.REMIND)
-                .addParams("userId", 11 + "")//id
+                .addParams("userId", id)//id
                 .build()
                 .execute(MyStringCallBack);
     }
