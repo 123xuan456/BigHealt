@@ -48,6 +48,7 @@ import dbighealth.bighealth.activity.Me_LogoutActivity;
 import dbighealth.bighealth.activity.MedicalReportActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
 import dbighealth.bighealth.activity.RewritePhysical;
+import dbighealth.bighealth.activity.SubscribeActivity;
 import dbighealth.bighealth.bean.EveryDayBean;
 import dbighealth.bighealth.bean.HasCommitBean;
 import dbighealth.bighealth.bean.PhysicalBean;
@@ -492,9 +493,13 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
             case R.id.textView16:
                 if (!TextUtils.isEmpty(id)) {
+                  // Intent i6 = new Intent(getActivity(), SubscribeActivity.class);//预约
+                 //  startActivity(i6);
+                 /*   Intent i6 = new Intent(getActivity(), ManageSiteActivity.class);//预约
+                    startActivity(i6);*/
                 //   Intent i6 = new Intent(getActivity(), SubscribeActivity.class);//预约
-                   Intent i6 = new Intent(getActivity(), ManageSiteActivity.class);//预约
-                    startActivity(i6);
+                 /*  Intent i6 = new Intent(getActivity(), ManageSiteActivity.class);//预约
+                    startActivity(i6);*/
                 } else {
                     Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
                 }

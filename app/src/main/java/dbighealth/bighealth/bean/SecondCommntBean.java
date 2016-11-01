@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class SecondCommntBean {
 
+
+
     /**
      * title : 眼病
      * content : 眼科频道为您提供最全面的眼科疾病预防、眼科疾病治疗、眼病保健等知识,详细讲解近视眼、白内障、青光眼、干眼症、红眼病等常见眼科疾病常识。
@@ -16,7 +18,7 @@ public class SecondCommntBean {
      * hint : 获取成功
      * comList : [{"id":1,"articleId":74,"comment":"帅点王哲发呆","time":"2016-09-05","userid":24,"name":"哈士奇"},{"id":2,"articleId":74,"comment":"王哲发呆打发很快就收到货","time":"2016-09-13","userid":24,"name":"哈士奇"},{"id":3,"articleId":74,"comment":"的是覅而言王哲发呆","time":"2016-09-13","userid":25,"name":"hashiqi"},{"id":4,"articleId":74,"comment":"的方式撒地方王哲发呆","time":"2016-09-13","userid":24,"name":"哈士奇"},{"id":5,"articleId":74,"comment":"王哲发呆","time":"2016-09-13","userid":16,"name":"哈士奇"}]
      */
-
+    private int like;
     private String title;
     private String content;
     private String images;
@@ -30,7 +32,13 @@ public class SecondCommntBean {
      * userid : 24
      * name : 哈士奇
      */
+    public int getLike() {
+        return like;
+    }
 
+    public void setLike(int like) {
+        this.like = like;
+    }
     private List<ComListBean> comList;
 
     public String getTitle() {

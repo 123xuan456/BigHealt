@@ -75,8 +75,6 @@ public class AddSiteActivity extends Activity implements View.OnClickListener {
         city = new City();
         toCitys = new ArrayList<City>();
 
-
-
     }
 
     private boolean isEmailValid(String email) {
@@ -94,7 +92,6 @@ public class AddSiteActivity extends Activity implements View.OnClickListener {
                 city = data.getParcelableExtra("city");
                 System.out.println("拿到了城市" + city.getProvince() + city.getCity() + city.getDistrict());
                 tv_city1.setText(city.getProvince() + city.getCity() + city.getDistrict());
-
             } else if (requestCode == 2) {
                 toCitys = data.getParcelableArrayListExtra("toCitys");
                 StringBuffer ab = new StringBuffer();

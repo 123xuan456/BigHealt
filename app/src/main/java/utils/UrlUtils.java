@@ -10,15 +10,13 @@ public class UrlUtils {
 
   public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
 
-  //public static String BASEURL="http://192.168.0.43:8080/JianKangChanYe";
-  public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";//本地测试
-  public  static String   BASEURL2 = "http://192.168.0.120:8081/JianKangChanYe";//本地测试
-  public  static String   BASEURL3 = "http://192.168.0.120:8081/JianKangChanYe";//本地测试
-//  public  static String   BASEURL3 = "http://106.2.219.210:1314/";//
-//   public static String BASEURL="http://106.2.219.210:1314/";
-//   public  static String   BASEURL2 = "http://106.2.219.210:1314/";
-
-
+  public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
+  public  static String   BASEURL2 = " http://192.168.0.120:8081/JianKangChanYe";//本地测试
+  public  static String   BASEURL3 = " http://192.168.0.120:8081/JianKangChanYe";//本地测试
+  //http://106.2.219.210:8090/JianKangChanYe/homepictures/sickn
+ /* public static String BASEURL=" http://106.2.219.210:1314";//本地测试
+  public  static String   BASEURL2 = " http://106.2.219.210:1314";//本地测试
+  public  static String   BASEURL3 = " http://106.2.219.210:1314";//本地测试*/
   //-------------------------------API接口----------------------------------
   public static String CommonHome=BASEURL+"/homepictures/sickness";
   public static String SpecialHome = BASEURL+"/homepictures/showhealthknowledge";
@@ -108,21 +106,30 @@ public class UrlUtils {
   public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuy";
   //确认订单中提交
   public static String SUBMITS = BASEURL2+"/order/goOrder";
-  //我的收藏展示
-  public static String  DELETECOLLECTION = BASEURL3+"/transfer/deletecollection?";
-
-
   //收货地址查询
   public static String SEARCH_MANAGESITE =  BASEURL3+"/addressmanager/searchall?userId=";
   //收货地址设为默认
   public static String SET_MANAGESITE =  BASEURL3+"/addressmanager/defaults";
   //删除收货地址
   public static String DELETE_MANAGESITE =  BASEURL3+"/addressmanager/deleteAddress?addressId=";
+  //查询购物车
+  public static String SELECTSHOPCART = BASEURL3 +"/shoppingtemp/searchCart";
   //添加收货地址
   public static String ADD_MANAGESITE =  BASEURL3+"/addressmanager/saveAddress";
   //删除收藏
+  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
+  //删除购物车
+  public static String DELETESHOPCART = BASEURL3+"/shoppingtemp/deleteCart";
+  //修改购物车中单件商品的数量
+  public static String UPDATENUMS = BASEURL3+"/shoppingtemp/updateNum";
+  //存储购物车要结算的订单
+  public static String SETTLEMENTORDER = BASEURL3 +"/shoppingtemp/doBuyTemp";
 //  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
   //编辑收货地址
   public static String EDIT_MANAGESITE =  BASEURL3+"/addressmanager/updateAddress";
+  //加入购物车
+  public static String ADDSHOPCART = BASEURL3+"/shoppingtemp/saveCart";
+  //添加收藏
+  public static String ADDCOLLECTIONS =BASEURL3+"/transfer/insertcollection";
 
 }

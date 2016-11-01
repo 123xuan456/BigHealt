@@ -288,6 +288,9 @@ public class MedicalReportActivity extends Activity implements View.OnClickListe
         public void onResponse(String response, int id) {
 
             if (id == COMMIT_PIC) {
+
+                Log.i("mhysa--->","上传返回结果："+response);
+              //  Toast.makeText(getApplicationContext(), "返回值："+response, Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "上传成功！", Toast.LENGTH_SHORT).show();
                 MedicalReportActivity.this.finish();
             }

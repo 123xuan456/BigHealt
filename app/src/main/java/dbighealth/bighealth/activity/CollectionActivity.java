@@ -1,7 +1,12 @@
 package dbighealth.bighealth.activity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,7 +79,57 @@ public class CollectionActivity extends Activity implements View.OnClickListener
         rightTv.setOnClickListener(this);
         ivTrash.setOnClickListener(this);
 
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.CART_COLLECTION");
+        BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver(){
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                int productposition = intent.getIntExtra("productposition", 0);
+
+                Log.i("postion",productposition+"");
+                int articleId = message.get(productposition).getArticleId();
+                if( CollectionAdapter.getIsSelected().get(productposition)){
+                    isCheckMap.put(articleId,true);
+                    deleteIndex.add(productposition);
+                    isDeleteDataMap.put(articleId,deleteIndex);
+                    tvListCount.setText("("+(count+1)+")");
+                    count+=1;
+
+                }else{
+                    isCheckMap.put(articleId,false);
+                    // holder.cbcollecion.setChecked(false);
+                    if(deleteIndex.size()==1){
+                        deleteIndex.remove(0);
+                    }else {
+                        for (int i = 0; i < deleteIndex.size(); i++) {
+                            if (deleteIndex.get(i) == productposition) {
+                                deleteIndex.remove(i);
+                            }
+                        }
+                    }
+                    tvListCount.setText("("+(count-1)+")");
+                    count-=1;
+                }
+
+            }
+        };
+        broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
+
         InitInternet();
+        if(rightTv.getText().toString().equals("编辑")){
+            lvCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(CollectionActivity.this,SecondActivity.class);
+                    intent.putExtra("picId",message.get(position).getArticleId());
+                    startActivity(intent);
+                }
+            });
+
+        }
     }
     @Override
     protected void onResume() {
@@ -145,35 +200,9 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                     lvCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                          //  view.setVisibility(View.VISIBLE);
                             rlTrash.setVisibility(View.VISIBLE);
-                         //   CheckBox checkBox = (CheckBox) lvCollection.getChildAt(position).findViewById(R.id.checkBox);
                             CollectionAdapter.ViewHolder holder = (CollectionAdapter.ViewHolder) view.getTag();
                             holder.cbcollecion.toggle();
-                            CollectionAdapter.getIsSelected().put(position, holder.cbcollecion.isChecked());
-                            int articleId = message.get(position).getArticleId();
-                            if( CollectionAdapter.getIsSelected().get(position)){
-                                isCheckMap.put(articleId,true);
-                                deleteIndex.add(position);
-                                isDeleteDataMap.put(articleId,deleteIndex);
-                                tvListCount.setText("("+(count+1)+")");
-                                count+=1;
-
-                            }else{
-                                isCheckMap.put(articleId,false);
-                               // holder.cbcollecion.setChecked(false);
-                                if(deleteIndex.size()==1){
-                                    deleteIndex.remove(0);
-                                }else {
-                                    for (int i = 0; i < deleteIndex.size(); i++) {
-                                        if (deleteIndex.get(i) == position) {
-                                            deleteIndex.remove(i);
-                                        }
-                                    }
-                                }
-                                tvListCount.setText("("+(count-1)+")");
-                                count-=1;
-                            }
 
                         }
                     });

@@ -23,14 +23,14 @@ public class ItemProductAdapter extends BaseAdapter  {
 
     private final int NUM = 1;
     private AdpterOnItemClick myAdpterOnclick;
-    private List<AffirmIndentBean.Message> list;
+    private List<AffirmIndentBean.MessageBean> list;
     private LayoutInflater mInflater = null;
     private int count ;
 //    private Integer[] mCounts;
 //    public int q;
 //    int b = 1;
 
-    public ItemProductAdapter(Context context, List<AffirmIndentBean.Message> list) {
+    public ItemProductAdapter(Context context, List<AffirmIndentBean.MessageBean> list) {
         this.context = context;
         this.list = list;
 //        mCounts = new Integer[999];

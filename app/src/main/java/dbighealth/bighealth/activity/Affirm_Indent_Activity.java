@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import java.util.List;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.AdpterOnItemClick;
 import dbighealth.bighealth.adapter.ItemProductAdapter;
+import dbighealth.bighealth.adapter.ManageSiteAdapter;
 import dbighealth.bighealth.bean.AffirmIndentBean;
 import dbighealth.bighealth.view.NoScrollListview;
 import okhttp3.Call;
@@ -41,7 +43,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
     private ImageView arrow_left;
     private TextView shouhuoren,tel,address,heji;
     private NoScrollListview product_listview;
-    List<AffirmIndentBean.Message> urls;
+    List<AffirmIndentBean.MessageBean> urls;
     ItemProductAdapter reportPicAdapter;
     public Context context;
     List<Integer> zongjia;
@@ -51,6 +53,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
     int qian;
     int leijiahe;
     private AffirmIndentBean AffirmIndent;
+    private RelativeLayout rl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,11 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_affirm_indent);
         findView();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         initIntenet();
     }
 
@@ -69,7 +77,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         right_tv.setVisibility(View.GONE);
         arrow_left = (ImageView)findViewById(R.id.arrow_left);
         arrow_left.setOnClickListener(this);
-
+        rl = (RelativeLayout) findViewById(R.id.rl);
         //收货地址的findView
         shouhuoren = (TextView)findViewById(R.id.shouhuoren);//收货人
         tel = (TextView)findViewById(R.id.tel);//电话
@@ -82,6 +90,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         //提交
         submit = (TextView)findViewById(R.id.submit);
         submit.setOnClickListener(this);
+        rl.setOnClickListener(this);
     }
 
     //连网操作
@@ -89,7 +98,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         String useid = SharedPreferencesUtils.getString(this,UrlUtils.LOGIN,"");
         OkHttpUtils.get()
                 .url(UrlUtils.DOBUYNOW)
-                .addParams("userId", 26 + "")//useid
+                .addParams("userId",SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, ""))//useid
                 .build()
                 .execute(MyStringCallBack.get());
     }
@@ -110,6 +119,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
                 @Override
                 public void onResponse(String response, int id) {
+                    Log.i("liu-->", response);
                     Gson gson = new Gson();
                     AffirmIndent = gson.fromJson(response, AffirmIndentBean.class);
                     int code = AffirmIndent.getCode();
@@ -131,7 +141,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
     };
 
     public void onAdpterClick(int which,final int position) {
-        AffirmIndentBean.Message message =urls.get(position);
+        AffirmIndentBean.MessageBean message =urls.get(position);
 
         switch (which) {
             case R.id.jia:
@@ -238,6 +248,10 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                                 Toast.makeText(getApplicationContext(), "提交成功", Toast.LENGTH_LONG).show();
                             }
                         });
+                break;
+            case R.id.rl:
+                Intent intent = new Intent(Affirm_Indent_Activity.this, ManageSiteActivity.class);
+                startActivity(intent);
                 break;
         }
     }

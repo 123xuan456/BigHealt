@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,11 +49,11 @@ public class EditSiteActivity extends Activity {
     TextView tvCity1;
     @Bind(R.id.et_xiangxidizhi)
     EditText etXiangxidizhi;
-    private String addressId;
-    private String name;
-    private String phoneNumber;
-    private String area;
-    private String address;
+    private String addressId="";
+    private String name="";
+    private String phoneNumber="";
+    private String area="";
+    private String address="";
     private City city;
     private ArrayList<City> toCitys;
     private String phone;
@@ -66,17 +67,21 @@ public class EditSiteActivity extends Activity {
 
         Intent i=getIntent();
         Bundle bundle=i.getExtras();
-        addressId =bundle.getString("addressId");
-        name=bundle.getString("name");
-        phoneNumber=bundle.getString("phoneNumber");
-        area=bundle.getString("area");
-        address=bundle.getString("address");
-        defaults=bundle.getString("defaults");
-        tit.setText("编辑地址");
-        etShouhuoren.setText(name);
-        etMobile.setText(phoneNumber);
-        tvCity1.setText(area);
-        etXiangxidizhi.setText(address);
+        Log.i("Mhysa-->",bundle+"");
+        if(bundle!=null){
+            addressId =bundle.getString("addressId");
+            name=bundle.getString("name");
+            phoneNumber=bundle.getString("phoneNumber");
+            area=bundle.getString("area");
+            address=bundle.getString("address");
+            defaults=bundle.getString("defaults");
+            tit.setText("编辑地址");
+            etShouhuoren.setText(name);
+            etMobile.setText(phoneNumber);
+            tvCity1.setText(area);
+            etXiangxidizhi.setText(address);
+        }
+
 
     }
 

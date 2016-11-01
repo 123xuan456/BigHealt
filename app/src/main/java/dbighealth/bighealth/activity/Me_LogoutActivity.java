@@ -189,7 +189,9 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 startActivity(collectionInent);
                 break;
             case R.id.rl_shoppingCart:
-                Toast.makeText(getApplicationContext(), "暂未开通，敬请期待！", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "暂未开通，敬请期待！", Toast.LENGTH_SHORT).show();
+                Intent shopcartIntent = new Intent(Me_LogoutActivity.this,ShoppingCartActivity.class);
+                startActivity(shopcartIntent);
                 break;
 
         }
