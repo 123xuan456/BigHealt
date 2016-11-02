@@ -107,7 +107,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
      * 2.1个是进来拿到的数据的接口（地址和产品的listview的）
      * 3.1个是提交，把拿到的数据给后台传过去
      */
-    public final ThreadLocal<StringCallback> MyStringCallBack = new ThreadLocal<StringCallback>() {
+    public  ThreadLocal<StringCallback> MyStringCallBack = new ThreadLocal<StringCallback>() {
         @Override
         protected StringCallback initialValue() {
             return new StringCallback() {
