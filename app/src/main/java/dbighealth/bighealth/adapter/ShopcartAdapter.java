@@ -119,8 +119,6 @@ public class ShopcartAdapter extends BaseAdapter{
                 .transform(new GlideRoundTransform(context,10))
                 .into(holder.ivShopImg);
 
-
-
         /**
          * 编辑下的界面
          */
@@ -157,6 +155,7 @@ public class ShopcartAdapter extends BaseAdapter{
                         datas2.set(pos,"编辑");
                         Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
                         intent.putExtra("getTotal",1);
+
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                         /**

@@ -196,16 +196,18 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                     int childCount = lvCollection.getChildCount();
                     flage = true;
                     InitInternet();
-                    collectionAdapter.notifyDataSetChanged();
-                    lvCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            rlTrash.setVisibility(View.VISIBLE);
-                            CollectionAdapter.ViewHolder holder = (CollectionAdapter.ViewHolder) view.getTag();
-                            holder.cbcollecion.toggle();
+                    if(collectionAdapter!=null){
+                        collectionAdapter.notifyDataSetChanged();
+                        lvCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                rlTrash.setVisibility(View.VISIBLE);
+                                CollectionAdapter.ViewHolder holder = (CollectionAdapter.ViewHolder) view.getTag();
+                                holder.cbcollecion.toggle();
+                            }
+                        });
+                    }
 
-                        }
-                    });
 
                 }else if(rightTv.getText().toString().equals("取消")){
                     view1.setVisibility(View.GONE);

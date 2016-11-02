@@ -107,7 +107,9 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             @Override
             public void onReceive(Context context, Intent intent) {
 
+
                 tit.setText("购物车(" + message.size() + ")");
+
                 /**
                  * 总计
                  */
@@ -212,7 +214,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                         }
                     }
 
-
                 }
                 tvMoney.setText("￥" + totalPrice);
 
@@ -231,12 +232,14 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //全选
                 if (isChecked) {
-
-                    for (int i = 0; i < message.size(); i++) {
-                        //   ShopcartAdapter.getSelect().add(true);
-                        ShopcartAdapter.getIsSelected().put(i, true);
-                        shopcartAdapter.notifyDataSetChanged();
+                    if(message!=null){
+                        for (int i = 0; i < message.size(); i++) {
+                            //   ShopcartAdapter.getSelect().add(true);
+                            ShopcartAdapter.getIsSelected().put(i, true);
+                            shopcartAdapter.notifyDataSetChanged();
+                        }
                     }
+
 
                 } else {
                     if (ShopcartAdapter.getIsSelected().containsValue(false)) {
@@ -357,6 +360,14 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                     tvTotal.setVisibility(View.VISIBLE);
                     tvMoney.setVisibility(View.VISIBLE);
                     tvBalance.setBackgroundColor(Color.parseColor("#f58661"));
+                    int prouctCount =0;
+                    for(int i=0;i<message.size();i++){
+                        Boolean flag = ShopcartAdapter.getIsSelected().get(i);
+                        if(flag){
+                            prouctCount++;
+                        }
+                    }
+                    count = prouctCount;
                     tvBalance.setText("结算(" + count + ")");
 
                     //上传修改过的商品信息
@@ -425,12 +436,18 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                     ShopcartAdapter.getIsSelected().put(m,false);
 
                 }*/
-                shopcartAdapter.notifyDataSetChanged();
+
                 //将存储选中的集合清空，避免第二次删除时集合长度递增的情况
                 deleteIndex.clear();
-                if(cbShopping.isChecked()){
-                    cbShopping.setChecked(false);
+                for(int i=0;i<message.size();i++){
+                    ShopcartAdapter.getIsSelected().put(i,false);
                 }
+                shopcartAdapter.notifyDataSetChanged();
+              /*  if(cbShopping.isChecked()){
+                    cbShopping.setChecked(false);
+
+                }*/
+
                 Log.i("delete-->","size："+deleteshopId);
                 OkHttpUtils.get()
                            .url(UrlUtils.DELETESHOPCART)
