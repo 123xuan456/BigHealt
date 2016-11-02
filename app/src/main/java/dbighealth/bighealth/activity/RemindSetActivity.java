@@ -30,10 +30,12 @@ import java.util.List;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.DetailsMessageAdapter;
 import dbighealth.bighealth.bean.DetailsMessageBean;
+import dbighealth.bighealth.view.DateTimePickerDialog;
 import dbighealth.bighealth.wheel.JudgeDate;
 import dbighealth.bighealth.wheel.ScreenInfo;
 import dbighealth.bighealth.wheel.WheelMain;
 import okhttp3.Call;
+import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 
 public class RemindSetActivity extends Activity implements View.OnClickListener {
@@ -117,23 +119,26 @@ public class RemindSetActivity extends Activity implements View.OnClickListener 
 
             case R.id.rl_time:
 
-                currentTime = Calendar.getInstance();
-
-                new TimePickerDialog(RemindSetActivity.this, 0,
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-//							PendingIntent pi = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-                                Calendar c = Calendar.getInstance();
-                                c.setTimeInMillis(System.currentTimeMillis());
-                                c.set(Calendar.HOUR, hourOfDay);
-                                c.set(Calendar.MINUTE, minute);
-
-                            }
-                        }, currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE), false).show();
-                btn_time.setText(currentTime.get(Calendar.HOUR_OF_DAY)+":"+currentTime.get(Calendar.MINUTE));
+//                currentTime = Calendar.getInstance();
+//
+//                new TimePickerDialog(RemindSetActivity.this, 0,
+//                        new TimePickerDialog.OnTimeSetListener() {
+//
+//                            @Override
+//                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//
+////							PendingIntent pi = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+//                                Calendar c = Calendar.getInstance();
+//                                c.setTimeInMillis(System.currentTimeMillis());
+//                                c.set(Calendar.HOUR, hourOfDay);
+//                                c.set(Calendar.MINUTE, minute);
+//
+//                            }
+//                        }, currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE), false).show();
+//                btn_time.setText(currentTime.get(Calendar.HOUR_OF_DAY)+":"+currentTime.get(Calendar.MINUTE));
+                DateTimePickerDialog dateTimePicKDialog2 = new DateTimePickerDialog(
+                        RemindSetActivity.this);
+                dateTimePicKDialog2.dateTimePicKDialog(btn_time, 2);
                 break;
 
             case R.id.arrow_left:
@@ -150,7 +155,8 @@ public class RemindSetActivity extends Activity implements View.OnClickListener 
     }
 
     public void http(){
-        int userId = 11;
+        String userId = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
+//        int userId = 11;
         String medicineName = text.getText().toString();
 
         if(TextUtils.isEmpty(medicineName)){
