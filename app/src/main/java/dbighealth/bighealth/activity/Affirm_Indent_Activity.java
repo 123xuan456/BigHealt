@@ -41,7 +41,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
     private TextView tit,right_tv,submit;
     private ImageView arrow_left;
-    private TextView shouhuoren,tel,address,heji;
+    private TextView shouhuoren,tel,address,heji,no_address;
     private NoScrollListview product_listview;
     List<AffirmIndentBean.MessageBean> urls;
     ItemProductAdapter reportPicAdapter;
@@ -86,6 +86,9 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         product_listview = (NoScrollListview)findViewById(R.id.product_listview);//要提交的产品的listview
         //ItemProductAdapter这个类是listview的adapter，item的布局已经完成，坐等数据和bean文件
 
+        //没有收货地址时的布局
+        no_address = (TextView)findViewById(R.id.no_address);
+
         heji = (TextView)findViewById(R.id.heji);
         //提交
         submit = (TextView)findViewById(R.id.submit);
@@ -107,7 +110,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
      * 2.1个是进来拿到的数据的接口（地址和产品的listview的）
      * 3.1个是提交，把拿到的数据给后台传过去
      */
-    public  ThreadLocal<StringCallback> MyStringCallBack = new ThreadLocal<StringCallback>() {
+    public final ThreadLocal<StringCallback> MyStringCallBack = new ThreadLocal<StringCallback>() {
         @Override
         protected StringCallback initialValue() {
             return new StringCallback() {
@@ -119,18 +122,28 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
                 @Override
                 public void onResponse(String response, int id) {
-                    Log.i("liu-->", response);
+                    Log.i("liuliu123-->", response);
                     Gson gson = new Gson();
                     AffirmIndent = gson.fromJson(response, AffirmIndentBean.class);
                     int code = AffirmIndent.getCode();
                     if (code == 200) {
-                        shouhuoren.setText("收货人:" + AffirmIndent.getName());
-                        tel.setText(AffirmIndent.getPhoneNumber());
-                        address.setText(AffirmIndent.getAddress());
                         urls = AffirmIndent.getMessage();
                         reportPicAdapter = new ItemProductAdapter(getApplicationContext(), urls);
                         reportPicAdapter.onListener(Affirm_Indent_Activity.this);
                         product_listview.setAdapter(reportPicAdapter);
+                        if(!AffirmIndent.getAddress().equals("")){
+                            no_address.setVisibility(View.GONE);
+                            shouhuoren.setText("收货人:" + AffirmIndent.getName());
+                            tel.setText(AffirmIndent.getPhoneNumber());
+                            address.setText("收货地址:"+AffirmIndent.getAddress());
+                        }else{
+                            shouhuoren.setVisibility(View.GONE);
+                            tel.setVisibility(View.GONE);
+                            address.setVisibility(View.GONE);
+                            no_address.setVisibility(View.VISIBLE);
+                        }
+
+
                         gross();
 
                     }
