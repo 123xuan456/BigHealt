@@ -28,9 +28,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aab3c819-1330-4d9c-9924-cac892f90ce2" name="Default" comment="轩：头像图片的跳转，注册时的手机长度设置">
+    <list default="true" id="aab3c819-1330-4d9c-9924-cac892f90ce2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
     </list>
     <ignored path="BigHealt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2435,7 +2434,13 @@
       <option name="project" value="LOCAL" />
       <updated>1478142588523</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="轩：头像图片的跳转，注册时的手机长度设置">
+      <created>1478165641701</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1478165641701</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2490,7 +2495,8 @@
     <MESSAGE value="轩：健康档案修改版（用户递交之后再次打开显示数据）" />
     <MESSAGE value="轩：1" />
     <MESSAGE value="轩：更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="轩：更新" />
+    <MESSAGE value="轩：头像图片的跳转，注册时的手机长度设置" />
+    <option name="LAST_COMMIT_MESSAGE" value="轩：头像图片的跳转，注册时的手机长度设置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
