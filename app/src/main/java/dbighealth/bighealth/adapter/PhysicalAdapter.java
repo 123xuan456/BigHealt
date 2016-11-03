@@ -1,14 +1,18 @@
 package dbighealth.bighealth.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.io.PipedOutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.Inflater;
@@ -32,9 +36,39 @@ public class PhysicalAdapter extends BaseAdapter implements RadioGroup.OnChecked
     private RadioButton often;
     private TextView problem;
 
+
+    private static HashMap<Integer,Boolean> isSelected;
+    private static HashMap<Integer,Boolean> NO;
+    private static HashMap<Integer,Boolean> REALY;
+    private static HashMap<Integer,Boolean> OFEN;
+    private static HashMap<Integer,Boolean> SOMETIME;
+    private boolean flagCheck = false;
+    private static HashMap<Integer,Integer> flag;
     public PhysicalAdapter(Context context,List<PhysicalBean.ContentBean.ResultBean> list) {
             this.context = context;
             this.list = list;
+            isSelected = new HashMap<Integer, Boolean>();
+            NO = new HashMap<Integer, Boolean>();
+            REALY = new HashMap<Integer, Boolean>();
+            OFEN = new HashMap<Integer, Boolean>();
+            SOMETIME = new HashMap<Integer, Boolean>();
+            flag = new HashMap<Integer, Integer>();
+            for(int i=0; i<list.size();i++) {
+                getIsSelected().put(i,false);
+            }
+        for(int i=0; i<list.size();i++) {
+            NO.put(i,false);
+        }
+        for(int i=0; i<list.size();i++) {
+            REALY.put(i,false);
+        }
+        for(int i=0; i<list.size();i++) {
+          OFEN.put(i,false);
+        }
+        for(int i=0; i<list.size();i++) {
+            SOMETIME.put(i,false);
+        }
+
             this.mInflater = LayoutInflater.from(context);
     }
 
@@ -53,6 +87,21 @@ public class PhysicalAdapter extends BaseAdapter implements RadioGroup.OnChecked
         return position;
     }
 
+    public static HashMap<Integer,Boolean> getIsSelected() {
+        return isSelected;
+    }
+    public static HashMap<Integer,Boolean> getNo() {
+        return NO;
+    }
+    public static HashMap<Integer,Boolean> getREALY() {
+        return REALY;
+    }
+    public static HashMap<Integer,Boolean> getOFEN() {
+        return OFEN;
+    }
+    public static HashMap<Integer,Boolean> getSOMETIME() {
+        return SOMETIME;
+    }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -76,16 +125,154 @@ public class PhysicalAdapter extends BaseAdapter implements RadioGroup.OnChecked
             holder = (ViewHolder)convertView.getTag();
         }
         holder.problemDescribe.setText(list.get(position).getSymptom());
-
-        holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        holder.radioGroup.setTag(position);
+        holder.rbNo.setTag(position);
+        if (holder.rbNo.equals("没有"))
+        {
+            holder.radioGroup.check(holder.rbNo.getId());
+        }else if(holder.rbRarely.equals("很少")){
+            holder.radioGroup.check(holder.rbRarely.getId());
+        }else if(holder.rbSometimes.equals("有时")){
+            holder.radioGroup.check(holder.rbRarely.getId());
+        }else if(holder.rbOffen.equals("经常")){
+            holder.radioGroup.check(holder.rbOffen.getId());
+        } else
+        {
+            holder.radioGroup.clearCheck();
+        }
+        final RadioGroup radioGroup = holder.radioGroup;
+      /*  holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                PhysicalBean.ContentBean.ResultBean resultBean = list.get((Integer) group.getTag());
                 //病症号
+                if(group==radioGroup){
+                    switch (checkedId){
+                        case R.id.btn_no:
+                            resultBean.setSymptomId(list.get((Integer) group.getTag()).getSymptomId());
+                            break;
+                    }
+                }
+                Log.i("mhysa-->",list.get(position).getSymptomId()+"");
+               // isSelected.put(position,isChecked);
+              //  isSelected.put(position,flag.put(position,true));
+                flag.put(position,checkedId);
+                isSelected.put(position,true);
                 int symptomId = list.get(position).getSymptomId();
+
+            }
+        });*/
+        holder.radioGroup.setOnCheckedChangeListener(null);
+        holder.rbNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                Log.i("save",isChecked+""+"weizhi="+position);
+                if(isChecked){
+                    isSelected.put(position,isChecked);
+                    NO.put(position,isChecked);
+                    SOMETIME.put(position,false);
+                    REALY.put(position,false);
+                    OFEN.put(position,false);
+                }
+            }
+        });
+        holder.rbNo.setChecked(NO.get(position));
+
+        holder.rbSometimes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+
+                    isSelected.put(position,isChecked);
+                    SOMETIME.put(position,isChecked);
+                    NO.put(position,false);
+                    REALY.put(position,false);
+                    OFEN.put(position,false);
+                }
+            }
+        });
+        holder.rbRarely.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    REALY.put(position,isChecked);
+
+                    isSelected.put(position,isChecked);
+                    SOMETIME.put(position,false);
+                    NO.put(position,false);
+                    OFEN.put(position,false);
+
+
+                }
 
             }
         });
 
+        holder.rbOffen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    OFEN.put(position,isChecked);
+                    isSelected.put(position,isChecked);
+                    SOMETIME.put(position,false);
+                    NO.put(position,false);
+                    REALY.put(position,false);
+
+                }
+
+            }
+        });
+        holder.rbSometimes.setChecked(SOMETIME.get(position));
+        holder.rbRarely.setChecked(REALY.get(position));
+        holder.rbOffen.setChecked(OFEN.get(position));
+
+       /* if(flag.get(position)!=null){
+            RadioButton rb = (RadioButton) holder.radioGroup.getChildAt(flag.get(position));
+            if(rb!=null){
+                rb.setChecked(isSelected.get(position));
+            }
+
+        }*/
+/*
+        holder.rbNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                NO.put(position,isChecked);
+
+            }
+        });
+
+        holder.rbSometimes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+
+                    SOMETIME.put(position,isChecked);
+                }
+            }
+        });
+        holder.rbRarely.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                REALY.put(position,isChecked);
+            }
+        });
+
+        holder.rbOffen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                OFEN.put(position,isChecked);
+            }
+        });
+        holder.rbNo.setChecked(NO.get(position));
+        holder.rbSometimes.setChecked(SOMETIME.get(position));
+        holder.rbRarely.setChecked(REALY.get(position));
+        holder.rbOffen.setChecked(OFEN.get(position));*/
         return convertView;
     }
 

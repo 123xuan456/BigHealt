@@ -21,6 +21,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -69,7 +70,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
     private int SAVE_SYMPTON =2;
     private SharedPreferences sp;
     private int count =1;
-
+    private List<PhysicalBean.ContentBean.ResultBean> result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +115,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
     private StringCallback MyStringCallBack = new StringCallback() {
 
 
-        private List<PhysicalBean.ContentBean.ResultBean> result;
+       
 
         @Override
         public void onError(Call call, Exception e, int id) {
@@ -156,43 +157,91 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 break;
             //提交所有
             case R.id.btn_consititution_commit:
-                int childCount = ultraLv.getChildCount();
-                JSONObject jsonObject = new JSONObject();
+                HashMap<Integer, Boolean> isSelected = PhysicalAdapter.getIsSelected();
                 int FLAG =0;
-                try {
-                    jsonObject.put("userId",16);
-                    for(int i=1;i<childCount+1;i++){
-                        int id = getItemId(i-1);
-                        if(id!=0){
-                            FLAG =1;
-                            jsonObject.put("symptomId_foreign"+i,i);
-                            jsonObject.put("score"+i,id);
+                String strId = "";
+                String str ="";
+                for (int i=0;i<result.size();i++){
+                    Boolean aBoolean = isSelected.get(i);
+                    if(aBoolean){
+                        Log.i("position-->","当前选中的位置="+i);
+                        if(PhysicalAdapter.getNo().get(i)){
+                            if(i!=result.size()-1){
+                                Log.i("itemposition","item=1");
+                                strId=strId+(i+1)+",";
+                                str = str +"1,";
+                            }else{
+                                strId=strId+(i+1);
+                                str = str +"1";
+                            }
+
+                        }else if(PhysicalAdapter.getREALY().get(i)){
+                            if(i!=result.size()-1){
+                                Log.i("itemposition","item=1");
+                                strId=strId+(i+1)+",";
+                                str = str +"2,";
+                            }else{
+                                strId=strId+(i+1);
+                                str = str +"2";
+                            }
+                        }else if(PhysicalAdapter.getSOMETIME().get(i)){
+                            if(i!=result.size()-1){
+                                Log.i("itemposition","item=1");
+                                strId=strId+(i+1)+",";
+                                str = str +"3,";
+                            }else{
+                                strId=strId+(i+1);
+                                str = str +"3";
+                            }
+                        }else if(PhysicalAdapter.getOFEN().get(i)){
+                            if(i!=result.size()-1){
+                                strId=strId+(i+1)+",";
+                                Log.i("itemposition","item=1");
+                                str = str +"4,";
+                            }else{
+                                strId=strId+(i+1);
+                                str = str +"4";
+                            }
                         }
-
                     }
-                    /**
-                     * 提交接口
-                     */
-                if(FLAG==1){
 
-                    OkHttpUtils.postString()
-                               .url(UrlUtils.SAVESYMPTON)
-                               .content(jsonObject.toString())
-                               .id(SAVE_SYMPTON)
-                               .build()
-                               .execute(MyStringCallBack);
-
-                    sp = getSharedPreferences("commit",
-                            Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor edit = sp.edit();
-                    edit.putBoolean("First",true);
-                    edit.commit();
-
-                }else{
-                    Toast.makeText(getApplicationContext(),"请填写信息后再提交！！！",Toast.LENGTH_SHORT).show();
                 }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if(!str.equals("")) {
+                    JSONObject jsonObject = new JSONObject();
+
+                    try {
+                        jsonObject.put("userId", 16);
+                        FLAG = 1;
+                        jsonObject.put("symptomId_foreign", strId);
+                        jsonObject.put("score" , str);
+                         //   }
+
+                    //    }
+                        /**
+                         * 提交接口
+                         */
+                        if (FLAG == 1) {
+
+                            Log.i("json-->","json="+jsonObject.toString());
+                            OkHttpUtils.postString()
+                                    .url(UrlUtils.SAVESYMPTON)
+                                    .content(jsonObject.toString())
+                                    .id(SAVE_SYMPTON)
+                                    .build()
+                                    .execute(MyStringCallBack);
+
+                            sp = getSharedPreferences("commit",
+                                    Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor edit = sp.edit();
+                            edit.putBoolean("First", true);
+                            edit.commit();
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "请填写信息后再提交！！！", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
         }
@@ -203,6 +252,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
      */
     public int getItemId(int itemIndex){
 
+        Log.i("itemId-->","itemid="+itemIndex);
             RadioGroup rg_selector = (RadioGroup) ultraLv.getChildAt(itemIndex).findViewById(R.id.rg_selector);
             RadioButton btn_sometimes = (RadioButton) ultraLv.getChildAt(itemIndex).findViewById(R.id.btn_sometimes);
             RadioButton btn_rarely = (RadioButton) ultraLv.getChildAt(itemIndex).findViewById(R.id.btn_rarely);
@@ -211,7 +261,6 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
            /* rg_selector.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-
                 }
             });*/
         return btn_no.isChecked()?1:(btn_rarely.isChecked()?2:(btn_sometimes.isChecked()?3:(often.isChecked()?4:0)));
@@ -231,6 +280,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 ultraLv.refreshComplete();
                 if(physicalAdapter!=null){
                     physicalAdapter.notifyDataSetChanged();
+//                    physicalAdapter.notify();
                 }
 
             }
@@ -239,7 +289,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
 
     @Override
     public void addMore() {
-        ultraPtr.postDelayed(new Runnable() {
+       /* ultraPtr.postDelayed(new Runnable() {
             @Override
             public void run() {
 //                datas.clear();
@@ -253,7 +303,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 ultraLv.refreshComplete();
                 physicalAdapter.notifyDataSetChanged();
             }
-        }, 200);
+        }, 200);*/
     }
 
 }

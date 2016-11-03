@@ -70,7 +70,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     private String productIdlist = "";//拼接所有商品的id
     private String settleProduct ="";//要结算的商品
     //计数选中的条目个数
-    private int count = 0;
+    public int count = 0;
     //存储item选中状态
     private HashMap<Integer, Boolean> saveStatus;
     private int totalPrice = 0;
@@ -216,6 +216,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                 }
                 tvMoney.setText("￥" + totalPrice);
+//                tvBalance.setText("结算(" + count + ")");
 
             }
         };

@@ -37,7 +37,6 @@ public class Details_MessageActivity extends Activity implements View.OnClickLis
     ImageView arrowLeft;
     @Bind(R.id.right_tv)
     TextView rightTv;
-
     @Bind(R.id.et_content)
     EditText etContent;
     private TextView textView7, textView10;
