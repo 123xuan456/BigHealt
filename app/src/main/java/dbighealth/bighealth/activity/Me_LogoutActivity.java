@@ -149,7 +149,6 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.rcv_article_photo:
 
-
                 Intent i1 = new Intent(this, EditdataActivity.class);
                 i1.putExtra("imgurl1",imgurl);
                 startActivity(i1);
@@ -195,7 +194,6 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
                 break;
 
         }
-
 
     }
 

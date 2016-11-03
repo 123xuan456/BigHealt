@@ -32,6 +32,7 @@ public class PhysicalAdapter extends BaseAdapter implements RadioGroup.OnChecked
     private RadioButton often;
     private TextView problem;
 
+
     public PhysicalAdapter(Context context,List<PhysicalBean.ContentBean.ResultBean> list) {
             this.context = context;
             this.list = list;

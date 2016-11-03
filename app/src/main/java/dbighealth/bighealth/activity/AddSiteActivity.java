@@ -151,6 +151,8 @@ public class AddSiteActivity extends Activity implements View.OnClickListener {
         }
     }
 
+
+
     private void tijia(String defaults) {
         System.out.println("用户是否点击了="+defaults);
         System.out.println("用户id拿到="+userid);
