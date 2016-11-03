@@ -1,6 +1,7 @@
 package dbighealth.bighealth;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
@@ -19,4 +20,10 @@ public class BaseApplication extends Application{
     public static Bitmap bitmap =null; //传递本地图片
     public static String name;
     public static String age;//年龄
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+    }
 }

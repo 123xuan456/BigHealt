@@ -17,11 +17,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.https.HttpsUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.ShoppingCartBean;
 import okhttp3.Call;
@@ -119,8 +119,6 @@ public class ShopcartAdapter extends BaseAdapter{
                 .transform(new GlideRoundTransform(context,10))
                 .into(holder.ivShopImg);
 
-
-
         /**
          * 编辑下的界面
          */
@@ -134,7 +132,9 @@ public class ShopcartAdapter extends BaseAdapter{
                     checks[pos] = isChecked;
                    // mListener.clickListener(buttonView,isChecked);
                      Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
+                    intent.putExtra("position",position);
                      intent.putExtra("getTotal",1);
+                   //  intent.putExtra("postion",position);
                      LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 }
@@ -155,6 +155,7 @@ public class ShopcartAdapter extends BaseAdapter{
                         datas2.set(pos,"编辑");
                         Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
                         intent.putExtra("getTotal",1);
+
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                         /**
@@ -280,6 +281,7 @@ public class ShopcartAdapter extends BaseAdapter{
                     isSelected.put(position,isChecked);
                     Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
                     intent.putExtra("getTotal",2);
+                    intent.putExtra("postion",position);
                     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 }

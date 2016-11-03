@@ -10,9 +10,9 @@ public class UrlUtils {
 
   public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
 
-  public static String BASEURL="http://192.168.0.120:8081/JianKangChanYe";
-  public  static String   BASEURL2 = " http://192.168.0.120:8081/JianKangChanYe";//本地测试
-  public  static String   BASEURL3 = " http://192.168.0.120:8081/JianKangChanYe";//本地测试
+  public static String BASEURL="http://192.168.0.120:8081//JianKangChanYe";
+  public  static String   BASEURL2 = "http://192.168.0.120:8081//JianKangChanYe";//本地测试
+  public  static String   BASEURL3 = "http://192.168.0.120:8081//JianKangChanYe";//本地测试
   //http://106.2.219.210:8090/JianKangChanYe/homepictures/sickn
  /* public static String BASEURL=" http://106.2.219.210:1314";//本地测试
   public  static String   BASEURL2 = " http://106.2.219.210:1314";//本地测试
@@ -93,14 +93,19 @@ public class UrlUtils {
   //提醒listview
   public static String REMIND = BASEURL2+"/medicineremind/remindlist";
   //查询体检报告
-  public static String SEARCHREPORT = BASEURL3+"/medicalReportarchReport";
+  public static String SEARCHREPORT = BASEURL3+"/medicalReport/searchReport";
   //保存体检报告
   public static String UPLOADREPORT = BASEURL3+"/medicalReportveReporty";
   //判读是否填写过体质
   public static String JUDGEPHYSICAL = BASEURL3+"/Symptom/alllist";
   //我的收藏展示
   public static String COLLECTIONSHOW = BASEURL3+"/transfer/mycollection";
-
+  //产品详细
+  public static String INPRODUCT = BASEURL2+"/mountinformation/inProduct";
+  //确认订单
+  public static String DOBUYNOW = BASEURL2+"/shoppingtemp/doBuy";
+  //确认订单中提交
+  public static String SUBMITS = BASEURL2+"/order/goOrder";
   //收货地址查询
   public static String SEARCH_MANAGESITE =  BASEURL3+"/addressmanager/searchall?userId=";
   //收货地址设为默认
@@ -119,5 +124,12 @@ public class UrlUtils {
   public static String UPDATENUMS = BASEURL3+"/shoppingtemp/updateNum";
   //存储购物车要结算的订单
   public static String SETTLEMENTORDER = BASEURL3 +"/shoppingtemp/doBuyTemp";
+//  public static String DELETECOLLECTION = BASEURL3+"/transfer/deletecollection";
+  //编辑收货地址
+  public static String EDIT_MANAGESITE =  BASEURL3+"/addressmanager/updateAddress";
+  //加入购物车
+  public static String ADDSHOPCART = BASEURL3+"/shoppingtemp/saveCart";
+  //添加收藏
+  public static String ADDCOLLECTIONS =BASEURL3+"/transfer/insertcollection";
 
 }

@@ -117,6 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/star"
+            android:id="@+id/iv_collction"
             android:layout_marginLeft="35dp"
             android:enabled="true"
             android:visibility="visible"

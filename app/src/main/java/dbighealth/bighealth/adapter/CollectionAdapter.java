@@ -1,6 +1,8 @@
 package dbighealth.bighealth.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,12 +95,15 @@ public class CollectionAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-
         holder.cbcollecion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.i("mhysa-->","选中的状态时："+position);
                 checks[pos] = isChecked;
+                isSelected.put(position,isChecked);
+                Intent intent = new Intent("android.intent.action.CART_COLLECTION");
+                intent.putExtra("productposition",position);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
         });
         /**
