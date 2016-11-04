@@ -114,8 +114,9 @@ public class EditSiteActivity extends Activity {
                     return;
                 }else {
                     String url = UrlUtils.EDIT_MANAGESITE;
+                    JSONObject obj=new JSONObject();
                     try {
-                        JSONObject obj=new JSONObject();
+
                         obj.put("addressId", addressId);
                         obj.put("name", name);
                         obj.put("phoneNumber", phone);
@@ -123,6 +124,9 @@ public class EditSiteActivity extends Activity {
                         obj.put("street", area);
                         obj.put("address", address);
                         obj.put("defaults", defaults);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                         OkHttpUtils.postString().url(url).content(obj.toString())
                                 .build().execute(new StringCallback() {
                             @Override
@@ -133,14 +137,12 @@ public class EditSiteActivity extends Activity {
                             @Override
                             public void onResponse(String response, int id) {
                                 System.out.println("添加地址成功" + response);
-                                Intent i=new Intent("android.intent.action.SET");
+                                Intent i = new Intent("android.intent.action.SET");
                                 LocalBroadcastManager.getInstance(EditSiteActivity.this).sendBroadcast(i);
                                 finish();
                             }
                         });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+
 
                 }
                 break;
