@@ -127,7 +127,7 @@ public class ProductActivity extends Activity implements View.OnClickListener {
                             .into(iv_product);
 
                     tv_title.setText(inProduct.getContent());
-                    price.setText(inProduct.getPrice());
+                    price.setText("￥"+inProduct.getPrice());
                     lists = inProduct.getLittleImages();
                     InProductAdapter reportPicAdapter = new InProductAdapter(getApplicationContext(), lists);
                     lv_companyDescribe.setAdapter(reportPicAdapter);

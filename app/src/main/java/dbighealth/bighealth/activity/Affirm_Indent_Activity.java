@@ -39,7 +39,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
     private TextView tit,right_tv,submit;
     private ImageView arrow_left;
-    private TextView shouhuoren,tel,address,heji;
+    private TextView shouhuoren,tel,address,heji,no_address;
     private NoScrollListview product_listview;
     List<AffirmIndentBean.MessageBean> urls;
     ItemProductAdapter reportPicAdapter;
@@ -98,6 +98,9 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         product_listview = (NoScrollListview)findViewById(R.id.product_listview);//要提交的产品的listview
         //ItemProductAdapter这个类是listview的adapter，item的布局已经完成，坐等数据和bean文件
 
+        //没有地址的时候显示的
+        no_address = (TextView)findViewById(R.id.no_address);
+
         heji = (TextView)findViewById(R.id.heji);
         //提交
         submit = (TextView)findViewById(R.id.submit);
@@ -136,9 +139,20 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                     AffirmIndent = gson.fromJson(response, AffirmIndentBean.class);
                     int code = AffirmIndent.getCode();
                     if (code == 200) {
-                        shouhuoren.setText("收货人:" + AffirmIndent.getName());
-                        tel.setText(AffirmIndent.getPhoneNumber());
-                        address.setText(AffirmIndent.getAddress());
+                        if(!AffirmIndent.getAddress().equals("")){
+                            no_address.setVisibility(View.GONE);
+                            shouhuoren.setVisibility(View.VISIBLE);
+                            tel.setVisibility(View.VISIBLE);
+                            address.setVisibility(View.VISIBLE);
+                            shouhuoren.setText("收货人:" + AffirmIndent.getName());
+                            tel.setText(AffirmIndent.getPhoneNumber());
+                            address.setText("收货地址:" + AffirmIndent.getAddress());
+                        }else {
+                            no_address.setVisibility(View.VISIBLE);
+                            shouhuoren.setVisibility(View.GONE);
+                            tel.setVisibility(View.GONE);
+                            address.setVisibility(View.GONE);
+                        }
                         urls = AffirmIndent.getMessage();
                         reportPicAdapter = new ItemProductAdapter(getApplicationContext(), urls);
                         reportPicAdapter.onListener(Affirm_Indent_Activity.this);
