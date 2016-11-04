@@ -186,6 +186,7 @@ public class ProductActivity extends Activity implements View.OnClickListener {
                 String useid1 = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
                 if(!TextUtils.isEmpty(useid1)){
                     Intent intent = new Intent(this, Affirm_Indent_Activity.class);
+                    intent.putExtra("articleId",ids);
                     startActivity(intent);
 
                 }else {

@@ -131,5 +131,7 @@ public class UrlUtils {
   public static String ADDSHOPCART = BASEURL3+"/shoppingtemp/saveCart";
   //添加收藏
   public static String ADDCOLLECTIONS =BASEURL3+"/transfer/insertcollection";
+  //立即购买的订单
+  public static String BUYNOW = BASEURL3+"/shoppingtemp/doBuyNow";
 
 }
