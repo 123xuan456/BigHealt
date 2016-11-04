@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -26,7 +25,6 @@ import java.util.List;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.AdpterOnItemClick;
 import dbighealth.bighealth.adapter.ItemProductAdapter;
-import dbighealth.bighealth.adapter.ManageSiteAdapter;
 import dbighealth.bighealth.bean.AffirmIndentBean;
 import dbighealth.bighealth.view.NoScrollListview;
 import okhttp3.Call;
@@ -265,8 +263,20 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                 break;
             case R.id.rl:
                 Intent intent = new Intent(Affirm_Indent_Activity.this, ManageSiteActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode == RESULT_OK){
+            shouhuoren.setText("收货人:" +  data.getStringExtra("name"));
+            tel.setText(data.getStringExtra("phone"));
+            address.setText("收货地址："+data.getStringExtra("area"));
+        }
+
+
     }
 }

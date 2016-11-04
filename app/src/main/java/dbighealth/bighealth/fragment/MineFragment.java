@@ -43,7 +43,6 @@ import dbighealth.bighealth.activity.ConditionActivity;
 import dbighealth.bighealth.activity.HasCommitReport;
 import dbighealth.bighealth.activity.InformationActivity1;
 import dbighealth.bighealth.activity.LoginActivity;
-import dbighealth.bighealth.activity.ManageSiteActivity;
 import dbighealth.bighealth.activity.Me_LogoutActivity;
 import dbighealth.bighealth.activity.MedicalReportActivity;
 import dbighealth.bighealth.activity.PhysiqueActivity;
@@ -420,10 +419,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.rl1:
                 Intent i1 = new Intent();//已经登录后，点击进入详情
                 Bundle bundle = new Bundle();
-                if(BaseApplication.imgUrl!=null){
-                    bundle.putString("imgurl",BaseApplication.imgUrl.toString());
-                }
-                bundle.putString("picUrl", SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,""));
+//                if(BaseApplication.imgUrl!=null){
+//                    bundle.putString("imgurl",BaseApplication.imgUrl.toString());
+//                }
+//                bundle.putString("picUrl",photoPic);
                 bundle.putString("name", SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERNAME,""));
 //                bundle.putString("uid", BaseApplication.userid);
                 i1.setClass(getActivity(), Me_LogoutActivity.class);

@@ -59,6 +59,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText7"
             android:background="@null"
+            android:maxLength="11"
+            android:inputType="number"
             android:layout_alignTop="@+id/textView40"
             android:layout_alignEnd="@+id/relativeLayout4"
             android:layout_toEndOf="@+id/textView40"

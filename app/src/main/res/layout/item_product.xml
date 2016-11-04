@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="碧鉴春茶叶"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="35dp"
         android:textColor="#333333"/>
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="购买数量"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="#333333"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"

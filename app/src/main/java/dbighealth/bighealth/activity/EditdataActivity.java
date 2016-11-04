@@ -152,6 +152,10 @@ public class EditdataActivity extends Activity {
         textView59.setText(name);
         tvTab.setText("个人信息");
         rightAdd.setVisibility(View.GONE);
+        if (BaseApplication.bitmap!=null){
+            image.setImageBitmap(BaseApplication.bitmap);
+
+        }
         //  image.setType(RoundImageView.TYPE_ROUND);//圆角
         if(imgUrl!=null){
             image.setImageURI(imgUrl);

@@ -35,6 +35,8 @@ public class PhysicalAdapter extends BaseAdapter implements RadioGroup.OnChecked
     private RadioButton btn_sometimes;
     private RadioButton often;
     private TextView problem;
+
+
     private static HashMap<Integer,Boolean> isSelected;
     private static HashMap<Integer,Boolean> NO;
     private static HashMap<Integer,Boolean> REALY;

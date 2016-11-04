@@ -78,7 +78,14 @@ public class ManageSiteActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.arrow_left:
+
+                Intent intent=new Intent();
+                intent.putExtra("name", mes.get(0).getName());
+                intent.putExtra("phone",  mes.get(0).getPhoneNumber());
+                intent.putExtra("area",  mes.get(0).getArea()+mes.get(0).getAddress());
+                setResult(RESULT_OK, intent);
                 finish();
+
                 break;
             case R.id.tv:
                 Intent i = new Intent(this, AddSiteActivity.class);
@@ -95,7 +102,6 @@ public class ManageSiteActivity extends Activity {
             public void onError(Call call, Exception e, int id) {
                 System.out.println("收货地址失败" + e.toString());
             }
-
             @Override
             public void onResponse(String response, int id) {
                 System.out.println("收货地址成功" + response);
@@ -104,6 +110,9 @@ public class ManageSiteActivity extends Activity {
                 mes = ms.getMessage();
                 adapter = new ManageSiteAdapter(ManageSiteActivity.this, mes);
                 listView.setAdapter(adapter);
+
+
+
             }
         });
     }

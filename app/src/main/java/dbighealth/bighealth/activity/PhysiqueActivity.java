@@ -261,7 +261,6 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
            /* rg_selector.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-
                 }
             });*/
         return btn_no.isChecked()?1:(btn_rarely.isChecked()?2:(btn_sometimes.isChecked()?3:(often.isChecked()?4:0)));
@@ -281,6 +280,7 @@ public class PhysiqueActivity extends Activity implements View.OnClickListener, 
                 ultraLv.refreshComplete();
                 if(physicalAdapter!=null){
                     physicalAdapter.notifyDataSetChanged();
+//                    physicalAdapter.notify();
                 }
 
             }
