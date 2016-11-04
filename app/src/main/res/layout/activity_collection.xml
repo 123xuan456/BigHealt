@@ -12,6 +12,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
         android:id="@+id/lv_collection"
         android:layout_below="@+id/layout_footer"
         android:divider="@null"

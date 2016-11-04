@@ -94,22 +94,27 @@ public class CollectionAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        holder.cbcollecion.setTag(position);
         holder.cbcollecion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.i("mhysa-->","选中的状态时："+position);
-                checks[pos] = isChecked;
-                isSelected.put(position,isChecked);
-                Intent intent = new Intent("android.intent.action.CART_COLLECTION");
-                intent.putExtra("productposition",position);
-                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                Log.i("mhysa-->","选中的状态时："+position+"status ="+isChecked);
+
+                int  post = (int) buttonView.getTag();
+                if(post==position){
+                    checks[pos] = isChecked;
+                    isSelected.put(position,isChecked);
+                    Intent intent = new Intent("android.intent.action.CART_COLLECTION");
+                    intent.putExtra("productposition",position);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                }
+
             }
         });
         /**
          * 解析接口数据
          */
-        holder.cbcollecion.setChecked(checks[pos]);
+        holder.cbcollecion.setChecked(isSelected.get(position));
         holder.rcvCollectionPic.setImageURI(list.get(position).getImages());
         holder.tvCollection.setText(list.get(position).getTitle());
         holder.tvCollectionDate.setText(list.get(position).getTime());
