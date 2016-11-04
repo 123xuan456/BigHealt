@@ -17,11 +17,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.https.HttpsUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.ShoppingCartBean;
 import okhttp3.Call;

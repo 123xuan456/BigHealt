@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -26,7 +25,6 @@ import java.util.List;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.AdpterOnItemClick;
 import dbighealth.bighealth.adapter.ItemProductAdapter;
-import dbighealth.bighealth.adapter.ManageSiteAdapter;
 import dbighealth.bighealth.bean.AffirmIndentBean;
 import dbighealth.bighealth.view.NoScrollListview;
 import okhttp3.Call;
@@ -54,19 +52,33 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
     int leijiahe;
     private AffirmIndentBean AffirmIndent;
     private RelativeLayout rl;
-
+    private int BUYNOW =101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_affirm_indent);
         findView();
+        Intent intent = getIntent();
+        String articleId = intent.getStringExtra("articleId");
+        Log.i("article","articleid="+articleId);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        initIntenet();
+        if(articleId!=null){
+            OkHttpUtils.get()
+                       .url(UrlUtils.BUYNOW)
+                       .id(BUYNOW)
+                       .addParams("userId",SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, ""))
+                       .addParams("productId",articleId)
+                       .build()
+                       .execute(MyStringCallBack.get());
+        }else{
+            initIntenet();
+        }
+
     }
 
 
@@ -86,7 +98,7 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
         product_listview = (NoScrollListview)findViewById(R.id.product_listview);//要提交的产品的listview
         //ItemProductAdapter这个类是listview的adapter，item的布局已经完成，坐等数据和bean文件
 
-        //没有收货地址时的布局
+        //没有地址的时候显示的
         no_address = (TextView)findViewById(R.id.no_address);
 
         heji = (TextView)findViewById(R.id.heji);
@@ -122,28 +134,29 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
 
                 @Override
                 public void onResponse(String response, int id) {
-                    Log.i("liuliu123-->", response);
-                    Gson gson = new Gson();
+                    Log.i("liu-->", response);
+                   Gson gson = new Gson();
                     AffirmIndent = gson.fromJson(response, AffirmIndentBean.class);
                     int code = AffirmIndent.getCode();
                     if (code == 200) {
+                        if(!AffirmIndent.getAddress().equals("")){
+                            no_address.setVisibility(View.GONE);
+                            shouhuoren.setVisibility(View.VISIBLE);
+                            tel.setVisibility(View.VISIBLE);
+                            address.setVisibility(View.VISIBLE);
+                            shouhuoren.setText("收货人:" + AffirmIndent.getName());
+                            tel.setText(AffirmIndent.getPhoneNumber());
+                            address.setText("收货地址:" + AffirmIndent.getAddress());
+                        }else {
+                            no_address.setVisibility(View.VISIBLE);
+                            shouhuoren.setVisibility(View.GONE);
+                            tel.setVisibility(View.GONE);
+                            address.setVisibility(View.GONE);
+                        }
                         urls = AffirmIndent.getMessage();
                         reportPicAdapter = new ItemProductAdapter(getApplicationContext(), urls);
                         reportPicAdapter.onListener(Affirm_Indent_Activity.this);
                         product_listview.setAdapter(reportPicAdapter);
-                        if(!AffirmIndent.getAddress().equals("")){
-                            no_address.setVisibility(View.GONE);
-                            shouhuoren.setText("收货人:" + AffirmIndent.getName());
-                            tel.setText(AffirmIndent.getPhoneNumber());
-                            address.setText("收货地址:"+AffirmIndent.getAddress());
-                        }else{
-                            shouhuoren.setVisibility(View.GONE);
-                            tel.setVisibility(View.GONE);
-                            address.setVisibility(View.GONE);
-                            no_address.setVisibility(View.VISIBLE);
-                        }
-
-
                         gross();
 
                     }
@@ -264,8 +277,20 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                 break;
             case R.id.rl:
                 Intent intent = new Intent(Affirm_Indent_Activity.this, ManageSiteActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode == RESULT_OK){
+            shouhuoren.setText("收货人:" +  data.getStringExtra("name"));
+            tel.setText(data.getStringExtra("phone"));
+            address.setText("收货地址："+data.getStringExtra("area"));
+        }
+
+
     }
 }

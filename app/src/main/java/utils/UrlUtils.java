@@ -10,13 +10,13 @@ public class UrlUtils {
 
   public static String ImageCachePath = Environment.getExternalStorageDirectory().getPath()+"/BigHealt/ImageCache/";// sd路径
 
-  public static String BASEURL="http://192.168.0.120:8081//JianKangChanYe";
+ /* public static String BASEURL="http://192.168.0.120:8081//JianKangChanYe";
   public  static String   BASEURL2 = "http://192.168.0.120:8081//JianKangChanYe";//本地测试
-  public  static String   BASEURL3 = "http://192.168.0.120:8081//JianKangChanYe";//本地测试
+  public  static String   BASEURL3 = "http://192.168.0.120:8081//JianKangChanYe";//本地测试*/
   //http://106.2.219.210:8090/JianKangChanYe/homepictures/sickn
- /* public static String BASEURL=" http://106.2.219.210:1314";//本地测试
+  public static String BASEURL=" http://106.2.219.210:1314";//本地测试
   public  static String   BASEURL2 = " http://106.2.219.210:1314";//本地测试
-  public  static String   BASEURL3 = " http://106.2.219.210:1314";//本地测试*/
+  public  static String   BASEURL3 = " http://106.2.219.210:1314";//本地测试
   //-------------------------------API接口----------------------------------
   public static String CommonHome=BASEURL+"/homepictures/sickness";
   public static String SpecialHome = BASEURL+"/homepictures/showhealthknowledge";
@@ -131,5 +131,7 @@ public class UrlUtils {
   public static String ADDSHOPCART = BASEURL3+"/shoppingtemp/saveCart";
   //添加收藏
   public static String ADDCOLLECTIONS =BASEURL3+"/transfer/insertcollection";
+  //立即购买的订单
+  public static String BUYNOW = BASEURL3+"/shoppingtemp/doBuyNow";
 
 }

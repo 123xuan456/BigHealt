@@ -17,8 +17,8 @@
         android:layout_marginTop="30dp"
         fresco:actualImageScaleType="centerInside"
         fresco:roundAsCircle="true"
-        fresco:placeholderImage="@drawable/user"
         android:layout_gravity="center"
+        android:background="@drawable/user"
         fresco:roundingBorderWidth="1dp"
         />
     <RelativeLayout

@@ -60,7 +60,7 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
     private String name;
-    private String picUrl;
+//    private String picUrl;
     private String uid;
     private Intent lastIntent;
     private Uri photoUri;
@@ -84,16 +84,18 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         ButterKnife.bind(this);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        picUrl = extras.getString("picUrl");
+//        picUrl = extras.getString("picUrl");
 //        uid = extras.getString("uid");
-        imgurl = extras.getString("imgurl");
+//        imgurl = extras.getString("imgurl");
+        imgurl = SharedPreferencesUtils.getString(this, ConfigUsers.USERPIC,"");
         if(imgurl!=null){
             Uri uri = Uri.parse(imgurl);
             rcvArticlePhoto.setImageURI(uri);
-        }else if (picUrl != null) {
-            Uri uri = Uri.parse(picUrl);
-            rcvArticlePhoto.setImageURI(uri);
         }
+//        else if (picUrl != null) {
+//            Uri uri = Uri.parse(picUrl);
+//            rcvArticlePhoto.setImageURI(uri);
+//        }
         name = extras.getString("name");
 
         sp = getSharedPreferences("potrait", Activity.MODE_PRIVATE);
@@ -103,7 +105,11 @@ public class Me_LogoutActivity extends Activity implements View.OnClickListener 
         BaseActivity.activityList.add(this);
         setView();
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //防止修改头像之后，再次从首页进入后不显示
+        if (BaseApplication.bitmap!=null){
+            rcvArticlePhoto.setImageBitmap(BaseApplication.bitmap);
 
+        }
         getBraodCast();
 
     }

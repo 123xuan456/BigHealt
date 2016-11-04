@@ -61,7 +61,7 @@ public class SecondAdapter extends BaseAdapter{
         {
             holder = (ViewHolder)convertView.getTag();
         }
-        if(list!=null&&list.get(position).getName()!=null&&list.get(position).getName().equals("")){
+        if(list!=null&&list.get(position).getName()==null){
             holder.username.setText("匿名");
         }else{
             holder.username.setText(list.get(position).getName());

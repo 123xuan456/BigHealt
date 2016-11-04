@@ -95,6 +95,11 @@ public class SecondActivity extends Activity implements View.OnClickListener {
         id = extras.getInt("id");
         userid = SharedPreferencesUtils.getString(this, UrlUtils.LOGIN, "");
 
+
+        if(userid.isEmpty()){
+            userid = "0";
+        }
+        Log.i("picId-->","picId="+picId);
         InitInternet();
     }
 
@@ -114,12 +119,12 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                 .execute(MyStringCallBack);*/
 
         if (id == 1) {
-            Log.i("mhysa-->", UrlUtils.FORMATIONDETAIL + "?id=" + picId);
+            Log.i("mhysa-->", UrlUtils.FORMATIONDETAIL + "?id=" + picId+"&userid="+userid);
             OkHttpUtils.get()
                     .url(UrlUtils.FORMATIONDETAIL)
                     .id(SECOND)
                     .addParams("id", String.valueOf(picId))
-                    .addParams("userid", SharedPreferencesUtils.getString(getApplicationContext(), UrlUtils.LOGIN, ""))
+                    .addParams("userid",userid)
                     .build()
                     .execute(MyStringCallBack);
         }else if (id == 2) {
@@ -127,7 +132,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                     .url(UrlUtils.SPECIALITEM)
                     .id(SECOND)
                     .addParams("id", String.valueOf(picId))
-                    .addParams("userid", SharedPreferencesUtils.getString(getApplicationContext(), UrlUtils.LOGIN, ""))
+                    .addParams("userid", userid)
                     .build()
                     .execute(MyStringCallBack);
         }else{
@@ -136,7 +141,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                     .url(UrlUtils.FORMATIONDETAIL)
                     .id(SECOND)
                     .addParams("id", String.valueOf(picId))
-                    .addParams("userid", SharedPreferencesUtils.getString(getApplicationContext(), UrlUtils.LOGIN, ""))
+                    .addParams("userid", userid)
                     .build()
                     .execute(MyStringCallBack);
         }
@@ -151,7 +156,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void onError(Call call, Exception e, int id) {
-
+           Log.i("error-->",e.toString());
             if (id == COMMENT_USER) {
                 Toast.makeText(getApplicationContext(), "提交失敗", Toast.LENGTH_SHORT).show();
             }
@@ -161,6 +166,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
         public void onResponse(String response, int id) {
 
             if (id == SECOND) {
+                Log.i("mhysa-->","fanhuishuju="+response);
                 Gson gson = new Gson();
                 secondCommntBean = gson.fromJson(response, SecondCommntBean.class);
                 if (secondCommntBean.getCode() == 200) {
@@ -175,11 +181,12 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                         ivCollction.setImageResource(R.drawable.star);
                         ivCollction.setOnClickListener(SecondActivity.this);
                     }
-                    if (title.isEmpty()) {
+                    tvTitle.setText(title);
+                   /* if (title.isEmpty()) {
                         tvTitle.setText("匿名");
                     } else {
                         tvTitle.setText(title);
-                    }
+                    }*/
 
                     Glide.with(getApplicationContext())
                             .load(images)
