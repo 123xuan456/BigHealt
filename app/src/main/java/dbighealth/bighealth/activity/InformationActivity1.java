@@ -2,6 +2,7 @@ package dbighealth.bighealth.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -10,13 +11,15 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
 import java.util.List;
 
-import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
 import dbighealth.bighealth.adapter.InformationAdapter1;
 import dbighealth.bighealth.bean.InformationBean;
@@ -34,6 +37,8 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
     private TextView right_tv;
     private LinearLayoutManager linearLayoutManager;
     InformationAdapter1 adapter;
+    private RelativeLayout rl,relativeLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +55,8 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
         arrow_left.setOnClickListener(this);
         right_tv.setText("我要咨询");
         right_tv.setOnClickListener(this);
-
+        rl = (RelativeLayout) findViewById(R.id.rl);
+        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
     }
 
     public void init(){
@@ -82,6 +88,10 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
             InformationBean informationBean = gson.fromJson(response, InformationBean.class);
             int code = informationBean.getCode();
             if (code == 200) {
+                System.out.println("有数据");
+                rl.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                relativeLayout.setBackgroundColor(Color.WHITE);
                 final List<InformationBean.Message> result1 = informationBean.getMessage();
                 adapter = new InformationAdapter1(getApplication(), result1);
                 recyclerView.setAdapter(adapter);
@@ -95,6 +105,11 @@ public class InformationActivity1 extends Activity implements View.OnClickListen
                         startActivity(intent);
                     }
                 });
+
+            }else {
+                System.out.println("没有数据");
+                rl.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
 
             }
 

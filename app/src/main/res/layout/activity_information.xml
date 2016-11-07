@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff"
+    android:background="#efeff4"
     >
 
     <include
         layout="@layout/footer_tab_3"
         android:id="@+id/include5"></include>
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
 
+        android:visibility="visible"
+        android:background="@drawable/no_background_alert"
+        android:layout_below="@+id/include5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_margin="10dp"
+            android:text="没有资讯，点按钮添加吧！！！"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
     <ListView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#ffff"
+        android:visibility="gone"
         android:dividerHeight="10dp"
         android:layout_below="@+id/include5"
         android:orientation="vertical">
