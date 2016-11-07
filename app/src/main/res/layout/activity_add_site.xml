@@ -57,6 +57,8 @@
             android:id="@+id/et_Mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="11"
+            android:inputType="number"
             android:background="#ffffff"
             android:textSize="16sp"
             android:padding="10dp" />

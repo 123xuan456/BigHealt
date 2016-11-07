@@ -141,8 +141,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 textView50.setText(username);
                 userid = SharedPreferencesUtils.getString(getContext(),UrlUtils.LOGIN,"");
                 photoUrl = SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,"");
-                ivTouxiang.setImageURI(photoUrl);
-                /*if(!SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,"").equals("")){
+             /*   Log.i("mhysa-->","userPic="+photoUrl);
+                ivTouxiang.setImageURI(photoUrl);*/
+               if(!SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,"").equals("")){
                     photoUrl = SharedPreferencesUtils.getString(getContext(),ConfigUsers.USERPIC,"");
                     imgUrl = BaseApplication.imgUrl;
                  //   ivTouxiang.setImageURI(photoUrl);
@@ -166,7 +167,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     Uri uri = Uri.parse(photoUrl);
                     Log.i("mhysa","接收到的地址是："+photoUrl);
                     ivTouxiang.setImageURI(uri);
-                }*/
+                }
 
                 Log.i("pengpeng--->", UrlUtils.UPDATEPIC + "?id=" + userid + "&imgage=" + intent.getStringExtra("photoUrl"));
                 OkHttpUtils.get()

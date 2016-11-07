@@ -17,22 +17,24 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="50dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:background="@drawable/no_background_alert"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:layout_margin="10dp"
             android:text="没有服药提醒，点加号按钮添加一条提醒吧！"
             android:textSize="17sp"
+            android:gravity="center"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
     <ListView
         android:id="@+id/listview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:visibility="gone">

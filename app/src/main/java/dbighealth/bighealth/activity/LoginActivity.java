@@ -269,7 +269,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             Intent intent = new Intent("android.intent.action.CART_BROADCAST");
             intent.putExtra("username",username);
             intent.putExtra("photoUrl", imgUrl);
-            System.out.println("过去！！username"+username);
+            System.out.println("过去！！username"+username+"图片="+imgUrl);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
 
             Intent i = new Intent("android.intent.action.CART_SEX");

@@ -248,6 +248,7 @@ public class ShopcartAdapter extends BaseAdapter{
                     Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
                     if(getIsSelected().get(position)){
                         intent.putExtra("delete",true);
+                        intent.putExtra("getTotal",1);
                     }
                     for(int i =0;i<list.size();i++){
                         if(position<=i){

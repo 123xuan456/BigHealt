@@ -126,27 +126,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                if (intent.getIntExtra("getTotal", 0) == 1) {
 
-                   /*int position = intent.getIntExtra("position", 0);
-                   Log.i("count-->", "position==" + position);
-                   if(ShopcartAdapter.getIsSelected().get(position)){
-                       if (!saveStatus.containsKey(position)) {
-                           count=count+1;
-                           saveStatus.put(position, true);
-                           Log.i("count-->", "count=" + count + "i=" + position);
-                       }
-                       String price = message.get(position).getPrice();
-                       int singlePrice = Integer.parseInt(price);
-                       int num = message.get(position).getNum();
-                       int ProductPrice = singlePrice * num;
-                       totalPrice += ProductPrice;
-                   }else{
-                       count -=1;
-                   }
-                   if(tvBalance.VISIBLE==View.VISIBLE){
-                       tvBalance.setText("结算("+count+")");
-                   }
-*/
-
                  for (int i = 0; i < message.size(); i++) {
                      Log.i("count-->", "getselect="+ShopcartAdapter.getIsSelected().get(i));
                         if (ShopcartAdapter.getIsSelected().get(i)!=null&&ShopcartAdapter.getIsSelected().get(i)) {
@@ -156,7 +135,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                                 count=count+1;
                                 Log.i("count-->", "count=" + count + "i=" + i);
                             }
-
 
                             saveStatus.put(i, true);
                             String price = message.get(i).getPrice();
@@ -189,6 +167,15 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                     }
 
+                   if(intent.getBooleanExtra("delete",false)){
+                       int sum =0;
+                       for(int i=0;i<message.size();i++){
+                          if(ShopcartAdapter.getIsSelected().get(i)) {
+                              sum+=1;
+                          }
+                       }
+                       count = sum;
+                   }
                   //  tvBalance.setText("结算("+count+")");
                    tvBalance.setText("结算("+count+")");
                 }
@@ -325,8 +312,10 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
              */
             if(id == DELETEPRODUCT){
 
+
                 Toast.makeText(getApplicationContext(),"删除成功！",Toast.LENGTH_SHORT).show();
                 deleteshopId = "";
+
             }
             tit.setText("购物车(" + message.size() + ")");
             lvShopcart.setAdapter(shopcartAdapter);
@@ -453,6 +442,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 }*/
 
                 Log.i("delete-->","size："+deleteshopId);
+
                 OkHttpUtils.get()
                            .url(UrlUtils.DELETESHOPCART)
                            .addParams("userId",SharedPreferencesUtils.getString(getApplicationContext(),UrlUtils.LOGIN,""))
