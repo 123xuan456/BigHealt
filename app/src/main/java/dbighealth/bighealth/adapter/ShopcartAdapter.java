@@ -142,7 +142,7 @@ public class ShopcartAdapter extends BaseAdapter{
             holder.cbShopcheck.setChecked(isSelected.get(pos));
 
             holder.tvProductDescribe.setText(list.get(position).getContent());
-            holder.tvProductPrice.setText(list.get(position).getPrice());
+            holder.tvProductPrice.setText("￥"+list.get(position).getPrice());
             /**
              * 如果条目编辑按钮可见，点击编辑按钮修改item内容
              */

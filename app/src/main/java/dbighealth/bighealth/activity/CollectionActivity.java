@@ -203,7 +203,14 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 rlTrash.setVisibility(View.VISIBLE);
                                 CollectionAdapter.ViewHolder holder = (CollectionAdapter.ViewHolder) view.getTag();
-                                holder.cbcollecion.toggle();
+                             //   holder.cbcollecion.toggle();
+
+                                if(holder.cbcollecion.isChecked()){
+                                    CollectionAdapter.getIsSelected().put(position,false);
+                                }else{
+                                    CollectionAdapter.getIsSelected().put(position,true);
+                                }
+                                collectionAdapter.notifyDataSetChanged();
                             }
                         });
                     }
