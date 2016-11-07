@@ -197,7 +197,6 @@ public class EditdataActivity extends Activity {
         broadcastManager.registerReceiver(mItemViewListClickReceiver1, intentFilter);
 
     }
-
     @OnClick({R.id.relativeLayout1, R.id.relativeLayout2, R.id.relativeLayout3, R.id.relativeLayout5,
             R.id.relativeLayout4,R.id.arrow_left})
     public void onClick(View view) {
