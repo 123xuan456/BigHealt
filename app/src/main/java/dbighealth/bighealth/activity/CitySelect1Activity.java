@@ -96,7 +96,7 @@ public class CitySelect1Activity extends Activity implements OnClickListener {
 		btn_submit = (TextView) findViewById(R.id.right_tv);
 		btn_submit.setText("确定");
 		tit = (TextView) findViewById(R.id.tit);
-
+		tit.setText("");
 		
 		findViewById(R.id.scrollview).setVisibility(View.GONE);
 		
@@ -150,6 +150,7 @@ public class CitySelect1Activity extends Activity implements OnClickListener {
 					adapter.addAll(regions);
 					adapter.update();
 					break;
+
 			}
 		};
 	};
@@ -197,7 +198,12 @@ public class CitySelect1Activity extends Activity implements OnClickListener {
 				city.setRegionId(regions.get(arg2).getId());
 				city.setDistrict(regions.get(arg2).getName());
 				tvs[2].setText(regions.get(arg2).getName());
+				//选择城市之后就直接跳转
+				Intent in = new Intent();
+				in.putExtra("city", city);
+				setResult(8,in);
 
+				finish();
 			}
 			tvs[last].setBackgroundColor(Color.WHITE);
 			tvs[current].setBackgroundColor(Color.GRAY);
