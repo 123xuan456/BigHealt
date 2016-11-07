@@ -83,7 +83,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         ButterKnife.bind(this);
         rightTv.setText("编辑");
         tit.setText("购物车(0)");
-
+        rightTv.setVisibility(View.INVISIBLE);
         saveStatus = new HashMap<Integer, Boolean>();
         unSelectStatus = new HashMap<Integer, Boolean>();
         initListener();
@@ -149,7 +149,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                  for (int i = 0; i < message.size(); i++) {
                      Log.i("count-->", "getselect="+ShopcartAdapter.getIsSelected().get(i));
-                        if (ShopcartAdapter.getIsSelected().get(i)) {
+                        if (ShopcartAdapter.getIsSelected().get(i)!=null&&ShopcartAdapter.getIsSelected().get(i)) {
 
 
                             if (!saveStatus.containsKey(i)) {
@@ -288,6 +288,9 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 Gson gson = new Gson();
                 ShoppingCartBean shoppingCartBean = gson.fromJson(response, ShoppingCartBean.class);
                 message = shoppingCartBean.getMessage();
+                if(message.size()!=0){
+                    rightTv.setVisibility(View.VISIBLE);
+                }
                 shopcartAdapter = new ShopcartAdapter(getApplicationContext(), message, 1);
                 for(int i=0;i<message.size();i++){
                     if(saveStatus.get(i)!=null){
@@ -418,7 +421,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                         if (i != deleteIndex.size() - 1) {
                            // saveAritcleId += message.get(index).getArticleId() + ",";
-                            deleteshopId+=message.get(index).getShoppingId()+"";
+                            deleteshopId+=message.get(index).getShoppingId()+",";
                         } else {
                            // saveAritcleId += message.get(index).getArticleId();
                             deleteshopId+=message.get(index).getShoppingId();

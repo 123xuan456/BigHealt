@@ -1,7 +1,6 @@
 package dbighealth.bighealth.activity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -48,8 +47,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -435,7 +432,6 @@ public class EditdataActivity extends Activity {
                     Bundle extras = data.getExtras();
                     headBitmap = extras.getParcelable("data");
                     if (headBitmap != null) {
-
                         setPicToView(headBitmap);// 保存在SD卡中
                         image.setImageBitmap(BitmapUtils.toRoundBitmap(headBitmap));// 用ImageView显示出来
                         Log.i("mhysa--->", "数据uri" + Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null)));
@@ -478,6 +474,7 @@ public class EditdataActivity extends Activity {
         FileOutputStream b = null;
 
         String fileName = ImageCachePath + cutPicName;// 图片名字
+        System.out.println("保存的图片名字="+fileName);
         try {
             b = new FileOutputStream(fileName);
             mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
@@ -554,21 +551,19 @@ public class EditdataActivity extends Activity {
     }
 
     // 创建一个以当前时间为名称的文件
-    File tempFile = new File(Environment.getExternalStorageDirectory(),
-            getPhotoFileName());
-
-    // 使用系统当前日期加以调整作为照片的名称
-    @SuppressLint("SimpleDateFormat")
-    private String getPhotoFileName() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "'IMG'_yyyyMMdd_HHmmss");
-        return dateFormat.format(date) + ".jpg";
-    }
+//    File tempFile = new File(Environment.getExternalStorageDirectory(),
+//            getPhotoFileName());
+//
+//    // 使用系统当前日期加以调整作为照片的名称
+//    @SuppressLint("SimpleDateFormat")
+//    private String getPhotoFileName() {
+//        Date date = new Date(System.currentTimeMillis());
+//        SimpleDateFormat dateFormat = new SimpleDateFormat(
+//                "'IMG'_yyyyMMdd_HHmmss");
+//        return dateFormat.format(date) + ".jpg";
+//    }
 
     protected void photo() {
-
-
         String SDState = Environment.getExternalStorageState();
         if (SDState.equals(Environment.MEDIA_MOUNTED)) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// "android.media.action.IMAGE_CAPTURE"

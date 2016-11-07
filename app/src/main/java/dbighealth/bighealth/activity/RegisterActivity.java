@@ -176,7 +176,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
         @Override
         public void onFinish() {// 计时完毕
-            getcode.setText("重新获取验证码");
+            getcode.setText("获取验证码");
             getcode.setClickable(true);
         }
 
