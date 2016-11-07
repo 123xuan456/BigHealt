@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class CollectionAdapter extends BaseAdapter {
     private static HashMap<Integer,Boolean> isSelected;
     private boolean flage;
     private boolean[] checks;//用于保存checkBox的选择状态
+    private List<Integer> savePostion = new ArrayList<Integer>();
     public CollectionAdapter(Context context, List<ColllectionBean.MessageBean> list,Boolean flage) {
         checks = new boolean[list.size()];
         this.context = context;
@@ -101,13 +103,33 @@ public class CollectionAdapter extends BaseAdapter {
                 Log.i("mhysa-->","选中的状态时："+position+"status ="+isChecked);
 
                 int  post = (int) buttonView.getTag();
-                if(post==position){
+                if(isChecked){
+                    checks[pos] = isChecked;
+                    isSelected.put(position,isChecked);
+                    savePostion.add(position);
+                    Intent intent = new Intent("android.intent.action.CART_COLLECTION");
+                    intent.putExtra("productposition",position);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                }else{
+                    if(savePostion.size()!=0&&savePostion.contains(position)){
+                        isSelected.put(position,isChecked);
+                        for(int i=0;i<savePostion.size();i++){
+                            if(savePostion.get(i)==position){
+                                savePostion.remove(i);
+                            }
+                        }
+                        Intent intent = new Intent("android.intent.action.CART_COLLECTION");
+                        intent.putExtra("productposition",position);
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    }
+                }
+             /*   if(post==position){
                     checks[pos] = isChecked;
                     isSelected.put(position,isChecked);
                     Intent intent = new Intent("android.intent.action.CART_COLLECTION");
                     intent.putExtra("productposition",position);
                     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-                }
+                }*/
 
             }
         });

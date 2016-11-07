@@ -21,7 +21,6 @@ public class UrlUtils {
   public static String CommonHome=BASEURL+"/homepictures/sickness";
   public static String SpecialHome = BASEURL+"/homepictures/showhealthknowledge";
   //   public static  String LEAGUE = BASEURL+"/hathappenedat/savehealthcare";
-
   public static  String  Symptom = BASEURL2+"/Symptom/list";
   //提交健康档案
   public static  String  FileSave = BASEURL2+"/filesave/save";

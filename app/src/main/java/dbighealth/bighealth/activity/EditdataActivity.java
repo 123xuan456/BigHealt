@@ -194,7 +194,6 @@ public class EditdataActivity extends Activity {
         broadcastManager.registerReceiver(mItemViewListClickReceiver1, intentFilter);
 
     }
-
     @OnClick({R.id.relativeLayout1, R.id.relativeLayout2, R.id.relativeLayout3, R.id.relativeLayout5,
             R.id.relativeLayout4,R.id.arrow_left})
     public void onClick(View view) {
@@ -449,10 +448,11 @@ public class EditdataActivity extends Activity {
                                 SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERNAME,name);
                                 //  BaseApplication.userid = uid;
                                 BaseApplication.imgUrl = imgUrl;
-                                SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERPIC,getPicUrl);
+                               // SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERPIC,getPicUrl);
+                                SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERPIC,MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null));
                                 BaseApplication.photoPic = getPicUrl;
                                 BaseApplication.bitmap = BitmapUtils.toRoundBitmap(headBitmap);
-                                Log.i("mhysa","本地地址："+imgUrl);
+                                Log.i("mhysa","本地地址："+getPicUrl);
                                 Intent intent = new Intent("android.intent.action.CART_BROADCAST");
                                 intent.putExtra("photoUrl", getPicUrl);
                                 intent.putExtra("username", name);

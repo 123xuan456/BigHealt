@@ -90,29 +90,45 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                 int productposition = intent.getIntExtra("productposition", 0);
 
                 Log.i("postion",productposition+"");
-                int articleId = message.get(productposition).getArticleId();
-                if( CollectionAdapter.getIsSelected().get(productposition)){
-                    isCheckMap.put(articleId,true);
-                    deleteIndex.add(productposition);
-                    isDeleteDataMap.put(articleId,deleteIndex);
-                    tvListCount.setText("("+(count+1)+")");
-                    count+=1;
+                if(message.size()!=0){
+                    int articleId = message.get(productposition).getArticleId();
+                    if( CollectionAdapter.getIsSelected().get(productposition)){
+                        if(deleteIndex.size()!=0){
+                            if(!deleteIndex.contains(productposition)){
+                                isCheckMap.put(articleId,true);
+                                deleteIndex.add(productposition);
+                                isDeleteDataMap.put(articleId,deleteIndex);
+                                tvListCount.setText("("+(count+1)+")");
+                                count+=1;
+                            }
 
-                }else{
-                    isCheckMap.put(articleId,false);
-                    // holder.cbcollecion.setChecked(false);
-                    if(deleteIndex.size()==1){
-                        deleteIndex.remove(0);
-                    }else {
-                        for (int i = 0; i < deleteIndex.size(); i++) {
-                            if (deleteIndex.get(i) == productposition) {
-                                deleteIndex.remove(i);
+                        }else{
+                            isCheckMap.put(articleId,true);
+                            deleteIndex.add(productposition);
+                            isDeleteDataMap.put(articleId,deleteIndex);
+                            tvListCount.setText("("+(count+1)+")");
+                            count+=1;
+                        }
+                    }else{
+                        isCheckMap.put(articleId,false);
+                        // holder.cbcollecion.setChecked(false);
+                        if(deleteIndex.size()==1){
+                            deleteIndex.remove(0);
+
+                            tvListCount.setText("("+(count-1)+")");
+                            count-=1;
+                        }else {
+                            for (int i = 0; i < deleteIndex.size(); i++) {
+                                if (deleteIndex.get(i) == productposition) {
+                                    deleteIndex.remove(i);
+                                    tvListCount.setText("("+(count-1)+")");
+                                    count-=1;
+                                }
                             }
                         }
                     }
-                    tvListCount.setText("("+(count-1)+")");
-                    count-=1;
                 }
+
 
             }
         };
@@ -203,14 +219,15 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 rlTrash.setVisibility(View.VISIBLE);
                                 CollectionAdapter.ViewHolder holder = (CollectionAdapter.ViewHolder) view.getTag();
-                             //   holder.cbcollecion.toggle();
+                             holder.cbcollecion.toggle();
 
-                                if(holder.cbcollecion.isChecked()){
+                                Log.i("itemPosition-->",position+"");
+                             /*   if(holder.cbcollecion.isChecked()){
                                     CollectionAdapter.getIsSelected().put(position,false);
                                 }else{
                                     CollectionAdapter.getIsSelected().put(position,true);
-                                }
-                                collectionAdapter.notifyDataSetChanged();
+                                }*/
+                             //   collectionAdapter.notifyDataSetChanged();
                             }
                         });
                     }
@@ -266,15 +283,19 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                      */
 
                  for(int i =0 ;i<message.size();i++){
-                       Log.i("mhysa-->","lvCollection.getChildAt(i)="+i+lvCollection.getChildAt(i%5)+message.size());
-                        CheckBox ischecked = (CheckBox) lvCollection.getChildAt(i%5).findViewById(R.id.cb_collecion);
-                        ischecked.setChecked(false);
+                      /* Log.i("mhysa-->","lvCollection.getChildAt(i)="+i+lvCollection.getChildAt(i%5)+message.size());
+                        CheckBox ischecked = (CheckBox) lvCollection.getChildAt(i%5).findViewById(R.id.cb_collecion);*/
+                        CollectionAdapter.getIsSelected().put(i,false);
+                       // ischecked.setChecked(false);
                     }
-                    collectionAdapter.notifyDataSetChanged();
-                    tvListCount.setText("("+0+")");
                     count = 0;
+                    tvListCount.setText("("+0+")");
                     //将存储选中的集合清空，避免第二次删除时集合长度递增的情况
                     deleteIndex.clear();
+                    collectionAdapter.notifyDataSetChanged();
+
+
+
                     /**
                      * 调用删除数据接口
                      */

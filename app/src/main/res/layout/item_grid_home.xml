@@ -18,6 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:text="白内障"
         android:id="@+id/tv_PicTxt"
         android:layout_alignParentBottom="true"
