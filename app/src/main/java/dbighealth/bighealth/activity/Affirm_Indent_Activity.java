@@ -286,6 +286,10 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==1&&resultCode == RESULT_OK){
+            no_address.setVisibility(View.GONE);
+            shouhuoren.setVisibility(View.VISIBLE);
+            tel.setVisibility(View.VISIBLE);
+            address.setVisibility(View.VISIBLE);
             shouhuoren.setText("收货人:" +  data.getStringExtra("name"));
             tel.setText(data.getStringExtra("phone"));
             address.setText("收货地址："+data.getStringExtra("area"));
