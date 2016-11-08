@@ -26,7 +26,6 @@ public class UrlUtils {
   public static  String  FileSave = BASEURL2+"/filesave/save";
   //获取健康档案数据
   public static  String  FileSubmit = BASEURL2+"/filesave/searchFile?userId=";
-
   //预约一级
   public static  String SUBSCRIBE =BASEURL +"/hathappenedat/onlinebookingselect";
   //详细预约particular

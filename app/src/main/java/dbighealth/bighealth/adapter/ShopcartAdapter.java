@@ -87,7 +87,7 @@ public class ShopcartAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         final int pos  = position;
         if(convertView==null){
             holder = new ViewHolder();
@@ -151,6 +151,7 @@ public class ShopcartAdapter extends BaseAdapter{
                 public void onClick(View v) {
                     if(datas2.get(pos).equals("编辑")){
                         datas2.set(pos,"完成");
+
                     }else if(datas2.get(pos).equals("完成")){
                         datas2.set(pos,"编辑");
                         Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
@@ -178,15 +179,17 @@ public class ShopcartAdapter extends BaseAdapter{
              * item中的编辑或完成
              */
             if(datas2.get(pos).equals("完成")){
+                parent.setEnabled(false);
                 holder.tvProductDescribe.setVisibility(View.GONE);
                 holder.tvProductPrice.setVisibility(View.GONE);
                 holder.tvProductNum.setVisibility(View.GONE);
                 holder.tvJianProduct.setVisibility(View.VISIBLE);
-                holder.tvSingleNum.setVisibility(View.VISIBLE);
+                holder.tvSingleNum1.setVisibility(View.VISIBLE);
                 holder.tvDelete.setVisibility(View.VISIBLE);
                 holder.tvAddProduct.setVisibility(View.VISIBLE);
-
+                holder.tvSingleNum1.setText(""+list.get(position).getNum());
             }else if(datas2.get(pos).equals("编辑")){
+                parent.setEnabled(true);
                 holder.tvProductDescribe.setVisibility(View.VISIBLE);
                 holder.tvProductPrice.setVisibility(View.VISIBLE);
                 holder.tvProductNum.setVisibility(View.VISIBLE);
@@ -195,8 +198,9 @@ public class ShopcartAdapter extends BaseAdapter{
                 holder.tvDelete.setVisibility(View.GONE);
                 holder.tvAddProduct.setVisibility(View.GONE);
                 holder.tvProductNum.setText(SingleNum+"");
+                holder.tvSingleNum.setText(""+list.get(position).getNum());
             }
-            holder.tvSingleNum.setText(""+list.get(position).getNum());
+
             holder.tvEditShop.setText(datas2.get(pos));
             /**
              * 加数量操作
@@ -274,6 +278,7 @@ public class ShopcartAdapter extends BaseAdapter{
          * 完成下的界面展示
          */
         if(flage==2){
+            parent.setEnabled(false);
             holder.cbShopcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

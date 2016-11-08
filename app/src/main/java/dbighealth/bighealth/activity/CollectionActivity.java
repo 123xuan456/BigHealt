@@ -90,7 +90,7 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                 int productposition = intent.getIntExtra("productposition", 0);
 
                 Log.i("postion",productposition+"");
-                if(message.size()!=0){
+                if(message.size()>productposition){
                     int articleId = message.get(productposition).getArticleId();
                     if( CollectionAdapter.getIsSelected().get(productposition)){
                         if(deleteIndex.size()!=0){

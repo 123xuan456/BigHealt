@@ -118,7 +118,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                 .build()
                 .execute(MyStringCallBack);*/
 
-        if (id == 1) {
+        if (id == 1||id==2) {
             Log.i("mhysa-->", UrlUtils.FORMATIONDETAIL + "?id=" + picId+"&userid="+userid);
             OkHttpUtils.get()
                     .url(UrlUtils.FORMATIONDETAIL)
@@ -127,15 +127,24 @@ public class SecondActivity extends Activity implements View.OnClickListener {
                     .addParams("userid",userid)
                     .build()
                     .execute(MyStringCallBack);
-        }else if (id == 2) {
+        }/*else if (id == 2) {
+
+        //首页特殊页的二级页面
             OkHttpUtils.get()
+                    .url(UrlUtils.FORMATIONDETAIL)
+                    .id(SECOND)
+                    .addParams("id", String.valueOf(picId))
+                    .addParams("userid",userid)
+                    .build()
+                    .execute(MyStringCallBack);
+          *//*  OkHttpUtils.get()
                     .url(UrlUtils.SPECIALITEM)
                     .id(SECOND)
                     .addParams("id", String.valueOf(picId))
                     .addParams("userid", userid)
                     .build()
-                    .execute(MyStringCallBack);
-        }else{
+                    .execute(MyStringCallBack);*//*
+        }*/else{
             Log.i("mhysa-->", UrlUtils.FORMATIONDETAIL + "?id=" + picId);
             OkHttpUtils.get()
                     .url(UrlUtils.FORMATIONDETAIL)

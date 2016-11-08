@@ -431,12 +431,14 @@ public class EditdataActivity extends Activity {
                     Bundle extras = data.getExtras();
                     headBitmap = extras.getParcelable("data");
                     if (headBitmap != null) {
-                        setPicToView(headBitmap);// 保存在SD卡中
+                   //     setPicToView(headBitmap);// 保存在SD卡中
                         image.setImageBitmap(BitmapUtils.toRoundBitmap(headBitmap));// 用ImageView显示出来
-                        Log.i("mhysa--->", "数据uri" + Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null)));
-                        final String path1 = getPath(null, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null)));
-                        final Uri imgUrl = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null));
-                        new Thread() {
+                      //  Log.i("mhysa--->", "数据uri" + Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null)));
+                        final String spath = MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null);
+                        final Uri imgUrl = Uri.parse(spath);
+                        final String path1 = getPath(null, imgUrl);
+
+                    new Thread() {
                             @Override
                             public void run() {
                                 Map<String, String> textMap = new HashMap<String, String>();
@@ -449,7 +451,7 @@ public class EditdataActivity extends Activity {
                                 //  BaseApplication.userid = uid;
                                 BaseApplication.imgUrl = imgUrl;
                                // SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERPIC,getPicUrl);
-                                SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERPIC,MediaStore.Images.Media.insertImage(getContentResolver(), headBitmap, null, null));
+                                SharedPreferencesUtils.saveString(getApplicationContext(),ConfigUsers.USERPIC,spath);
                                 BaseApplication.photoPic = getPicUrl;
                                 BaseApplication.bitmap = BitmapUtils.toRoundBitmap(headBitmap);
                                 Log.i("mhysa","本地地址："+getPicUrl);
@@ -514,16 +516,6 @@ public class EditdataActivity extends Activity {
         startActivityForResult(intent, 3);
     }
 
-  /*  Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Bundle data = msg.getData();
-            String picurl = data.getString("picurl");
-            rcvArticlePhoto.setImageURI(picurl);
-        }
-    };*/
-
     public String getPath(Cursor cursor, Uri uri) {
         if (cursor == null) {
             String str = uri.toString();
@@ -566,11 +558,6 @@ public class EditdataActivity extends Activity {
     protected void photo() {
         String SDState = Environment.getExternalStorageState();
         if (SDState.equals(Environment.MEDIA_MOUNTED)) {
-           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// "android.media.action.IMAGE_CAPTURE"
-            // 指定调用相机拍照后照片的储存路径
-            //   intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-            startActivityForResult(intent, TAKE_PICTURE);*/
-
             Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(FileUtils.createFile(ImageCachePath + cutPicName)));
             startActivityForResult(intent2, 2);

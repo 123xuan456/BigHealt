@@ -170,8 +170,10 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                    if(intent.getBooleanExtra("delete",false)){
                        int sum =0;
                        for(int i=0;i<message.size();i++){
-                          if(ShopcartAdapter.getIsSelected().get(i)) {
-                              sum+=1;
+                          if(ShopcartAdapter.getIsSelected().containsKey(i)) {
+                              if(ShopcartAdapter.getIsSelected().get(i)){
+                                  sum+=1;
+                              }
                           }
                        }
                        count = sum;
@@ -188,7 +190,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                    }*/
                    for(int i = 0;i<message.size();i++){
                         if (ShopcartAdapter.getIsSelected().get(i)){
-                            if(saveStatus.get(i)!=null&&!saveStatus.get(i)){
+                            if(saveStatus.containsKey(i)&&!saveStatus.get(i)){
                                 count++;
                             }
                             saveStatus.put(i,true);
