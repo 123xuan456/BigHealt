@@ -152,11 +152,13 @@ public class ShopcartAdapter extends BaseAdapter{
                     if(datas2.get(pos).equals("编辑")){
                         datas2.set(pos,"完成");
 
+                        parent.setEnabled(false);
+
                     }else if(datas2.get(pos).equals("完成")){
                         datas2.set(pos,"编辑");
+                        parent.setEnabled(true);
                         Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
                         intent.putExtra("getTotal",1);
-
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                         /**
@@ -198,7 +200,6 @@ public class ShopcartAdapter extends BaseAdapter{
                 holder.tvDelete.setVisibility(View.GONE);
                 holder.tvAddProduct.setVisibility(View.GONE);
                 holder.tvProductNum.setText(SingleNum+"");
-                holder.tvSingleNum.setText(""+list.get(position).getNum());
             }
 
             holder.tvEditShop.setText(datas2.get(pos));
