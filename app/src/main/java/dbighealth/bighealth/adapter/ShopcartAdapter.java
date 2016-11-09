@@ -157,6 +157,7 @@ public class ShopcartAdapter extends BaseAdapter{
                     }else if(datas2.get(pos).equals("完成")){
                         datas2.set(pos,"编辑");
                         parent.setEnabled(true);
+                        holder.tvSingleNum1.setVisibility(View.GONE);
                         Intent intent = new Intent("android.intent.action.CART_PRODUCTNUM");
                         intent.putExtra("getTotal",1);
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
