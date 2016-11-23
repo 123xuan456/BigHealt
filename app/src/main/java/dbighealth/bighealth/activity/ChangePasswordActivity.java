@@ -32,6 +32,7 @@ import dbighealth.bighealth.R;
 import dbighealth.bighealth.bean.LostpwSubmitBean;
 import dbighealth.bighealth.imageUtils.BaseActivity;
 import okhttp3.Call;
+import utils.ConfigUsers;
 import utils.SharedPreferencesUtils;
 import utils.UrlUtils;
 /**
@@ -76,7 +77,8 @@ public class ChangePasswordActivity extends Activity {
         tvTab.setText("修改密码");
         rightAdd.setVisibility(View.GONE);
 
-        password=BaseApplication.password;//之前的密码
+     //   password=BaseApplication.password;//之前的密码
+        password=SharedPreferencesUtils.getString(getApplicationContext(), ConfigUsers.USERpassword, "");//之前的密码
         regphone=BaseApplication.regphone;//手机号
 
     }

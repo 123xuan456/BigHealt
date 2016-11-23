@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_transparent" >
+
+    <LinearLayout
+        android:id="@+id/ll_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/finish"
+                android:padding="15dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择支付类型"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f2f2f2" />
+
+        <RelativeLayout
+            android:id="@+id/weixin"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/log_weixin"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:id="@+id/imageView17" />
+            <TextView
+                android:id="@+id/item_popupwindows_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:textColor="#585858"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:text="微信支付"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/imageView17" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/finsh"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imageView18" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f2f2f2" />
+
+        <RelativeLayout
+            android:id="@+id/ali"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/log_alibaba"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:id="@+id/imageView19" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:textColor="#585858"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:text="支付宝支付"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/imageView19" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/finsh"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imageView20" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f3f3f3" />
+
+        <RelativeLayout
+            android:id="@+id/yinhang"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/log_yinlian"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:id="@+id/imageView21" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:textColor="#585858"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:text="银行卡支付"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/imageView21" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/finsh"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f2f2f2" />
+    </LinearLayout>
+
+</RelativeLayout>

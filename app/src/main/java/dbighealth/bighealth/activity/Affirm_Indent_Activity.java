@@ -1,13 +1,21 @@
 package dbighealth.bighealth.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +61,10 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
     private AffirmIndentBean AffirmIndent;
     private RelativeLayout rl;
     private int BUYNOW =101;
+    private PopupWindow pop;
+    private RelativeLayout weixin,ali,yinhang;
+    private LinearLayout ll_popup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -272,6 +284,10 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                             @Override
                             public void onResponse(String response, int id) {
                                 Toast.makeText(getApplicationContext(), "提交成功", Toast.LENGTH_LONG).show();
+                                initPopu();
+                                ll_popup.startAnimation(AnimationUtils.loadAnimation(
+                                        Affirm_Indent_Activity.this, R.anim.activity_translate_in));
+                                pop.showAtLocation(rl, Gravity.CENTER, 10, 10);
                             }
                         });
                 break;
@@ -280,6 +296,56 @@ public class Affirm_Indent_Activity extends Activity implements View.OnClickList
                 startActivityForResult(intent,1);
                 break;
         }
+    }
+
+    private void initPopu() {
+        pop = new PopupWindow(Affirm_Indent_Activity.this);
+        View view = getLayoutInflater().inflate(R.layout.item_popupwindows_1, null);
+        pop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        pop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setFocusable(true);
+        pop.setOutsideTouchable(true);
+        pop.setContentView(view);
+        RelativeLayout parent = (RelativeLayout) view.findViewById(R.id.parent);
+        ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
+        weixin = (RelativeLayout) view.findViewById(R.id.weixin);
+        ali = (RelativeLayout) view.findViewById(R.id.ali);
+        yinhang = (RelativeLayout) view.findViewById(R.id.yinhang);
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        weixin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            Toast.makeText(Affirm_Indent_Activity.this,"你点击的微信支付",Toast.LENGTH_SHORT).show();
+
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        ali.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.ECLAIR)
+            public void onClick(View v) {
+                Toast.makeText(Affirm_Indent_Activity.this,"你点击的支付宝支付",Toast.LENGTH_SHORT).show();
+
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        yinhang.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(Affirm_Indent_Activity.this,"你点击的银联支付",Toast.LENGTH_SHORT).show();
+
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+
+
     }
 
     @Override

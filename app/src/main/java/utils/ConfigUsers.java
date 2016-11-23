@@ -17,5 +17,7 @@ public class ConfigUsers {
     public static String USERID = "userid";
     //保存用户手机号
     public static String USERPHONE = "regphone";
+    //保存用户密码
+    public static String USERpassword = "password";
 
 }

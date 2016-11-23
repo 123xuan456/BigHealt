@@ -203,6 +203,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> ,
             BaseApplication.password=password;
             BaseApplication.regphone=email;
             SharedPreferencesUtils.saveString(context, ConfigUsers.USERPHONE, email);//把手机号存储到了sp中
+            SharedPreferencesUtils.saveString(context, ConfigUsers.USERpassword, password);//把密码存储到了sp中
             String url= UrlUtils.LOGIN;
             OkHttpUtils.get().url(url).id(LOGINID)
                     .addParams("regphone",email)
