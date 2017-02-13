@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,6 @@ import dbighealth.bighealth.ben.Channel;
 import dbighealth.bighealth.ben.ChannelDb;
 import dbighealth.bighealth.fragment.home.CommonFragment;
 import dbighealth.bighealth.fragment.home.NewsChannelFragment;
-import dbighealth.bighealth.fragment.home.SpecialFragment;
 import dbighealth.bighealth.fragment.home.SpecialFragment1;
 import utils.UrlUtils;
 
@@ -98,7 +95,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         viewPager.setOffscreenPageLimit(2);
         int currentItem = viewPager.getCurrentItem();
            viewPager.setCurrentItem(0);
-        viewPager.setOnPageChangeListener(this);
+        viewPager.addOnPageChangeListener(this);
     }
     private void initTab(LayoutInflater inflater){
         List<Channel> channelList=ChannelDb.getSelectedChannel();

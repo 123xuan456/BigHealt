@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_secondDesciption"
-                android:text="这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面这是眼病二级界面"
+                android:text=""
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"

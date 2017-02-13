@@ -3,17 +3,22 @@ package dbighealth.bighealth.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -36,9 +41,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dbighealth.bighealth.BaseApplication;
 import dbighealth.bighealth.R;
-import dbighealth.bighealth.adapter.GridAdapter;
 import dbighealth.bighealth.imageUtils.AlbumActivity;
 import dbighealth.bighealth.imageUtils.BaseActivity;
 import dbighealth.bighealth.imageUtils.Bimp;
@@ -52,7 +55,7 @@ import utils.UrlUtils;
 /**
  * 资讯详情
  */
-public class Information_DetailsActivity extends Activity implements View.OnClickListener {
+public class Information_DetailsActivity extends Activity  {
 
     @Bind(R.id.arrow_left)
     ImageView arrowLeft;
@@ -75,7 +78,6 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
 
     // 上传的地址
     String uploadUrl = "http://192.168.0.43:8080/JianKangChanYe/homepictures/getAppLog?";
-    @Bind(R.id.grid_view)
     GridView mGridView;
     @Bind(R.id.rl_grid_view)
     RelativeLayout parentView;
@@ -105,26 +107,16 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     private void initViews() {
         initPopu();//提示框
         // 点击GridView时出现背景色设置为透明
+        mGridView= (GridView) findViewById(R.id.grid_view);
         mGridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);
         mGridView.setAdapter(adapter);
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == Bimp.tempSelectBitmap.size()) {
-                    ll_popup.startAnimation(AnimationUtils.loadAnimation(
-                            Information_DetailsActivity.this, R.anim.activity_translate_in));
-                    pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
-                } else {
-                    Intent intent = new Intent(Information_DetailsActivity.this,
-                            GalleryActivity.class);
-                    intent.putExtra("ID", position);
-                    startActivity(intent);
-                }
-            }
-        });
-
+//        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
     }
 
     private void initPopu() {
@@ -180,7 +172,7 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
-        mGridView.setAdapter(adapter);
+        //mGridView.setAdapter(adapter);
     }
     protected void photo() {
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -286,5 +278,120 @@ public class Information_DetailsActivity extends Activity implements View.OnClic
             return null;
         }
 
+    }
+    public class GridAdapter extends BaseAdapter {
+
+        private LayoutInflater inflater;
+        private boolean shape;
+
+        public GridAdapter(Information_DetailsActivity information_detailsActivity) {
+            inflater = LayoutInflater.from(information_detailsActivity);
+        }
+
+
+        public boolean isShape() {
+            return shape;
+        }
+
+        public void setShape(boolean shape) {
+            this.shape = shape;
+        }
+
+        public void update() {
+            loading();
+        }
+
+        Handler handler = new Handler() {
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        notifyDataSetChanged();
+                        break;
+                }
+                super.handleMessage(msg);
+            }
+        };
+
+        private void loading() {
+            new Thread(new Runnable() {
+                public void run() {
+                    while (true) {
+                        if (Bimp.max == Bimp.tempSelectBitmap.size()) {
+                            Message message = new Message();
+                            message.what = 1;
+                            handler.sendMessage(message);
+                            break;
+                        } else {
+                            Bimp.max += 1;
+                            Message message = new Message();
+                            message.what = 1;
+                            handler.sendMessage(message);
+                        }
+                    }
+                }
+            }).start();
+        }
+
+        @Override
+        public int getCount() {
+            if(Bimp.tempSelectBitmap.size() == 9){
+                return 9;
+            }
+            return (Bimp.tempSelectBitmap.size() + 1);
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.grid_item,parent, false);
+                holder = new ViewHolder();
+                holder.image = (ImageView) convertView.findViewById(R.id.grid_item_img);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            if (position ==Bimp.tempSelectBitmap.size()) {
+
+                holder.image.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_addpic_unfocused));
+                if (position == 9) {
+                    holder.image.setVisibility(View.GONE);
+                }
+            } else {
+                holder.image.setImageBitmap(Bimp.tempSelectBitmap.get(position).getBitmap());
+            }
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("ddddddd", "----------");
+                    if (position == Bimp.tempSelectBitmap.size()) {
+                        ll_popup.startAnimation(AnimationUtils.loadAnimation(
+                                Information_DetailsActivity.this, R.anim.activity_translate_in));
+                        pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
+                    } else {
+                        Intent intent = new Intent(Information_DetailsActivity.this,
+                                GalleryActivity.class);
+                        intent.putExtra("ID", position);
+                        startActivity(intent);
+                    }
+                }
+            });
+            return convertView;
+        }
+
+        public class ViewHolder {
+            public ImageView image;
+        }
     }
 }
